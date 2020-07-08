@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+// các chức năng của admin
+Route::group(['middleware' => ['check_role_admin',],], function () {
+
+Route::resource('/admin','backend\IndexController');
+
+});
