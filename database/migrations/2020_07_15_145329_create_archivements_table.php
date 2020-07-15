@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRollCallsTable extends Migration
+class CreateArchivementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateRollCallsTable extends Migration
      */
     public function up()
     {
-        Schema::create('roll_calls', function (Blueprint $table) {
+        Schema::create('archivements', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('is_active');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->integer('class_id')->unsigned();
+            $table->foreign('class_id')->references('id')->on('class')->onDelete('cascade');
+            $table->integer('session');
+            $table->integer('medium_score');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateRollCallsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roll_calls');
+        Schema::dropIfExists('archivements');
     }
 }
