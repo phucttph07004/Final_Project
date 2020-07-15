@@ -15,6 +15,12 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('class_room');
+            $table->integer('teacher_id')->unsigned();
+            $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('level_id')->unsigned();
+            $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
+            $table->date('time');
             $table->timestamps();
         });
     }
