@@ -328,7 +328,8 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.3s; }
+    transition: 0.3s;
+    box-shadow: -1px 5px 18px grey; }
     .breadCrumb__homeIcon:hover {
       background-color: #fe6500; }
     .breadCrumb__homeIcon:hover i {

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/plugins/box/jquery.fancybox.min.css">
     <link rel="stylesheet" href="/plugins/carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="/plugins/carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/plugins/animation/animate.css">
 
     <!-- Icon -->
     <link rel="stylesheet" href="/plugins/fontawesome/css/font-awesome.css">

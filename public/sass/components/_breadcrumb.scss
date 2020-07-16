@@ -39,6 +39,7 @@
         align-items: center;
         justify-content: center;
         transition: 0.3s;
+        box-shadow: -1px 5px 18px grey;
         &:hover {
             background-color: $orange;
         }

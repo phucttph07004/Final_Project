@@ -27,8 +27,8 @@
     <div class="container">
         <h1 class="section__title">What we're offering</h1>
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="offer__block">
+            <div class="col-12 col-md-6 col-lg-3 ">
+                <div class="offer__block wow bounce">
                     <div class="offer__block-circle">
                         <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
                     </div>
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-3">
-                <div class="offer__block">
+                <div class="offer__block wow bounce">
                     <div class="offer__block-circle">
                         <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
                     </div>
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-3">
-                <div class="offer__block">
+                <div class="offer__block wow bounce">
                     <div class="offer__block-circle">
                         <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
                     </div>
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-3">
-                <div class="offer__block">
+                <div class="offer__block wow bounce">
                     <div class="offer__block-circle">
                         <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
                     </div>
@@ -76,13 +76,13 @@
 <section class="welcome">
     <div class="container">
         <div class="row align-items-end justify-content-between">
-            <div class="col-md-5">
-                <div class="welcome__image">
+            <div class="col-md-5 wow slideInLeft" >
+                <div class="welcome__image ">
                     <img src="/images/gallery-1.jpg" alt="welcome">
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="welcome__content">
+            <div class="col-md-6 wow slideInRight" >
+                <div class="welcome__content ">
                     <h1 class="section__title">Welcome to Something English Center </h1>
                     <p class="welcome__content-desc">
                         There are many variations of pass of lorem ipsum available but the majority have suffered
