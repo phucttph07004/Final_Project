@@ -280,7 +280,7 @@
 <!-- End news -->
 
 <!-- Start Gallery -->
-<div class="gallery">
+<!-- <div class="gallery">
     <div class="gallery-carousel owl-carousel">
         <div class="gallery__item">
             <a href="/images/gallery-1.jpg"  data-fancybox="gallery" alt="gallery">
@@ -343,6 +343,6 @@
             </a>
         </div>
     </div>
-</div>
+</div> -->
 <!-- End Gallery -->
 @endsection

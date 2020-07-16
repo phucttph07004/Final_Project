@@ -1467,7 +1467,13 @@ body.hc-nav-open {
       margin-bottom: 20px; }
       .news-detail .related__post-item .related__post-img {
         max-width: 40%;
-        flex-basis: 40%; }
+        flex-basis: 40%;
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        -ms-border-radius: 8px;
+        -o-border-radius: 8px;
+        overflow: hidden; }
       .news-detail .related__post-item .related__post-info {
         max-width: 60%;
         flex-basis: 60%;
@@ -1478,13 +1484,16 @@ body.hc-nav-open {
           font-family: nunito-semibold; }
         .news-detail .related__post-item .related__post-info .related__post-title {
           font-size: 1.8rem;
-          color: #341c77;
-          font-family: asl-bold;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
-          overflow: hidden;
-          text-overflow: ellipsis; }
+          font-family: asl-bold; }
+          .news-detail .related__post-item .related__post-info .related__post-title a {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #341c77; }
+            .news-detail .related__post-item .related__post-info .related__post-title a:hover {
+              color: #fe6500; }
 
 .auth__form {
   padding: 120px 0; }
@@ -1529,51 +1538,88 @@ body.hc-nav-open {
 --------------------------------------------- */
 /* Footer
 --------------------------------------------- */
-.footer .footer-text {
-  font-size: 1.4rem;
-  font-family: nunito-regular;
-  color: #fff; }
-.footer__main {
+.footer {
   background-color: #341c77;
-  padding: 95px 0; }
-  @media only screen and (max-width: 767px) {
-    .footer__main-item {
-      margin-bottom: 20px; } }
-  .footer__main-item .footer__main-title {
+  padding: 100px 0 0 0; }
+  .footer .footer-text {
+    font-size: 1.4rem;
+    font-family: nunito-regular;
+    color: #fff; }
+  .footer .footer__top-title {
     font-size: 2.4rem;
     font-family: asl-regular;
     color: #fff;
-    margin-bottom: 40px; }
-  .footer__main-item .footer__main-contact {
-    display: block; }
-    .footer__main-item .footer__main-contact i {
-      margin-right: 5px;
-      color: #fe6500; }
-    .footer__main-item .footer__main-contact:not(:last-child) {
-      margin-bottom: 30px; }
-  .footer__main-item .footer__main-branch {
     margin-bottom: 30px; }
-    .footer__main-item .footer__main-branch .branch__name {
-      font-family: nunito-semibold;
-      font-size: 1.8rem;
-      color: #c8bee3;
-      text-decoration: underline;
+  .footer .footer__top-item p {
+    font-size: 1.6rem;
+    color: #c8bee3;
+    font-family: nunito-regular;
+    margin-top: 20px; }
+  .footer .footer__top form {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px; }
+    .footer .footer__top form .form-group input,
+    .footer .footer__top form .form-group select {
+      background-color: #f7f2ea;
+      padding: 10px;
+      font-size: 1.6rem;
+      font-family: nunito-regular;
+      color: #696478;
+      border: none;
+      outline: none;
+      border-radius: 5px;
+      box-shadow: none;
+      margin-bottom: 20px;
+      height: auto; }
+      .footer .footer__top form .form-group input:focus,
+      .footer .footer__top form .form-group select:focus {
+        background-color: #f7f2ea;
+        outline: none;
+        box-shadow: none; }
+    .footer .footer__top form button {
+      display: block;
+      color: #fff;
+      background-color: #fe6500;
+      font-family: asl-bold;
+      font-size: 2.2rem;
+      padding: 10px 15px;
+      border-radius: 5px;
+      border: 1px solid #fe6500;
+      margin: 0 auto;
+      height: auto;
+      text-align: center; }
+  .footer__mid {
+    padding: 95px 0; }
+    .footer__mid-item {
       margin-bottom: 20px; }
-    .footer__main-item .footer__main-branch .branch__contact i {
-      color: #fe6500;
-      font-size: 1.4rem;
-      margin-right: 7px; }
-.footer__bottom {
-  height: 100px;
-  background-color: #341c77;
-  border-top: 1px solid #c8bee3; }
-  .footer__bottom .footer__socialMedia a {
-    color: #ffffff;
-    font-size: 1.6rem; }
-    .footer__bottom .footer__socialMedia a:not(:last-child) {
-      margin-right: 10px; }
-    .footer__bottom .footer__socialMedia a:hover {
-      color: #fe6500; }
+      @media only screen and (max-width: 767px) {
+        .footer__mid-item {
+          margin-bottom: 20px; } }
+      .footer__mid-item p {
+        font-size: 1.4rem;
+        color: #c8bee3;
+        font-family: nunito-regular;
+        margin-bottom: 10px; }
+        .footer__mid-item p i {
+          margin-right: 5px;
+          color: #fe6500; }
+        .footer__mid-item p a {
+          color: #c8bee3; }
+          .footer__mid-item p a:hover {
+            color: #fe6500; }
+  .footer__bottom {
+    height: 100px;
+    border-top: 1px solid #493385; }
+    .footer__bottom .footer__socialMedia a {
+      color: #ffffff;
+      font-size: 1.6rem; }
+      .footer__bottom .footer__socialMedia a:not(:last-child) {
+        margin-right: 10px; }
+      .footer__bottom .footer__socialMedia a:hover {
+        color: #fe6500; }
 
 /* Animation
 --------------------------------------------- */

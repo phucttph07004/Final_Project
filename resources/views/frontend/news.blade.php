@@ -27,7 +27,7 @@
                             <div class="news__item-info">
                                 <p class="news__item-date">20 Jun 2020</p>
                                 <h2>
-                                    <a class="news__item-title" href="news-detail.html">Something News</a>
+                                    <a class="news__item-title" href="/news-detail">Something News</a>
                                 </h2>
                                 <p class="news__item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, nemo alias commodi earum culpa quis neque, atque iste consectetur iure quos</p>
                             </div>
@@ -43,7 +43,7 @@
                             <div class="news__item-info">
                                 <p class="news__item-date">20 Jun 2020</p>
                                 <h2>
-                                    <a class="news__item-title" href="news-detail.html">Something News</a>
+                                    <a class="news__item-title" href="/news-detail">Something News</a>
                                 </h2>
                                 <p class="news__item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, nemo alias commodi earum culpa quis neque, atque iste consectetur iure quos</p>
                             </div>
@@ -59,7 +59,7 @@
                             <div class="news__item-info">
                                 <p class="news__item-date">20 Jun 2020</p>
                                 <h2>
-                                    <a class="news__item-title" href="news-detail.html">Something News</a>
+                                    <a class="news__item-title" href="/news-detail">Something News</a>
                                 </h2>
                                 <p class="news__item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, nemo alias commodi earum culpa quis neque, atque iste consectetur iure quos</p>
                             </div>
@@ -75,7 +75,7 @@
                             <div class="news__item-info">
                                 <p class="news__item-date">20 Jun 2020</p>
                                 <h2>
-                                    <a class="news__item-title" href="news-detail.html">Something News</a>
+                                    <a class="news__item-title" href="/news-detail">Something News</a>
                                 </h2>
                                 <p class="news__item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, nemo alias commodi earum culpa quis neque, atque iste consectetur iure quos</p>
                             </div>
@@ -91,7 +91,7 @@
                             <div class="news__item-info">
                                 <p class="news__item-date">20 Jun 2020</p>
                                 <h2>
-                                    <a class="news__item-title" href="news-detail.html">Something News</a>
+                                    <a class="news__item-title" href="/news-detail">Something News</a>
                                 </h2>
                                 <p class="news__item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, nemo alias commodi earum culpa quis neque, atque iste consectetur iure quos</p>
                             </div>
@@ -107,7 +107,7 @@
                             <div class="news__item-info">
                                 <p class="news__item-date">20 Jun 2020</p>
                                 <h2>
-                                    <a class="news__item-title" href="news-detail.html">Something News</a>
+                                    <a class="news__item-title" href="/news-detail">Something News</a>
                                 </h2>
                                 <p class="news__item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, nemo alias commodi earum culpa quis neque, atque iste consectetur iure quos</p>
                             </div>

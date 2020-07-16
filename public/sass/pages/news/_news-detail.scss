@@ -185,6 +185,12 @@
             .related__post-img {
                 max-width: 40%;
                 flex-basis: 40%;
+                border-radius: 8px;
+                -webkit-border-radius: 8px;
+                -moz-border-radius: 8px;
+                -ms-border-radius: 8px;
+                -o-border-radius: 8px;
+                overflow: hidden;
             }
             .related__post-info {
                 max-width: 60%;
@@ -197,9 +203,14 @@
                 }
                 .related__post-title {
                     font-size: 1.8rem;
-                    color: $base-color;
                     font-family: asl-bold;
-                    @include truncate(2);
+                    a {
+                        @include truncate(2);
+                        color: $base-color;
+                        &:hover {
+                            color: $orange;
+                        }
+                    }
                 }
             }
         }

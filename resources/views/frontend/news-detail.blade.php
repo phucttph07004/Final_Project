@@ -116,7 +116,9 @@
                                 </div>
                                 <div class="related__post-info">
                                     <p class="related__post-date">23 June, 2020</p>
-                                    <h1 class="related__post-title">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+                                    <h3 class="related__post-title">
+                                        <a href="">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
+                                    </h3>
                                 </div>
                             </div>
                             <div class="related__post-item">
@@ -125,7 +127,9 @@
                                 </div>
                                 <div class="related__post-info">
                                     <p class="related__post-date">23 June, 2020</p>
-                                    <h1 class="related__post-title">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+                                     <h3 class="related__post-title">
+                                        <a href="">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
+                                    </h3>
                                 </div>
                             </div>
                             <div class="related__post-item">
@@ -134,7 +138,9 @@
                                 </div>
                                 <div class="related__post-info">
                                     <p class="related__post-date">23 June, 2020</p>
-                                    <h1 class="related__post-title">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+                                     <h3 class="related__post-title">
+                                        <a href="">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
+                                    </h3>
                                 </div>
                             </div>
                         </div>
@@ -143,5 +149,4 @@
             </div>
         </section>
         <!-- End news -->
-
 @endsection

@@ -1,83 +1,91 @@
   <!-- Start footer -->
   <footer class="footer">
-      <div class="footer__main">
+      <div class="footer__top">
           <div class="container">
               <div class="row">
-                  <div class="col-md-3 col-lg-3">
-                      <div class="footer__main-item">
-                          <h1 class="footer__main-title">Contact</h1>
-                          <a href="tel:0123456789" class="footer__main-contact footer-text"><i
-                                  class="fa fa-phone"></i>012345678</a>
-                          <a href="mailto:something@gmail.com" class="footer__main-contact footer-text"><i
-                                  class="fa fa-envelope-o"></i>something@gmail.com</a>
-                          <a href="">
-                              <img src="/images/Logo.png" alt="logo footer">
-                          </a>
+                  <div class="col-4">
+                      <div class="footer__top-item">
+                          <h1 class="footer__top-title">Something English Center On Facebook</h1>
                       </div>
                   </div>
-                  <div class="col-md-9 col-lg-9">
-                      <div class="footer__main-item ">
-                          <h1 class="footer__main-title">Branch</h1>
-                          <div class="row">
-                              <div class="col-6">
-                                  <div class="footer__main-branch">
-                                      <h5 class="branch__name">Branch 1</h5>
-                                      <div class="branch__contact">
-                                          <i class="fa fa-map-marker"></i>
-                                          <span class="branch__location footer-text">Tòa nhà FPT Polytechnic, Phố Trịnh
-                                              Văn Bô, Nam Từ Liêm, Hà Nội</span>
-                                      </div>
-                                      <div class="branch__contact">
-                                          <i class="fa fa-phone"></i>
-                                          <span class="branch__phone footer-text">(024) 7300 1955</span>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-6">
-                                  <div class="footer__main-branch">
-                                      <h5 class="branch__name">Branch 1</h5>
-                                      <div class="branch__contact">
-                                          <i class="fa fa-map-marker"></i>
-                                          <span class="branch__location footer-text">Tòa nhà FPT Polytechnic, Phố Trịnh
-                                              Văn Bô, Nam Từ Liêm, Hà Nội</span>
-                                      </div>
-                                      <div class="branch__contact">
-                                          <i class="fa fa-phone"></i>
-                                          <span class="branch__phone footer-text">(024) 7300 1955</span>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-6">
-                                  <div class="footer__main-branch">
-                                      <h5 class="branch__name">Branch 1</h5>
-                                      <div class="branch__contact">
-                                          <i class="fa fa-map-marker"></i>
-                                          <span class="branch__location footer-text">Tòa nhà FPT Polytechnic, Phố Trịnh
-                                              Văn Bô, Nam Từ Liêm, Hà Nội</span>
-                                      </div>
-                                      <div class="branch__contact">
-                                          <i class="fa fa-phone"></i>
-                                          <span class="branch__phone footer-text">(024) 7300 1955</span>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-6">
-                                  <div class="footer__main-branch">
-                                      <h5 class="branch__name">Branch 1</h5>
-                                      <div class="branch__contact">
-                                          <i class="fa fa-map-marker"></i>
-                                          <span class="branch__location footer-text">Tòa nhà FPT Polytechnic, Phố Trịnh
-                                              Văn Bô, Nam Từ Liêm, Hà Nội</span>
-                                      </div>
-                                      <div class="branch__contact">
-                                          <i class="fa fa-phone"></i>
-                                          <span class="branch__phone footer-text">(024) 7300 1955</span>
-                                      </div>
-                                  </div>
-                              </div>
+                  <div class="col-4">
+                      <div class="footer__top-item">
+                          <div class="footer__logo">
+                              <a href="/">
+                                  <img src="/images/Logo.png" alt="logo"></a>
                           </div>
+                          <p>Somthing English Center - Hệ thống hoc tiếng Anh giao tiếp toàn diện cho người mới bắt đầu.</p>
                       </div>
                   </div>
+                  <div class="col-4">
+                  <div class="footer__top-item">
+                          <h1 class="footer__top-title">Subscribe</h1>
+                          <p>To receive information about special events and free English language learning materials. Please leave us contact information.</p>
+                          <form action="">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Fullname">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Phone Number">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                       <select class="form-control" name="address" id="">
+                                           <option value="" selected>Address</option>
+                                       </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="form-control">Subscribe</button>
+                                </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="footer__mid">
+          <div class="container">
+              <div class="row">
+                 <div class="col-md-4">
+                     <div class="footer__mid-item">
+                        <p><i class="fa fa-map-marker"></i>Tòa nhà FPT Polytechnic, Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội</p>
+                        <p><i class="fa fa-phone"></i><a href="tel:0123456789">0123456789</a></p> 
+                    </div>
+                 </div>
+                 <div class="col-md-4">
+                     <div class="footer__mid-item">
+                        <p><i class="fa fa-map-marker"></i>Tòa nhà FPT Polytechnic, Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội</p>
+                        <p><i class="fa fa-phone"></i><a href="tel:0123456789">0123456789</a></p> 
+                    </div>
+                 </div>
+                 <div class="col-md-4">
+                     <div class="footer__mid-item">
+                        <p><i class="fa fa-map-marker"></i>Tòa nhà FPT Polytechnic, Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội</p>
+                        <p><i class="fa fa-phone"></i><a href="tel:0123456789">0123456789</a></p> 
+                    </div>
+                 </div>
+                 <div class="col-md-4">
+                     <div class="footer__mid-item">
+                        <p><i class="fa fa-map-marker"></i>Tòa nhà FPT Polytechnic, Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội</p>
+                        <p><i class="fa fa-phone"></i><a href="tel:0123456789">0123456789</a></p> 
+                    </div>
+                 </div>
+                 <div class="col-md-4">
+                     <div class="footer__mid-item">
+                        <p><i class="fa fa-map-marker"></i>Tòa nhà FPT Polytechnic, Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội</p>
+                        <p><i class="fa fa-phone"></i><a href="tel:0123456789">0123456789</a></p> 
+                    </div>
+                 </div>
               </div>
           </div>
       </div>
@@ -112,7 +120,7 @@
   <script src="/plugins/animation/wow.min.js"></script>
   <script src="/js/main.js"></script>
   <script>
-        new WOW().init();
+new WOW().init();
   </script>
   </body>
 

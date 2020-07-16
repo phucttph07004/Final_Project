@@ -1,11 +1,7 @@
 (function($) {
     window.onload = function() {
         $(document).ready(function() {
-            homeSlider();
-            feedback();
-            gallerySlider();
-            showMenuMobile();
-            teacherSlider();
+
         });
     };
 })(jQuery);
@@ -180,3 +176,9 @@ function showMenuMobile() {
         headerMenu.classList.toggle('menuMobile-show');
     })
 }
+
+homeSlider();
+feedback();
+gallerySlider();
+showMenuMobile();
+teacherSlider();
