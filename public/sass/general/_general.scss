@@ -1,0 +1,51 @@
+.section__title {
+    font-family: asl-bold;
+    font-size: 6rem;
+    color: $base-color;
+    text-align: center;
+    position: relative;
+    padding-top: 30px;
+    @include breakpoint(1023) {
+        font-size: 3rem;
+    }
+    &:before {
+        position: absolute;
+        display: block;
+        content: '';
+        width: 30px;
+        height: 4px;
+        background-color: $orange;
+        border-radius: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+    }
+}
+
+.section__title--white {
+    color: #fff;
+}
+
+.lines {
+    width: 30px;
+    height: 4px;
+    display: inline-block;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.lines--orange {
+    background-color: $orange;
+}
+
+.lines--yellow {
+    background-color: #ffc133;
+}
+
+.lines--blue {
+    background-color: #25bdd8;
+}
+
+.lines--violet {
+    background-color: #f736b5;
+}
