@@ -23,8 +23,6 @@ class CreateClassTable extends Migration
             $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('teaching_assitant_id')->unsigned();
             $table->foreign('teaching_assitant_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('student_id')->unsigned();
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->integer('level_id')->unsigned();
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
             $table->integer('schedule_id')->unsigned();
