@@ -17,6 +17,8 @@ class CreateNotificationsTable extends Migration
             $table->increments('id');
             $table->text('title');
             $table->text('reciever');
+            $table->integer('student_id')->unsigned();
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->timestamps();
         });
     }

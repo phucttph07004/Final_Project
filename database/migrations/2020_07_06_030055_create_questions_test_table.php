@@ -16,7 +16,10 @@ class CreateQuestionsTestTable extends Migration
         Schema::create('questions_test', function (Blueprint $table) {
             $table->increments('id');
             $table->text('question');
-            $table->text('answer');
+            $table->json('answer');
+            $table->json('correct_answer');
+            $table->integer('level_id')->unsigned();
+            $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
             $table->timestamps();
         });
     }
