@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Models\{Lesson_content};
 class Lesson_contentSeeder extends Seeder
 {
     /**
@@ -11,6 +11,6 @@ class Lesson_contentSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Lesson_content::class, 10)->create();
     }
 }
