@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Models\{Writing_essay};
 class Writing_essaySeeder extends Seeder
 {
     /**
@@ -11,6 +11,6 @@ class Writing_essaySeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Writing_essay::class, 10)->create();
     }
 }

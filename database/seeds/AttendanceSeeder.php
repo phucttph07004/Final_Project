@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Models\{Attendance};
 class AttendanceSeeder extends Seeder
 {
     /**
@@ -11,6 +11,6 @@ class AttendanceSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Attendance::class, 10)->create();
     }
 }
