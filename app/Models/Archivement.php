@@ -6,4 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Archivement extends Model
 {
+    // public $table ='archivements';
 }
