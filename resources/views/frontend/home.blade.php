@@ -223,57 +223,24 @@
     <div class="container">
         <h1 class="section__title">News</h1>
         <div class="row align-items-center">
+        @foreach($news as $new)
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="news__item">
                     <div class="news__item-image">
                         <a href="">
-                            <img src="/images/news-1.jpg" alt="news">
+                            <img src="{{$new->image}}" alt="news">
                         </a>
                     </div>
                     <div class="news__item-info">
-                        <p class="news__item-date">20 Jun 2020</p>
+                        <p class="news__item-date">{{$new->created_at}}</p>
                         <h2>
-                            <a class="news__item-title" href="news-detail.html">Something News</a>
+                            <a class="news__item-title" href="news-detail.html">{{$new->title}}</a>
                         </h2>
-                        <p class="news__item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, nemo
-                            alias commodi earum culpa quis neque, atque iste consectetur iure quos</p>
+                        <p class="news__item-desc">{{$new->content}}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="news__item">
-                    <div class="news__item-image">
-                        <a href="">
-                            <img src="/images/news-2.jpg" alt="news">
-                        </a>
-                    </div>
-                    <div class="news__item-info">
-                        <p class="news__item-date">20 Jun 2020</p>
-                        <h2>
-                            <a class="news__item-title" href="news-detail.html">Something News</a>
-                        </h2>
-                        <p class="news__item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, nemo
-                            alias commodi earum culpa quis neque, atque iste consectetur iure quos</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="news__item">
-                    <div class="news__item-image">
-                        <a href="">
-                            <img src="/images/news-3.jpg" alt="news">
-                        </a>
-                    </div>
-                    <div class="news__item-info">
-                        <p class="news__item-date">20 Jun 2020</p>
-                        <h2>
-                            <a class="news__item-title" href="news-detail.html">Something News</a>
-                        </h2>
-                        <p class="news__item-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, nemo
-                            alias commodi earum culpa quis neque, atque iste consectetur iure quos</p>
-                    </div>
-                </div>
-            </div>
+        @endforeach    
         </div>
     </div>
 </section>
