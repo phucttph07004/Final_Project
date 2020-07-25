@@ -49,11 +49,11 @@
                         </div>
                         <nav class="header__menu">
                             <ul class="header__menu-list d-flex">
-                                <li class="header__menu-item"><a href="/" class="item-link active">Home</a></li>
-                                <li class="header__menu-item"><a href="/about" class="item-link">About</a></li>
-                                <li class="header__menu-item"><a href="/news" class="item-link">News</a></li>
-                                <li class="header__menu-item"><a href="" class="item-link">Test</a></li>
-                                <li class="header__menu-item"><a href="/contact" class="item-link">Contact</a></li>
+                                <li class="header__menu-item"><a href="/" class="item-link active">Trang chủ</a></li>
+                                <li class="header__menu-item"><a href="/about" class="item-link">Giới Thiệu</a></li>
+                                <li class="header__menu-item"><a href="/news" class="item-link">Tin tức</a></li>
+                                <li class="header__menu-item"><a href="/enroll" class="item-link">Đăng ký học</a></li>
+                                <li class="header__menu-item"><a href="/contact" class="item-link">Liên Hệ</a></li>
                             </ul>
                         </nav>
                         <div class="hamburger">

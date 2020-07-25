@@ -21,14 +21,14 @@
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="news__item">
                             <div class="news__item-image">
-                                <a href="">
+                                <a href="{{route('news.news-detail',[$new->id])}}">
                                     <img src="{{$new->image}}" alt="news">
                                 </a>
                             </div>
                             <div class="news__item-info">
                                 <p class="news__item-date">{{$new->created_at}}</p>
                                 <h2>
-                                    <a class="news__item-title" href="/news-detail">{{$new -> title}}</a>
+                                    <a class="news__item-title" href="{{route('news.news-detail',[$new->id])}}">{{$new -> title}}</a>
                                 </h2>
                                 <p class="news__item-desc">{{$new->content}}</p>
                             </div>
@@ -37,19 +37,7 @@
                 @endforeach
                 </div>
                 <nav aria-label="" class="news__pagination">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" tabindex="-1">Previous</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
+                   {{ $news->links() }}
                 </nav>
             </div>
         </section>

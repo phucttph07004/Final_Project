@@ -2,7 +2,9 @@
 @section('content')
 <section class="breadCrumb" style="background: url(/images/contact-breadcrumb.jpg); background-repeat: no-repeat;background-size:cover;">
             <div class="container">
-                <h1 class="breadCrumb__title">News</h1>
+            @foreach($news as $new)
+                <h1 class="breadCrumb__title">{{$new->title}}</h1>
+                @endforeach
             </div>
             <a href="index.html" class="breadCrumb__homeIcon">
                 <i class="fa fa-home"></i>
@@ -15,26 +17,21 @@
             <div class="container">
                 <div class="row">
                     <div class="col-9">
-                        <div class="news-detail__content">
-                            <div class="news-detail__img">
-                                <img src="/images/homeslider.jpg" alt="news detail image">
+                        @foreach($news as $new)
+                            <div class="news-detail__content">
+                                <div class="news-detail__img">
+                                    <img src="{{$new->image}}" alt="news detail image">
+                                </div>
+                                <div class="news__detail-info">
+                                    <p class="news-date">{{$new->created_at}}</p>
+                                    <p class="news-comment">3 comment</p>
+                                </div>
+                                <h1 class="news__detail-title">{{$new->title}}</h1>
+                                <p class="content">
+                                {{$new->content}}
+                                </p>
                             </div>
-                            <div class="news__detail-info">
-                                <p class="news-date">20 June 2020</p>
-                                <p class="news-comment">3 comment</p>
-                            </div>
-                            <h1 class="news__detail-title">We Makes Difference in the Life of Child</h1>
-                            <p class="content">
-                                There are many people variation of passages of lorem ipsum is simply free text available in the majority sed do eius tempo. There are many people variation of passages of lorem Ipsum available in the majority sed do eius tempor incididunt ut labore et
-                                alteration in some. Quuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quiaolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt
-                                ut labore et dolore magnam dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </p>
-                            <p class="content">
-                                There are many people variation of passages of lorem ipsum is simply free text available in the majority sed do eius tempo. There are many people variation of passages of lorem Ipsum available in the majority sed do eius tempor incididunt ut labore et
-                                alteration in some. Quuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quiaolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt
-                                ut labore et dolore magnam dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </p>
-                        </div>
+                        @endforeach
                         <div class="news-detail__mid">
                             <div class="tag">
                                 <p>Tag: </p>
@@ -110,39 +107,19 @@
                     <div class="col-3">
                         <div class="related__post">
                             <h2>Related Post</h2>
+                            @foreach($relaNews as $relaNew)
                             <div class="related__post-item">
                                 <div class="related__post-img">
-                                    <img src="/images/gallery-1.jpg" alt="news detail image">
+                                    <img src="{{$relaNew->image}}" alt="news detail image">
                                 </div>
                                 <div class="related__post-info">
-                                    <p class="related__post-date">23 June, 2020</p>
+                                    <p class="related__post-date">{{$relaNew->created_at}}</p>
                                     <h3 class="related__post-title">
-                                        <a href="">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
+                                        <a href="{{route('news.news-detail',[$new->id])}}">{{$relaNew->title}}</a>
                                     </h3>
                                 </div>
                             </div>
-                            <div class="related__post-item">
-                                <div class="related__post-img">
-                                    <img src="/images/gallery-1.jpg" alt="news detail image">
-                                </div>
-                                <div class="related__post-info">
-                                    <p class="related__post-date">23 June, 2020</p>
-                                     <h3 class="related__post-title">
-                                        <a href="">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="related__post-item">
-                                <div class="related__post-img">
-                                    <img src="/images/gallery-1.jpg" alt="news detail image">
-                                </div>
-                                <div class="related__post-info">
-                                    <p class="related__post-date">23 June, 2020</p>
-                                     <h3 class="related__post-title">
-                                        <a href="">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
-                                    </h3>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

@@ -76,12 +76,12 @@
 <section class="welcome">
     <div class="container">
         <div class="row align-items-end justify-content-between">
-            <div class="col-md-5 wow slideInLeft" >
+            <div class="col-md-5 wow slideInLeft">
                 <div class="welcome__image ">
                     <img src="/images/gallery-1.jpg" alt="welcome">
                 </div>
             </div>
-            <div class="col-md-6 wow slideInRight" >
+            <div class="col-md-6 wow slideInRight">
                 <div class="welcome__content ">
                     <h1 class="section__title">Welcome to Something English Center </h1>
                     <p class="welcome__content-desc">
@@ -223,24 +223,25 @@
     <div class="container">
         <h1 class="section__title">News</h1>
         <div class="row align-items-center">
-        @foreach($news as $new)
+            @foreach($news as $new)
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="news__item">
                     <div class="news__item-image">
-                        <a href="">
+                        <a href="{{route('news.news-detail',[$new->id])}}">
                             <img src="{{$new->image}}" alt="news">
                         </a>
                     </div>
                     <div class="news__item-info">
                         <p class="news__item-date">{{$new->created_at}}</p>
                         <h2>
-                            <a class="news__item-title" href="news-detail.html">{{$new->title}}</a>
+                            <a class="news__item-title" href="{{route('news.news-detail',[$new->id])}}">
+                                {{$new -> title}}</a>
                         </h2>
                         <p class="news__item-desc">{{$new->content}}</p>
                     </div>
                 </div>
             </div>
-        @endforeach    
+            @endforeach
         </div>
     </div>
 </section>

@@ -11,8 +11,7 @@ use App\Models\User;
 class HomeController extends Controller
 {
     public function index(){
-        $news = factory(News::class,3)->make();
+        $news = News::all();
         return view('frontend.home', ['news' => $news]);
     }
-    
 }
