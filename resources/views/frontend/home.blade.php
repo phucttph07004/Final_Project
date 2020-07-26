@@ -142,7 +142,7 @@
 <!-- Start feedback -->
 <section class="feedback">
     <div class="container">
-        <h1 class="section__title section__title--white">What Students Say</h1>
+        <h1 class="section__title section__title--white">Cảm nhận của học viên</h1>
         <div class="feedback-carousel owl-carousel owl-theme">
             <div class="feedback__item">
                 <p class="feedback__item-content">
@@ -210,7 +210,7 @@
                 </div>
                 <div class="teacher__item-info">
                     <p class="teacher__position">Teacher</p>
-                    <h3 class="teacher__name">Truong Nguyen</h3>
+                    <h3 class="teacher__name">Teacher Name</h3>
                 </div>
             </div>
         </div>

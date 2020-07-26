@@ -28,4 +28,6 @@ Route::group(['middleware' => ['check_role_admin',],], function () {
 
 Route::resource('/admin','backend\IndexController');
 
+Route::get('/login', 'backend\AuthController@getLoginForm');
+
 });

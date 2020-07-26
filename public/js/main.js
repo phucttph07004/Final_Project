@@ -1,7 +1,12 @@
 (function($) {
     window.onload = function() {
         $(document).ready(function() {
-
+            showPassword();
+            homeSlider();
+            feedback();
+            gallerySlider();
+            showMenuMobile();
+            teacherSlider();
         });
     };
 })(jQuery);
@@ -177,8 +182,14 @@ function showMenuMobile() {
     })
 }
 
-homeSlider();
-feedback();
-gallerySlider();
-showMenuMobile();
-teacherSlider();
+function showPassword() {
+    $('.show-pass').click(function() {
+        $(this).find($('.fa')).toggleClass('fa-lock').toggleClass('fa-unlock');
+        var password = document.querySelector('#password');
+        if (password.type === "password") {
+            password.type = "text";
+        } else {
+            password.type = "password"
+        }
+    })
+}

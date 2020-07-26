@@ -16,7 +16,7 @@ class NewsController extends Controller
 
     public function getNews($id){
         $news = News::where('id','=',$id)->get();
-        $relaNews = News::where('id','!=',$id)->get();
+        $relaNews = News::where('id','!=',$id)->orderBy('created_at')->get();
         return view('frontend.news-detail',['news'=> $news, 'news_id'=>$id,'relaNews'=>$relaNews]);
     }
 
