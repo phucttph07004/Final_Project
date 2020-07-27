@@ -23,7 +23,7 @@
                                     <img src="{{$new->image}}" alt="news detail image">
                                 </div>
                                 <div class="news__detail-info">
-                                    <p class="news-date">{{$new->created_at}}</p>
+                                    <p class="news-date">{{$new->created_at->format('d-m-Y')}}</p>
                                     <p class="news-comment">3 comment</p>
                                 </div>
                                 <h1 class="news__detail-title">{{$new->title}}</h1>
@@ -113,7 +113,7 @@
                                     <img src="{{$relaNew->image}}" alt="news detail image">
                                 </div>
                                 <div class="related__post-info">
-                                    <p class="related__post-date">{{$relaNew->created_at}}</p>
+                                    <p class="related__post-date">{{$relaNew->created_at->format('d-m-Y')}}</p>
                                     <h3 class="related__post-title">
                                         <a href="{{route('news.news-detail',[$new->id])}}">{{$relaNew->title}}</a>
                                     </h3>

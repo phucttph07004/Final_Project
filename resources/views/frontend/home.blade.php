@@ -232,7 +232,7 @@
                         </a>
                     </div>
                     <div class="news__item-info">
-                        <p class="news__item-date">{{$new->created_at}}</p>
+                        <p class="news__item-date">{{$new->created_at->format('d-m-Y')}}</p>
                         <h2>
                             <a class="news__item-title" href="{{route('news.news-detail',[$new->id])}}">
                                 {{$new -> title}}</a>

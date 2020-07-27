@@ -24,14 +24,17 @@ Route::post('enroll',       'frontend\EnrollController@store')->name('enroll');
 
 
 // các chức năng của admin
-Route::group(['middleware' => ['check_role_admin',],], function () {
+Route::group([ 'prefix' => 'admin',
+               'middleware' => ['check_role_admin',],
+], function () {
 
-Route::resource('/admin','backend\IndexController');
+    Route::resource('/','backend\IndexController');
 
-Route::resource('/register', 'backend\RegisterController');
-
-Route::get('/login', 'backend\AuthController@getLoginForm');
+    Route::resource('/register', 'backend\RegisterController');
+    
+    Route::resource('/news', 'backend\NewsController');
+     
+    Route::get('/login', 'backend\AuthController@getLoginForm');
 
 });
-
 

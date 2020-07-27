@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\backend;
 
+use Illuminate\Support\Arr;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\Register;
 
-class RegisterController extends Controller
+use App\Models\News;
+
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +18,8 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        $registers = Register::all();
-        return view('backend.pages.register.register',['registers' => $registers]);
+        $news = News::where('type','new')->get();
+        return view('backend.pages.news.news',['news'=>$news]);
     }
 
     /**
@@ -27,7 +29,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.news.create-news');
     }
 
     /**
@@ -38,7 +40,9 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = Arr::except($request->all(), ['_token']);
+        $news = News::create($data);
+        return redirect()->route('news.index');
     }
 
     /**
@@ -59,8 +63,9 @@ class RegisterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    { 
+        $data['news'] = News::find($id);
+        return view('backend.pages.news.edit-news',$data);
     }
 
     /**
@@ -70,9 +75,15 @@ class RegisterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        $data = Arr::except(request()->all(), ["_token"]);
+        $news = News::find($id);
+        $news->title = $data['title'];
+        $news->content = $data['content'];
+        $news->save();
+        
+        return redirect()->route('news.index');
     }
 
     /**
@@ -83,6 +94,7 @@ class RegisterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        News::destroy($id);
+        return redirect()->route('news.index');
     }
 }

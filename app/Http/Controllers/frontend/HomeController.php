@@ -11,7 +11,7 @@ use App\Models\User;
 class HomeController extends Controller
 {
     public function index(){
-        $news = News::all();
+        $news = News::OrderBy('id','desc')->limit(3)->get();
         return view('frontend.home', ['news' => $news]);
     }
 }
