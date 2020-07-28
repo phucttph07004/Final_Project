@@ -22,19 +22,28 @@ Route::get('/news/{id}',    'frontend\NewsController@getNews')->name('news.news-
 Route::get('enroll',        'frontend\EnrollController@create');
 Route::post('enroll',       'frontend\EnrollController@store')->name('enroll');
 
+// Route::get('/', function () {return redirect()->route('home.index');});
+// login và logout
+
+// Route::get('login', 'frontend\AuthController@getLoginForm');
+// Route::post('login', 'frontend\AuthController@login')->name('auth.login');
+// Route::get('logout', 'frontend\AuthController@logout')->name('auth.logout');
+
 
 // các chức năng của admin
 Route::group([ 'prefix' => 'admin',
                'middleware' => ['check_role_admin',],
 ], function () {
 
-    Route::resource('/','backend\IndexController');
 
-    Route::resource('/register', 'backend\RegisterController');
+Route::resource('/register', 'backend\RegisterController');
     
-    Route::resource('/news', 'backend\NewsController');
+Route::resource('/news', 'backend\NewsController');
      
-    Route::get('/login', 'backend\AuthController@getLoginForm');
 
+Route::resource('/','backend\IndexController');
+Route::resource('/notifications','backend\NotificationController');
+Route::resource('/student','backend\StudentController');
 });
+Route::get('/login', 'backend\AuthController@getLoginForm');
 

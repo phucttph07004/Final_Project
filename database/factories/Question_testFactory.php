@@ -13,3 +13,25 @@ $factory->define(Question_test::class, function (Faker $faker) {
         'level_id' => Level::inRandomOrder()->first()->id,
     ];
 });
+
+
+// 'reciever_id'=>'{
+//     id:1,
+//     result:[
+//         {
+//             1:"a"
+//         },
+//         {
+//             2:"b"
+//         }
+//     },
+//     id:2,
+//     result:[
+//         {
+//             1:"a"
+//         },
+//         {
+//             2:"b"
+//         }
+//     }
+//     }',
