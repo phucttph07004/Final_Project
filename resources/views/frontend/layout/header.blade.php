@@ -17,6 +17,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="dist/css/notification.css">
 </head>
 
 <body>
@@ -28,9 +29,11 @@
                 <div class="container">
                     <div class="header__top-inner d-flex align-items-center justify-content-between">
                         <div class="header__top-info d-flex align-items-center">
-                            <p class="header__top-welcome">Welcome to Something English Center</p>
-                            <a href="mailto:something@gmail.com" class="header__top-email"><i class="fa fa-envelope-o"></i>something@gmail.com</a>
-                            <a href="tel:0123456789" class="header__top-phoneNumber"><i class="fa fa-phone"></i>0123456789</a>
+                        @foreach($settings as $setting)
+                            <p class="header__top-welcome">{{$setting->slogan}}</p>
+                            <a href="mailto:{{$setting->email}}" class="header__top-email"><i class="fa fa-envelope-o"></i>{{$setting->email}}</a>
+                            <a href="tel:{{$setting->phone}}" class="header__top-phoneNumber"><i class="fa fa-phone"></i>{{$setting->phone}}</a>
+                        @endforeach
                         </div>
                         <ul class="header__top-account d-flex">
                             <li class="account__item"><a href="/login" class="account__item-link">Login</a></li>
@@ -43,16 +46,18 @@
                 <div class="container">
                     <div class="header__main-inner d-flex align-items-center justify-content-between h-100">
                         <div class="header__logo">
+                        @foreach($settings as $setting)
                             <a href="/">
-                                <img src="/images/Logo.png" alt="logo">
+                                <img src="{{$setting->logo}}" alt="logo">
                             </a>
+                        @endforeach
                         </div>
                         <nav class="header__menu">
                             <ul class="header__menu-list d-flex">
                                 <li class="header__menu-item"><a href="/" class="item-link active">Trang chủ</a></li>
                                 <li class="header__menu-item"><a href="/about" class="item-link">Giới Thiệu</a></li>
                                 <li class="header__menu-item"><a href="/news" class="item-link">Tin tức</a></li>
-                                <li class="header__menu-item"><a href="/enroll" class="item-link">Đăng ký học</a></li>
+                                <li class="header__menu-item"><a href="/register" class="item-link">Đăng ký học</a></li>
                                 <li class="header__menu-item"><a href="/contact" class="item-link">Liên Hệ</a></li>
                             </ul>
                         </nav>

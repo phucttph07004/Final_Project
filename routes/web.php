@@ -2,9 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Models\News;
-use App\Models\User;
-use App\Models\Register;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +16,8 @@ use App\Models\Register;
 Route::get('/',             'frontend\HomeController@index')->name('home.index');
 Route::get('/news',         'frontend\NewsController@index')->name('news.index');
 Route::get('/news/{id}',    'frontend\NewsController@getNews')->name('news.news-detail');
-Route::get('enroll',        'frontend\EnrollController@create');
-Route::post('enroll',       'frontend\EnrollController@store')->name('enroll');
+Route::get('register',        'frontend\RegisterController@create');
+Route::post('register',       'frontend\RegisterController@store')->name('register');
 
 // Route::get('/', function () {return redirect()->route('home.index');});
 // login và logout
@@ -35,15 +32,13 @@ Route::group([ 'prefix' => 'admin',
                'middleware' => ['check_role_admin',],
 ], function () {
 
-
-Route::resource('/register', 'backend\RegisterController');
-    
-Route::resource('/news', 'backend\NewsController');
-     
-
 Route::resource('/','backend\IndexController');
+
+Route::resource('/setting', 'backend\SettingController');
+Route::resource('/register', 'backend\RegisterController');
+Route::resource('/news', 'backend\NewsController');
 Route::resource('/notifications','backend\NotificationController');
 Route::resource('/student','backend\StudentController');
-});
 Route::get('/login', 'backend\AuthController@getLoginForm');
+});
 
