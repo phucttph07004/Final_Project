@@ -12,7 +12,8 @@ class News extends Model
         'content',
         'type',
         'image',
-        'video',
+        'status',
         'user_id',
+
     ];
 }

@@ -29,16 +29,19 @@
                 <div class="d-flex align-items-center justify-content-center h-100">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="login__form">
-                            <p class="login__form-title">Sign In</p>
-                            <form action="">
-                                <input class="login__form-input" type="text" placeholder="Enter your email here">
+                            <p class="login__form-title">Đăng nhập</p>
+                            <form action="{{route('auth.login')}}" method="POST">
+                            @csrf
+                                <input class="login__form-input" type="text" name="email" placeholder="Email">
+                                {!! ShowErrors($errors,'email') !!}
                                 <div class="login__form-password">
-                                    <input class="login__form-input" type="password" name="" id="password" placeholder="Enter your password here">
+                                    <input class="login__form-input" type="password" name="password" id="password" placeholder="Mật khẩu">
                                     <div class="show-pass">
                                         <i class="fa fa-lock "></i>
                                     </div>
                                 </div>
-                                <button class="btn login__form-btn">Sign In</button>
+                                {!! ShowErrors($errors,'password') !!}
+                                <button type="submit" class="btn login__form-btn">Đăng nhập</button>
                             </form>
                         </div>
                     </div>

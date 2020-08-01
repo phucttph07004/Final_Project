@@ -1,6 +1,6 @@
   <!-- Start footer -->
   <footer class="footer">
-      <div class="footer__top">
+      <!-- <div class="footer__top">
           <div class="container">
               <div class="row">
                   <div class="col-4">
@@ -52,8 +52,8 @@
                   </div>
               </div>
           </div>
-      </div>
-      <div class="footer__mid">
+      </div> -->
+      <div class="footer__mid pt-0">
           <div class="container">
               <div class="row">
                  <div class="col-md-4">

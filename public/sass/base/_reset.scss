@@ -123,6 +123,7 @@ html {
 body {
     line-height: 1.5;
     overflow-x: hidden;
+    font-size: 1.6rem;
 }
 
 ol,
@@ -151,10 +152,6 @@ table {
 img {
     display: block;
     max-width: 100%;
-    &:not([alt]),
-    &[alt=''] {
-        border: 5px solid red;
-    }
 }
 
 button {

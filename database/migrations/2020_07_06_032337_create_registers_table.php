@@ -19,6 +19,9 @@ class CreateRegistersTable extends Migration
             $table->date('date_of_birth');
             $table->string('phone');
             $table->text('address');
+            $table->text('note');
+            // $table->integer('branch_id')->unsigned();
+            // $table->foreign('branch_id')->references('id')->on('branchs')->onDelete('cascade');
             $table->integer('is_active');
             $table->string('email',100)->unique();
             $table->timestamps();

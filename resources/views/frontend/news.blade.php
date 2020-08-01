@@ -16,13 +16,13 @@
         <section class="news">
             <div class="container">
                 <h1 class="section__title">News</h1>
-                <div class="row align-items-center">
+                <div class="row">
                 @foreach($news as $new)
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="news__item">
                             <div class="news__item-image">
                                 <a href="{{route('news.news-detail',[$new->id])}}">
-                                    <img src="{{$new->image}}" alt="news">
+                                    <img src="storage/{{$new->image}}" alt="news">
                                 </a>
                             </div>
                             <div class="news__item-info">
@@ -30,7 +30,7 @@
                                 <h2>
                                     <a class="news__item-title" href="{{route('news.news-detail',[$new->id])}}">{{$new -> title}}</a>
                                 </h2>
-                                <p class="news__item-desc">{{$new->content}}</p>
+                                {!!$new->content!!}
                             </div>
                         </div>
                     </div>
