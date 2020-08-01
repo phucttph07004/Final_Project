@@ -45,9 +45,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
+                <a href="/branch" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
+                  <p>Quản Trị Chi Nhánh</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/level" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Quản Trị Levels</p>
                 </a>
               </li>
             </ul>

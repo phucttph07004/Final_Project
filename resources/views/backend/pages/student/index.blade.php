@@ -2,7 +2,7 @@
 @section('title','Quản Trị Học Sinh')
 @section('title_page','Quản Trị Học Sinh')
 @section('content')
-<table style="background-color: white" class="table">
+<table style="background-color: white" class="table ml-5">
     @if(session('thongbao'))
     <div class="alert alert-primary text-center" role="alert">
         {{session('thongbao') }}
@@ -19,7 +19,10 @@
         <th scope="col">
         <a href="{{ route('student.create') }}">
                 <button type="button" class="btn btn-outline-primary">Thêm Học Sinh</button>
-            </a>
+        </a>
+        <a href="/student/create/excel">
+            <button type="button" class="btn btn-outline-primary">Thêm Bằng File Excel</button>
+        </a>
         </th>
       </tr>
     </thead>
@@ -41,10 +44,10 @@
 
             </td>
             <td>
-                <a href="{{ route('notifications.show',"$item->id") }}">
+                <a href="{{ route('student.show',"$item->id") }}">
             <button type="button" class="btn btn-outline-info">Chi Tiết</button>
                 </a>
-                <a href="{{ route('notifications.edit',"$item->id") }}">
+                <a href="{{ route('student.edit',"$item->id") }}">
             <button type="button" class="btn btn-outline-warning">Sửa</button>
                 </a>
 

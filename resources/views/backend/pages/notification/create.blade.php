@@ -2,7 +2,7 @@
 @section('title','Quản Trị Thông Báo')
 @section('title_page','Gửi Thông Báo')
 @section('content')
-<form class="pl-5 pt-5" action="{{ route('notifications.store') }}" method="POST">
+<form class=" col-11 pl-5 pt-5" action="{{ route('notifications.store') }}" method="POST">
     @csrf
         @if(session('thongbao'))
         <div class="alert alert-primary" role="alert">
@@ -13,7 +13,7 @@
       <label for="exampleFormControlInput1">Tiêu Đề</label>
     <br>
       {!! ShowErrors($errors,'title') !!}
-      <input name="title" type="text" class="form-control" >
+      <input name="title"  value="{{ old('title') }}" type="text" class="form-control" >
     </div>
 
     <div class="form-group">
@@ -26,39 +26,23 @@
         @endforeach
       </select>
     </div>
+    @if(session('error'))
+        <span style='color: red'>{{session('error')}}</span>
+    @endif
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Trạng Thái Thông Báo</label>
+        <select class="form-control" name="status" id="type">
+        <option value="1">Thông Báo Bình Thường</option>
+        <option value="2">Thông Báo Quan Trọng</option>
+        </select>
+      </div>
 
     <div class="form-group">
       <label for="exampleFormControlTextarea1">Nội Dung </label>
       <br>
         {!! ShowErrors($errors,'content') !!}
-      <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ old('content') }}</textarea>
     </div>
-    <button type="submit" class="mb-5 btn btn-primary">Gửi Thông Báo</button>
+    <button type="submit" class="mb-5 btn btn-primary">Tạo Thông Báo</button>
   </form>
   @endsection
-
-  {{-- @push('scripts')
-  <script>
-    $(document).ready(function(){
-    $("select#Select1").change(function(){
-        var option = $('select[name="Select1"]').find(':selected').attr('class');
-        if (option == 'by_class') {
-            $(".by_class_all").attr('id','by_class_all');
-            $(".by_student_all").attr('id','');
-        }
-        if(option == 'by_all'){
-            $(".by_student_all").attr('id','');
-            $(".by_class_all").attr('id','');
-        }
-    });
-});
-  </script>
-  @endpush --}}
-  <style>
-      /* #by_class_all{
-          display: block !important;
-      } */
-      /* #by_studen_all{
-          display: block !important;
-      } */
-  </style>

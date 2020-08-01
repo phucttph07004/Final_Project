@@ -25,7 +25,7 @@ class NotificationRequest extends FormRequest
     {
         return [
             'title'=>'required|min:6',
-            'content'=>'required',
+            'content'=>'required|min:6',
             'category_id'=>'required',
         ];
     }

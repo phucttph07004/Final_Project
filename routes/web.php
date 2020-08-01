@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Models\News;
+use App\Models\User;
+use App\Models\Register;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',             'frontend\HomeController@index')->name('home.index');
+Route::get('/news',         'frontend\NewsController@index')->name('news.index');
+Route::get('/news/{id}',    'frontend\NewsController@getNews')->name('news.news-detail');
+Route::get('enroll',        'frontend\EnrollController@create');
+Route::post('enroll',       'frontend\EnrollController@store')->name('enroll');
 
 // Route::get('/', function () {return redirect()->route('home.index');});
 // login và logout
@@ -26,10 +31,22 @@ Route::get('/', function () {
 
 
 // các chức năng của admin
-Route::group(['middleware' => ['check_role_admin',],], function () {
+// Route::group([ 'prefix' => 'admin',
+//                'middleware' => ['check_role_admin',],
+// ], function () {
 
 Route::resource('/admin','backend\IndexController');
 Route::resource('/notifications','backend\NotificationController');
 Route::resource('/student','backend\StudentController');
-});
+Route::resource('/branch','backend\BranchController');
+Route::resource('/level','backend\LevelController');
+// Route::POST('/notification/store/default','backend\ExcelController@student_store_default');
+Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
+Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
+
+    // Route::resource('/','backend\IndexController');
+    Route::resource('/register', 'backend\RegisterController');
+    Route::resource('/news', 'backend\NewsController');
+    Route::get('/login', 'backend\AuthController@getLoginForm');
+// });
 

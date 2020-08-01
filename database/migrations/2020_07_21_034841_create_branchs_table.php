@@ -16,11 +16,11 @@ class CreateBranchsTable extends Migration
         Schema::create('branchs', function (Blueprint $table) {
             $table->increments('id');
             $table->text('address');
+            $table->text('avatar');
             $table->string('branch_name');
             $table->integer('director_id')->unsigned();
-            $table->foreign('director_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('teaching_assitant_id')->unsigned();
-            $table->foreign('teaching_assitant_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('director_id')->references('id')->on('users');
+            $table->integer('status');
             $table->timestamps();
         });
     }

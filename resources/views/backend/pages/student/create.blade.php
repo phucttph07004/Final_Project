@@ -13,7 +13,7 @@
       <label for="exampleFormControlInput1">Họ Tên</label>
     <br>
       {!! ShowErrors($errors,'fullname') !!}
-      <input name="fullname" type="text" class="form-control" >
+    <input name="fullname" type="text" value="{{ old('fullname') }}" class="form-control" >
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Ảnh</label>
@@ -25,29 +25,29 @@
         <label for="exampleFormControlInput1">ngày Sinh</label>
       <br>
         {!! ShowErrors($errors,'date_of_birth') !!}
-        <input name="date_of_birth" type="date" class="form-control" >
+        <input name="date_of_birth" value="{{ old('date_of_birth') }}" type="date" class="form-control" >
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Số Điện Thoại</label>
       <br>
         {!! ShowErrors($errors,'phone') !!}
-        <input name="phone" type="number" class="form-control" >
+        <input name="phone" value="{{ old('phone') }}" type="number" class="form-control" >
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">email</label>
       <br>
         {!! ShowErrors($errors,'email') !!}
-        <input name="email" type="email" class="form-control" >
+        <input name="email" value="{{ old('email') }}" type="email" class="form-control" >
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Địa Chỉ</label>
       <br>
         {!! ShowErrors($errors,'address') !!}
-        <input name="address" type="text" class="form-control" >
+        <input name="address" value="{{ old('address') }}" type="text" class="form-control" >
       </div>
 
     <div class="form-group">
-      <label for="exampleFormControlSelect1">Lever</label>
+      <label for="exampleFormControlSelect1">Chọn Lever Và Lớp</label>
       <br>
         {!! ShowErrors($errors,'class_id') !!}
     <div class="row">
@@ -70,53 +70,10 @@
     </div>
 </div>
 @endforeach
-
-
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <button type="submit" class="mb-5 btn btn-primary">Thêm Học Sinh</button>
   </form>
   @endsection
-
-
-@push('scripts')
-  <script>
-    $(document).ready(function(){
-    $("select#Select1").change(function(){
-        var option = $('select[name="Select1"]').find(':selected').attr('class');
-        if (option == 'by_class') {
-            $(".by_class_all").attr('id','by_class_all');
-            $(".by_student_all").attr('id','');
-        }
-        if(option == 'by_all'){
-            $(".by_student_all").attr('id','');
-            $(".by_class_all").attr('id','');
-        }
-    });
-});
-  </script>
-  @endpush
-  <style>
-    #by_class_all{
-        display: block !important;
-    }
-</style>
 
 
 
