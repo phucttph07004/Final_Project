@@ -19,6 +19,7 @@ class CreateStudentsTable extends Migration
             $table->foreign('class_id')->references('id')->on('class')->onDelete('cascade');
             $table->string('fullname');
             $table->string('code');
+            $table->text('avatar');
             $table->date('date_of_birth');
             $table->string('phone');
             $table->string('email',100)->unique();

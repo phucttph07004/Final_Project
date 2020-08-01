@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call(Writing_essaySeeder::class);
         $this->call(AttendanceSeeder::class);
         $this->call(ArchivementSeeder::class);
+        $this->call(CategorySeeder::class);
         $this->call(NotificationSeeder::class);
-
 
 
 

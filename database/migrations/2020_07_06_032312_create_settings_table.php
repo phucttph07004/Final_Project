@@ -17,6 +17,8 @@ class CreateSettingsTable extends Migration
             $table->increments('id');
             $table->text('logo');
             $table->text('slogan');
+            $table->string('phone');
+            $table->string('email',100)->unique();
             $table->timestamps();
         });
     }
