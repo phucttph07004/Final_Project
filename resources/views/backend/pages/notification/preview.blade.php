@@ -2,9 +2,9 @@
 @section('title','Quản Trị Thông Báo')
 @section('title_page','Xác Nhận Thông Báo')
 @section('content')
-<form class=" col-10 pl-5 pt-5" action="/notification/store/default" method="POST">
+<form class=" col-10 pl-5 pt-5" action="{{ route('notifications.update',"1") }}" method="POST">
     @csrf
-
+    @method('PUT')
     @if(session('thongbao'))
     <div class="alert alert-primary" role="alert">
         {{session('thongbao')}}

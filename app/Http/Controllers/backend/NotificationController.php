@@ -42,31 +42,30 @@ class NotificationController extends Controller
             $data = Arr::except($request, ['_token'])->toarray();
             $data['user_id'] = 1;
             // $data['user_id']=Auth::user()->id;
-            if ($request['is_active'] == null) {
-                $preview['Notification'] = $data;
-                $preview['get_users'] = User::all();
-                $preview['get_categories'] = Category::all();
-                return view('backend.pages.notification.preview', $preview);
-            }else {
+
+            $preview['Notification'] = $data;
+            $preview['get_users'] = User::all();
+            $preview['get_categories'] = Category::all();
+            return view('backend.pages.notification.preview', $preview);
                 // dd($request->all());
                 // $data['user_id'] = 1;
                 // // $data['user_id']=Auth::user()->id;
                 // Notification::create($data);
                 // return redirect()->back()->with('thongbao', 'Tạo Thông Báo Thành Công');
-            }
         }
     }
 
 
-    public function edit(Notification $Notification)
-    {
-        $data['Notification'] = $Notification;
-        $data['get_all_category'] = Category::all();
-        return view('backend.pages.notification.edit', $data);
-    }
+    // public function edit(Notification $Notification)
+    // {
+    //     $data['Notification'] = $Notification;
+    //     $data['get_all_category'] = Category::all();
+    //     return view('backend.pages.notification.edit', $data);
+    // }
 
-    public function update(NotificationRequest $request, $id)
+    public function update(NotificationRequest $request)
     {
+        dd($request->all());
         $data = Arr::except($request, ['_token', '_method'])->toarray();
         $data['user_id'] = 1;
         // $data['user_id']=Auth::user()->id;
