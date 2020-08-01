@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Requests\backend\student;
+use App\Models\Student;
 use Illuminate\Foundation\Http\FormRequest;
-class StudentRequest extends FormRequest
+use Illuminate\Validation\Rule;
+
+class StudentRequestEdit extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,9 +24,10 @@ class StudentRequest extends FormRequest
      */
     public function rules()
     {
+        $students = Student::find((int) request()->segment(2));
         return [
             'fullname'=>'required|min:6',
-            'email'=>'required|email|unique:students',
+            'email'=>'required|email|unique:students,email,'.$students->id.',id',
             'address'=>'required|min:10',
             'phone'=>'required|numeric|digits:10',
             'class_id'=>'required',

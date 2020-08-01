@@ -27,8 +27,27 @@ Route::resource('/news', 'backend\NewsController');
 Route::resource('/notifications','backend\NotificationController');
 Route::resource('/student','backend\StudentController');
 Route::resource('/account','backend\AccountController');
-
+Route::resource('/branch','backend\BranchController');
+Route::resource('/level','backend\LevelController');
+Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
+Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 });
+// Route::group([ 'prefix' => 'admin',
+//                'middleware' => ['check_role_admin',],
+// ], function () {
+
+
+
+
+
+// Route::POST('/notification/store/default','backend\ExcelController@student_store_default');
+
+
+    // Route::resource('/','backend\IndexController');
+    // Route::resource('/register', 'backend\RegisterController');
+    // Route::resource('/news', 'backend\NewsController');
+    // Route::get('/login', 'backend\AuthController@getLoginForm');
+// });
 
 // Auth Admin
 

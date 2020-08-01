@@ -106,7 +106,7 @@
                     </div>
                     <div class="col-3">
                         <div class="related__post">
-                            <h2>Related Post</h2>
+                            <h2>Bài viết liên quan</h2>
                             @foreach($relaNews as $relaNew)
                             <div class="related__post-item">
                                 <div class="related__post-img">

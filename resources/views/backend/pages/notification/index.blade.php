@@ -2,7 +2,7 @@
 @section('title','Quản Trị Thông Báo')
 @section('title_page','Quản Trị Thông Báo')
 @section('content')
-<table style="background-color: white" class="table">
+<table style="background-color: white" class="table ml-5">
     @if(session('thongbao'))
     <div class="alert alert-primary text-center" role="alert">
         {{session('thongbao') }}
@@ -17,7 +17,7 @@
         <th scope="col">Ngày Gửi</th>
         <th scope="col">
         <a href="{{ route('notifications.create') }}">
-                <button type="button" class="btn btn-outline-primary">Gửi Thông Báo</button>
+                <button type="button" class="btn btn-outline-primary">Tạo Thông Báo</button>
             </a>
         </th>
       </tr>

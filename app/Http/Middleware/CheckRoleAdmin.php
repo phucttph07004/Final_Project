@@ -16,9 +16,9 @@ class CheckRoleAdmin
      */
     public function handle($request, Closure $next)
     {
-    //    if(Auth::check()===false){
-    //         return redirect()->route('auth.login');
-    //     }
+       if(Auth::check()===false){
+            return redirect()->route('auth.login');
+        }
         return $next($request);
     }
 }

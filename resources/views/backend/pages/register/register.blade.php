@@ -78,36 +78,15 @@
                                         <button class="btn btn-primary" data-toggle="modal"
                                             data-target="#{{$register->id}}" data-whatever="@mdo">Ghi
                                             chú</button>
-                                        <!-- <form class="" action="{{route('register.confirm')}}" method="POST">
-                                            @csrf
-                                            <div class="form-group">
-                                                <input class="form-control" type="hidden" name="fullname"
-                                                    value="{{$register->fullname}}" placeholder="Họ và tên">
-                                            </div>
-                                            <div class="form-group">
-                                                <input class="form-control" type="hidden" name="phone"
-                                                    value="{{$register->phone}}" placeholder="Số điện thoại">
-                                            </div>
-                                            <div class="form-group">
-                                                <input class="form-control" type="hidden" name="email"
-                                                    value="{{$register->email}}">
-                                            </div>
-                                            <div class="form-group">
-                                                <input class="form-control" type="hidden" name="code" value="PH05500">
-                                            </div>
-                                            <div class="form-group">
-                                                <input class="form-control" type="hidden" name="question_test_id"
-                                                    value="{{rand(0,10)}}">
-                                            </div>
-                                        </form> -->
-                                        <button id="btn_delete_{{ $register->id }}" type="submit"
-                                                class="btn btn-success mb-3">Xác nhận</button>
-                                        <form id="delete_form_{{ $register->id }}"
+                                        
+                                        <!-- <button id="btn_delete_{{ $register->id }}" type="submit"
+                                                class="btn btn-success mb-3">Xác nhận</button> -->
+                                        <!-- <form id="delete_form_{{ $register->id }}"
                                             action="{{ route('register.destroy',$register->id) }}" method="post"
                                             style="display: none;">
                                             @method('DELETE')
                                             @csrf
-                                        </form>
+                                        </form> -->
                                     </td>
                                     <div class="modal fade" id="{{$register->id}}" tabindex="-1" role="dialog"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">

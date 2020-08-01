@@ -92,6 +92,7 @@
                                             action="{{ route('news.destroy',$new->id) }}" method="post"
                                             style="display: none;">
                                             @method('DELETE')
+                                            <input type="hidden" name="status" value="{{$new->status}}">
                                             @csrf
                                         </form>
                                     </td>

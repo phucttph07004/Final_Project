@@ -120,13 +120,18 @@ class NewsController extends Controller
     public function destroy($id)
     {
         $news = News::find($id);
+        $data = Arr::except(request()->all(), ["_token ,'_method'"]);
 
-        if($data['status'] = 0){
+        // dd($id);
+
+        if($data['status'] == 0){
             $data['status'] = 1;
         }
-         else if($data['status'] = 1){
+        else {
             $data['status'] = 0;
         }
+
+        
 
         $news->update($data);
 

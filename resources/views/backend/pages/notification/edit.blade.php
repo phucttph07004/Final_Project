@@ -40,7 +40,6 @@
         <label for="exampleFormControlInput1">Ngày Cập Nhật</label>
         <input type="text" class="form-control" value="{{ Carbon\carbon::parse($Notification->updated_at)->format('d-m-Y') }}" readonly>
       </div>
-
       <button type="submit" class="mt-3 mb-5 btn btn-primary">Cập Nhật Thông Báo</button>
   </form>
 

@@ -35,10 +35,6 @@
                             <a href="tel:{{$setting->phone}}" class="header__top-phoneNumber"><i class="fa fa-phone"></i>{{$setting->phone}}</a>
                         @endforeach
                         </div>
-                        <ul class="header__top-account d-flex">
-                            <li class="account__item"><a href="/login" class="account__item-link">Login</a></li>
-                            <li class="account__item"><a href="/register" class="account__item-link">Register</a></li>
-                        </ul>
                     </div>
                 </div>
             </div>

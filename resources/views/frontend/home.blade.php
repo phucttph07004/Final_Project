@@ -60,7 +60,7 @@
 <!-- Start offer -->
 <section class="offer">
     <div class="container">
-        <h1 class="section__title">What we're offering</h1>
+        <h1 class="section__title">Toàn diện 4 kỹ năng</h1>
         <div class="row">
             <div class="col-12 col-md-6 col-lg-3 ">
                 <div class="offer__block wow bounce">
@@ -68,7 +68,7 @@
                         <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
                     </div>
                     <p class="offer__block-name">
-                        Something Offer
+                        Nghe 
                     </p>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                         <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
                     </div>
                     <p class="offer__block-name">
-                        Something Offer
+                       Nói
                     </p>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                         <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
                     </div>
                     <p class="offer__block-name">
-                        Something Offer
+                       Đọc
                     </p>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                         <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
                     </div>
                     <p class="offer__block-name">
-                        Something Offer
+                       Viết
                     </p>
                 </div>
             </div>
@@ -118,12 +118,11 @@
             </div>
             <div class="col-md-6 wow slideInRight">
                 <div class="welcome__content ">
-                    <h1 class="section__title">Welcome to Something English Center </h1>
+                    <h1 class="section__title">Chào mừng bạn đến với Bee English Center </h1>
                     <p class="welcome__content-desc">
-                        There are many variations of pass of lorem ipsum available but the majority have suffered
-                        alteration in some form.
+                    Chúng tôi cam kết chuyển giao kiến thức thực tiễn dựa trên nền tảng tư duy giáo dục định hướng & phát huy tối đa khả năng sáng tạo của học viên với mục tiêu tối thượng là giúp người học thay đổi tư duy, phát triển kỹ năng cần thiết, nghe nói tiếng Anh dễ dàng, trôi chảy và tự động.
                     </p>
-                    <a href="" class="welcome__readMore">Discover More</a>
+                    <a href="" class="welcome__readMore">Xem thêm</a>
                 </div>
             </div>
         </div>
@@ -134,7 +133,7 @@
 <!-- Start programs -->
 <section class="programs">
     <div class="container">
-        <h1 class="section__title">Our Programs</h1>
+        <h1 class="section__title">Hệ Thống Khoá Học</h1>
         <div class="row">
             <div class="col-12 col-md-4 col-lg-4">
                 <div class="programs__block">
@@ -142,8 +141,8 @@
                         <img src="https://via.placeholder.com/350x150" alt="programs">
                     </div>
                     <div class="programs__block-text">
-                        <h5 class="programs__block-name">Something Programs</h5>
-                        <p class="programs__block-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <h5 class="programs__block-name">COMBO 1</h5>
+                        <p class="programs__block-desc">Nền tảng tiếng Anh</p>
                     </div>
                 </div>
             </div>
@@ -153,8 +152,8 @@
                         <img src="https://via.placeholder.com/350x150" alt="programs">
                     </div>
                     <div class="programs__block-text">
-                        <h5 class="programs__block-name">Something Programs</h5>
-                        <p class="programs__block-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <h5 class="programs__block-name">COMBO 2</h5>
+                        <p class="programs__block-desc">Toàn diện 4 kỹ năng</p>
                     </div>
                 </div>
             </div>
@@ -164,8 +163,8 @@
                         <img src="https://via.placeholder.com/350x150" alt="programs">
                     </div>
                     <div class="programs__block-text">
-                        <h5 class="programs__block-name">Something Programs</h5>
-                        <p class="programs__block-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <h5 class="programs__block-name">COMBO 3</h5>
+                        <p class="programs__block-desc">Chuẩn đầu ra TOEIC</p>
                     </div>
                 </div>
             </div>
@@ -181,32 +180,29 @@
         <div class="feedback-carousel owl-carousel owl-theme">
             <div class="feedback__item">
                 <p class="feedback__item-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti tenetur saepe doloribus corporis
+                Mình cảm thấy rất may mắn khi được biết đến trung tâm giao tiếp tiếng Anh từ đầu. Mình thực sự rất ấn tượng với phương pháp dạy và học ở Langmaster ạ. Học không còn chỉ là trên lý thuyết như mình được học trên trường mà đó là sự áp dụng lý thuyết vào thực tiễn. Điều này giúp mình nhớ lâu nhanh hơn. 
                 </p>
-                <p class="feedback__item-author">Someone</p>
-                <p class="feedback__item-job">Student</p>
+                <p class="feedback__item-author">Nguyễn Quang Trường</p>
                 <div class="feedback__item-avatar">
-
+                    <img src="" alt="">
                 </div>
             </div>
-            <div class="feedback__item">
+             <div class="feedback__item">
                 <p class="feedback__item-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti tenetur saepe doloribus corporis
+                Mình cảm thấy rất may mắn khi được biết đến trung tâm giao tiếp tiếng Anh từ đầu. Mình thực sự rất ấn tượng với phương pháp dạy và học ở Langmaster ạ. Học không còn chỉ là trên lý thuyết như mình được học trên trường mà đó là sự áp dụng lý thuyết vào thực tiễn. Điều này giúp mình nhớ lâu nhanh hơn. 
                 </p>
-                <p class="feedback__item-author">Someone</p>
-                <p class="feedback__item-job">Student</p>
+                <p class="feedback__item-author">Nguyễn Quang Trường</p>
                 <div class="feedback__item-avatar">
-
+                    <img src="" alt="">
                 </div>
             </div>
-            <div class="feedback__item">
+             <div class="feedback__item">
                 <p class="feedback__item-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti tenetur saepe doloribus corporis
+                Mình cảm thấy rất may mắn khi được biết đến trung tâm giao tiếp tiếng Anh từ đầu. Mình thực sự rất ấn tượng với phương pháp dạy và học ở Langmaster ạ. Học không còn chỉ là trên lý thuyết như mình được học trên trường mà đó là sự áp dụng lý thuyết vào thực tiễn. Điều này giúp mình nhớ lâu nhanh hơn. 
                 </p>
-                <p class="feedback__item-author">Someone</p>
-                <p class="feedback__item-job">Student</p>
+                <p class="feedback__item-author">Nguyễn Quang Trường</p>
                 <div class="feedback__item-avatar">
-
+                    <img src="" alt="">
                 </div>
             </div>
         </div>
@@ -214,25 +210,6 @@
 </section>
 <!-- End feedback -->
 
-<!-- Start subscribe -->
-<section class="subscribe">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-12 col-lg-6">
-                <p class="subscribe__text">
-                    Don’t miss our daily updates
-                </p>
-            </div>
-            <div class="col-md-12 col-lg-6">
-                <form action="">
-                    <input type="email" placeholder="Enter Email Here">
-                    <button class="btn">Subscribe</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End subscribe -->
 
 <!-- Start teacher -->
 <section class="teacher">
@@ -245,7 +222,7 @@
                     <img src="{{$teacher->avatar}}" alt="Teacher Image">
                 </div>
                 <div class="teacher__item-info">
-                    <p class="teacher__position">Teacher</p>
+                    <p class="teacher__position">Giảng Viên</p>
                     <h3 class="teacher__name">{{$teacher->fullname}}</h3>
                 </div>
             </div>
@@ -258,7 +235,7 @@
 <!-- Start news -->
 <section class="news">
     <div class="container">
-        <h1 class="section__title">News</h1>
+        <h1 class="section__title">Tin tức</h1>
         <div class="row">
             @foreach($news as $new)
             <div class="col-12 col-md-6 col-lg-4">

@@ -12,7 +12,7 @@ use Str;
 use Auth;
 use Carbon\Carbon;
 
-
+use App\Models\News;
 use App\Models\Setting;
 
 class SettingController extends Controller
@@ -25,7 +25,8 @@ class SettingController extends Controller
     public function index()
     {
         $settings = Setting::all();
-        return view('backend.pages.setting.setting',['settings' => $settings]);
+        $abouts = News::where('type','about')->limit(1)->get();
+        return view('backend.pages.setting.setting',['settings' => $settings,'abouts' => $abouts]);
     }
 
     /**

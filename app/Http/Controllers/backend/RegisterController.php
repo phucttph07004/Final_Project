@@ -41,15 +41,6 @@ class RegisterController extends Controller
         return redirect()->back();
     }
 
-    public function confirm(Request $request)
-    {
-        $data = Arr::except($request->all(),['_token']);
-        
-        Test::create($data);
-
-        return redirect()->route('register.index')->with('thongbao','Xác nhận thành công');
-    }
-
     public function changeStatus(Request $request)
     {
         $register = Register::find($request->id);
