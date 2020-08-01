@@ -8,6 +8,6 @@ class Register extends Model
 {
     //
         protected $fillable = [
-            'fullname','date_of_birth','phone','address','is_active','email',
+            'fullname','date_of_birth','phone','address','is_active','email','note','branch_id'
         ];
 }

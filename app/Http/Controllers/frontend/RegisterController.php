@@ -9,7 +9,7 @@ use App\Http\Requests\frontend\register\RegisterRequest;
 use App\Models\Register;
 use App\Models\Setting;
 
-
+use Mail;
 use Arr;
 class RegisterController extends Controller
 {
@@ -46,9 +46,10 @@ class RegisterController extends Controller
     {
         $data = Arr::except($request->all(), ['_token']);
         $data['is_active']=0;
+        $data['note']='';
         $register = Register::create($data);
                 
-        return redirect()->route('home.index')->with('thongbao','Đăng Ký Thành Công');
+        return redirect()->view('frontend.thankyou');
     }
 
     /**

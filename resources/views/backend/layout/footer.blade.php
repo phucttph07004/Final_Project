@@ -38,8 +38,11 @@
 <script>
   $(function () {
     // Summernote
-    $('.textarea').summernote()
+    $('.textarea').summernote();
+    
   })
+
+
 </script>
 
 @stack('scripts')

@@ -22,7 +22,9 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+
+
         $news = News::where('type','new')->OrderBy('created_at','desc')->paginate(6);
         return view('backend.pages.news.news',['news'=>$news]);
     }
@@ -56,7 +58,7 @@ class NewsController extends Controller
 
         News::create($data);
 
-        return redirect()->route('news.index');
+        return redirect()->route('news.index')->with('thongbao','Thêm tin tức thành công');
     }
 
     /**
@@ -106,7 +108,7 @@ class NewsController extends Controller
 
         $news->update($data);
 
-        return redirect()->route('news.index');
+        return redirect()->route('news.index')->with('thongbao','Cập nhập tin tức thành công');
     }
 
     /**
@@ -117,7 +119,17 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        News::destroy($id);
-        return redirect()->back()->with('thongbao','Xóa Thành Công');
+        $news = News::find($id);
+
+        if($data['status'] = 0){
+            $data['status'] = 1;
+        }
+         else if($data['status'] = 1){
+            $data['status'] = 0;
+        }
+
+        $news->update($data);
+
+        return redirect()->back();
     }
 }

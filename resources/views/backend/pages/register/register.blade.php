@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Danh sách học viên đăng ký</h3>
+                        <h3>Danh sách học viên đăng ký</h3>
                     </div>
                     @if(session('thongbao'))
                     <section class="alert-noti">
@@ -55,6 +55,7 @@
                                     <th>Email</th>
                                     <th>Điện thoại</th>
                                     <th>Địa chỉ</th>
+                                    <th>Ghi chú</th>
                                     <th>Trạng thái</th>
                                     <th></th>
                                 </tr>
@@ -64,32 +65,85 @@
                                 <tr>
                                     <td>{{$register->id}}</td>
                                     <td>{{$register->fullname}}</td>
-                                    <td>{{$register->email}}</td>
-                                    <td>{{$register->phone}}</td>
+                                    <td><a href="mailto:{{$register->email}}">{{$register->email}}</a></td>
+                                    <td><a href="tel:{{$register->phone}}">{{$register->phone}}</a></td>
                                     <td>{{$register->address}}</td>
-                                    <td>@if($register->is_active == 0)<a href="{{route('register.update',[$register->id])}}" style="color: red">Chưa xác nhận</a>
-                                        @else<span style="color: green">Đã xác nhận</span>
+                                    <td>{{$register->note}}</td>
+                                    <td>
+                                        @if($register->is_active==0) <span style="color:red"> Chưa xác nhận</span>
+                                        @else <span style="color:green">Chưa xác nhận</span>
                                         @endif
                                     </td>
-                                    <td>
-                                        <a class="btn btn-primary" href="{{route('register.edit',[$register->id])}}">Sửa</a>
-                                        <button id="btn_delete_{{ $register->id }}" class="btn btn-danger">
-                                            Xóa
-                                        </button>
-
+                                    <td class=>
+                                        <button class="btn btn-primary" data-toggle="modal"
+                                            data-target="#{{$register->id}}" data-whatever="@mdo">Ghi
+                                            chú</button>
+                                        <!-- <form class="" action="{{route('register.confirm')}}" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input class="form-control" type="hidden" name="fullname"
+                                                    value="{{$register->fullname}}" placeholder="Họ và tên">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" type="hidden" name="phone"
+                                                    value="{{$register->phone}}" placeholder="Số điện thoại">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" type="hidden" name="email"
+                                                    value="{{$register->email}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" type="hidden" name="code" value="PH05500">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" type="hidden" name="question_test_id"
+                                                    value="{{rand(0,10)}}">
+                                            </div>
+                                        </form> -->
+                                        <button id="btn_delete_{{ $register->id }}" type="submit"
+                                                class="btn btn-success mb-3">Xác nhận</button>
                                         <form id="delete_form_{{ $register->id }}"
-                                            action="{{ route('register.destroy', $register->id) }}" method="POST"
+                                            action="{{ route('register.destroy',$register->id) }}" method="post"
                                             style="display: none;">
                                             @method('DELETE')
                                             @csrf
-
                                         </form>
                                     </td>
+                                    <div class="modal fade" id="{{$register->id}}" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <form role="form" method="POST"
+                                                        action="{{ route('register.update', $register->id) }}">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="form-group">
+                                                            <label for="message-text" class="col-form-label">Ghi
+                                                                chú</label>
+                                                            <textarea class="form-control" name="note"
+                                                                id="message-text">
+                                                       {{ $register->note}}
+                                                        </textarea>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-primary">Lưu</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </tr>
+
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
+
+
+
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
                         {{ $registers->links() }}
@@ -106,12 +160,21 @@
 <script>
 $("button[id^='btn_delete_']").click(function(event) {
     id = event.currentTarget.attributes.id.value.replace('btn_delete_', '');
-    if (confirm('Bạn có muốn xóa không')) {
-        $("#delete_form_" + id).submit();
-    }
+
+    $("#delete_form_" + id).submit();
 });
 $('.close-noti').click(function() {
     $('.alert-noti').hide();
+});
+
+$('#{{$register->id}}').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var recipient = button.data('whatever') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-title').text('New message to ' + recipient)
+    modal.find('.modal-body input').val(recipient)
 })
 </script>
 @endpush

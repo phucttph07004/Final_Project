@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h3 class="card-title mr-5">Quản lý tin tức</h3>
+                            <h3 class=" mr-5">Quản lý tin tức</h3>
                             <a href="{{route('news.create')}}" class="btn btn-success col-md-1">Create</a>
                         </div>
                     </div>
@@ -56,6 +56,9 @@
                                     <th style="width: 10px">ID</th>
                                     <th>Ảnh</th>
                                     <th>Tiêu đề</th>
+                                    <th>Danh mục</th>
+                                    <th>Lượt xem</th>
+                                    <th>Trạng thái</th>
                                     <th>Ngày tạo</th>
                                     <th>Action</th>
                                 </tr>
@@ -66,10 +69,25 @@
                                     <td>{{$new->id}}</td>
                                     <td><img src="storage/{{ $new->image }}" width="70px" height="50px"></td>
                                     <td>{{$new->title}}</td>
+                                    <td>{{$new->category}}</td>
+                                    <td>{{$new->view}}</td>
+                                    <td>
+                                        @if($new->status == 1)
+                                        <span class="text-success">Hiện</span>
+                                        @else
+                                        <span class="text-danger">Ẩn</span>
+                                        @endif
+                                    </td>
                                     <td>{{$new->created_at->format('d-m-Y')}}</td>
                                     <td>
                                         <a class="btn btn-primary" href="{{route('news.edit',[$new->id])}}">Sửa</a>
-                                        <button id="btn_delete_{{ $new->id }}" class="btn btn-danger">Xóa</button>
+                                       
+                                        @if($new->status == 1)
+                                        <button id="btn_delete_{{ $new->id }}" class="btn btn-danger">Ẩn</button>
+                                        @else
+                                        <button id="btn_delete_{{ $new->id }}" class="btn btn-success">Hiện</button>
+                                        @endif
+                                        
                                         <form id="delete_form_{{ $new->id }}"
                                             action="{{ route('news.destroy',$new->id) }}" method="post"
                                             style="display: none;">
@@ -84,7 +102,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                    {{ $news->links() }}
+                        {{ $news->links() }}
                     </div>
                 </div>
                 <!-- /.card -->
@@ -98,12 +116,10 @@
 <script>
 $("button[id^='btn_delete_']").click(function(event) {
     id = event.currentTarget.attributes.id.value.replace('btn_delete_', '');
-    if (confirm('Bạn có muốn xóa không')) {
-        $("#delete_form_" + id).submit();
-    }
+    $("#delete_form_" + id).submit();
 });
 $('.close-noti').click(function() {
     $('.alert-noti').hide();
-})
+});
 </script>
 @endpush

@@ -43,9 +43,10 @@
                                             <!-- /.card-header -->
                                             <div class="card-body pad">
                                                 <div class="mb-3">
-                                                    <textarea name="content" class="textarea" placeholder="Place some text here"
+                                                    <textarea name="content" class="textarea"
+                                                        placeholder="Place some text here"
                                                         style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-                                                        
+
                                                     </textarea>
                                                 </div>
                                             </div>
@@ -61,7 +62,7 @@
                                 <label for="">Image</label>
                                 <input type="file" name="image" id="">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="">Video</label>
                                 <input type="file" name="video" id="">

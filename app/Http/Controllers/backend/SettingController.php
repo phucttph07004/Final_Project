@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\backend;
 
+use Illuminate\Support\Arr;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
+use App\Http\Requests\backend\setting\SettingRequest;
+
 
 use Str;
 use Auth;
@@ -77,7 +79,7 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SettingRequest $request, $id)
     {
         $settings = Setting::find($id);
 
@@ -94,7 +96,7 @@ class SettingController extends Controller
 
         $settings->update($data);
 
-        return redirect()->route('setting.index');
+        return redirect()->route('setting.index')->with('thongbao','Cập nhật Thành Công');
     }
 
     /**

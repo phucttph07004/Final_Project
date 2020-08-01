@@ -1,6 +1,6 @@
 @extends('backend.layout.master')
 @section('title')
-    Edit Register
+Edit Register
 @endsection
 @section('content')
 <section class="content">
@@ -11,7 +11,7 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Sửa Thông Tin Đăng Ký</h3>
+                        <h3">Sửa Thông Tin Đăng Ký</h3>
                     </div>
                     <!-- /.card-header -->
                     @if(session('thongbao'))
@@ -57,39 +57,10 @@
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="">Họ tên</label>
-                                <input type="text" class="form-control" name="fullname" id="" value="{{ $register->fullname }}">
-                                {!! ShowErrors($errors,'title') !!}
+                                <label for="">Ghi chú</label>
+                                <input type="text" class="form-control" name="note" id="" value="{{ $register->note }}">
                             </div>
-                            <div class="form-group">
-                                <label for="">Địa chỉ</label>
-                                <input type="text" class="form-control" name="address" id="" value="{{ $register->address }}">
-                                {!! ShowErrors($errors,'title') !!}
-                            </div>
-                            <div class="form-group">
-                                <label for="">Số điện thoại</label>
-                                <input type="text" class="form-control" name="phone" id="" value="{{ $register->phone }}">
-                                {!! ShowErrors($errors,'title') !!}
-                            </div>
-                            <div class="form-group">
-                                <label for="">Email</label>
-                                <input type="text" class="form-control" name="email" id="" value="{{ $register->email }}">
-                                {!! ShowErrors($errors,'title') !!}
-                            </div>
-                            <div class="form-group">
-                                <label for="">Ngày Sinh</label>
-                                <input type="date" class="form-control" name="date_of_birth" id="" value="{{ $register->date_of_birth }}">
-                                {!! ShowErrors($errors,'title') !!}
-                            </div>
-
-                            <div class="form-group">
-                                <label for="">Trạng thái</label>
-                                <select class="form-control" name="is_active" id="">
-                                    <option @if ($register->is_active == 0) selected @endif value="0">Chưa xác nhận</option>
-                                    <option @if ($register->is_active == 1) selected @endif value="1">Đã xác nhận</option>
-                                </select>
-                            </div>
-                        </div> 
+                        </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>

@@ -48,7 +48,7 @@
                         <div class="header__logo">
                         @foreach($settings as $setting)
                             <a href="/">
-                                <img src="{{$setting->logo}}" alt="logo">
+                                <img src="/storage/{{$setting->logo}}" alt="logo">
                             </a>
                         @endforeach
                         </div>

@@ -19,7 +19,8 @@ class CreateNewsTable extends Migration
             $table->longText('content');
             $table->string('type');
             $table->text('image');
-            $table->text('video');
+            $table->integer('status')->default(1);
+            $table->integer('view')->default(0);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

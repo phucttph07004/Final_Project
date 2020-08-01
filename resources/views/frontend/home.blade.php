@@ -237,17 +237,19 @@
 <!-- Start teacher -->
 <section class="teacher">
     <div class="container">
-        <h1 class="section__title">Meet Our Teacher</h1>
+        <h1 class="section__title">Đội ngũ giảng viên</h1>
         <div class="teacher-carousel owl-carousel">
-            <div class="teacher__item">
+           @foreach($teachers as $teacher)
+           <div class="teacher__item">
                 <div class="teacher__item-img">
-                    <img src="/images/teacher.jpg" alt="Teacher Image">
+                    <img src="{{$teacher->avatar}}" alt="Teacher Image">
                 </div>
                 <div class="teacher__item-info">
                     <p class="teacher__position">Teacher</p>
-                    <h3 class="teacher__name">Teacher Name</h3>
+                    <h3 class="teacher__name">{{$teacher->fullname}}</h3>
                 </div>
             </div>
+           @endforeach
         </div>
     </div>
 </section>

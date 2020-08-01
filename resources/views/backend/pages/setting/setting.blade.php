@@ -7,8 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h3 class="card-title mr-5">Setting</h3>
-                            <a href="{{route('news.create')}}" class="btn btn-success col-md-1">Create</a>
+                            <h3 >Setting</h3>
                         </div>
                     </div>
                     @if(session('thongbao'))
@@ -57,6 +56,7 @@
                                     <th>Slogan</th>
                                     <th>Email</th>
                                     <th>Số điện thoại</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>

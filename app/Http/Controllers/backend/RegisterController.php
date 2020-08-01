@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 use App\Models\Register;
+use App\Models\Test;
 
 use Str;
 use Auth;
+use Mail;
 use Carbon\Carbon;
 
 
@@ -30,8 +32,31 @@ class RegisterController extends Controller
 
     public function destroy($id)
     {
-        Register::destroy($id);
-        return redirect()->back()->with('thongbao','Xóa Thành Công');
+        $registers = Register::find($id);
+
+     $data['is_active'] = 1;
+
+        $registers->update($data);
+
+        return redirect()->back();
+    }
+
+    public function confirm(Request $request)
+    {
+        $data = Arr::except($request->all(),['_token']);
+        
+        Test::create($data);
+
+        return redirect()->route('register.index')->with('thongbao','Xác nhận thành công');
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $register = Register::find($request->id);
+        $register->is_active = $request->is_active;
+        $register->save();
+  
+        return response()->json(['success'=>'Status change successfully.']);
     }
 
     /**
@@ -96,7 +121,7 @@ class RegisterController extends Controller
         $register->update($data);
 
         
-        return redirect()->back()->with('thongbao','Cập nhật Thành Công');
+        return redirect()->route('register.index')->with('thongbao','Cập nhật Thành Công');
     }
 
     /**

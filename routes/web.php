@@ -3,16 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 Route::get('/',             'frontend\HomeController@index')->name('home.index');
 Route::get('/news',         'frontend\NewsController@index')->name('news.index');
 Route::get('/news/{id}',    'frontend\NewsController@getNews')->name('news.news-detail');
@@ -22,23 +12,30 @@ Route::post('register',       'frontend\RegisterController@store')->name('regist
 // Route::get('/', function () {return redirect()->route('home.index');});
 // login và logout
 
-// Route::get('login', 'frontend\AuthController@getLoginForm');
-// Route::post('login', 'frontend\AuthController@login')->name('auth.login');
-// Route::get('logout', 'frontend\AuthController@logout')->name('auth.logout');
-
 
 // các chức năng của admin
 Route::group([ 'prefix' => 'admin',
-               'middleware' => ['check_role_admin',],
+               'middleware' => ['check_role_admin','check_auth'],
 ], function () {
 
 Route::resource('/','backend\IndexController');
 
 Route::resource('/setting', 'backend\SettingController');
 Route::resource('/register', 'backend\RegisterController');
+// Route::post('/register', 'backend\RegisterController@confirm')->name('register.confirm');
 Route::resource('/news', 'backend\NewsController');
 Route::resource('/notifications','backend\NotificationController');
 Route::resource('/student','backend\StudentController');
-Route::get('/login', 'backend\AuthController@getLoginForm');
+Route::resource('/account','backend\AccountController');
+
 });
 
+// Auth Admin
+
+Route::group([
+    'prefix' => 'admin',
+], function(){
+    Route::get('login', 'backend\AuthController@getLoginForm');
+    Route::post('login', 'backend\AuthController@login')->name('auth.login');
+    Route::get('logout','backend\AuthController@logout')->name('auth.logout');
+});
