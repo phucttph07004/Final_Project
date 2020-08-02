@@ -1,6 +1,5 @@
-
-  <!-- Main Footer -->
-  {{-- <footer class="main-footer">
+<!-- Main Footer -->
+{{-- <footer class="main-footer">
     <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
@@ -12,7 +11,7 @@
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
-<script src="./plugins/jquery-3.3.1.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
@@ -34,8 +33,17 @@
 <!-- PAGE SCRIPTS -->
 <script src="dist/js/pages/dashboard2.js"></script>
 
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+
+<script>
+  $(function () {
+    // Summernote
+    $('.textarea').summernote();
+    
+  })
 
 
+</script>
 
 @stack('scripts')
 

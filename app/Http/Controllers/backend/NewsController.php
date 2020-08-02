@@ -5,6 +5,11 @@ namespace App\Http\Controllers\backend;
 use Illuminate\Support\Arr;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\backend\news\NewsRequest;
+
+use Str;
+use Auth;
+use Carbon\Carbon;
 
 
 use App\Models\News;
@@ -17,8 +22,10 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $news = News::where('type','new')->get();
+    {   
+
+
+        $news = News::where('type','new')->OrderBy('created_at','desc')->paginate(6);
         return view('backend.pages.news.news',['news'=>$news]);
     }
 
@@ -38,11 +45,20 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NewsRequest $request)
     {
         $data = Arr::except($request->all(), ['_token']);
-        $news = News::create($data);
-        return redirect()->route('news.index');
+        $data['user_id']=1;
+        
+        if ($request->hasFile('image')) {
+            $data['image']=$request->file('image')->store('images','public');
+        }else{
+            $data['image']='noImage.jpg';
+        }
+
+        News::create($data);
+
+        return redirect()->route('news.index')->with('thongbao','Thêm tin tức thành công');
     }
 
     /**
@@ -75,15 +91,24 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(NewsRequest $request,$id)
     {
-        $data = Arr::except(request()->all(), ["_token"]);
         $news = News::find($id);
-        $news->title = $data['title'];
-        $news->content = $data['content'];
-        $news->save();
-        
-        return redirect()->route('news.index');
+
+        $data = Arr::except(request()->all(), ["_token ,'_method'"]);
+        $updated_at=Carbon::now()->toarray();
+        $data['updated_at']=$updated_at['formatted'];
+
+
+        if ($request->hasFile('image')) {
+            $data['image']=$request->file('image')->store('images','public');
+         }else{
+             $data['image']=$news->image;
+         }
+
+        $news->update($data);
+
+        return redirect()->route('news.index')->with('thongbao','Cập nhập tin tức thành công');
     }
 
     /**
@@ -94,7 +119,22 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        News::destroy($id);
-        return redirect()->route('news.index');
+        $news = News::find($id);
+        $data = Arr::except(request()->all(), ["_token ,'_method'"]);
+
+        // dd($id);
+
+        if($data['status'] == 0){
+            $data['status'] = 1;
+        }
+        else {
+            $data['status'] = 0;
+        }
+
+        
+
+        $news->update($data);
+
+        return redirect()->back();
     }
 }

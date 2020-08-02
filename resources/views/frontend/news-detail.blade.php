@@ -20,15 +20,15 @@
                         @foreach($news as $new)
                             <div class="news-detail__content">
                                 <div class="news-detail__img">
-                                    <img src="{{$new->image}}" alt="news detail image">
+                                    <img src="/storage/{{ $new->image }}" alt="news detail image">
                                 </div>
                                 <div class="news__detail-info">
                                     <p class="news-date">{{$new->created_at->format('d-m-Y')}}</p>
-                                    <p class="news-comment">3 comment</p>
+                                    <!-- <p class="news-comment">3 comment</p> -->
                                 </div>
                                 <h1 class="news__detail-title">{{$new->title}}</h1>
                                 <p class="content">
-                                {{$new->content}}
+                                {!!$new->content!!}
                                 </p>
                             </div>
                         @endforeach
@@ -53,7 +53,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="comment">
+                        <!-- <div class="comment">
                             <p class="comment-title">2 Comment</p>
                             <div class="comment__detail">
                                 <div class="col-2">
@@ -102,15 +102,15 @@
                                 </div>
                                 <button class="btn">Send Message</button>
                             </form>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-3">
                         <div class="related__post">
-                            <h2>Related Post</h2>
+                            <h2>Bài viết liên quan</h2>
                             @foreach($relaNews as $relaNew)
                             <div class="related__post-item">
                                 <div class="related__post-img">
-                                    <img src="{{$relaNew->image}}" alt="news detail image">
+                                    <img src="/storage/{{$relaNew->image}}" alt="news detail image">
                                 </div>
                                 <div class="related__post-info">
                                     <p class="related__post-date">{{$relaNew->created_at->format('d-m-Y')}}</p>

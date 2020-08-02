@@ -14,7 +14,7 @@ use Carbon\Carbon;
 class BranchController extends Controller
 {
     public function index(Request $request){
-        if($request->all() != null){
+        if($request->all() != null && $request['page'] == null){
             foreach($request->all() as $key => $value){
                 if($key == 'status'){
                     $data['get_all_branch']=Branch::where("$key","$value")->paginate(10);
@@ -34,7 +34,7 @@ class BranchController extends Controller
     // }
 
     public function create(){
-        $data['get_all_user']=User::all();
+        $data['get_all_user']=User::where('type','branch_manager')->get();
         return view('backend.pages.branch.create',$data);
     }
 
@@ -62,12 +62,17 @@ class BranchController extends Controller
     }
 
     public function update(BranchRequestEdit $request ,$id){
+        $Branchupdate=Branch::find($id);
         $updateBranch = Arr::except($request, ['_token'])->toarray();
         if(User::where([['id', $request['director_id']],['type','branch_manager']])->first()  == null ){
             return redirect()->back()->with('error','Không Được Thay Đổi Dữ Liệu');
         }else{
-        $Branch=Branch::find($id)->first();
-        $Branch->update($updateBranch);
+        if($updateBranch['avatar'] != $Branchupdate->avatar){
+        $updateBranch['avatar']=$request->file('avatar')->store('images','public');
+        }else{
+        $updateBranch['avatar']=$Branchupdate->avatar;
+        }
+        $Branchupdate->update($updateBranch);
         return redirect()->back()->with('thongbao','Cập Nhật Thành Công');
     }
 

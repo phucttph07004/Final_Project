@@ -18,6 +18,7 @@ class CreateStudentsTable extends Migration
             $table->integer('class_id')->unsigned();
             $table->foreign('class_id')->references('id')->on('class')->onDelete('cascade');
             $table->string('fullname');
+            $table->text('password');
             $table->string('code');
             $table->text('avatar');
             $table->date('date_of_birth');

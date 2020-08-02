@@ -135,7 +135,7 @@ function gallerySlider() {
 
 function teacherSlider() {
     $('.teacher-carousel').owlCarousel({
-        loop: true,
+        loop: false,
         margin: 15,
         nav: false,
         dots: false,

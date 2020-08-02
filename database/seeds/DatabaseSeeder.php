@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SettingSeeder::class);
         $this->call(RegisterSeeder::class);
         $this->call(TestSeeder::class);
-        $this->call(NewSeeder::class);
         $this->call(BranchSeeder::class);
         $this->call(ScheduleSeeder::class);
         $this->call(ClassSeeder::class);
@@ -29,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AttendanceSeeder::class);
         $this->call(ArchivementSeeder::class);
         $this->call(CategorySeeder::class);
+        $this->call(NewSeeder::class);
         $this->call(NotificationSeeder::class);
 
 

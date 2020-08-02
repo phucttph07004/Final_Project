@@ -1,5 +1,40 @@
 @extends('frontend.layout.layout')
 @section('content')
+
+@if(session('thongbao'))
+<section class="alert-noti">
+    <div class="d-flex align-items-center">
+        <div class="col-2">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+                x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"
+                width="50px" height="50px">
+                <g>
+                    <g>
+                        <g>
+                            <path
+                                d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341    c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659c119.295,0,216.341,97.046,216.341,216.341    S375.275,472.341,256,472.341z"
+                                data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF" />
+                        </g>
+                    </g>
+                    <g>
+                        <g>
+                            <path
+                                d="M373.451,166.965c-8.071-7.337-20.623-6.762-27.999,1.348L224.491,301.509l-58.438-59.409    c-7.714-7.813-20.246-7.932-28.039-0.238c-7.813,7.674-7.932,20.226-0.238,28.039l73.151,74.361    c3.748,3.807,8.824,5.929,14.138,5.929c0.119,0,0.258,0,0.377,0.02c5.473-0.119,10.629-2.459,14.297-6.504l135.059-148.722    C382.156,186.854,381.561,174.322,373.451,166.965z"
+                                data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFFFFF" />
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <div class="col-10">
+            {{session('thongbao') }}
+        </div>
+        <div class="close-noti">
+            <i class="fa fa-times"></i>
+        </div>
+    </div>
+</section>
+@endif
 <!-- Start main slider -->
 <section class="homeSlider">
     <div class="homeSlider-carousel owl-carousel ow-theme">
@@ -25,7 +60,7 @@
 <!-- Start offer -->
 <section class="offer">
     <div class="container">
-        <h1 class="section__title">What we're offering</h1>
+        <h1 class="section__title">Toàn diện 4 kỹ năng</h1>
         <div class="row">
             <div class="col-12 col-md-6 col-lg-3 ">
                 <div class="offer__block wow bounce">
@@ -33,7 +68,7 @@
                         <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
                     </div>
                     <p class="offer__block-name">
-                        Something Offer
+                        Nghe 
                     </p>
                 </div>
             </div>
@@ -43,7 +78,7 @@
                         <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
                     </div>
                     <p class="offer__block-name">
-                        Something Offer
+                       Nói
                     </p>
                 </div>
             </div>
@@ -53,7 +88,7 @@
                         <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
                     </div>
                     <p class="offer__block-name">
-                        Something Offer
+                       Đọc
                     </p>
                 </div>
             </div>
@@ -63,7 +98,7 @@
                         <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
                     </div>
                     <p class="offer__block-name">
-                        Something Offer
+                       Viết
                     </p>
                 </div>
             </div>
@@ -83,12 +118,11 @@
             </div>
             <div class="col-md-6 wow slideInRight">
                 <div class="welcome__content ">
-                    <h1 class="section__title">Welcome to Something English Center </h1>
+                    <h1 class="section__title">Chào mừng bạn đến với Bee English Center </h1>
                     <p class="welcome__content-desc">
-                        There are many variations of pass of lorem ipsum available but the majority have suffered
-                        alteration in some form.
+                    Chúng tôi cam kết chuyển giao kiến thức thực tiễn dựa trên nền tảng tư duy giáo dục định hướng & phát huy tối đa khả năng sáng tạo của học viên với mục tiêu tối thượng là giúp người học thay đổi tư duy, phát triển kỹ năng cần thiết, nghe nói tiếng Anh dễ dàng, trôi chảy và tự động.
                     </p>
-                    <a href="" class="welcome__readMore">Discover More</a>
+                    <a href="" class="welcome__readMore">Xem thêm</a>
                 </div>
             </div>
         </div>
@@ -99,7 +133,7 @@
 <!-- Start programs -->
 <section class="programs">
     <div class="container">
-        <h1 class="section__title">Our Programs</h1>
+        <h1 class="section__title">Hệ Thống Khoá Học</h1>
         <div class="row">
             <div class="col-12 col-md-4 col-lg-4">
                 <div class="programs__block">
@@ -107,8 +141,8 @@
                         <img src="https://via.placeholder.com/350x150" alt="programs">
                     </div>
                     <div class="programs__block-text">
-                        <h5 class="programs__block-name">Something Programs</h5>
-                        <p class="programs__block-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <h5 class="programs__block-name">COMBO 1</h5>
+                        <p class="programs__block-desc">Nền tảng tiếng Anh</p>
                     </div>
                 </div>
             </div>
@@ -118,8 +152,8 @@
                         <img src="https://via.placeholder.com/350x150" alt="programs">
                     </div>
                     <div class="programs__block-text">
-                        <h5 class="programs__block-name">Something Programs</h5>
-                        <p class="programs__block-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <h5 class="programs__block-name">COMBO 2</h5>
+                        <p class="programs__block-desc">Toàn diện 4 kỹ năng</p>
                     </div>
                 </div>
             </div>
@@ -129,8 +163,8 @@
                         <img src="https://via.placeholder.com/350x150" alt="programs">
                     </div>
                     <div class="programs__block-text">
-                        <h5 class="programs__block-name">Something Programs</h5>
-                        <p class="programs__block-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <h5 class="programs__block-name">COMBO 3</h5>
+                        <p class="programs__block-desc">Chuẩn đầu ra TOEIC</p>
                     </div>
                 </div>
             </div>
@@ -146,32 +180,29 @@
         <div class="feedback-carousel owl-carousel owl-theme">
             <div class="feedback__item">
                 <p class="feedback__item-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti tenetur saepe doloribus corporis
+                Mình cảm thấy rất may mắn khi được biết đến trung tâm giao tiếp tiếng Anh từ đầu. Mình thực sự rất ấn tượng với phương pháp dạy và học ở Langmaster ạ. Học không còn chỉ là trên lý thuyết như mình được học trên trường mà đó là sự áp dụng lý thuyết vào thực tiễn. Điều này giúp mình nhớ lâu nhanh hơn. 
                 </p>
-                <p class="feedback__item-author">Someone</p>
-                <p class="feedback__item-job">Student</p>
+                <p class="feedback__item-author">Nguyễn Quang Trường</p>
                 <div class="feedback__item-avatar">
-
+                    <img src="" alt="">
                 </div>
             </div>
-            <div class="feedback__item">
+             <div class="feedback__item">
                 <p class="feedback__item-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti tenetur saepe doloribus corporis
+                Mình cảm thấy rất may mắn khi được biết đến trung tâm giao tiếp tiếng Anh từ đầu. Mình thực sự rất ấn tượng với phương pháp dạy và học ở Langmaster ạ. Học không còn chỉ là trên lý thuyết như mình được học trên trường mà đó là sự áp dụng lý thuyết vào thực tiễn. Điều này giúp mình nhớ lâu nhanh hơn. 
                 </p>
-                <p class="feedback__item-author">Someone</p>
-                <p class="feedback__item-job">Student</p>
+                <p class="feedback__item-author">Nguyễn Quang Trường</p>
                 <div class="feedback__item-avatar">
-
+                    <img src="" alt="">
                 </div>
             </div>
-            <div class="feedback__item">
+             <div class="feedback__item">
                 <p class="feedback__item-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti tenetur saepe doloribus corporis
+                Mình cảm thấy rất may mắn khi được biết đến trung tâm giao tiếp tiếng Anh từ đầu. Mình thực sự rất ấn tượng với phương pháp dạy và học ở Langmaster ạ. Học không còn chỉ là trên lý thuyết như mình được học trên trường mà đó là sự áp dụng lý thuyết vào thực tiễn. Điều này giúp mình nhớ lâu nhanh hơn. 
                 </p>
-                <p class="feedback__item-author">Someone</p>
-                <p class="feedback__item-job">Student</p>
+                <p class="feedback__item-author">Nguyễn Quang Trường</p>
                 <div class="feedback__item-avatar">
-
+                    <img src="" alt="">
                 </div>
             </div>
         </div>
@@ -179,40 +210,23 @@
 </section>
 <!-- End feedback -->
 
-<!-- Start subscribe -->
-<section class="subscribe">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-12 col-lg-6">
-                <p class="subscribe__text">
-                    Don’t miss our daily updates
-                </p>
-            </div>
-            <div class="col-md-12 col-lg-6">
-                <form action="">
-                    <input type="email" placeholder="Enter Email Here">
-                    <button class="btn">Subscribe</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End subscribe -->
 
 <!-- Start teacher -->
 <section class="teacher">
     <div class="container">
-        <h1 class="section__title">Meet Our Teacher</h1>
+        <h1 class="section__title">Đội ngũ giảng viên</h1>
         <div class="teacher-carousel owl-carousel">
-            <div class="teacher__item">
+           @foreach($teachers as $teacher)
+           <div class="teacher__item">
                 <div class="teacher__item-img">
-                    <img src="/images/teacher.jpg" alt="Teacher Image">
+                    <img src="{{$teacher->avatar}}" alt="Teacher Image">
                 </div>
                 <div class="teacher__item-info">
-                    <p class="teacher__position">Teacher</p>
-                    <h3 class="teacher__name">Teacher Name</h3>
+                    <p class="teacher__position">Giảng Viên</p>
+                    <h3 class="teacher__name">{{$teacher->fullname}}</h3>
                 </div>
             </div>
+           @endforeach
         </div>
     </div>
 </section>
@@ -221,14 +235,14 @@
 <!-- Start news -->
 <section class="news">
     <div class="container">
-        <h1 class="section__title">News</h1>
-        <div class="row align-items-center">
+        <h1 class="section__title">Tin tức</h1>
+        <div class="row">
             @foreach($news as $new)
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="news__item">
                     <div class="news__item-image">
                         <a href="{{route('news.news-detail',[$new->id])}}">
-                            <img src="{{$new->image}}" alt="news">
+                            <img src="storage/{{$new->image}}" alt="news">
                         </a>
                     </div>
                     <div class="news__item-info">

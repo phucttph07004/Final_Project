@@ -1,6 +1,6 @@
 @extends('./backend/layout/master')
-@section('title','Quản Trị Học Sinh')
-@section('title_page','Thông Tin Học Sinh')
+@section('title','Quản Trị Học Viên')
+@section('title_page','Thông Tin Học Viên')
 @section('content')
 <form enctype="multipart/form-data" class="pl-5 pt-5" action="" method="POST">
     @csrf
@@ -29,6 +29,18 @@
         <input name="address" value="{{ $get_student->address }}"  type="text" class="form-control" >
       </div>
 
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Chi Nhánh</label>
+        @foreach ($get_all_class as $class)
+        @if($get_student->ClassName->id == $class->id)
+        @foreach ($get_all_branch as $branch)
+        @if($branch->id == $class->branch_id)
+        <input name="branch" value="{{ $branch->branch_name }}"  type="text" class="form-control" >
+        @endif
+        @endforeach
+        @endif
+        @endforeach
+      </div>
     <div class="form-group">
       <label for="exampleFormControlSelect1">Lớp</label>
       <input name="address" value="{{ $get_student->ClassName->class_name }}"  type="text" class="form-control" >

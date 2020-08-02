@@ -1,6 +1,6 @@
 @extends('./backend/layout/master')
-@section('title','Quản Trị Học Sinh')
-@section('title_page','Thêm Mới Học Sinh')
+@section('title','Quản Trị Học Viên')
+@section('title_page','Thêm Mới Học Viên')
 @section('content')
 <form enctype="multipart/form-data" class="pl-5 pt-5" action="/student/store/excel" method="POST">
     @csrf
@@ -18,7 +18,7 @@
           </div>
 
 
-    <button type="submit" class="mb-5 btn btn-primary">Thêm Học Sinh</button>
+    <button type="submit" class="mb-5 btn btn-primary">Thêm Học Viên</button>
   </form>
   @endsection
 
