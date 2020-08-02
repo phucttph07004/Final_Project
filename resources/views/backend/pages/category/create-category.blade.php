@@ -26,7 +26,7 @@
     <div class="d-flex align-items-center">
     <a class="btn btn-danger mr-4" href="{{route('category.index')}}">Quay lại</a>
 
-        <button type="submit" class="btn btn-primary">Thêm Tài Khoản</button>
+        <button type="submit" class="btn btn-primary">Thêm</button>
     </div>
 
     </div>

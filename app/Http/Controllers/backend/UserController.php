@@ -54,7 +54,7 @@ class UserController extends Controller
         }
 
         User::create($data);
-        return redirect()->back()->with('thongbao','Thêm Tài Khoản Thành Công');
+        return redirect()->route('user.index')->with('thongbao','Thêm Tài Khoản Thành Công');
     }
 
     /**
@@ -78,6 +78,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $users = User::find($id);
+
         return view('backend.pages.user.edit-user',['users' => $users]);
     }
 
@@ -96,16 +97,16 @@ class UserController extends Controller
         $updated_at=Carbon::now()->toarray();
         $data['updated_at']=$updated_at['formatted'];
 
-
         if ($request->hasFile('avatar')) {
             $data['avatar']=$request->file('avatar')->store('images','public');
          }else{
-             $data['avatar']=$users->image;
+             $data['avatar']=$users->avatar;
          }
 
+        $data['updated_at']=$updated_at['formatted'];
         $users->update($data);
 
-        return redirect()->back()->with('thongbao','Cập nhật Thành Công');
+        return redirect()->route('user.index')->with('thongbao','Cập nhật Thành Công');
     }
 
     /**

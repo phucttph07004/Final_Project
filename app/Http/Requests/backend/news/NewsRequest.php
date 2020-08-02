@@ -26,6 +26,7 @@ class NewsRequest extends FormRequest
         return [
             'title'=>'required|min:6',
             'content'=>'required',
+            'image'=>'required|mimes:jpeg,jpg,png'
         ];
     }
 
@@ -36,6 +37,8 @@ class NewsRequest extends FormRequest
             'title.min'=>'Tên tiêu đề không được dưới 6 ký tự',
             'content.required'=>'Không được bỏ trống nội dung',
             'content.min'=>'nội dung không được dưới 6 ký tự',
+            'image.required'=>'Không để trống thumbnail',
+            'image.mimes'=>'Không đúng định dạng ảnh',
         ];
     }
 }

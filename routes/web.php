@@ -7,7 +7,7 @@ Route::get('/',             'frontend\HomeController@index')->name('home.index')
 Route::get('/news',         'frontend\NewsController@index')->name('news.index');
 Route::get('/news/{id}',    'frontend\NewsController@getNews')->name('news.news-detail');
 Route::get('register',        'frontend\RegisterController@create');
-Route::get('thankyou', 'frontend\RegisterController@thankyou')->name('register.thankyou');
+// Route::get('thankyou', 'frontend\RegisterController@thankyou')->name('register.thankyou');
 Route::post('register',       'frontend\RegisterController@store')->name('register');
 
 // Route::get('/', function () {return redirect()->route('home.index');});

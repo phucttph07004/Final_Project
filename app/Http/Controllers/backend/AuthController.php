@@ -16,9 +16,6 @@ class AuthController extends Controller
     //
 
     public function getLoginForm(){
-        if(Auth::check()){
-            return redirect('admin');
-        }
         return view('backend.auth.login');
     }
 
@@ -28,9 +25,11 @@ class AuthController extends Controller
         
         if($result = Auth::attempt($data)){
             if(Auth::User()->is_active == 0 ){
-                return redirect()->back()->with('thongbao','Tài Khoản Của Bạn Đã Bị Khóa');
+                return redirect()->route('auth.login')->with('thongbao','Tài Khoản Của Bạn Đã Bị Khóa');
+                echo 'lock';
             }else{
                 return redirect('admin');
+                echo 'unlock';
             }
         }else{
             return redirect()->back()->with('thongbao','Bạn Nhập sai tài khoản hoặc mật khẩu');

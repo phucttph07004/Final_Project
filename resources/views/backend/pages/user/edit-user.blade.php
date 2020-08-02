@@ -17,15 +17,6 @@
         <input name="fullname" value="{{ $users->fullname }}" type="text" class="form-control">
     </div>
     <div class="form-group">
-        <label for="exampleFormControlInput1">Ảnh</label><br>
-        <img style="width:30%;" src="storage/{{ $users->avatar }}" alt="">
-        <input name="avatar" value="storage/{{ $users->avatar }}" type="hidden">
-        <br>
-        {!! ShowErrors($errors,'avatar') !!}
-        <br>
-        <input type="file" name="avatar" class="form-control">
-    </div>
-    <div class="form-group">
         <label for="exampleFormControlInput1">Ngày Sinh</label>
         <br>
         {!! ShowErrors($errors,'date_of_birth') !!}

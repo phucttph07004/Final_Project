@@ -48,13 +48,13 @@ class RegisterController extends Controller
         $data['note']='';
         $register = Register::create($data);
                 
-        return redirect()->route('register.thankyou');
+        return redirect()->back()->with('thongbao','Đăng ký thành công, chúng tôi sẽ liên hệ bạn sớm nhất');
     }
 
-    public function thankyou(){
-        return view('frontend.thankyou');
+    // public function thankyou(){
+    //     return view('frontend.thankyou');
 
-    }
+    // }
 
     /**
      * Display the specified resource.

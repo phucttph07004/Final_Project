@@ -7,7 +7,7 @@
     <div class="card-body">
         <div class="form-group">
             <label for="exampleInputEmail1">Tiêu đề</label>
-            <input type="text" class="form-control" name="title" id="">
+            <input type="text" class="form-control" name="title" value="{{ old('title')}}" id="">
             {!! ShowErrors($errors,'title') !!}
         </div>
         <section class="content">
@@ -32,7 +32,7 @@
                             <div class="mb-3">
                                 <textarea name="content" class="textarea" placeholder="Place some text here"
                                     style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-                                                    </textarea>
+                                    {{ old('content')}}  </textarea>
                             </div>
                         </div>
                     </div>
@@ -46,6 +46,7 @@
         <div class="form-group">
             <label for="">Image</label>
             <input type="file" name="image" id="">
+            {!! ShowErrors($errors,'image') !!}
         </div>
 
         <div class="form-group">
@@ -62,6 +63,7 @@
         </div>
     </div>
     <div class="card-footer">
+        <a class="btn btn-danger"href="{{route('news.index')}}">Quay lại</a>
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>

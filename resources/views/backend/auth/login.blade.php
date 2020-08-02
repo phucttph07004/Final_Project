@@ -33,7 +33,7 @@
                             <p class="login__form-title">Đăng nhập</p>
                             <form action="{{route('auth.login')}}" method="POST">
                                 @csrf
-                                <input class="login__form-input" type="text" name="email" placeholder="Email">
+                                <input class="login__form-input" type="text" name="email" value="{{old('email')}}" placeholder="Email">
                                 {!! ShowErrors($errors,'email') !!}
                                 <div class="login__form-password">
                                     <input class="login__form-input" type="password" name="password" id="password"

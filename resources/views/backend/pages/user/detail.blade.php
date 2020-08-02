@@ -9,7 +9,7 @@
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Ảnh</label><br>
-        <img src="{{ $users->avatar }}" alt="">
+        <img src="storage/{{ $users->avatar }}" style="width:15%" alt="">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Ngày Sinh</label>
@@ -22,10 +22,6 @@
     <div class="form-group">
         <label for="exampleFormControlInput1">Email</label>
         <input name="email" value="{{ $users->email }}" type="email" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlInput1">Địa Chỉ</label>
-        <input name="address" value="{{ $users->address }}" type="text" class="form-control">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Địa Chỉ</label>

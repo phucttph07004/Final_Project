@@ -13,7 +13,7 @@
         <label for="exampleFormControlInput1">Họ Tên</label>
         <br>
         {!! ShowErrors($errors,'fullname') !!}
-        <input name="fullname" type="text" class="form-control">
+        <input name="fullname" type="text" value="{{ old('fullname')}}" class="form-control">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Ảnh</label>
@@ -25,31 +25,31 @@
         <label for="exampleFormControlInput1">Ngày Sinh</label>
         <br>
         {!! ShowErrors($errors,'date_of_birth') !!}
-        <input name="date_of_birth" type="date" class="form-control">
+        <input name="date_of_birth" type="date" value="{{ old('date_of_birth')}}" class="form-control">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Số Điện Thoại</label>
         <br>
         {!! ShowErrors($errors,'phone') !!}
-        <input name="phone" type="number" class="form-control">
+        <input name="phone" type="number" value="{{ old('phone')}}" class="form-control">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Email</label>
         <br>
         {!! ShowErrors($errors,'email') !!}
-        <input name="email" type="email" class="form-control">
+        <input name="email" type="email" value="{{ old('email')}}" class="form-control">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Mật khẩu</label>
         <br>
-        {!! ShowErrors($errors,'email') !!}
-        <input name="password" type="password" class="form-control">
+        {!! ShowErrors($errors,'password') !!}
+        <input name="password" type="password" value="{{ old('password')}}" class="form-control">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Địa Chỉ</label>
         <br>
         {!! ShowErrors($errors,'address') !!}
-        <input name="address" type="text" class="form-control">
+        <input name="address" type="text" value="{{ old('address')}}" class="form-control">
     </div>
     <div class="form-group">
         <label for="role">Vai trò</label>

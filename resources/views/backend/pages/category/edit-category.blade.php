@@ -26,6 +26,6 @@
         </select>
     </div>
     <a class="btn btn-danger mb-5" href="{{ route('category.index') }}">Quay lại</a>
-    <button type="submit" class="mb-5 btn btn-primary">Sửa Tài Khoản</button>
+    <button type="submit" class="mb-5 btn btn-primary">Sửa</button>
 </form>
 @endsection

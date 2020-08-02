@@ -28,7 +28,7 @@ class UserEditRequest extends FormRequest
             'email'=>'required|email|',
             'phone'=>'required|numeric|digits:10',
             'date_of_birth'=>'required|date',
-            'avatar'=>'required|mimes:jpeg,jpg,png',
+            'avatar'=>'mimes:jpeg,jpg,png',
         ];
     }
     public function messages()
@@ -45,7 +45,6 @@ class UserEditRequest extends FormRequest
             'class_id.required'=>'Không được bỏ trống lớp học',
             'date_of_birth.required'=>'Không được bỏ trống ngày sinh',
             'date_of_birth.date'=>'phải đúng định dạng ngày tháng',
-            'avatar.required'=>'Ảnh không được bỏ trống',
             'avatar.mimes'=>'Ảnh phải đúng định dạng jpg , png ,jpeg',
         ];
     }

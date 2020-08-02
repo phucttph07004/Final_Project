@@ -28,6 +28,7 @@ class UserRequest extends FormRequest
             'address'=>'required|min:10',
             'phone'=>'required|numeric|digits:10',
             'date_of_birth'=>'required|date',
+            'password'=>'required|min:6',
             'avatar'=>'required|mimes:jpeg,jpg,png',
         ];
     }
@@ -41,6 +42,8 @@ class UserRequest extends FormRequest
             'email.unique'=>'Email đã tồn tại!',
             'address.required'=>'Không được bỏ trống địa chỉ',
             'address.min'=>'Địa chỉ không được dưới 10 ký tự',
+            'password.required'=>'Không để trống password',
+            'password.min'=>'Password cần nhiều hơn 6 ký tự',
             'phone.required'=>'Không được bỏ trống số điện thoại',
             'phone.numeric'=>'Số điện thoại phải là chữ số',
             'phone.digits'=>'Số điện thoại phải đúng định dạng',

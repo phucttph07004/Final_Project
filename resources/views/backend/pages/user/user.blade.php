@@ -51,12 +51,12 @@
                     <button type="button" class="btn btn-outline-warning">Sửa</button>
                 </a>
 
-                <a id="btn_delete_{{ $user->id }}" class="btn btn-outline-danger">Xóa</a>
+                <!-- <a id="btn_delete_{{ $user->id }}" class="btn btn-outline-danger">Xóa</a>
                 <form id="delete_form_{{ $user->id }}" action="{{ route('user.destroy',$user->id) }}"
                     method="post" style="display: none;">
                     @method('DELETE')
                     @csrf
-                </form>
+                </form> -->
             </td>
         </tr>
         @endforeach

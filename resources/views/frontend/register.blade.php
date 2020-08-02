@@ -2,12 +2,12 @@
 @section('content')
 <section class="auth__form">
     <div class="container">
+        @if(session('thongbao'))
+        <div class="alert alert-primary" role="alert">
+            {{session('thongbao')}}
+        </div>
+        @endif
         <div class="row align-items-center justify-content-center">
-            @if(session('thongbao'))
-            <div class="alert alert-primary" role="alert">
-                {{session('thongbao')}}
-            </div>
-            @endif
             <div class="col-6">
                 <h1 class="">Đăng Ký Kiểm Tra Đầu Vào</h1>
                 <form class="" action="{{route('register')}}" method="POST">
