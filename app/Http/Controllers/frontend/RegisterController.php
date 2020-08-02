@@ -20,7 +20,6 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        //
         
     }
 
@@ -49,7 +48,12 @@ class RegisterController extends Controller
         $data['note']='';
         $register = Register::create($data);
                 
-        return redirect()->view('frontend.thankyou');
+        return redirect()->route('register.thankyou');
+    }
+
+    public function thankyou(){
+        return view('frontend.thankyou');
+
     }
 
     /**

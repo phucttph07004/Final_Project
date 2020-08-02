@@ -14,6 +14,11 @@ class News extends Model
         'image',
         'status',
         'user_id',
-
+        'category_id',
     ];
+
+    public function categoryName()
+    {
+        return $this->belongsTo('App\Models\Category' ,'category_id', 'id');
+    }
 }

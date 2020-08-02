@@ -1,137 +1,102 @@
-@extends('backend.layout.master')
+@extends('./backend/layout/master')
+@section('title','Danh Sách Đăng Ký Kiểm Tra Đầu Vào')
+@section('title_page','Danh Sách Đăng Ký Kiểm Tra Đầu Vào')
 @section('content')
 <section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Danh sách học viên đăng ký</h3>
-                    </div>
-                    @if(session('thongbao'))
-                    <section class="alert-noti">
-                        <div class="d-flex align-items-center">
-                            <div class="col-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                    version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512"
-                                    style="enable-background:new 0 0 512 512;" xml:space="preserve" width="50px"
-                                    height="50px">
-                                    <g>
-                                        <g>
-                                            <g>
-                                                <path
-                                                    d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341    c-119.275,0-216.341-97.046-216.341-216.341S136.725,39.659,256,39.659c119.295,0,216.341,97.046,216.341,216.341    S375.275,472.341,256,472.341z"
-                                                    data-original="#000000" class="active-path" data-old_color="#000000"
-                                                    fill="#FFFFFF" />
-                                            </g>
-                                        </g>
-                                        <g>
-                                            <g>
-                                                <path
-                                                    d="M373.451,166.965c-8.071-7.337-20.623-6.762-27.999,1.348L224.491,301.509l-58.438-59.409    c-7.714-7.813-20.246-7.932-28.039-0.238c-7.813,7.674-7.932,20.226-0.238,28.039l73.151,74.361    c3.748,3.807,8.824,5.929,14.138,5.929c0.119,0,0.258,0,0.377,0.02c5.473-0.119,10.629-2.459,14.297-6.504l135.059-148.722    C382.156,186.854,381.561,174.322,373.451,166.965z"
-                                                    data-original="#000000" class="active-path" data-old_color="#000000"
-                                                    fill="#FFFFFF" />
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                            </div>
-                            <div class="col-10">
-                                {{session('thongbao') }}
-                            </div>
-                            <div class="close-noti">
-                                <i class="fa fa-times"></i>
-                            </div>
+    <table style="background-color: white" class="table ml-5">
+        @if(session('thongbao'))
+        <div class="alert alert-primary text-center" role="alert">
+            {{session('thongbao') }}
+        </div>
+        @endif
+        <thead>
+            <tr>
+                <th style="width: 10px">STT</th>
+                <th>Họ và tên</th>
+                <th>Email</th>
+                <th>Điện thoại</th>
+                <th>Ghi chú</th>
+                <th>Trạng thái</th>
+                <th>
+                    <div class="dropdown mt-2">
+                        <button class="border-success bg-white btn btn-secondary dropdown-toggle" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Lọc Theo Trạng Thái
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/admin/register">Tất cả</a>
+                            <a class="dropdown-item" href="/admin/register?is_active=0">Chưa xác nhận</a>
+                            <a class="dropdown-item" href="/admin/register?is_active=1">Đã xác nhận</a>
                         </div>
-                    </section>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i=1 ?>
+            @foreach($registers as $register)
+            <tr>
+                <td>{{ $i++ }}</td>
+                <td>{{$register->fullname}}</td>
+                <td><a href="mailto:{{$register->email}}">{{$register->email}}</a></td>
+                <td><a href="tel:{{$register->phone}}">{{$register->phone}}</a></td>
+                <td>{{$register->note}}</td>
+                <td>
+                    @if($register->is_active==0) <span style="color:red"> Chưa xác nhận</span>
+                    @else <span style="color:green">Đã Xác nhận</span>
                     @endif
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th style="width: 10px">ID</th>
-                                    <th>Họ và tên</th>
-                                    <th>Email</th>
-                                    <th>Điện thoại</th>
-                                    <th>Địa chỉ</th>
-                                    <th>Ghi chú</th>
-                                    <th>Trạng thái</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($registers as $register)
-                                <tr>
-                                    <td>{{$register->id}}</td>
-                                    <td>{{$register->fullname}}</td>
-                                    <td><a href="mailto:{{$register->email}}">{{$register->email}}</a></td>
-                                    <td><a href="tel:{{$register->phone}}">{{$register->phone}}</a></td>
-                                    <td>{{$register->address}}</td>
-                                    <td>{{$register->note}}</td>
-                                    <td>
-                                        @if($register->is_active==0) <span style="color:red"> Chưa xác nhận</span>
-                                        @else <span style="color:green">Chưa xác nhận</span>
-                                        @endif
-                                    </td>
-                                    <td class=>
-                                        <button class="btn btn-primary" data-toggle="modal"
-                                            data-target="#{{$register->id}}" data-whatever="@mdo">Ghi
-                                            chú</button>
-                                        
-                                        <!-- <button id="btn_delete_{{ $register->id }}" type="submit"
-                                                class="btn btn-success mb-3">Xác nhận</button> -->
-                                        <!-- <form id="delete_form_{{ $register->id }}"
-                                            action="{{ route('register.destroy',$register->id) }}" method="post"
-                                            style="display: none;">
-                                            @method('DELETE')
-                                            @csrf
-                                        </form> -->
-                                    </td>
-                                    <div class="modal fade" id="{{$register->id}}" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <form role="form" method="POST"
-                                                        action="{{ route('register.update', $register->id) }}">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <div class="form-group">
-                                                            <label for="message-text" class="col-form-label">Ghi
-                                                                chú</label>
-                                                            <textarea class="form-control" name="note"
-                                                                id="message-text">
+                </td>
+                <td class=>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#{{$register->id}}"
+                        data-whatever="@mdo">Ghi
+                        chú</button>
+
+                    @if($register->is_active == 0) <button id="btn_delete_{{ $register->id }}" type="submit" class="btn btn-success ">Xác
+                        nhận</button>
+                    @else <button id="btn_delete_{{ $register->id }}" type="submit" class="btn btn-success " disabled>Xác
+                        nhận</button>
+                    @endif
+
+                    <form id="delete_form_{{ $register->id }}" action="{{ route('register.destroy',$register->id) }}"
+                        method="post" style="display: none;">
+                        @method('DELETE')
+                        <input type="hidden" name="is_active" value="is_active">
+                        @csrf
+                    </form>
+                </td>
+                <div class="modal fade" id="{{$register->id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <form role="form" method="POST" action="{{ route('register.update', $register->id) }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="form-group">
+                                        <label for="message-text" class="col-form-label">Ghi
+                                            chú</label>
+                                        <textarea class="form-control" name="note" id="message-text">
                                                        {{ $register->note}}
                                                         </textarea>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-primary">Lưu</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-
-                                            </div>
-                                        </div>
+                                                        {!! ShowErrors($errors,'note') !!}
                                     </div>
-                                </tr>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Lưu</button>
+                                    </div>
+                                </form>
+                            </div>
 
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
-
-
-                    <!-- /.card-body -->
-                    <div class="card-footer clearfix">
-                        {{ $registers->links() }}
+                        </div>
                     </div>
                 </div>
-                <!-- /.card -->
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
+            </tr>
+
+            @endforeach
+        </tbody>
+    </table>
+    <div class="container justify-content-center d-flex mt-5 pb-5">
+        {{$registers->links()}}
+    </div>
 </section>
 @endsection
 

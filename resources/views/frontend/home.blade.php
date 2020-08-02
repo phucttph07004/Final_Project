@@ -219,7 +219,7 @@
            @foreach($teachers as $teacher)
            <div class="teacher__item">
                 <div class="teacher__item-img">
-                    <img src="{{$teacher->avatar}}" alt="Teacher Image">
+                    <img src="storage/{{$teacher->avatar}}" alt="Teacher Image">
                 </div>
                 <div class="teacher__item-info">
                     <p class="teacher__position">Giảng Viên</p>

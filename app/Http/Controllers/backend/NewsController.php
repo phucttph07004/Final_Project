@@ -12,7 +12,7 @@ use Auth;
 use Carbon\Carbon;
 
 
-use App\Models\News;
+use App\Models\{News,Category};
 
 class NewsController extends Controller
 {
@@ -36,7 +36,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('backend.pages.news.create-news');
+        $categories = Category::where('type','news')->get();
+        return view('backend.pages.news.create-news',compact('categories'));
     }
 
     /**
@@ -48,14 +49,13 @@ class NewsController extends Controller
     public function store(NewsRequest $request)
     {
         $data = Arr::except($request->all(), ['_token']);
-        $data['user_id']=1;
-        
+        $data['user_id']=Auth::user()->id;
+        $data['type']='new';
         if ($request->hasFile('image')) {
             $data['image']=$request->file('image')->store('images','public');
         }else{
             $data['image']='noImage.jpg';
         }
-
         News::create($data);
 
         return redirect()->route('news.index')->with('thongbao','Thêm tin tức thành công');
@@ -81,7 +81,8 @@ class NewsController extends Controller
     public function edit($id)
     { 
         $data['news'] = News::find($id);
-        return view('backend.pages.news.edit-news',$data);
+        $categories= Category::all();
+        return view('backend.pages.news.edit-news',$data,compact('categories'));
     }
 
     /**

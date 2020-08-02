@@ -4,56 +4,28 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\backend\register\RegisterRequest;
+use App\Http\Requests\backend\category\CategoryRequest;
 
-use Illuminate\Support\Arr;
+use App\Models\Category;
 
-use App\Models\Register;
-use App\Models\Test;
-
+use Arr;
 use Str;
 use Auth;
-use Mail;
 use Carbon\Carbon;
 
 
-
-class RegisterController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if($request->all() != null){
-            foreach($request->all() as $key => $value){
-                if($key == 'is_active'){
-                    $registers=Register::where("$key","$value")->paginate(10);
-                }else{
-                    $registers=Register::where("$key",'LIKE',"%$value%")->paginate(10);
-                }
-            }
-        }else{
-            $registers = Register::orderBy('created_at','desc')->paginate(10);
-        }
-
-       
-        return view('backend.pages.register.register',['registers' => $registers]);
+            $categories = Category::paginate(10);
+            return view('backend.pages.category.category',['categories' => $categories]);
     }
-
-    public function destroy($id)
-    {
-        $registers = Register::find($id);
-
-        $data['is_active'] = 1;
-
-        $registers->update($data);
-
-        return redirect()->back();
-    }
-
 
     /**
      * Show the form for creating a new resource.
@@ -62,7 +34,8 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.category.create-category');
+        
     }
 
     /**
@@ -71,9 +44,14 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $data = Arr::except($request->all(), ['_token']);
+        $data['user_id']=Auth::user()->id;
+
+        Category::create($data);
+
+        return redirect()->back()->with('thongbao','Thêm danh mục thành công');
     }
 
     /**
@@ -95,8 +73,8 @@ class RegisterController extends Controller
      */
     public function edit($id)
     {
-        $data['register'] = Register::find($id);
-        return view('backend.pages.register.edit-register',$data);
+        $data['categories'] = Category::find($id);
+        return view('backend.pages.category.edit-category',$data);
     }
 
     /**
@@ -106,18 +84,18 @@ class RegisterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RegisterRequest $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        $register = Register::find($id);
+        $categories = Category::find($id);
 
         $data = Arr::except(request()->all(), ["_token ,'_method'"]);
+        $data['user_id']=Auth::user()->id;
         $updated_at=Carbon::now()->toarray();
         $data['updated_at']=$updated_at['formatted'];
 
-        $register->update($data);
+        $categories->update($data);
 
-        
-        return redirect()->route('register.index')->with('thongbao','Cập nhật Thành Công');
+        return redirect()->back()->with('thongbao','Cập nhật Thành Công');
     }
 
     /**
@@ -126,5 +104,9 @@ class RegisterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
+    public function destroy($id)
+    {
+        Category::destroy($id);
+        return redirect()->route('category.index');
+    }
 }

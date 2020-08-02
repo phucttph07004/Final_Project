@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -31,16 +32,20 @@
                         <div class="login__form">
                             <p class="login__form-title">Đăng nhập</p>
                             <form action="{{route('auth.login')}}" method="POST">
-                            @csrf
+                                @csrf
                                 <input class="login__form-input" type="text" name="email" placeholder="Email">
                                 {!! ShowErrors($errors,'email') !!}
                                 <div class="login__form-password">
-                                    <input class="login__form-input" type="password" name="password" id="password" placeholder="Mật khẩu">
+                                    <input class="login__form-input" type="password" name="password" id="password"
+                                        placeholder="Mật khẩu">
                                     <div class="show-pass">
                                         <i class="fa fa-lock "></i>
                                     </div>
                                 </div>
                                 {!! ShowErrors($errors,'password') !!}
+                                @if(session('thongbao'))
+                                <span style='color: red'>{{session('thongbao')}}</span>
+                                @endif
                                 <button type="submit" class="btn login__form-btn">Đăng nhập</button>
                             </form>
                         </div>

@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers\backend;
 
-use Illuminate\Support\Arr;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\backend\setting\SettingRequest;
+use App\Http\Requests\backend\user\{UserRequest,UserEditRequest};
 
-
+use App\Models\User;
+use Arr;
 use Str;
 use Auth;
 use Carbon\Carbon;
 
-use App\Models\News;
-use App\Models\Setting;
-
-class SettingController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,9 +21,8 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $settings = Setting::limit(1)->get();
-        $abouts = News::where('type','about')->limit(1)->get();
-        return view('backend.pages.setting.setting',['settings' => $settings,'abouts' => $abouts]);
+        $users = User::paginate(10);
+        return view('backend.pages.user.user',['users' => $users]);
     }
 
     /**
@@ -36,7 +32,7 @@ class SettingController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.user.create-user');
     }
 
     /**
@@ -45,9 +41,20 @@ class SettingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $data = Arr::except($request->all(),['_token']);
+        $data['password']=bcrypt($data['password']);
+        $data['type']='text';
+        $data['is_active']='1';
+        if($request->hasFile('avatar')){
+            $data['avatar']=$request->file('avatar')->store('images','public');
+        }else{
+            $data['avatar']='noImage.jpg';
+        }
+
+        User::create($data);
+        return redirect()->back()->with('thongbao','Thêm Tài Khoản Thành Công');
     }
 
     /**
@@ -58,7 +65,8 @@ class SettingController extends Controller
      */
     public function show($id)
     {
-        //
+        $users = User::find($id);
+        return view('backend.pages.user.detail',['users' => $users]);
     }
 
     /**
@@ -69,8 +77,8 @@ class SettingController extends Controller
      */
     public function edit($id)
     {
-        $data['setting'] = Setting::find($id);
-        return view('backend.pages.setting.edit-setting',$data);
+        $users = User::find($id);
+        return view('backend.pages.user.edit-user',['users' => $users]);
     }
 
     /**
@@ -80,24 +88,24 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SettingRequest $request, $id)
+    public function update(UserEditRequest $request, $id)
     {
-        $settings = Setting::find($id);
+        $users = User::find($id);
 
         $data = Arr::except(request()->all(), ["_token ,'_method'"]);
         $updated_at=Carbon::now()->toarray();
         $data['updated_at']=$updated_at['formatted'];
 
 
-        if ($request->hasFile('logo')) {
-            $data['logo']=$request->file('logo')->store('images','public');
+        if ($request->hasFile('avatar')) {
+            $data['avatar']=$request->file('avatar')->store('images','public');
          }else{
-             $data['logo']=$settings->image;
+             $data['avatar']=$users->image;
          }
 
-        $settings->update($data);
+        $users->update($data);
 
-        return redirect()->route('setting.index')->with('thongbao','Cập nhật Thành Công');
+        return redirect()->back()->with('thongbao','Cập nhật Thành Công');
     }
 
     /**
@@ -108,6 +116,7 @@ class SettingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect()->route('user.index');
     }
 }

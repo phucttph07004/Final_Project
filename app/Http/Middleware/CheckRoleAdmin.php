@@ -16,9 +16,14 @@ class CheckRoleAdmin
      */
     public function handle($request, Closure $next)
     {
-       if(Auth::check()===false){
-            return redirect()->route('auth.login');
+        if(Auth::check()){
+            if(Auth::User()->role !== config('common.role.admin') && Auth::User()->role !== config('common.role.teaching_assitant') && Auth::User()->role !== config('common.role.teacher') && Auth::User()->role !== config('common.role.branch_manager') && Auth::User()->role !== config('common.role.general_manager')){
+              return redirect()->route('home.index');
+            }else{
+                return $next($request);
+            }
+        }else{
+            return redirect('admin/login');
         }
-        return $next($request);
     }
 }
