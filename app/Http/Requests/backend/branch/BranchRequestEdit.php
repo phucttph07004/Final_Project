@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Requests\backend\branch;
-use App\Models\{User,Branch};
+use App\Models\{Branch};
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 class BranchRequestEdit extends FormRequest
 {
     /**
@@ -23,12 +22,18 @@ class BranchRequestEdit extends FormRequest
      */
     public function rules()
     {
-        $Branch = Branch::find((int) request()->segment(2));
+        $segments = request()->segments();
+        $Branch = Branch::find((int) end($segments));
+        if(request('avatar') != $Branch->avatar){
+            $mimes ='|mimes:jpeg,jpg,png';
+        }else{
+            $mimes ='required';
+        }
         return [
             'director_id'=>'required|numeric',
             'branch_name'=>'required|min:10|unique:Branchs,branch_name,'.$Branch->id.',id',
             'address'=>'required|min:10',
-            'avatar'=>'required|mimes:jpeg,jpg,png',
+            'avatar'=>$mimes,
 
         ];
     }

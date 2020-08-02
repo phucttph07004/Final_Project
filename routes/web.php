@@ -29,8 +29,10 @@ Route::resource('/student','backend\StudentController');
 Route::resource('/account','backend\AccountController');
 Route::resource('/branch','backend\BranchController');
 Route::resource('/level','backend\LevelController');
-Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
-Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
+
+
+// Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
+// Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 });
 // Route::group([ 'prefix' => 'admin',
 //                'middleware' => ['check_role_admin',],

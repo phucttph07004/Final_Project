@@ -24,15 +24,21 @@ class StudentRequestEdit extends FormRequest
      */
     public function rules()
     {
-        $students = Student::find((int) request()->segment(2));
+        $segments = request()->segments();
+        $Student = Student::find((int) end($segments));
+        if(request('avatar') != $Student->avatar){
+            $mimes ='|mimes:jpeg,jpg,png';
+        }else{
+            $mimes ='required';
+        }
         return [
             'fullname'=>'required|min:6',
-            'email'=>'required|email|unique:students,email,'.$students->id.',id',
+            'email'=>'required|email|unique:students,email,'.$Student->id.',id',
             'address'=>'required|min:10',
             'phone'=>'required|numeric|digits:10',
             'class_id'=>'required',
             'date_of_birth'=>'required|date',
-            'avatar'=>'required|mimes:jpeg,jpg,png',
+            'avatar'=>$mimes,
 
         ];
     }

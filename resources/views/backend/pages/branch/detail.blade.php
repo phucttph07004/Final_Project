@@ -19,6 +19,13 @@
           <img class="ml-2" width="315" height="150" src="storage/{{ $get_branch->avatar }}" alt="">
           </div>
           <div class="form-group">
+            <label for="exampleFormControlInput1">Trạng Thái</label>
+            <select class="form-control"  name="status" id="">
+                <option @if($get_branch->status ==1) selected @endif value="1">Hoạt Động</option>
+                <option @if($get_branch->status ==2) selected @endif value="2">Tạm Dừng</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label for="exampleFormControlInput1">Ngày Tạo</label>
             <input value="{{ Carbon\carbon::parse($get_branch->created_at)->format('d-m-Y') }}" type="" class="form-control" >
           </div>

@@ -2,7 +2,11 @@
 @section('title','Quản Trị Thông Báo')
 @section('title_page','Chi Tiết Thông Báo')
 @section('content')
-<form class="pl-5 pt-5" action="{{ route('notifications.update',"$Notification->id") }}" method="POST">
+
+<?php
+$Notification=(object)$Notification;
+?>
+<form class="pl-5 pt-5" action="{{ route('notifications.update',"1") }}" method="POST">
     @method('PUT')
     @csrf
     @if(session('thongbao'))

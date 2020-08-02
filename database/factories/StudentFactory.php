@@ -10,6 +10,7 @@ $factory->define(Student::class, function (Faker $faker) {
         'fullname' => $faker->name,
         'class_id' =>Classroom::inRandomOrder()->first()->id,
         'email' => $faker->unique()->safeEmail,
+        'password' => bcrypt('123456'),
         'avatar'=>$faker->imageUrl(150, 150, 'cats'),
         'address' => "hà nội",
         'date_of_birth' => $faker->date(),

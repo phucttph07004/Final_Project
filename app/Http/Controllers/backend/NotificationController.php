@@ -5,7 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Models\{Notification, Category, User};
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\backend\notification\NotificationRequest;
+use App\Http\Requests\backend\notification\{NotificationRequest, NotificationCheckCreateRequest};
 use Arr;
 use Str;
 use Auth;
@@ -13,15 +13,35 @@ use Carbon\Carbon;
 
 class NotificationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data['get_all_notification'] = Notification::paginate(5);
+        if ($request->all() != null && $request['page'] == null) {
+            foreach ($request->all() as $key => $value) {
+                if ($key == 'status') {
+                    $data['get_all_notification'] = Notification::where("$key", "$value")->paginate(10);
+                } elseif ($key == 'is_active') {
+                    $data['get_all_notification'] = Notification::where("$key", "$value")->paginate(10);
+                } else {
+                    $data['get_all_notification'] = Notification::where("$key", 'LIKE', "%$value%")->paginate(10);
+                }
+            }
+        } else {
+            $data['get_all_notification'] = Notification::paginate(10);
+        }
         return view('backend.pages.notification.index', $data);
     }
-    // public function destroy($id){
-    //     Notification::destroy($id);
-    //     return redirect()->back()->with('thongbao','Xóa Thành Công');
-    // }
+
+    public function destroy(Request $request, $id)
+    {
+        $data = Arr::except($request, ['_token', '_method'])->toarray();
+        if ($data['is_active'] != 1) {
+            $data['is_active'] = 2;
+        }
+        $Notification = Notification::find($id);
+        $Notification->update($data);
+        return redirect()->back()->with('thongbao', 'Cập Nhật Trạng Thái Thành Công');
+    }
+
     public function show(Notification $Notification)
     {
         $data['Notification'] = $Notification;
@@ -40,37 +60,19 @@ class NotificationController extends Controller
             return redirect()->back()->with('error', 'Không Được Thay Đổi Dữ Liệu');
         } else {
             $data = Arr::except($request, ['_token'])->toarray();
-            $data['user_id'] = 1;
-            // $data['user_id']=Auth::user()->id;
-
+            $data['user_id'] = Auth::user()->id;
             $preview['Notification'] = $data;
             $preview['get_users'] = User::all();
             $preview['get_categories'] = Category::all();
             return view('backend.pages.notification.preview', $preview);
-                // dd($request->all());
-                // $data['user_id'] = 1;
-                // // $data['user_id']=Auth::user()->id;
-                // Notification::create($data);
-                // return redirect()->back()->with('thongbao', 'Tạo Thông Báo Thành Công');
         }
     }
 
-
-    // public function edit(Notification $Notification)
-    // {
-    //     $data['Notification'] = $Notification;
-    //     $data['get_all_category'] = Category::all();
-    //     return view('backend.pages.notification.edit', $data);
-    // }
-
-    public function update(NotificationRequest $request)
+    public function update(Request $request, $id)
     {
-        dd($request->all());
         $data = Arr::except($request, ['_token', '_method'])->toarray();
-        $data['user_id'] = 1;
-        // $data['user_id']=Auth::user()->id;
-        $Notification = Notification::find($id)->first();
-        $Notification->update($data);
+        $data['user_id'] = Auth::user()->id;
+        Notification::create($data);
         return redirect()->back()->with('thongbao', 'Cập Nhật Thông Báo Thành Công');
     }
 }

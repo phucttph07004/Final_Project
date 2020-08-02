@@ -41,7 +41,7 @@
               <li class="nav-item">
                 <a href="{{route('student.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Quản Trị Học Sinh</p>
+                  <p>Quản Trị Học Viên</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -76,7 +76,7 @@
               </li>
             </ul>
           </li>
-          
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

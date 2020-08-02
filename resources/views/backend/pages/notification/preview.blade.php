@@ -12,14 +12,14 @@
     @endif
 
     @if(session('error'))
-        <span style='color: red'>{{session('error1')}}</span>
-        @endif
+    <span style='color: red'>{{session('error')}}</span>
+    @endif
 
     <div class="form-group">
         <label for="exampleFormControlInput1">Người Gửi</label>
         @foreach($get_users as $item)
         @if($Notification['user_id']== $item->id)
-        <input type="text" name="user_id" class="form-control" value="{{ $item->fullname}}">
+        <input type="text" name="user_id" class="form-control" readonly value="{{ $item->fullname}}">
         @endif
         @endforeach
     </div>
@@ -53,9 +53,11 @@
     <div class="row">
         <div class="col-12">
             <div class="row">
-                <div class="col-4">
+                <div class="col-4 ml-4">
                     <div class="form-group">
                         <select class="form-control" name="is_active" id="">
+                            <br>
+                            {!! ShowErrors($errors,'is_active') !!}
                             <option>Chọn Xác Nhận</option>
                             <option value="1">Xác Nhận Gửi Thông Báo</option>
                             <option value="2">Lưu thông Báo Vào Nháp</option>
