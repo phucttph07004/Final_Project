@@ -51,13 +51,13 @@
 
 
       <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chọn Chi Nhánh Lever Và Lớp</button>
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chọn khóa học Level Và Lớp học</button>
         <br>
         {!! ShowErrors($errors,'class_id') !!}
         <ul class="dropdown-menu">
-        @foreach ($get_all_branch as $item)
+        @foreach ($get_all_course as $item)
           <li class="dropdown-submenu">
-          <a class="test" tabindex="-1">{{ $item->branch_name }}<span class="caret"></span></a>
+          <a class="test" tabindex="-1">{{ $item->course_name }}<span class="caret"></span></a>
               <ul class="dropdown-menu">
                 @foreach ($get_all_level as $level)
                  <li class="dropdown-submenu">
@@ -65,15 +65,15 @@
                  <ul class="dropdown-menu">
                     <?php $i=0 ?>
                     @foreach ($get_all_class as $class)
-                    @if($class->branch_id == $item->id && $class->level_id == $level->id)
+                    @if($class->course_id == $item->id && $class->level_id == $level->id && $class->is_active == 1)
                     <input style="margin-left: 15px;" type="radio" id="id_{{$class->id}}" name="class_id" value="{{$class->id}}">
-                    <label for="id_{{$class->id}}">{{$class->class_name}}</label>
+                    <label for="id_{{$class->id}}">{{$class->name}}</label>
                     <br>
                     <?php $i++; ?>
                     @endif
                     @endforeach
                     @if($i == 0)
-                    <p style="margin-left: 15px;">Chưa có lớp nào</p>
+                    <p style="margin-left: 15px;">Chưa có lớp nào ở level và trong khóa này</p>
                     @endif
                    </ul>
                  </li>
