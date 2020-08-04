@@ -12,16 +12,6 @@
             {!! ShowErrors($errors,'name') !!}
         </div>
         <div class="form-group">
-            <label for="">Giáo viên</label>
-            <select name="teacher_id" id="" class="form-control">
-                @foreach ($teachers as $teacher)
-                <option @if($teacher->id == $class->teacher_id ) selected @endif
-                    value="{{ $teacher->id }}">{{ $teacher->fullname }}
-                </option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
             <label for="">Level</label>
             <select name="level_id" id="" class="form-control">
                 @foreach ($levels as $level)
@@ -39,10 +29,6 @@
                 </option>
                 @endforeach
             </select>
-        </div>
-        <div class="form-group">
-            <label for="">Trạng thái</label>
-            <input type="text" class="form-control" name="is_active" id="" value="{{ $class->is_active }}">
         </div>
     </div>
     <div class="card-footer">

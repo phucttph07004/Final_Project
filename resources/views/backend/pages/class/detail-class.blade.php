@@ -25,7 +25,12 @@
         </div>
         <div class="form-group">
             <label for="">Trạng thái</label>
-            <input type="text" readonly="readonly" class="form-control" name="is_active" id="" value="{{ $class->is_active }}">
+            <input type="text" readonly="readonly" class="form-control" name="is_active" id="" 
+                    @if($class->is_active == 0) value="Khoá"
+                    @else value="Hoạt động"
+                    @endif
+            
+            >
         </div>
         <div class="form-group">
             <label for="">Người tạo</label>
