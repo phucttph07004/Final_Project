@@ -74,16 +74,28 @@
                                 <p>Quản Trị LandingPage</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('register.index')}}" class="nav-link">
+                        <!-- <li class="nav-item">
+                            <a href="" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách đăng ký kiểm tra đầu vào</p>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a href="{{route('user.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Quản trị tài khoản</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('course.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Quản trị khoá học</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('class.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Quản trị lớp học</p>
                             </a>
                         </li>
                     </ul>

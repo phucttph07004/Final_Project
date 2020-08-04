@@ -15,16 +15,16 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('class_id')->unsigned();
-            $table->foreign('class_id')->references('id')->on('class')->onDelete('cascade');
             $table->string('fullname');
-            $table->text('password');
             $table->string('code');
             $table->text('avatar');
             $table->date('date_of_birth');
             $table->string('phone');
             $table->string('email',100)->unique();
             $table->text('address');
+            $table->text('password');
+            $table->integer('class_id')->unsigned();
+            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             $table->integer('is_active');
             $table->timestamps();
         });

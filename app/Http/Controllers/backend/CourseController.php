@@ -1,17 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\frontend\register\RegisterRequest;
+use App\Http\Requests\backend\course\CourseRequest;
 
-use App\Models\Register;
-use App\Models\Setting;
 
-use Mail;
+use App\Models\Course;
+
 use Arr;
-class RegisterController extends Controller
+use Str;
+use Auth;
+use Carbon\Carbon;
+
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +23,8 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        
+        $courses = Course::paginate(10);
+        return view('backend.pages.course.course',['courses' => $courses]);
     }
 
     /**
@@ -30,9 +34,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        //
-        $settings = Setting::All();
-        return view('frontend.register',['settings' => $settings]);
+        return view('backend.pages.course.create-course');
     }
 
     /**
@@ -41,20 +43,15 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RegisterRequest $request)
+    public function store(CourseRequest $request)
     {
-        $data = Arr::except($request->all(), ['_token']);
-        $data['is_active']=0;
-        $data['note']='';
-        $register = Register::create($data);
-                
-        return redirect()->back()->with('thongbao','Đăng ký thành công, chúng tôi sẽ liên hệ bạn sớm nhất');
+        $data = Arr::except($request->all(),['_tokent']);
+        $data['user_id']=Auth::user()->id;
+
+        Course::create($data);
+
+        return redirect()->route('course.index')->with('thongbao','Tạo khoá học thành công');
     }
-
-    // public function thankyou(){
-    //     return view('frontend.thankyou');
-
-    // }
 
     /**
      * Display the specified resource.
@@ -75,7 +72,8 @@ class RegisterController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['course']=Course::find($id);
+        return view('backend.pages.course.edit-course',$data);
     }
 
     /**
@@ -85,9 +83,17 @@ class RegisterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CourseRequest $request, $id)
     {
-        //
+        $courses = Course::find($id);
+
+        $data = Arr::except(request()->all(), ["_token ,'_method'"]);
+        $update_at = Carbon::now()->toarray();
+        $data['update_at'] = $update_at['formatted'];
+
+        $courses->update($data);
+
+        return redirect()->route('course.index')->with('thongbao','Cập nhật khoá học thành công');
     }
 
     /**
@@ -98,6 +104,7 @@ class RegisterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Course::destroy($id);
+        return redirect()->back();
     }
 }

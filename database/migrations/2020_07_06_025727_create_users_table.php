@@ -18,7 +18,6 @@ class CreateUsersTable extends Migration
             $table->text('password');
             $table->string('fullname');
             $table->text('avatar');
-            $table->string('type');
             $table->text('address');
             $table->date('date_of_birth');
             $table->string('phone');

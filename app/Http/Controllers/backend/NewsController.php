@@ -123,7 +123,6 @@ class NewsController extends Controller
         $news = News::find($id);
         $data = Arr::except(request()->all(), ["_token ,'_method'"]);
 
-        // dd($id);
 
         if($data['status'] == 0){
             $data['status'] = 1;

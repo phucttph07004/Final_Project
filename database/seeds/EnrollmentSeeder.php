@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\{Homework};
-class HomeworkSeeder extends Seeder
+use App\Models\Enrollment;
+class EnrollmentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class HomeworkSeeder extends Seeder
      */
     public function run()
     {
-        factory(Homework::class, 10)->create();
+        factory(Enrollment::class, 10)->create();
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLessonContentsTable extends Migration
+class CreateFeedbackTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateLessonContentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('lesson_contents', function (Blueprint $table) {
+        Schema::create('feedback', function (Blueprint $table) {
             $table->increments('id');
-            $table->longtext('content');
-            $table->string('title');
-            $table->string('lesson');
-            $table->integer('level_id')->unsigned();
-            $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
+            $table->longText('content');
+            $table->integer('score');
+            $table->integer('student_id')->unsigned();
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateLessonContentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lesson_contents');
+        Schema::dropIfExists('feedback');
     }
 }

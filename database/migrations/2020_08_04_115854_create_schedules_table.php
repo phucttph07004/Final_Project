@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClassTable extends Migration
+class CreateSchedulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,19 @@ class CreateClassTable extends Migration
      */
     public function up()
     {
-        Schema::create('class', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('code');
-            $table->string('class_name');
-            $table->integer('branch_id')->unsigned();
-            $table->foreign('branch_id')->references('id')->on('branchs')->onDelete('cascade');
+            $table->integer('student_id')->unsigned();
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('teacher_id')->unsigned();
             $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('teaching_assitant_id')->unsigned();
-            $table->foreign('teaching_assitant_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('level_id')->unsigned();
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
-            $table->integer('schedule_id')->unsigned();
-            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
+            $table->integer('class_id')->unsigned();
+            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
+            $table->date('time');
             $table->timestamps();
         });
     }
@@ -38,6 +37,6 @@ class CreateClassTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('class');
+        Schema::dropIfExists('schedules');
     }
 }

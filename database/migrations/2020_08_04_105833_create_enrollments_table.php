@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBranchsTable extends Migration
+class CreateEnrollmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class CreateBranchsTable extends Migration
      */
     public function up()
     {
-        Schema::create('branchs', function (Blueprint $table) {
+        Schema::create('enrollments', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('fullname');
+            $table->date('date_of_birth');
+            $table->string('phone');
             $table->text('address');
-            $table->text('avatar');
-            $table->string('branch_name');
-            $table->integer('director_id')->unsigned();
-            $table->foreign('director_id')->references('id')->on('users');
+            $table->text('note');
             $table->integer('status');
+            $table->string('email',100)->unique();
+            $table->integer('level_id')->unsigned();
+            $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +35,6 @@ class CreateBranchsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('branchs');
+        Schema::dropIfExists('enrollments');
     }
 }

@@ -22,7 +22,6 @@ Route::group([ 'prefix' => 'admin',
 Route::resource('/','backend\IndexController');
 
 Route::resource('/setting', 'backend\SettingController');
-Route::resource('/register', 'backend\RegisterController');
 // Route::post('/register', 'backend\RegisterController@confirm')->name('register.confirm');
 Route::resource('/news', 'backend\NewsController');
 Route::resource('/notifications','backend\NotificationController');
@@ -33,24 +32,11 @@ Route::resource('/branch','backend\BranchController');
 Route::resource('/level','backend\LevelController');
 Route::resource('/user','backend\UserController');
 Route::resource('/category','backend\CategoryController');
+Route::resource('/course', 'backend\CourseController');
+Route::resource('/class','backend\ClassController');
 Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
 Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 });
-// Route::group([ 'prefix' => 'admin',
-//                'middleware' => ['check_role_admin',],
-// ], function () {
-
-
-
-
-
-
-
-    // Route::resource('/','backend\IndexController');
-    // Route::resource('/register', 'backend\RegisterController');
-    // Route::resource('/news', 'backend\NewsController');
-    // Route::get('/login', 'backend\AuthController@getLoginForm');
-// });
 
 // Auth Admin
 

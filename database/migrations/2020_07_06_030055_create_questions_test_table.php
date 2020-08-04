@@ -18,6 +18,9 @@ class CreateQuestionsTestTable extends Migration
             $table->text('question');
             $table->json('answer');
             $table->text('correct_answer');
+            $table->integer('is_active');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('level_id')->unsigned();
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
             $table->timestamps();
