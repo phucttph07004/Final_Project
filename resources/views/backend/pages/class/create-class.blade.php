@@ -35,16 +35,6 @@
             @endforeach
         </select>
     </div>
-    <div class="form-group">
-        <label for="">Giáo viên</label>
-        <br>
-        {!! ShowErrors($errors,'teacher_id') !!}
-        <select name="teacher_id" class="form-control">
-            @foreach ($teachers as $teacher)
-            <option value="{{ $teacher->id }}">{{ $teacher->fullname }}</option>
-            @endforeach
-        </select>
-    </div>
     <div class="d-flex align-items-center">
         <a class="btn btn-danger mr-4" href="{{route('class.index')}}">Quay lại</a>
         <button type="submit" class="btn btn-primary">Thêm Lớp</button>

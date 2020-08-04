@@ -24,7 +24,8 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::paginate(10);
-        return view('backend.pages.course.course',['courses' => $courses]);
+
+        return view('backend.pages.course.course',compact('courses'));
     }
 
     /**
@@ -32,8 +33,10 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        
+      
         return view('backend.pages.course.create-course');
     }
 
@@ -47,6 +50,10 @@ class CourseController extends Controller
     {
         $data = Arr::except($request->all(),['_tokent']);
         $data['user_id']=Auth::user()->id;
+
+        $start_date = new Carbon($request->input('start_date'));
+        $finish_date = new Carbon($request->input('finish_date'));
+        $diff_days = $start_date->diff($finish_date);
 
         Course::create($data);
 

@@ -15,7 +15,6 @@
                 <th scope="col">Tên lớp</th>
                 <th scope="col">Level</th>
                 <th scope="col">Khoá</th>
-                <th scope="col">Giáo viên</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col">
                     <a href="{{ route('class.create') }}">
@@ -32,7 +31,6 @@
                 <td>{{ $class->name }}</td>
                 <td>{{ $class->level_id}}</td>
                 <td>{{ $class->courseName->course_name}}</td>
-                <td>{{ $class->teacher_id}}</td>
                 <td>
                     @if($class->is_active == 1) <span style='color: green'>Hoạt động</span>
                     @else <span style='color: red'>Khoá</span>

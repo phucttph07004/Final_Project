@@ -4,6 +4,8 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\backend\classes\ClassRequest;
+
 use App\Models\{Classes,Course,Level,User};
 
 use Arr;
@@ -29,12 +31,11 @@ class ClassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $levels = Level::all();
         $courses = Course::all();
-        $teachers = User::where('role', 4)->get();
-        return view('backend.pages.class.create-class',['levels' => $levels,'courses' => $courses,'teachers' => $teachers]);
+        return view('backend.pages.class.create-class',compact('levels','courses'));
     }
 
     /**
@@ -43,7 +44,7 @@ class ClassController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClassRequest $request)
     {
         $data = Arr::except($request->all(), ['_token']);
         $data['user_id'] = Auth::user()->id;
@@ -88,7 +89,7 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClassRequest $request, $id)
     {
         $classes = Classes::find($id);
         $data = Arr::except(request()->all(), ["_token ,'_method'"]);

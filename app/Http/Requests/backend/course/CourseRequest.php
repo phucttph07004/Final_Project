@@ -26,8 +26,8 @@ class CourseRequest extends FormRequest
     {
         return [
             'course_name'=>'required|unique:courses',
-            'start_date' =>'required',
-            'finish_date' =>'required',
+            'start_date' =>'required|after:today',
+            'finish_date' =>'required|after:start_date',
         ];
     }
 
@@ -38,8 +38,10 @@ class CourseRequest extends FormRequest
             'course_name.unique' => 'Khoá học này đã tồn tại vui lòng kiểm tra lại',
 
             'start_date.required' => 'Không để trống ngày khai giảng',
+            'start_date.after' => 'Không thể chọn ngày trong quá khứ',
 
             'finish_date.required' => 'Không để trống ngày kết thúc dự kiến',
+            'finish_date.after' => 'Ngày kết thúc phải sau ngày khai giảng'
         ];
     }
 }

@@ -19,13 +19,13 @@
         <label for="">Ngày khai giảng</label>
         <br>
         {!! ShowErrors($errors,'start_date') !!}
-        <input type="date" name="start_date" class="form-control">
+        <input data-date="" data-date-format="DD MM YYYY" type="date" name="start_date" class="form-control">
     </div>
     <div class="form-group">
         <label for="">Ngày kết thúc dự kiến</label>
         <br>
         {!! ShowErrors($errors,'finish_date') !!}
-        <input name="finish_date" type="date" value="{{ old('finish_date')}}" class="form-control">
+        <input data-date="" data-date-format="DD MM YYYY" name="finish_date" type="date" value="{{ old('finish_date')}}" class="form-control">
     </div>
     <div class="d-flex align-items-center">
         <a class="btn btn-danger mr-4" href="{{route('course.index')}}">Quay lại</a>
