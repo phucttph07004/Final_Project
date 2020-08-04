@@ -31,9 +31,7 @@
               {!! ShowErrors($errors,'director_id') !!}
             <select class="form-control" name="director_id" id="type">
               @foreach ($get_all_user as $item)
-              @if($item->type == 'branch_manager')
             <option value="{{ $item->id }}">{{ $item->fullname }}</option>
-            @endif
               @endforeach
             </select>
           </div>

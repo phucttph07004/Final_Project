@@ -1,6 +1,6 @@
 @extends('./backend/layout/master')
-@section('title','Quản Trị Học Sinh')
-@section('title_page','Sửa  Học Sinh')
+@section('title','Quản Trị Học Viên')
+@section('title_page','Sửa  Học Viên')
 @section('content')
 <form enctype="multipart/form-data" class="pl-5 pt-5" action="{{ route('student.update',"$get_student->id") }}" method="POST">
     @csrf
@@ -51,6 +51,18 @@
       </div>
 
       <div class="form-group">
+        <label for="exampleFormControlSelect1">Chi Nhánh</label>
+        @foreach ($get_all_class as $class)
+        @if($get_student->ClassName->id == $class->id)
+        @foreach ($get_all_branch as $branch)
+        @if($branch->id == $class->branch_id)
+        <input readonly name="branch" value="{{ $branch->branch_name }}"  type="text" class="form-control" >
+        @endif
+        @endforeach
+        @endif
+        @endforeach
+      </div>
+      <div class="form-group">
         <label for="exampleFormControlSelect1">Lớp hiện tại</label>
         <input  value="{{ $get_student->ClassName->class_name }}" readonly type="text" class="form-control" >
         <input name="class_id" value="{{ $get_student->ClassName->id }}" type="hidden" class="form-control" >
@@ -60,34 +72,74 @@
           <input readonly value="Level : {{ $get_student->ClassName->level_id }}"  type="text" class="form-control" >
         </div>
 
-    <div class="form-group">
-      <label for="exampleFormControlSelect1">Sửa Đổi Lever và lớp</label>
-      <br>
-        {!! ShowErrors($errors,'class_id') !!}
-    <div class="row">
-        @foreach ($get_all_level as $item)
-        <div class="form-group ">
-        <a class="nav-link pl-2" data-toggle="dropdown" href="#">
-            level :{{$item->level}}
-            <i class="fa fa-angle-down" aria-hidden="true"></i>
-        </a>
-        <div class="dropdown-menu">
-            <p class="pl-2 pr-5">Danh Sách Lớp  level :{{$item->level}}</p>
-            @foreach($get_all_class as $value)
-            @if($value->level_id == $item->id)
-            <div class="col-12">
-            <input type="radio" id="id_{{$value->id}}" name="class_id" value="{{$value->id}}">
-            <label for="id_{{$value->id}}">{{$value->class_name}}</label>
-            </div>
-            @endif
-            @endforeach
-    </div>
-</div>
-@endforeach
-    </div>
-    <button type="submit" class="mb-5 btn btn-primary">Sửa Học Sinh</button>
+
+
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chọn Chi Nhánh Lever Và Lớp</button>
+            <ul class="dropdown-menu">
+            @foreach ($get_all_branch as $item)
+              <li class="dropdown-submenu">
+              <a class="test" tabindex="-1">{{ $item->branch_name }}<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    @foreach ($get_all_level as $level)
+                     <li class="dropdown-submenu">
+                     <a class="test">Level: {{ $level->level }}<span class="caret"></span></a>
+                       <ul class="dropdown-menu">
+                        <?php $i=0 ?>
+                        @foreach ($get_all_class as $class)
+                           @if($class->branch_id == $item->id && $class->level_id == $level->id)
+                           <input style="margin-left: 15px;" type="radio" id="id_{{$class->id}}" name="class_id" value="{{$class->id}}">
+                           <label class="w-90" for="id_{{$class->id}}">{{$class->class_name}}</label>
+                           <br>
+                            <?php $i++; ?>
+                           @endif
+                           @endforeach
+                           @if($i == 0)
+                           <p style="margin-left: 15px;">Chưa có lớp nào</p>
+                           @endif
+                       </ul>
+                     </li>
+                     @endforeach
+                   </ul>
+               </li>
+               @endforeach
+            </ul>
+          </div>
+          <div class="form-group mt-3">
+            <label for="exampleFormControlSelect1">Trạng Thái</label>
+            <select class="form-control" name="is_active" id="">
+                <option @if($get_student->is_active == 1) selected @endif value="1">Hoạt Động</option>
+                <option @if($get_student->is_active == 0) selected @endif value="0">Tạm Dừng</option>
+            </select>
+          </div>
+
+
+    <button type="submit" class="mt-5 mb-5 btn btn-primary">Sửa Học Viên</button>
   </form>
+  <style>
+    .dropdown-submenu {
+     position: relative;
+    }
+
+    .dropdown-submenu .dropdown-menu {
+     top: 0;
+     left: 100%;
+     margin-top: -1px;
+    }
+    </style>
   @endsection
+
+  @push('scripts')
+  <script>
+    $(document).ready(function () {
+      $('.dropdown-submenu a.test').on("click", function(e){
+           $(this).next('ul').toggle();
+           e.stopPropagation();
+           e.preventDefault();
+           });
+  });
+  </script>
+  @endpush
 
 
 

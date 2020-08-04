@@ -14,21 +14,6 @@ use Carbon\Carbon;
 
 class ExcelController extends Controller
 {
-
-//     public function student_store_default(NotificationRequest $request)
-//    {
-//        echo "fdsfds";die;
-//     if (count(Category::where('id', $request['category_id'])->get()) == 0 || ($request['status'] != '1' &&     $request['status'] != '2')) {
-//         return redirect()->back()->with('error', 'Không Được Thay Đổi Dữ Liệu');
-//     } else {
-//         $data = Arr::except($request, ['_token'])->toarray();
-//         $data['user_id'] = 1;
-//         // $data['user_id']=Auth::user()->id;
-//         Notification::create($data);
-//         return redirect()->back()->with('thongbao', 'Tạo Thông Báo Thành Công');
-//         }
-//     }
-
    public function student_create_excel()
    {
     return view('backend.pages.student.create_excel');

@@ -51,11 +51,11 @@
           <br>
             {!! ShowErrors($errors,'error2') !!}
             <select class="form-control"  name="status" id="">
-                <option value="1">Hoạt Động</option>
-                <option value="2">Tạm Dừng</option>
+                <option @if($get_branch->status ==1) selected @endif value="1">Hoạt Động</option>
+                <option @if($get_branch->status ==2) selected @endif value="2">Tạm Dừng</option>
             </select>
           </div>
-    <button class="mb-5 btn btn-primary">Sửa Chi Nhánh</button>
+    <button style="submit" class="mb-5 btn btn-primary">Sửa Chi Nhánh</button>
   </form>
   @endsection
 
