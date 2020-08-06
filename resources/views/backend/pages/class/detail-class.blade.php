@@ -12,10 +12,6 @@
             {!! ShowErrors($errors,'name') !!}
         </div>
         <div class="form-group">
-            <label for="">Giáo viên</label>
-            <input type="text" readonly="readonly" class="form-control" name="teacher_id" id="" value="{{ $class->teacher_id }}">
-        </div>
-        <div class="form-group">
             <label for="">Level</label>
             <input type="text" readonly="readonly" class="form-control" name="level_id" id="" value="{{ $class->level_id }}">
         </div>

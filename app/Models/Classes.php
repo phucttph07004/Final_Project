@@ -25,4 +25,9 @@ class Classes extends Model
         return $this->belongsToMany('App\Models\User');
     }
 
+    public function levelName()
+    {
+        return $this->belongsTo('App\Models\Level', 'level_id','id');
+    }
+
 }

@@ -29,7 +29,7 @@
             <tr>
                 <th scope="row">{{ $i++ }}</th>
                 <td>{{ $class->name }}</td>
-                <td>{{ $class->level_id}}</td>
+                <td>{{ $class->levelName->level}}</td>
                 <td>{{ $class->courseName->course_name}}</td>
                 <td>
                     @if($class->is_active == 1) <span style='color: green'>Hoạt động</span>
