@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 
 use App\Models\Register;
 use App\Models\Test;
+use App\Http\Requests\frontend\register\RegisterRequest;
 
 use Str;
 use Auth;
@@ -24,17 +25,27 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $registers = Register::orderBy('created_at','desc')->paginate(10);
-        return view('backend.pages.register.register',['registers' => $registers]);
+    public function index(Request $request)
+    {   
+        if($request->all() != null && $request['page'] == null){
+            foreach($request->all() as $key => $value){
+                if($key == 'is_active'){
+                    $data['get_all_register'] = Register::where("$key","$value")->paginate(10);
+                }else{
+                    $data['get_all_register'] = Register::where("$key",'LIKE',"%$value%")->paginate(10);
+                }
+            }
+        }else{
+            $data['get_all_register']=Register::paginate(10);
+        }
+        return view('backend.pages.register.index',$data);
     }
 
     public function destroy($id)
     {
         $registers = Register::find($id);
 
-     $data['is_active'] = 1;
+        $data['is_active'] = 1;
 
         $registers->update($data);
 
@@ -55,21 +66,6 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -90,8 +86,8 @@ class RegisterController extends Controller
      */
     public function edit($id)
     {
-        $data['register'] = Register::find($id);
-        return view('backend.pages.register.edit-register',$data);
+        $data['get_register'] = Register::find($id);
+        return view('backend.pages.register.edit',$data);
     }
 
     /**
@@ -103,16 +99,10 @@ class RegisterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $register = Register::find($id);
-
-        $data = Arr::except(request()->all(), ["_token ,'_method'"]);
-        $updated_at=Carbon::now()->toarray();
-        $data['updated_at']=$updated_at['formatted'];
-
+        $data = Arr::except($request, ['_token','_method'])->toarray();
+        $register=Register::find($id);
         $register->update($data);
-
-        
-        return redirect()->route('register.index')->with('thongbao','Cập nhật Thành Công');
+        return redirect()->back()->with('thongbao','Cập Nhật Thành Công');
     }
 
     /**

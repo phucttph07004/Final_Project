@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\{Branch, Student,Classroom,Level};
 use Illuminate\Http\Request;
 use App\Http\Requests\frontend\register\RegisterRequest;
 
@@ -13,7 +14,7 @@ use Mail;
 use Arr;
 class RegisterController extends Controller
 {
-    /**
+    /
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -32,8 +33,8 @@ class RegisterController extends Controller
     public function create()
     {
         //
-        $settings = Setting::All();
-        return view('frontend.register',['settings' => $settings]);
+        $data['get_all_level']=Level::all();
+        return view('frontend.register',$data);
     }
 
     /**
@@ -44,12 +45,11 @@ class RegisterController extends Controller
      */
     public function store(RegisterRequest $request)
     {
+       
         $data = Arr::except($request->all(), ['_token']);
         $data['is_active']=0;
-        $data['note']='';
         $register = Register::create($data);
-                
-        return redirect()->view('frontend.thankyou');
+        return redirect()->back()->with('thongbao','Bạn đã đăng ký thành công');;
     }
 
     /**
@@ -74,8 +74,8 @@ class RegisterController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
+    /**;
+     * Update the; specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

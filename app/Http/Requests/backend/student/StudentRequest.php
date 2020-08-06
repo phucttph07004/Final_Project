@@ -23,12 +23,7 @@ class StudentRequest extends FormRequest
     {
         return [
             'fullname'=>'required|min:6',
-            'email'=>'required|email|unique:students',
-            'address'=>'required|min:10',
-            'phone'=>'required|numeric|digits:10',
-            'class_id'=>'required',
-            'date_of_birth'=>'required|date',
-            'avatar'=>'required|mimes:jpeg,jpg,png',
+            
 
         ];
     }

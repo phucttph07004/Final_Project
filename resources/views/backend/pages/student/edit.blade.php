@@ -13,7 +13,7 @@
     <div class="form-group">
       <label for="exampleFormControlInput1">Họ Tên</label>
     <br>
-      {!! ShowErrors($errors,'fullname') !!}
+      
     <input name="fullname" value="{{ $get_student->fullname }}" type="text" class="form-control" >
     </div>
     <div class="form-group">
@@ -21,32 +21,32 @@
         <img src="storage/{{ $get_student->avatar }}" alt="">
         <input name="avatar" value="{{ $get_student->avatar }}" type="hidden" >
       <br>
-        {!! ShowErrors($errors,'avatar') !!}
+        
         <br>
         <input type="file" name="avatar" class="form-control" >
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">ngày Sinh</label>
       <br>
-        {!! ShowErrors($errors,'date_of_birth') !!}
+        
         <input name="date_of_birth" value="{{ $get_student->date_of_birth }}" type="date" class="form-control" >
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Số Điện Thoại</label>
       <br>
-        {!! ShowErrors($errors,'phone') !!}
+        
         <input name="phone" value="{{ $get_student->phone }}" type="number" class="form-control" >
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">email</label>
       <br>
-        {!! ShowErrors($errors,'email') !!}
+        
         <input name="email" value="{{ $get_student->email }}" type="email" class="form-control" >
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Địa Chỉ</label>
       <br>
-        {!! ShowErrors($errors,'address') !!}
+        
         <input name="address" value="{{ $get_student->address }}" type="text" class="form-control" >
       </div>
 

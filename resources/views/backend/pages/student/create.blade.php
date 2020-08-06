@@ -12,37 +12,37 @@
     <div class="form-group">
       <label for="exampleFormControlInput1">Họ Tên</label>
     <br>
-      {!! ShowErrors($errors,'fullname') !!}
+      
     <input name="fullname" type="text" value="{{ old('fullname') }}" class="form-control" >
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Ảnh</label>
       <br>
-        {!! ShowErrors($errors,'avatar') !!}
+        
         <input type="file" name="avatar" class="form-control" >
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">ngày Sinh</label>
       <br>
-        {!! ShowErrors($errors,'date_of_birth') !!}
+        
         <input name="date_of_birth" value="{{ old('date_of_birth') }}" type="date" class="form-control" >
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Số Điện Thoại</label>
       <br>
-        {!! ShowErrors($errors,'phone') !!}
+       
         <input name="phone" value="{{ old('phone') }}" type="number" class="form-control" >
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">email</label>
       <br>
-        {!! ShowErrors($errors,'email') !!}
+       
         <input name="email" value="{{ old('email') }}" type="email" class="form-control" >
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Địa Chỉ</label>
       <br>
-        {!! ShowErrors($errors,'address') !!}
+       
         <input name="address" value="{{ old('address') }}" type="text" class="form-control" >
       </div>
 
@@ -53,7 +53,7 @@
       <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chọn Chi Nhánh Lever Và Lớp</button>
         <br>
-        {!! ShowErrors($errors,'class_id') !!}
+       
         <ul class="dropdown-menu">
         @foreach ($get_all_branch as $item)
           <li class="dropdown-submenu">

@@ -15,11 +15,11 @@ Route::post('register',       'frontend\RegisterController@store')->name('regist
 
 // các chức năng của admin
 Route::group([ 'prefix' => 'admin',
-               'middleware' => ['check_role_admin','check_auth'],
+            //    'middleware' => ['check_role_admin','check_auth'],
 ], function () {
 
-Route::resource('/','backend\IndexController');
 
+Route::resource('/','backend\IndexController');
 Route::resource('/setting', 'backend\SettingController');
 Route::resource('/register', 'backend\RegisterController');
 // Route::post('/register', 'backend\RegisterController@confirm')->name('register.confirm');
