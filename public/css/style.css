@@ -1187,6 +1187,7 @@ body.hc-nav-open {
       .news__item-info .news__item-title:hover {
         color: #fe6500; }
     .news__item-info .news__item-desc {
+      height: 77px;
       font-size: 1.6rem;
       color: #696478;
       font-family: nunito-regular;
@@ -1209,6 +1210,17 @@ body.hc-nav-open {
         font-family: nunito-regular;
         padding: 10px;
         display: block; }
+
+.post-content {
+  height: 77px;
+  font-size: 1.6rem;
+  color: #696478;
+  font-family: nunito-regular;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; }
 
 .gallery__item:hover .overlay {
   opacity: 0.8;

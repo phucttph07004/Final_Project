@@ -2,13 +2,13 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\{Student,Classroom};
+use App\Models\{Student,Classes};
 use Faker\Generator as Faker;
 
 $factory->define(Student::class, function (Faker $faker) {
     return [
         'fullname' => $faker->name,
-        'class_id' =>Classroom::inRandomOrder()->first()->id,
+        'class_id' =>Classes::inRandomOrder()->first()->id,
         'email' => $faker->unique()->safeEmail,
         'password' => bcrypt('123456'),
         'avatar'=>$faker->imageUrl(150, 150, 'cats'),

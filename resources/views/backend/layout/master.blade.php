@@ -6,7 +6,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <div class="content-header pt-5">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
@@ -17,7 +17,7 @@
     </div>
 
     <!-- Main content -->
-    <section style="background-color: white" class="content">
+    <section style="background-color: white" class="content ">
         @yield('content')
     </section>
   </div>

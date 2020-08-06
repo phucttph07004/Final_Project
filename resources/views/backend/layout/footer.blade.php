@@ -12,6 +12,7 @@
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="js/jquery.min.js"></script>
+<script src="js/moment.min.js"></script>
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
@@ -39,9 +40,16 @@
   $(function () {
     // Summernote
     $('.textarea').summernote();
+
+    $("input").on("change", function() {
+    this.setAttribute(
+        "data-date",
+        moment(this.value, "YYYY-MM-DD")
+        .format( this.getAttribute("data-date-format") )
+    )
+}).trigger("change")
     
   })
-
 
 </script>
 

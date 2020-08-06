@@ -1,7 +1,10 @@
 <?php
 return[
     'role' => [
-        'admin' => 1,
+        'admin' => 2,
+        'manager' => 3,
+        'teacher' => 4,
+        'director'=>5,
     ],
 ];
 ?>
