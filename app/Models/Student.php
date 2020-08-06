@@ -11,6 +11,6 @@ class Student extends Model
     ];
     public function ClassName()
     {
-        return $this->belongsTo('App\Models\Classroom', 'class_id', 'id');
+        return $this->belongsTo('App\Models\Classes', 'class_id', 'id');
     }
 }

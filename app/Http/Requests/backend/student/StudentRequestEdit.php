@@ -24,6 +24,7 @@ class StudentRequestEdit extends FormRequest
      */
     public function rules()
     {
+        dd('fdgdfdfdfggfd');
         $segments = request()->segments();
         $Student = Student::find((int) end($segments));
         if(request('avatar') != $Student->avatar){

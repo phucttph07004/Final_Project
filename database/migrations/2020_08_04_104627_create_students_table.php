@@ -17,12 +17,12 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
             $table->string('fullname');
             $table->string('code');
-            $table->text('avatar');
+            $table->text('avatar')->nullable();
             $table->date('date_of_birth');
             $table->string('phone');
             $table->string('email',100)->unique();
             $table->text('address');
-            $table->text('password');
+            $table->text('password')->nullable();
             $table->integer('class_id')->unsigned();
             $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             $table->integer('is_active');

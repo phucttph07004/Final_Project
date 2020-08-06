@@ -3,7 +3,7 @@
 @section('title_page','Quản Trị Học Viên')
 @section('content')
 <div class="col-12">
-    <div style="padding-left: 165px" class="row bg-light form-inline">
+    <div style="padding-left: 45px" class="row bg-light form-inline">
         <div class="col-5"></div>
         <div class="col-7">
             <div class="row pl-5">
@@ -29,7 +29,7 @@
         </div>
 </div>
 </div>
-<table style="background-color: white" class="table ml-5 col-10">
+<table style="background-color: white" class="table ml-5 col-12">
     @if(session('thongbao'))
     <div class="alert alert-primary text-center" role="alert">
         {{session('thongbao') }}
@@ -41,12 +41,12 @@
             <th scope="col">Ảnh</th>
             <th scope="col">Họ Tên</th>
             <th scope="col">Mã Học Viên</th>
-            <th scope="col">Chi Nhánh</th>
+            <th scope="col">Khóa Học</th>
             <th scope="col">Trạng Thái</th>
             <th scope="col">
                     <div class="text-left">
                         <div class="col-12">
-                            <a href="/student/create/excel">
+                            <a href="/admin/student/create/excel">
                                 <button type="button" class="border-primary btn btn-outline-primary">Thêm File Excel</button>
                             </a>
                         </div>
@@ -79,9 +79,9 @@
             <td>
                 @foreach ($get_all_class as $class)
                 @if($item->class_id == $class->id)
-                @foreach ($get_all_branch as $branch)
-                @if($class->branch_id == $branch->id)
-                {{ $branch->branch_name }}
+                @foreach ($get_all_course as $course)
+                @if($class->course_id == $course->id)
+                {{ $course->course_name }}
                 @endif
                 @endforeach
                 @endif
