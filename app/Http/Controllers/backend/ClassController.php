@@ -4,7 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\backend\classes\ClassRequest;
+use App\Http\Requests\backend\classes\{ClassRequest,ClassEditRequest};
 
 use App\Models\{Classes,Course,Level,User};
 
@@ -20,10 +20,21 @@ class ClassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $classes = Classes::paginate(10);
-        return view('backend.pages.class.class',['classes' => $classes]);
+        // if($request->all() != null && $request['page'] == null){
+        //     foreach($request->all() as $key => $value){
+        //         if($key == 'is_active'){
+        //             $data['classes']=Classes::where("$key","$value")->paginate(10);
+        //         }else{
+        //             $data['classes']=Classes::where("$key",'LIKE',"%$value%")->paginate(10);
+        //         }
+        //     }
+        // }else{
+        //     $data['classes']=Classes::paginate(10);
+        // }
+        $data['classes']=Classes::paginate(10);
+        return view('backend.pages.class.class',$data);
     }
 
     /**
@@ -33,9 +44,21 @@ class ClassController extends Controller
      */
     public function create(Request $request)
     {
-        $levels = Level::all();
-        $courses = Course::all();
-        return view('backend.pages.class.create-class',compact('levels','courses'));
+        foreach(Course::all() as $value){
+            $first_date = strtotime($value->start_date);
+            $second_date = strtotime($value->finish_date);
+            $datediff = abs($first_date - $second_date);
+            $time_allowed=floor($datediff / (60*60*24)/10);
+            $start_date=strtotime(date("Y-m-d", strtotime($value->start_date)) . " +$time_allowed days");
+            $start_date_plus10 = strftime("%Y-%m-%d", $start_date);
+
+            if($start_date_plus10 >= date('Y-m-d')){
+                $data['courses'][]=$value;
+            }
+        }
+
+        $data['levels'] = Level::all();
+        return view('backend.pages.class.create-class',$data);
     }
 
     /**
@@ -89,7 +112,7 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ClassRequest $request, $id)
+    public function update(ClassEditRequest $request, $id)
     {
         $classes = Classes::find($id);
         $data = Arr::except(request()->all(), ["_token ,'_method'"]);

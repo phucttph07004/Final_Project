@@ -4,8 +4,7 @@ namespace App\Http\Requests\backend\course;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
-class CourseRequest extends FormRequest
+class CourseEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +24,7 @@ class CourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_name'=>'required|unique:courses',
-            'start_date' =>'required|after:today',
-            'finish_date' =>'required|after:start_date+10',
+            'course_name'=>'required',
         ];
     }
 
@@ -35,12 +32,6 @@ class CourseRequest extends FormRequest
     {
         return [
             'course_name.required' => 'Không để trống tên khoá học',
-            'course_name.unique' => 'Khoá học này đã tồn tại vui lòng kiểm tra lại',
-
-            'start_date.required' => 'Không để trống ngày khai giảng',
-            'start_date.after' => 'Không thể chọn ngày trong quá khứ',
-
-            'finish_date.required' => 'Không để trống ngày kết thúc dự kiến',
         ];
     }
 }

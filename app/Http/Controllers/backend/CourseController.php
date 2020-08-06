@@ -4,7 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\backend\course\CourseRequest;
+use App\Http\Requests\backend\course\{CourseRequest,CourseEditRequest};
 
 
 use App\Models\Course;
@@ -21,7 +21,7 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $courses = Course::paginate(10);
 
@@ -50,10 +50,6 @@ class CourseController extends Controller
     {
         $data = Arr::except($request->all(),['_tokent']);
         $data['user_id']=Auth::user()->id;
-
-        $start_date = new Carbon($request->input('start_date'));
-        $finish_date = new Carbon($request->input('finish_date'));
-        $diff_days = $start_date->diff($finish_date);
 
         Course::create($data);
 
@@ -90,7 +86,7 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CourseRequest $request, $id)
+    public function update(CourseEditRequest $request, $id)
     {
         $courses = Course::find($id);
 
