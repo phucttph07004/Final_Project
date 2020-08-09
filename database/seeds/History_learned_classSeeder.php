@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\{Attendance};
-class AttendanceSeeder extends Seeder
+use App\Models\History_learned_class;
+class History_learned_classSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class AttendanceSeeder extends Seeder
      */
     public function run()
     {
-        factory(Attendance::class, 10)->create();
+        factory(History_learned_class::class, 10)->create();
     }
 }

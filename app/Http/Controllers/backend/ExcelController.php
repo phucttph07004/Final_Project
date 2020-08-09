@@ -16,6 +16,7 @@ class ExcelController extends Controller
    public function student_store_excel()
     {
         $import = Excel::import(new StudentsImport, request()->file('excel'));
+        return redirect()->back()->with('thongbao', 'Thêm Học Viên Thành Công');
     }
 
 

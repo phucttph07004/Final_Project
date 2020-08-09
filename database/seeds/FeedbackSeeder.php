@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\{Writing_essay};
-class Writing_essaySeeder extends Seeder
+use App\Models\Feedback;
+class FeedbackSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,7 @@ class Writing_essaySeeder extends Seeder
      */
     public function run()
     {
-        factory(Writing_essay::class, 10)->create();
+        factory(Feedback::class, 10)->create();
+        
     }
 }

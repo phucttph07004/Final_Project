@@ -24,12 +24,12 @@
         <input type="hidden" name="avatar" value="{{ $get_student->avatar }}">
         <input type="file" name="avatar" class="form-control">
     </div>
-    {{-- <div class="form-group">
+    <div class="form-group">
         <label for="exampleFormControlInput1">ngày Sinh</label>
         <br>
         {!! ShowErrors($errors,'date_of_birth') !!}
         <input name="date_of_birth" value="{{ $get_student->date_of_birth }}" type="date" class="form-control">
-    </div> --}}
+    </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Số Điện Thoại</label>
         <br>
@@ -106,12 +106,11 @@
             @endif
         </ul>
     </div>
-
     <div class="form-group mt-4">
         <label for="exampleFormControlInput1">Trạng Thái</label>
         <select class="form-control" name="is_active" id="">
             <option @if($get_student->is_active == 1) selected @endif value="1">Hoạt Động</option>
-            <option @if($get_student->is_active == 1) selected @endif value="2">Tạm Dừng</option>
+            <option @if($get_student->is_active == 0) selected @endif value="0">Tạm Dừng</option>
         </select>
     </div>
 

@@ -65,8 +65,12 @@ class StudentController extends Controller
     {
         $data = Arr::except($request, ['_token'])->toarray();
         $data['is_active'] = 1;
-        $code = Student::orderBy('id', 'desc')->get()->first()->id;
-        $data['code'] = "PH$code";
+        if(Student::all()->last() == null){
+            $data['code'] = "PH001";
+        }else{
+        $code = Student::all()->last()->id;
+        $data['code'] = "PH00$code";
+        }
         $data['password'] = bcrypt('123456');
         $data['avatar'] = $request->file('avatar')->store('images', 'public');
         Student::create($data);
@@ -107,7 +111,6 @@ class StudentController extends Controller
 
     public function update(StudentRequestEdit $request ,$id){
         $data = Arr::except($request, ['_token','_method'])->toarray();
-        dd($data);
         $student=Student::find($id);
         if($data['avatar'] != $student->avatar){
             $data['avatar']=$request->file('avatar')->store('images','public');

@@ -2,10 +2,11 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Models\{Enrollment,Level};
+
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Enrollment::class, function (Faker $faker) {
     return [
         'fullname' => $faker->name,
         'date_of_birth' => $faker->date(),

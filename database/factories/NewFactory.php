@@ -14,5 +14,6 @@ $factory->define(News::class, function (Faker $faker) {
         'view' => 0,
         'category_id'=>Category::inRandomOrder()->first()->id,
         'user_id' =>User::inRandomOrder()->first()->id,
+        'description' => $faker->realText($maxNbChars = 50, $indexSize = 3),
     ];
 });

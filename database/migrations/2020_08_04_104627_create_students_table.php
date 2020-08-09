@@ -22,7 +22,7 @@ class CreateStudentsTable extends Migration
             $table->string('phone');
             $table->string('email',100)->unique();
             $table->text('address');
-            $table->text('password')->nullable();
+            $table->text('password');
             $table->integer('class_id')->unsigned();
             $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             $table->integer('is_active');
