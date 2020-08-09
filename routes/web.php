@@ -34,6 +34,7 @@ Route::resource('/user','backend\UserController');
 Route::resource('/category','backend\CategoryController');
 Route::resource('/course', 'backend\CourseController');
 Route::resource('/class','backend\ClassController');
+Route::resource('/class-detail','backend\ClassDetailController');
 Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
 Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 });

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEnrollmentsTable extends Migration
+class CreateWaitingListsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateEnrollmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('enrollments', function (Blueprint $table) {
+        Schema::create('waiting_lists', function (Blueprint $table) {
             $table->increments('id');
             $table->string('fullname');
             $table->date('date_of_birth');
             $table->string('phone');
             $table->text('address');
             $table->integer('note');
-            $table->date('weekday');
+            $table->integer('weekday');
             $table->integer('status');
             $table->string('email',100)->unique();
             $table->integer('level_id')->unsigned();
@@ -36,6 +36,6 @@ class CreateEnrollmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enrollments');
+        Schema::dropIfExists('waiting_lists');
     }
 }
