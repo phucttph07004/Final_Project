@@ -11,7 +11,7 @@ $factory->define(Question_test::class, function (Faker $faker) {
         'answer' =>json_encode(["A" => "realTextA ","B" => "realTextB ","C" => "realTextC ","D" => "realTextD "] ),
         'correct_answer' => $faker->randomElement($array = array ('A','B','C','D')),
         'level_id' => Level::inRandomOrder()->first()->id,
-        'is_active' => 1,
+        'status' => 1,
         'user_id' =>User::inRandomOrder()->first()->id,
     ];
 });

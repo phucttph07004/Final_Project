@@ -8,6 +8,6 @@ class Enrollment extends Model
 {
     //
         protected $fillable = [
-            'fullname','date_of_birth','phone','address','is_active','email','note','branch_id'
+            'fullname','date_of_birth','phone','address','status','email','note','branch_id'
         ];
 }
