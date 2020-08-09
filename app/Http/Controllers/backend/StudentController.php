@@ -18,7 +18,7 @@ class StudentController extends Controller
 
         if ($request->all() != null && $request['page'] == null) {
             foreach ($request->all() as $key => $value) {
-                if ($key == 'is_active') {
+                if ($key == 'status') {
                     $data['get_all_course'] = Course::all();
                     $data['get_all_class'] = Classes::all();
                     $data['get_all_student'] = Student::where("$key", "$value")->paginate(10);
@@ -36,10 +36,11 @@ class StudentController extends Controller
         return view('backend.pages.student.index', $data);
     }
 
-    // public function destroy($id){
-    //     Student::destroy($id);
-    //     return redirect()->back()->with('thongbao','Xóa Thành Công');
-    // }
+    public function destroy(Request $request ,$id){
+        dd($request->all());
+        // Student::destroy($id);
+        // return redirect()->back()->with('thongbao','Xóa Thành Công');
+    }
 
     public function create()
     {

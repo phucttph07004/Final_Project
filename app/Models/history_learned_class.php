@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class history_learned_class extends Model
+class History_learned_class extends Model
 {
-    public $table="history_learned_class";
+    public $table ='history_learned_class';
 }

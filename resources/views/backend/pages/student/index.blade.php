@@ -13,8 +13,8 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="/admin/student">Tất Cả</a>
-                    <a class="dropdown-item" href="/admin/student?is_active=1">Đang Hoạt Động</a>
-                    <a class="dropdown-item" href="/admin/student?is_active=0">Đang Tạm Dừng</a>
+                    <a class="dropdown-item" href="/admin/student?status=1">Hoạt Động</a>
+                    <a class="dropdown-item" href="/admin/student?status=0">Bảo Lưu</a>
                 </div>
             </div>
         <div style="width: 300px;">
@@ -45,11 +45,11 @@
             <th scope="col">Trạng Thái</th>
             <th scope="col">
                     <div class="text-left">
-                        <div class="col-12">
+                        {{-- <div class="col-12">
                             <a href="/admin/student/create/excel">
                                 <button type="button" class="border-primary btn btn-outline-primary">Thêm File Excel</button>
                             </a>
-                        </div>
+                        </div> --}}
                         <div class="col-12 pt-1">
                             <a href="{{ route('student.create') }}">
                                 <button type="button" class="border-primary btn btn-outline-primary">Thêm Học Viên</button>
@@ -88,11 +88,20 @@
                 @endforeach
             </td>
             <td>
-                @if($item->is_active == 1)
-                <p class="text-primary">Đang Hoạt Động</p>
-                @else
-                <p class="text-warning">Không Hoạt Động</p>
-                @endif
+                <a id="btn_delete_{{ $item->id }}">
+                <input type="checkbox"  @if($item->status == 1) checked @endif
+                data-toggle="toggle" data-on="Hoạt Động"
+                data-off="Bảo Lưu" data-onstyle="success" data-offstyle="danger"
+                >
+                </a>
+                <form id="delete_form_{{ $item->id }}" action="{{ route('student.destroy',$item->id) }}" method="post" style="display: none;">
+                    @method('DELETE')
+                    @csrf
+                <input type="hidden" name="status" value="{{ $item->status }}">
+                </form>
+
+
+
 
             </td>
             <td>
@@ -102,12 +111,6 @@
                 <a href="{{ route('student.edit',"$item->id") }}">
                     <button type="button" class="border-warning btn btn-outline-warning">Sửa</button>
                 </a>
-
-                {{-- <a id="btn_delete_{{ $item->id }}"class="btn btn-outline-danger">Xóa</a>
-                <form id="delete_form_{{ $item->id }}" action="{{ route('student.destroy',$item->id) }}" method="post" style="display: none;">
-                    @method('DELETE')
-                    @csrf
-                </form> --}}
             </td>
         </tr>
         @endforeach
@@ -122,9 +125,7 @@
 <script>
     $("a[id^='btn_delete_']").click(function(event) {
         id = event.currentTarget.attributes.id.value.replace('btn_delete_', '');
-        if (confirm('Bạn có muốn xóa không')) {
             $("#delete_form_" + id).submit();
-        }
     });
 </script>
 @endpush
