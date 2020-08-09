@@ -16,7 +16,7 @@ class StudentController extends Controller
 
         if($request->all() != null && $request['page'] == null){
             foreach($request->all() as $key => $value){
-                if($key == 'is_active'){
+                if($key == 'status'){
                     $data['get_all_class']=Classes::all();
                     $data['get_all_student']=Student::where("$key","$value")->paginate(10);
                 }else{
@@ -57,7 +57,7 @@ class StudentController extends Controller
 
     public function store(StudentRequest $request){
         $data = Arr::except($request, ['_token'])->toarray();
-        $data['is_active']=1;
+        $data['status']=1;
         $code=Student::orderBy('id', 'desc')->get()->first()->id;
         $data['code']="PH$code";
         $data['password']=bcrypt('123456');

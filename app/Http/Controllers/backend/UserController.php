@@ -46,7 +46,7 @@ class UserController extends Controller
         $data = Arr::except($request->all(),['_token']);
         $data['password']=bcrypt($data['password']);
         $data['type']='text';
-        $data['is_active']='1';
+        $data['status']='1';
         if($request->hasFile('avatar')){
             $data['avatar']=$request->file('avatar')->store('images','public');
         }else{
