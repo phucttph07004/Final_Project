@@ -35,6 +35,12 @@
             @endforeach
         </select>
     </div>
+    <div class="form-group">
+        <label for="">Số buổi học</label>
+        <br>
+        {!! ShowErrors($errors,'number_of_sessions') !!}
+        <input name="number_of_sessions" type="text" value="{{ old('number_of_sessions')}}" class="form-control">
+    </div>
     <div class="d-flex align-items-center">
         <a class="btn btn-danger mr-4" href="{{route('class.index')}}">Quay lại</a>
         <button type="submit" class="btn btn-primary">Thêm Lớp</button>

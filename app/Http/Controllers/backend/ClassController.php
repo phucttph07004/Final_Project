@@ -22,7 +22,21 @@ class ClassController extends Controller
      */
     public function index(Request $request)
     {
-        $data['classes']=Classes::paginate(10);
+        if($request->all() != null && $request['page'] == null){
+            foreach($request->all() as $key => $value){
+                if($key == 'is_active'){
+                    $data['levels']=Level::all();
+                    $data['classes']=Classes::where("$key","$value")->paginate(10);
+                }else{
+                    $data['levels']=Level::all();
+                    $data['classes']=Classes::where("$key",'LIKE',"%$value%")->paginate(10);
+                }
+            }
+        }else{
+            $data['levels']=Level::all();
+            $data['classes'] = Classes::paginate(10);
+        }
+
         return view('backend.pages.class.class',$data);
     }
 

@@ -16,6 +16,7 @@
                 <th scope="col">Tên lớp</th>
                 <th scope="col">Level</th>
                 <th scope="col">Khoá</th>
+                <th scope='col'>Số buổi học</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col">
                     <a href="{{ route('class.create') }}">
@@ -25,13 +26,36 @@
             </tr>
         </thead>
         <tbody>
+        <tr>
+            <td></td>
+                <td>
+                    <form action="">
+                        <input type="text" name="name" value="" placeholder="Lọc theo tên">
+                    </form>
+                </td>
+                <td>
+                    <form action="">
+                       <select name="level" id="">
+                            @foreach($levels as $level)
+                                <option value="{{$level->level_id}}">{{$level->level_id}}</option>
+                            @endforeach
+                       </select>
+                    </form>
+                </td>
+                <td>
+                    <form action="">
+                        <input type="text" name="course_name" value="" placeholder="Lọc theo tên khoá">
+                    </form>
+                </td>
+            </tr>
             <?php $i=1 ?>
             @foreach ($classes as $class)
             <tr>
                 <th scope="row">{{ $i++ }}</th>
                 <td>{{ $class->name }}</td>
-                <td>{{ $class->level_id}}</td>
+                <td>{{ $class->levelName->level}}</td>
                 <td>{{ $class->courseName->course_name}}</td>
+                <td>{{ $class->number_of_sessions}}</td>
                 <td>
                     @if($class->is_active == 1) <span style='color: green'>Hoạt động</span>
                     @else <span style='color: red'>Khoá</span>
