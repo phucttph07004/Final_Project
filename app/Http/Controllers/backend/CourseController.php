@@ -25,7 +25,7 @@ class CourseController extends Controller
     {
         if($request->all() != null && $request['page'] == null){
             foreach($request->all() as $key => $value){
-                if($key == 'is_active'){
+                if($key == 'status'){
                     $data['courses']=Course::where("$key","$value")->paginate(10);
                 }else{
                     $data['courses']=Course::where("$key",'LIKE',"%$value%")->paginate(10);

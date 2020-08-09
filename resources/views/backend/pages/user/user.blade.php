@@ -39,7 +39,7 @@
                 @endif
             </td>
             <td>
-                @if($user->is_active == 1) <span style='color: green'>Hoạt động</span>
+                @if($user->status == 1) <span style='color: green'>Hoạt động</span>
                 @else <span style='color: red'>Khoá</span>
                 @endif
             </td>

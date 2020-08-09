@@ -24,7 +24,7 @@ class AuthController extends Controller
         $data = Arr::except($request->all(), ['_token']);
         
         if($result = Auth::attempt($data)){
-            if(Auth::User()->is_active == 0 ){
+            if(Auth::User()->status == 0 ){
                 return redirect()->route('auth.login')->with('thongbao','Tài Khoản Của Bạn Đã Bị Khóa');
                 echo 'lock';
             }else{

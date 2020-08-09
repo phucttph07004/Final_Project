@@ -24,6 +24,7 @@ class CreateHistoryLearnedClassTable extends Migration
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->integer('class_id')->unsigned();
             $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
+            $table->integer('status');
             $table->timestamps();
         });
     }
