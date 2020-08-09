@@ -24,7 +24,7 @@ class ClassController extends Controller
     {
         if($request->all() != null && $request['page'] == null){
             foreach($request->all() as $key => $value){
-                if($key == 'is_active'){
+                if($key == 'status'){
                     $data['levels']=Level::all();
                     $data['classes']=Classes::where("$key","$value")->paginate(10);
                 }else{
@@ -74,7 +74,7 @@ class ClassController extends Controller
     {
         $data = Arr::except($request->all(), ['_token']);
         $data['user_id'] = Auth::user()->id;
-        $data['is_active'] = '1';
+        $data['status'] = '1';
 
         Classes::create($data);
 
@@ -140,11 +140,11 @@ class ClassController extends Controller
         $class = Classes::find($id);
         $data = Arr::except(request()->all(), ["_token ,'_method'"]);
 
-        if($data['is_active'] == 0){
-            $data['is_active'] = 1;
+        if($data['status'] == 0){
+            $data['status'] = 1;
         }
         else {
-            $data['is_active'] = 0;
+            $data['status'] = 0;
         }
 
         $class->update($data);

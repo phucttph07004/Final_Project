@@ -12,5 +12,6 @@ $factory->define(History_learned_class::class, function (Faker $faker) {
         'level_id' =>Level::inRandomOrder()->first()->id,
         'course_id' =>Course::inRandomOrder()->first()->id,
         'score' => $faker->numberBetween($min = 1, $max = 10),
+        'status'=>$faker->numberBetween($min = 1, $max = 3),
     ];
 });

@@ -33,20 +33,6 @@
                         <input type="text" name="name" value="" placeholder="Lọc theo tên">
                     </form>
                 </td>
-                <td>
-                    <form action="">
-                       <select name="level" id="">
-                            @foreach($levels as $level)
-                                <option value="{{$level->level_id}}">{{$level->level_id}}</option>
-                            @endforeach
-                       </select>
-                    </form>
-                </td>
-                <td>
-                    <form action="">
-                        <input type="text" name="course_name" value="" placeholder="Lọc theo tên khoá">
-                    </form>
-                </td>
             </tr>
             <?php $i=1 ?>
             @foreach ($classes as $class)
@@ -57,7 +43,7 @@
                 <td>{{ $class->courseName->course_name}}</td>
                 <td>{{ $class->number_of_sessions}}</td>
                 <td>
-                    @if($class->is_active == 1) <span style='color: green'>Hoạt động</span>
+                    @if($class->status == 1) <span style='color: green'>Hoạt động</span>
                     @else <span style='color: red'>Khoá</span>
                     @endif
                 </td>
@@ -66,7 +52,7 @@
                     </a>
                     <a class="btn btn-outline-warning" href="{{ route('class.edit',"$class->id") }}">Sửa</a>
 
-                    @if($class->is_active == 1)
+                    @if($class->status == 1)
                     <button id="btn_deactive_{{ $class->id }}" class="btn btn-outline-danger">Đóng</button>
                     @else
                     <button id="btn_deactive_{{ $class->id }}" class="btn btn-outline-success">Mở</button>

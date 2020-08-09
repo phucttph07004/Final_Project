@@ -20,7 +20,8 @@ class CreateEnrollmentsTable extends Migration
             $table->string('phone');
             $table->text('address');
             $table->integer('note');
-            $table->text('weekday');
+            $table->integer('slot');
+            $table->integer('weekday');
             $table->integer('status');
             $table->string('email',100)->unique();
             $table->integer('level_id')->unsigned();
