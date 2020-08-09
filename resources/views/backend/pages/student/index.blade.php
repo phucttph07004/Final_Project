@@ -13,6 +13,10 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="/admin/student">Tất Cả</a>
+
+                    <a class="dropdown-item" href="/admin/student?fee_status=1">Đã Lộp Tiền</a>
+                    <a class="dropdown-item" href="/admin/student?fee_status=0">Chưa Lộp Tiền</a>
+
                     <a class="dropdown-item" href="/admin/student?status=1">Hoạt Động</a>
                     <a class="dropdown-item" href="/admin/student?status=0">Bảo Lưu</a>
                 </div>
@@ -42,6 +46,7 @@
             <th scope="col">Họ Tên</th>
             <th scope="col">Mã Học Viên</th>
             <th scope="col">Khóa Học</th>
+            <th scope="col">Học Phí</th>
             <th scope="col">Trạng Thái</th>
             <th scope="col">
                     <div class="text-left">
@@ -89,6 +94,19 @@
             </td>
             <td>
                 <a id="btn_delete_{{ $item->id }}">
+                <input type="checkbox"  @if($item->fee_status == 1) checked @endif
+                data-toggle="toggle" data-on="Đã Lộp"
+                data-off="Chưa Lộp" data-onstyle="success" data-offstyle="danger"
+                >
+                </a>
+                <form id="delete_form_{{ $item->id }}" action="{{ route('student.destroy',$item->id) }}" method="post" style="display: none;">
+                    @method('DELETE')
+                    @csrf
+                <input type="hidden" name="status" value="{{ $item->status }}">
+                </form>
+            </td>
+            <td>
+                <a id="btn_delete_{{ $item->id }}">
                 <input type="checkbox"  @if($item->status == 1) checked @endif
                 data-toggle="toggle" data-on="Hoạt Động"
                 data-off="Bảo Lưu" data-onstyle="success" data-offstyle="danger"
@@ -99,18 +117,14 @@
                     @csrf
                 <input type="hidden" name="status" value="{{ $item->status }}">
                 </form>
-
-
-
-
             </td>
             <td>
                 <a href="{{ route('student.show',"$item->id") }}">
                     <button type="button" class="border-info btn btn-outline-info">Chi Tiết</button>
                 </a>
-                <a href="{{ route('student.edit',"$item->id") }}">
+                {{-- <a href="{{ route('student.edit',"$item->id") }}">
                     <button type="button" class="border-warning btn btn-outline-warning">Sửa</button>
-                </a>
+                </a> --}}
             </td>
         </tr>
         @endforeach

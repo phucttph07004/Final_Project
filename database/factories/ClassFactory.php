@@ -13,6 +13,6 @@ $factory->define(Classes::class, function (Faker $faker) {
         'level_id' =>Level::inRandomOrder()->first()->id,
         'user_id' =>User::inRandomOrder()->first()->id,
         'course_id' =>Course::inRandomOrder()->first()->id,
-        'is_active' => 1,
+        'status' => 1,
     ];
 });

@@ -54,6 +54,13 @@
                     value="{{$class->teacher_id}}">
             </div>
         </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label for="">Số buổi học</label>
+                <input type="text" readonly="readonly" class="form-control" name="number_of_sessions" id=""
+                    value="{{$class->number_of_sessions}}">
+            </div>
+        </div>
     </div>
 
     <table style="background-color: white" class="table ml-5">
@@ -86,6 +93,7 @@
                 </div>
             </td>
             @endif
+
             <?php $i=1 ?>
             @foreach ($students as $student)
             <tr>
