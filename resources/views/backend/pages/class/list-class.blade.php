@@ -1,9 +1,8 @@
 @extends('./backend/layout/master')
 @section('title','Quản Trị Lớp Học')
-@section('title_page','Quản Trị Lớp Học')
+@section('title_page','Danh sách lớp khoá') 
 @section('content')
 <section class="content">
-
     <table style="background-color: white" class="table ml-5">
         @if(session('thongbao'))
         <div class="alert alert-primary text-center" role="alert">

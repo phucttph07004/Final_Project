@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\backend;
-use App\Models\{Branch,Level,Classroom};
+use App\Models\{Level,Classes};
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\backend\level\{LevelRequest,LevelRequestEdit};

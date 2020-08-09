@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\backend\classes\{ClassRequest,ClassEditRequest};
 
-use App\Models\{Classes,Course,Level,User};
+use App\Models\{Classes,Course,Level,User,Student};
 
 use Arr;
 use Auth;
@@ -22,17 +22,6 @@ class ClassController extends Controller
      */
     public function index(Request $request)
     {
-        // if($request->all() != null && $request['page'] == null){
-        //     foreach($request->all() as $key => $value){
-        //         if($key == 'is_active'){
-        //             $data['classes']=Classes::where("$key","$value")->paginate(10);
-        //         }else{
-        //             $data['classes']=Classes::where("$key",'LIKE',"%$value%")->paginate(10);
-        //         }
-        //     }
-        // }else{
-        //     $data['classes']=Classes::paginate(10);
-        // }
         $data['classes']=Classes::paginate(10);
         return view('backend.pages.class.class',$data);
     }
@@ -86,6 +75,8 @@ class ClassController extends Controller
      */
     public function show($id)
     {
+        $data['students'] = Student::where('class_id','=',$id)->get();
+        $data['allstudents'] = Student::all();
         $data['class'] = Classes::find($id);
         return view('backend.pages.class.detail-class',$data);
     }
