@@ -40,7 +40,7 @@
                             placeholder="Ngày Sinh">
                     </div>
                     <div class="form-group">
-                        <select class="form-control" name="level">
+                        <select style="background-color:#f7f2ea; height:65px; border:0px; padding-left:30px;font-size: 18px" class="form-control" name="level">
                             <option value="">Level</option>
                             @foreach ($get_all_level ?? '' as $item)
                             <option value="{{ $item->level }}">{{ $item->level }}
@@ -49,7 +49,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" name="note" id="note"
+                        <textarea style="background-color:#f7f2ea; height:200px; border:0px; padding:10px 30px;font-size: 18px" class="form-control" name="note" id="note"
                             placeholder="Ghi chú"></textarea>
        
                     </div>

@@ -91,9 +91,13 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        
                     </div>
                     <!-- /.card-body -->
                 </div>
+                <div class="container justify-content-center d-flex mt-5 pb-5">
+                            {{$get_all_register->links()}}
+                        </div>
             </div>
         </div>
     </div><!-- /.container-fluid -->
