@@ -12,9 +12,8 @@
       <tr>
         <th scope="col">STT</th>
         <th scope="col">Level</th>
-        <th scope="col">Số Lớp Học</th>
-        <th></th>
-        <th></th>
+        <th scope="col">Mô tả</th>
+        <th scope="col">Học phí</th>
         <th></th>
         <th></th>
         <th></th>
@@ -34,10 +33,9 @@
         <tr>
         <th scope="row">{{ $i++ }}</th>
             <td>Level: {{ $item->level }}</td>
-            <td>Số Lớp: {{ $item->count_class_count }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{$item->description}}</td>
+            <td>{{number_format($item->fee, 0, ',', '.')}} đ</td>
+            <td> </td>
             <td></td>
             <td></td>
             <td></td>

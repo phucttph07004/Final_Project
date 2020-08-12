@@ -26,17 +26,20 @@ class ClassController extends Controller
             foreach($request->all() as $key => $value){
                 if($key == 'status'){
                     $data['levels']=Level::all();
+                    $data['courses']=Course::all();
                     $data['classes']=Classes::where("$key","$value")->paginate(10);
                 }else{
                     $data['levels']=Level::all();
+                    $data['courses']=Course::all();
                     $data['classes']=Classes::where("$key",'LIKE',"%$value%")->paginate(10);
                 }
             }
         }else{
             $data['levels']=Level::all();
+            $data['courses']=Course::all();
             $data['classes'] = Classes::paginate(10);
         }
-
+        
         return view('backend.pages.class.class',$data);
     }
 
@@ -123,7 +126,6 @@ class ClassController extends Controller
         $data = Arr::except(request()->all(), ["_token ,'_method'"]);
         $update_at = Carbon::now()->toarray();
         $data['update_at'] = $update_at['formatted'];
-
         $classes->update($data);
 
         return redirect()->route('class.index')->with('thongbao','Cập nhật lớp học thành công');

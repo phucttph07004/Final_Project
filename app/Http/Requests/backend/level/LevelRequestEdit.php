@@ -27,7 +27,9 @@ class LevelRequestEdit extends FormRequest
     {
         $level = Level::find((int) request()->segment(2));
         return [
-            'level'=>'required|numeric|unique:levels,Level,'.$level->id.',id',
+            'level'=>'required|numeric|',
+            'fee'=>'required|numeric',
+            'description'=>'required|min:10'
         ];
     }
     public function messages()
@@ -36,6 +38,12 @@ class LevelRequestEdit extends FormRequest
             'level.required'=>'Không được bỏ trống level',
             'level.numeric'=>'level phải là chữ số',
             'level.unique'=>'level đã tồn tại',
+
+            'fee.required'=>'Không được bỏ trống học phí',
+            'fee.numeric'=>'Học phí phải là số',
+            
+            'description.required'=> 'Không được để trống mô tả',
+            'description.min' => 'Mô tả quá ngắn'
         ];
     }
 }

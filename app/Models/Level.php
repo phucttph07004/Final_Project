@@ -9,7 +9,9 @@ class Level extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'level'
+        'level',
+        'description',
+        'fee'
     ];
     public function CountClass()
     {

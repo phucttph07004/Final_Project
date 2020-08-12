@@ -35,6 +35,8 @@ Route::resource('/category','backend\CategoryController');
 Route::resource('/course', 'backend\CourseController');
 Route::resource('/class','backend\ClassController');
 Route::resource('/class-detail','backend\ClassDetailController');
+Route::get('/search', 'SearchController@action')->name('search.action');
+Route::get('/changeStatus' , 'ChangeStatusController@changeStatus');
 Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
 Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 });
@@ -43,8 +45,23 @@ Route::POST('/student/store/excel','backend\ExcelController@student_store_excel'
 
 Route::group([
     'prefix' => 'admin',
-], function(){
+],
+ function()
+ {
     Route::get('login', 'backend\AuthController@getLoginForm');
     Route::post('login', 'backend\AuthController@login')->name('auth.login');
     Route::get('logout','backend\AuthController@logout')->name('auth.logout');
+});
+
+
+
+
+//Student 
+
+Route::group([
+    'prefix'=> 'student',
+],
+function()
+{
+    Route::get('/', 'student\IndexController@index');
 });

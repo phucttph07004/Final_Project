@@ -45,12 +45,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('branch.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản Trị Chi Nhánh</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{route('level.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Quản Trị Levels</p>
@@ -83,7 +77,7 @@
                         <li class="nav-item">
                             <a href="{{route('user.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Quản trị tài khoản</p>
+                                <p>Quản trị nhân viên</p>
                             </a>
                         </li>
                         <li class="nav-item">

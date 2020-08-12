@@ -32,8 +32,9 @@ class LevelController extends Controller
         return redirect()->back()->with('thongbao','Thêm Level Thành Công');
     }
 
-    public function show(Level $level){
-        $data['get_level']=$level;
+    public function show($id){
+        $data['course'] = Level::find($id);
+        $data['classes']=Classes::where('level_id','=',$id)->get();
         return view('backend.pages.level.detail',$data);
     }
 
