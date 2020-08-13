@@ -13,6 +13,6 @@ class Student extends Authenticatable
     ];
     public function ClassName()
     {
-        return $this->belongsTo('App\Models\Classroom', 'class_id', 'id');
+        return $this->belongsTo('App\Models\Classes', 'class_id', 'id');
     }
 }

@@ -111,7 +111,7 @@ class ClassController extends Controller
         $levels = Level::all();
         $courses = Course::all();
         return view('backend.pages.class.edit-class',$data,['levels' => $levels,'courses' => $courses,'teachers'=>$teachers]);
-    }                                                   
+    }
 
     /**
      * Update the specified resource in storage.

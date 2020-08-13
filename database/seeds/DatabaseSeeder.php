@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Lesson_content;
+// use App\Models\Lesson_content;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
