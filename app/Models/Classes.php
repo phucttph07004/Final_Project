@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Classes extends Model
 {
     protected $fillable = [
-        'name','user_id','teacher_id','level_id', 'course_id', 'status','number_of_sessions'
+        'name','user_id','teacher_id','level_id', 'course_id', 'status','number_of_sessions',
     ];
 
     public function userName()
@@ -18,6 +18,11 @@ class Classes extends Model
     public function courseName()
     {
         return $this->belongsTo('App\Models\Course', 'course_id','id');
+    }
+
+    public function CountClass()
+    {
+        return $this->hasMany('App\Models\Classes', 'course_id', 'id');
     }
 
     public function class_course()

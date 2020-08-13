@@ -50,7 +50,6 @@
         <br>
         {!! ShowErrors($errors,'class_id') !!}
         <ul class="dropdown-menu">
-
             @if($get_all_course == null)
             Các khóa học đã kết thúc hoặc quá 10% số buổi học
             @else

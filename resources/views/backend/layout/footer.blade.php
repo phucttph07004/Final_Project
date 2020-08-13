@@ -48,13 +48,10 @@
         .format( this.getAttribute("data-date-format") )
     )
 }).trigger("change")
-    
+
   })
 
 </script>
-
 @stack('scripts')
-
-
 </body>
 </html>

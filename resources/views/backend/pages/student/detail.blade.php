@@ -66,6 +66,7 @@
                             <th class="pl-0" scope="col">STT</th>
                             <th scope="col">Khóa Học</th>
                             <th scope="col">Level</th>
+                            <th scope="col">Trạng Thái</th>
                             <th scope="col">Điểm</th>
                         </tr>
                     </thead>
@@ -81,6 +82,13 @@
                             <th scope="row">{{ $i++ }}</th>
                             <td>{{ $course->course_name }}</td>
                             <td>{{ $level->level }}</td>
+                            <td>
+                                @if($course->status == 1)
+                                <p class="text-primary">Hoàn Thành</p>
+                                @else
+                                <p class="text-warning">Chưa Hoàn Thành</p>
+                                @endif
+                            </td>
                             <td>{{ $history->score }}</td>
                         </tr>
                         @endif
@@ -93,16 +101,11 @@
                     </tbody>
                 </table>
             </div>
-
-
-
-
-
-
-
         </div>
     </div>
 
-
+<a href="{{ route('student.edit',"$get_student->id") }}">
+<button type="button" class="border-blue bg-blue btn btn-outline-warning">Sửa Học Viên</button>
+</a>
 </form>
 @endsection

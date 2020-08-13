@@ -13,19 +13,17 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="/admin/student">Tất Cả</a>
-
-                    <a class="dropdown-item" href="/admin/student?fee_status=1">Đã Lộp Tiền</a>
-                    <a class="dropdown-item" href="/admin/student?fee_status=0">Chưa Lộp Tiền</a>
-
+                    <a class="dropdown-item" href="/admin/student?fee_status=1">Đã nộp Tiền</a>
+                    <a class="dropdown-item" href="/admin/student?fee_status=0">Chưa nộp Tiền</a>
                     <a class="dropdown-item" href="/admin/student?status=1">Hoạt Động</a>
                     <a class="dropdown-item" href="/admin/student?status=0">Bảo Lưu</a>
                 </div>
             </div>
         <div style="width: 300px;">
                 <form class="form-inline pt-4">
-                    <input name="fullname" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo Tên Học Viên" aria-label="Search">
+                    <input name="code" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo mã Học Viên" aria-label="Search">
                     <a>
-                        <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        <button  class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </a>
                 </form>
         </div>
@@ -34,11 +32,6 @@
 </div>
 </div>
 <table style="background-color: white" class="table ml-5 col-12">
-    @if(session('thongbao'))
-    <div class="alert alert-primary text-center" role="alert">
-        {{session('thongbao') }}
-    </div>
-    @endif
     <thead>
         <tr>
             <th scope="col">STT</th>
@@ -57,7 +50,7 @@
                         </div> --}}
                         <div class="col-12 pt-1">
                             <a href="{{ route('student.create') }}">
-                                <button type="button" class="border-primary btn btn-outline-primary">Thêm Học Viên</button>
+                                <button type="button" class="border-primary btn btn-outline-primary">Thêm Mới</button>
                             </a>
                         </div>
                     </div>
@@ -93,38 +86,37 @@
                 @endforeach
             </td>
             <td>
-                <a id="btn_delete_{{ $item->id }}">
+                <a class="fee_status" id="btn_edit_fee_status_{{ $item->id }}">
                 <input type="checkbox"  @if($item->fee_status == 1) checked @endif
-                data-toggle="toggle" data-on="Đã Lộp"
-                data-off="Chưa Lộp" data-onstyle="success" data-offstyle="danger"
+                data-toggle="toggle" data-on="Đã nộp"
+                data-off="Chưa nộp" data-onstyle="success" data-offstyle="danger"
                 >
                 </a>
-                <form id="delete_form_{{ $item->id }}" action="{{ route('student.destroy',$item->id) }}" method="post" style="display: none;">
+                <form id="btn_edit_fee_status_form_{{ $item->id }}" action="{{ route('student.destroy',$item->id) }}" method="post" style="display: none;">
                     @method('DELETE')
                     @csrf
-                <input type="hidden" name="status" value="{{ $item->status }}">
+                <input type="hidden" name="fee_status" value="{{ $item->fee_status }}">
                 </form>
             </td>
+
             <td>
-                <a id="btn_delete_{{ $item->id }}">
+                <a id="btn_edit_status_{{ $item->id }}">
                 <input type="checkbox"  @if($item->status == 1) checked @endif
                 data-toggle="toggle" data-on="Hoạt Động"
                 data-off="Bảo Lưu" data-onstyle="success" data-offstyle="danger"
                 >
                 </a>
-                <form id="delete_form_{{ $item->id }}" action="{{ route('student.destroy',$item->id) }}" method="post" style="display: none;">
+                <form id="btn_edit_status_form_{{ $item->id }}" action="{{ route('student.destroy',$item->id) }}" method="post" style="display: none;">
                     @method('DELETE')
                     @csrf
                 <input type="hidden" name="status" value="{{ $item->status }}">
                 </form>
             </td>
+
             <td>
                 <a href="{{ route('student.show',"$item->id") }}">
                     <button type="button" class="border-info btn btn-outline-info">Chi Tiết</button>
                 </a>
-                {{-- <a href="{{ route('student.edit',"$item->id") }}">
-                    <button type="button" class="border-warning btn btn-outline-warning">Sửa</button>
-                </a> --}}
             </td>
         </tr>
         @endforeach
@@ -137,9 +129,28 @@
 
 @push('scripts')
 <script>
-    $("a[id^='btn_delete_']").click(function(event) {
-        id = event.currentTarget.attributes.id.value.replace('btn_delete_', '');
-            $("#delete_form_" + id).submit();
+
+    $("a[id^='btn_edit_fee_status_']").click(function(event) {
+        id = event.currentTarget.attributes.id.value.replace('btn_edit_fee_status_', '');
+        if( confirm('Bạn có chắc chắn muốn thay đổi trạng thái học phí')){
+            $("#btn_edit_fee_status_form_" + id).submit();
+        }else{
+
+        }
     });
+
+    $("a[id^='btn_edit_status_']").click(function(event) {
+        id = event.currentTarget.attributes.id.value.replace('btn_edit_status_', '');
+        if( confirm('Bạn có chắc chắn muốn thay đổi trạng thái học viên')){
+            $("#btn_edit_status_form_" + id).submit();
+        }
+    });
+
+    // $(".fee_status").click( function() {
+    //     alert('fff');
+    //     // $(".address_two").addClass("block_address");
+    //     // $(".address_one").removeClass("block_address");
+    // });
+
 </script>
 @endpush

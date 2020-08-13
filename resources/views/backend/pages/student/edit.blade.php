@@ -108,13 +108,13 @@
     </div>
     <div class="form-group mt-4">
         <label for="exampleFormControlInput1">Trạng Thái</label>
-        <select class="form-control" name="is_active" id="">
-            <option @if($get_student->is_active == 1) selected @endif value="1">Hoạt Động</option>
-            <option @if($get_student->is_active == 0) selected @endif value="0">Tạm Dừng</option>
+        <select class="form-control" name="status" id="">
+            <option @if($get_student->status == 1) selected @endif value="1">Hoạt Động</option>
+            <option @if($get_student->status == 0) selected @endif value="0">Tạm Dừng</option>
         </select>
     </div>
 
-    <button type="submit" class="mt-5 mb-5 btn btn-primary">Sửa Học Viên</button>
+    <button type="submit" class="mt-5 mb-5 btn btn-primary">Xác Nhận Sửa Học Viên</button>
 </form>
 <style>
     .dropdown-submenu {

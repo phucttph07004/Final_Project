@@ -76,6 +76,8 @@ class ClassController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data['status'] = '1';
 
+        dd($data);
+
         Classes::create($data);
 
         return redirect()->route('class.index')->with('thongbao','Thêm lớp thành công');

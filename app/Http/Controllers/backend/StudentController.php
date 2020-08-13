@@ -22,10 +22,15 @@ class StudentController extends Controller
                     $data['get_all_course'] = Course::all();
                     $data['get_all_class'] = Classes::all();
                     $data['get_all_student'] = Student::where("$key", "$value")->paginate(10);
-                } else {
+                }elseif($key == 'fee_status'){
+                    $data['get_all_course'] = Course::all();
+                    $data['get_all_class'] = Classes::all();
+                    $data['get_all_student'] = Student::where("$key", "$value")->paginate(10);
+                }else {
                     $data['get_all_course'] = Course::all();
                     $data['get_all_class'] = Classes::all();
                     $data['get_all_student'] = Student::where("$key", 'LIKE', "%$value%")->paginate(10);
+
                 }
             }
         } else {
@@ -37,9 +42,31 @@ class StudentController extends Controller
     }
 
     public function destroy(Request $request ,$id){
-        dd($request->all());
-        // Student::destroy($id);
-        // return redirect()->back()->with('thongbao','Xóa Thành Công');
+
+        $data = Arr::except($request, ['_token','_method'])->toarray();
+
+
+        $student=Student::find($id);
+
+        if($request['fee_status'] == 1){
+            $data['fee_status'] = 0;
+        }else{
+            $data['fee_status'] = 1;
+        }
+        if($request['status'] == 1){
+            $data['status'] = 0;
+        }else{
+            $data['status'] = 1;
+        }
+
+        $student->update($data);
+        return redirect()->back();
+
+
+
+
+
+
     }
 
     public function create()

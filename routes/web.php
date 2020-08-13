@@ -16,7 +16,7 @@ Route::post('register',       'frontend\RegisterController@store')->name('regist
 
 // các chức năng của admin
 Route::group([ 'prefix' => 'admin',
-            //    'middleware' => ['check_role_admin','check_auth'],
+               'middleware' => ['check_role_admin','check_auth'],
 ], function () {
 
 Route::resource('/','backend\IndexController');
@@ -28,16 +28,18 @@ Route::resource('/notifications','backend\NotificationController');
 Route::POST('/notification/store/default','backend\ExcelController@student_store_default');
 Route::resource('/student','backend\StudentController');
 Route::resource('/account','backend\AccountController');
-Route::resource('/branch','backend\BranchController');
 Route::resource('/level','backend\LevelController');
 Route::resource('/user','backend\UserController');
 Route::resource('/category','backend\CategoryController');
 Route::resource('/course', 'backend\CourseController');
 Route::resource('/class','backend\ClassController');
 Route::resource('/class-detail','backend\ClassDetailController');
-Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
-Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
+
+Route::resource('/schedule_learn','backend\schedule_learnController');
+// Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
+// Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 });
+
 
 // Auth Admin
 
