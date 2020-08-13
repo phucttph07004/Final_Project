@@ -65,13 +65,6 @@ class StudentController extends Controller
     public function store(StudentRequest $request)
     {
         $data = Arr::except($request, ['_token'])->toarray();
-<<<<<<< HEAD
-        $data['is_active']=1;
-        $code=Student::orderBy('id', 'desc')->get()->first()->id;
-        $data['code']="PH$code";
-        $data['password']=bcrypt('123456');
-        $data['avatar']=$request->file('avatar')->store('images','public');
-=======
         $data['is_active'] = 1;
         if(Student::all()->last() == null){
             $data['code'] = "PH001";
@@ -81,7 +74,6 @@ class StudentController extends Controller
         }
         $data['password'] = bcrypt('123456');
         $data['avatar'] = $request->file('avatar')->store('images', 'public');
->>>>>>> e8e75107bbba5fb44d3af803dbe24a4550fcc1bc
         Student::create($data);
         return redirect()->back()->with('thongbao', 'Thêm Học Viên Thành Công');
     }
