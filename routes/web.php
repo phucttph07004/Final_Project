@@ -38,6 +38,10 @@ Route::resource('/class-detail','backend\ClassDetailController');
 Route::resource('/schedule_learn','backend\schedule_learnController');
 // Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
 // Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
+Route::get('/search', 'SearchController@action')->name('search.action');
+Route::get('/changeStatus' , 'ChangeStatusController@changeStatus');
+Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
+Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 });
 
 
@@ -45,8 +49,36 @@ Route::resource('/schedule_learn','backend\schedule_learnController');
 
 Route::group([
     'prefix' => 'admin',
-], function(){
+],
+ function()
+ {
     Route::get('login', 'backend\AuthController@getLoginForm');
     Route::post('login', 'backend\AuthController@login')->name('auth.login');
     Route::get('logout','backend\AuthController@logout')->name('auth.logout');
+});
+
+
+
+
+//Student
+
+
+Route::group([
+    'prefix' => 'student',
+],
+ function()
+ {
+    Route::get('login', 'student\AuthController@getLoginForm');
+    Route::post('login', 'student\AuthController@login')->name('student.login');
+    Route::get('logout','student\AuthController@logout')->name('student.logout');
+});
+
+
+Route::group([
+    'prefix'=> 'student',
+    'middleware' => ['check_auth'],
+],
+function()
+{
+    Route::get('/', 'student\IndexController@index');
 });

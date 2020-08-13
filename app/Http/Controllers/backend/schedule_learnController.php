@@ -55,9 +55,9 @@ class schedule_learnController extends Controller
 
         $class=Classes::where('id',$data['class_id'])->first();
 
-        dd($class);
+        // dd($class);
         //Lay o dau? ok! tim cach lay ngay bat dau nhe. t de tam thoi o day la now() nhe
-        $date = Carbon::now();
+        $date = $class->start_date;
         for($i=0 ;$i < $class->number_of_sessions ;$i++){
             $schedule=array(
                 'weekday' => $array1,
@@ -84,7 +84,7 @@ class schedule_learnController extends Controller
                     break;
 
                 case 4:
-                    $date = $date->next('Wed ...');
+                    $date = $date->next('Wed');
                     break;
 
                 case 5:
@@ -98,18 +98,18 @@ class schedule_learnController extends Controller
                 case 7:
                     $date = $date->next('Monday');
                     break;
-
             }
 
             $schedule['time'] = $date;
 
+            dd($date);
             // Chỗ phía trên tự đổi nốt nhé!  tạo thêm có ca cũng giống như ngày
-            // Schedule::create($schedule);
+            Schedule::create($schedule);
         }
 
 
-        dd($class);
-        Schedule::create($datacreate);
+        // dd($class);
+        // Schedule::create($datacreate);
         return redirect()->back();
     }
 

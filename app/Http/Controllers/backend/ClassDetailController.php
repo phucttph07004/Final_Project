@@ -31,7 +31,6 @@ class ClassDetailController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -64,7 +63,6 @@ class ClassDetailController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -76,11 +74,11 @@ class ClassDetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $students = Student::find($id);
-        $data = Arr::except(request()->all(), ["_token ,'_method'"]);
-        $students->update($data);
-
-        return redirect()->route('class.index')->with('thongbao','Cập nhật lớp học thành công');
+        $data = Arr::except($request, ['_token','_method'])->toarray();
+        $student=Student::find($id);
+        $student['class_id']=7;
+        $student->update($data);
+        return redirect()->back()->with('thongbao','Cập Nhật Học Viên Thành Công');
     }
 
     /**
