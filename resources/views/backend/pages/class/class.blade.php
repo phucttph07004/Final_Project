@@ -45,7 +45,8 @@
                 <th scope="col">Tên lớp</th>
                 <th scope="col">Level</th>
                 <th scope="col">Khoá</th>
-                <th scope='col'>Số buổi học</th>
+                <th scope="col">Ngày bắt đầu</th>
+                <th scope="col">Ngày Kết thúc</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col">
                     <a href="{{ route('class.create') }}">
@@ -62,7 +63,8 @@
                 <td>{{ $class->name }}</td>
                 <td>{{ $class->levelName->level}}</td>
                 <td>{{ $class->courseName->course_name}}</td>
-                <td>{{ $class->number_of_sessions}}</td>
+                <td>{{date('d-m-Y', strtotime($course->start_date))}}</td>
+                <td>{{date('d-m-Y', strtotime($course->finish_date))}}</td>
                 <td>
                     <input data-id="{{$class->id}}" class="toggle-class" type="checkbox" data-onstyle="success"
                         data-offstyle="danger" data-toggle="toggle" data-on="Mở" data-off="Đóng"

@@ -58,8 +58,21 @@ Route::group([
 
 //Student 
 
+
+Route::group([
+    'prefix' => 'student',
+],
+ function()
+ {
+    Route::get('login', 'student\AuthController@getLoginForm');
+    Route::post('login', 'student\AuthController@login')->name('student.login');
+    Route::get('logout','student\AuthController@logout')->name('student.logout');
+});
+
+
 Route::group([
     'prefix'=> 'student',
+    'middleware' => ['check_auth'],
 ],
 function()
 {

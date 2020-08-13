@@ -15,8 +15,14 @@ class CheckAuthentication
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check()==false){
+        if(Auth::guard('web')->check()==false){
             return redirect()->route('auth.login');
+        }else{
+            return $next($request);
+        }
+
+        if(Auth::guard('student')->check()==false){
+            return redirect()->route('student.login');
         }else{
             return $next($request);
         }
