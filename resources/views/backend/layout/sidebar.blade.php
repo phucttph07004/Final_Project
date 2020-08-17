@@ -9,14 +9,14 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
             <div class="image">
                 <img src="storage/{{Auth::user()->avatar}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="{{route('account.show', [Auth::user()->id])}}" class="d-block">{{Auth::user()->fullname}}</a>
             </div>
-        </div> --}}
+        </div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -41,7 +41,19 @@
                         <li class="nav-item">
                             <a href="{{route('student.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Quản Trị Học Sinh</p>
+                                <p>Quản Trị Học Viên</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('schedule_learn.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Quản Trị Lịch Học</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('schedule_teach.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Quản Trị Lịch Dạy</p>
                             </a>
                         </li>
                         <li class="nav-item">

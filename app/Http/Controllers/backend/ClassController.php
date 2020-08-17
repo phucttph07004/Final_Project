@@ -79,9 +79,7 @@ class ClassController extends Controller
         $data = Arr::except($request->all(), ['_token']);
         $data['user_id'] = Auth::user()->id;
         $data['status'] = '1';
-
         Classes::create($data);
-
         return redirect()->route('class.index')->with('thongbao','Thêm lớp thành công');
     }
 

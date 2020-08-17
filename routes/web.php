@@ -28,18 +28,25 @@ Route::resource('/notifications','backend\NotificationController');
 Route::POST('/notification/store/default','backend\ExcelController@student_store_default');
 Route::resource('/student','backend\StudentController');
 Route::resource('/account','backend\AccountController');
-Route::resource('/branch','backend\BranchController');
 Route::resource('/level','backend\LevelController');
 Route::resource('/user','backend\UserController');
 Route::resource('/category','backend\CategoryController');
 Route::resource('/course', 'backend\CourseController');
 Route::resource('/class','backend\ClassController');
 Route::resource('/class-detail','backend\ClassDetailController');
+Route::resource('/schedule_learn','backend\schedule_learnController');
+Route::resource('/schedule_teach','backend\schedule_teachController');
+
+// Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
+// Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
+Route::get('/student/create/selected/{slot}/{level}','backend\ExcelController@show_class_add');
+Route::get('/schedule_learn/show/edit/{id}','backend\ExcelController@show_edit_schedule');
+
+
 Route::get('/search', 'SearchController@action')->name('search.action');
 Route::get('/changeStatus' , 'ChangeStatusController@changeStatus');
-Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
-Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 });
+
 
 // Auth Admin
 
@@ -59,7 +66,7 @@ Route::group([
 });
 
 
-//Student 
+//Student
 
 
 Route::group([

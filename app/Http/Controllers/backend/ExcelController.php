@@ -4,7 +4,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Imports\StudentsImport;
 use Excel;
-use App\Models\{Student};
+use App\Models\{Student,Schedule,Classes,Course};
 
 class ExcelController extends Controller
 {
@@ -13,11 +13,70 @@ class ExcelController extends Controller
     return view('backend.pages.student.create_excel');
    }
 
-   public function student_store_excel()
+//    public function student_store_excel()
+//     {
+//         $import = Excel::import(new StudentsImport, request()->file('excel'));
+//         return redirect()->back()->with('thongbao', 'Thêm Học Viên Thành Công');
+//     }
+
+    public function show_class_add($slot,$level )
     {
-        $import = Excel::import(new StudentsImport, request()->file('excel'));
-        return redirect()->back()->with('thongbao', 'Thêm Học Viên Thành Công');
+        $get_all_course = array();
+        foreach (Course::all() as $value) {
+            $first_date = strtotime($value->start_date);
+            $second_date = strtotime($value->finish_date);
+            $datediff = abs($first_date - $second_date);
+            $time_allowed = floor($datediff / (60 * 60 * 24) / 10);
+            $start_date = strtotime(date("Y-m-d", strtotime($value->start_date)) . " +$time_allowed days");
+            $start_date_plus10 = strftime("%Y-%m-%d", $start_date);
+
+            if ($start_date_plus10 >= date('Y-m-d')) {
+                $get_all_course[] = $value;
+            }
+        }
+
+        if( count($get_all_course) !=0 ){
+
+        $get_class=Schedule::where([['slot',$slot],['level_id',$level]])->get();
+        if(count($get_class) == 0){
+            return $get_class;
+        }else{
+            foreach($get_class as $class_id){
+                $class[]=$class_id->class_id;
+            }
+            $class_id=0;
+            for($i=0 ; $i < count($class) ;$i++){
+                if($class_id != $class[$i]){
+                    $class_id=$class[$i];
+                    $get_all_class[]=Classes::find($class[$i]);
+                }
+            }
+            return $get_all_class;
+        }
+        }else{
+            return -1;
+        }
     }
+
+
+
+    public function show_edit_schedule($id)
+    {
+        $week_slot=array();
+        foreach (Schedule::where('class_id',$id)->get() as $value) {
+
+            if(array_search($value->weekday, $week_slot) === false){
+                $week_slot[$value->weekday]=$value->slot;
+            }
+        }
+        return $week_slot;
+    }
+
+
+
+
+
+
 
 
 

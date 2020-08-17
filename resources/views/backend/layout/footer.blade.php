@@ -42,6 +42,14 @@ $(function() {
     $('.textarea').summernote();
 
     $("input").on("change", function() {
+    this.setAttribute(
+        "data-date",
+        moment(this.value, "YYYY-MM-DD")
+        .format( this.getAttribute("data-date-format") )
+    )
+}).trigger("change")
+
+  })
         this.setAttribute(
             "data-date",
             moment(this.value, "YYYY-MM-DD")
@@ -70,7 +78,7 @@ $(document).ready(function() {
         })
     });
 
-    
+
 });
 </script>
 
@@ -81,10 +89,7 @@ $.ajaxSetup({
     }
 });
 </script>
-
 @stack('scripts')
-
-
 </body>
 
 </html>
