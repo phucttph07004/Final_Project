@@ -36,8 +36,6 @@
             </div>
         </div>
         <div class="col-6">
-
-
             <div class="form-group col-12">
                 <label for="exampleFormControlInput1">Khóa Học</label>
                 @foreach($get_all_course as $course)
@@ -49,7 +47,7 @@
             <div class="form-group col-12">
                 <label for="exampleFormControlInput1">Level</label>
                 @foreach($get_all_level as $level)
-                @if($level->id == $get_student->ClassName->id)
+                @if($level->id == $get_student->ClassName->level_id)
                 <input name="address" value="Level :{{ $level->level }}" type="text" class="form-control">
                 @endif
                 @endforeach
@@ -103,9 +101,8 @@
             </div>
         </div>
     </div>
-
-<a href="{{ route('student.edit',"$get_student->id") }}">
-<button type="button" class="border-blue bg-blue btn btn-outline-warning">Sửa Học Viên</button>
-</a>
+    <a href="{{ route('student.edit',"$get_student->id") }}">
+        <button type="button" class="border-blue bg-blue btn btn-outline-warning ml-4">Sửa Học Viên</button>
+    </a>
 </form>
 @endsection

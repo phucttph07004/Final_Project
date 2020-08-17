@@ -2,9 +2,6 @@
 @section('title','Quản Trị Lịch Học')
 @section('title_page','Danh Sách Lớp Chưa Có Lịch')
 @section('content')
-
-
-
 <div class="col-12">
     <div style="padding-left: 45px" class="row bg-light form-inline">
         <div class="col-5"></div>
@@ -33,8 +30,6 @@
         </div>
     </div>
 </div>
-
-
 <table class="table ml-3">
     <thead>
         <tr>
@@ -63,44 +58,38 @@
             <td>{{ $item->name }}</td>
             <td>{{ $item->levelName->level }}</td>
             <td>{{ $item->courseName->course_name }}</td>
-            <td>{{ $item->count_class_count }}</td>
+            <td>{{ $item->count_studen_count }}</td>
             <td>
                 @if($item->status == 0)
-                <p class="text-danger">Lớp Đã Đóng</p>
+                <p class="text-secondary">Lớp Đã Đóng</p>
                 @else
-                @if($item->weekday == null)
-                <p class="text-warning">Chưa Xếp Lịch</p>
+                @if(array_search($item->id, $get_schedule) === false)
+                <p class="text-warning">Chưa Xếp</p>
                 @else
-                <p class="text-primary">Đã Xếp Lịch</p>
+                <p class="text-primary">Đã Xếp</p>
                 @endif
                 @endif
             </td>
             <td>
                 @if($item->status == 0)
-                <button type="button" class="border-danger btn btn-outline-danger">Đã Đóng</button>
+                <button type="button" class="border-secondary btn btn-outline-secondary">Đã Đóng</button>
                 @else
-                <button data-toggle="modal" data-target="#exampleModal_{{$item->id}}" type="button" class="border-info btn btn-outline-info">Xếp Lịch</button>
+                @if(array_search($item->id, $get_schedule) === false)
+                <button data-toggle="modal" data-target="#exampleModal_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Xếp Lịch</button>
+                @else
+                @if($item->count_studen_count == 0)
+                <button data-toggle="modal" data-target="#exampleModal_edit_{{$item->id}}" id="button_edit_{{$item->id}}" type="button" class="border-warning btn btn-outline-warning">Đổi Lịch</button>
+                @else
+                <button data-toggle="modal" data-target="#exampleModal_edit_{{$item->id}}" id="button_edit_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Xem Lịch</button>
+                @endif
+                @endif
                 @endif
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
-
-
-{{-- @foreach ($get_all_class as $item)
-<?php
-if($item->slot != null){
-    $weekday['week']= explode (',',rtrim($item->weekday, ','));
-    $slot['slot']= explode (',',rtrim($item->slot, ','));
-
-    $done[$item->id]=array_merge($weekday,$slot);
-}
-?>
-@endforeach --}}
-
-
-
+{{-- xếp lịch --}}
 @foreach ($get_all_class as $item)
 <!-- Modal -->
 <form id="btn_create_form_{{ $item->id }}" action="{{ route('schedule_learn.store') }}" method="post">
@@ -232,29 +221,213 @@ if($item->slot != null){
     </div>
 </form>
 @endforeach
+{{-- đổi lịch --}}
+@foreach ($get_all_class as $item)
+@if(array_search($item->id, $get_schedule) !== false)
+<!-- Modal -->
+<form id="form_edit_{{ $item->id }}" action="{{ route('schedule_learn.store') }}" method="post">
+    @csrf
+    <div class="modal fade" id="exampleModal_edit_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header m-auto">
+                    <h4 class="modal-title text-primary font-weight-bold" id="exampleModalLabel">
+                        @if($item->count_studen_count == 0)
+                        Đổi Lịch Học
+                        @else
+                        Chi Tiết Lịch Học
+                        @endif
+                    </h4>
+                </div>
+                <h4 class="error text-center text-danger"></h4>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Lớp Thay Đổi</th>
+                                <th scope="col">Lớp : {{$item->name}}</th>
+                                @foreach ($get_all_level as $level)
+                                @if($item->level_id == $level->id)
+                                <th scope="col">Level : {{ $level->level }}</th>
+                                @endif
+                                @endforeach
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="mt-5 show_edit_{{$item->id}}">
+                            {{-- show detail edit --}}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    @if($item->count_studen_count == 0)
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                    <a id="btn_edit_{{ $item->id }}">
+                        <button type="button" class="btn btn-primary">Đổi Lịch Học</button>
+                    </a>
+                    @else
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                    @endif
+                    <input name="class_id" type="hidden" value="{{ $item->id }}">
+                    @foreach ($get_all_level as $level)
+                    @if($item->level_id == $level->id)
+                    <input name="level_id" type="hidden" value=" {{ $level->level }}">
+                    @endif
+                    @endforeach
 
-
-
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@endif
+@endforeach
+<div class="container justify-content-center d-flex mt-5 pb-5">
+    @if($check == false)
+    {{$get_all_class->links()}}
+    @endif
+</div>
 @endsection
 @push('scripts')
 <script>
-
+    // create ////////////////////////////////////////
     $("a[id^='btn_create_']").click(function(event) {
         id = event.currentTarget.attributes.id.value.replace('btn_create_', '');
-var count=0;
-$("select option:selected").each(function ()
-{
-    if($(this).val() != 0){
-        count++;
-    }
-});
-if(count >=2){
-    if (confirm('Xác Nhận Lịch Học')) {
-            $("#btn_create_form_" + id).submit();
+        var count = 0;
+        $("select option:selected").each(function() {
+            if ($(this).val() != 0) {
+                count++;
+            }
+        });
+        if (count >= 2) {
+            if (confirm('Xác Nhận Lịch Học')) {
+                $("#btn_create_form_" + id).submit();
+            }
+        } else {
+            $(".error").html("Vui Lòng Chọn ca Cho ít Nhất 2 Ngày Trong Tuần");
         }
-}else{
-    $( ".error" ).html("Vui Lòng Chọn ca Cho ít Nhất 2 Ngày Trong Tuần");
-}
+    });
+    // check edit ////////////////////////////////////////
+    $("a[id^='btn_edit_']").click(function(event) {
+        id = event.currentTarget.attributes.id.value.replace('btn_edit_', '');
+        var count = 0;
+        $("select option:selected").each(function() {
+            if ($(this).val() != 0) {
+                count++;
+            }
+        });
+        if (count >= 2) {
+            if (confirm('Xác Nhận Lịch Học')) {
+                $("#form_edit_" + id).submit();
+            }
+        } else {
+            $(".error").html("Vui Lòng Chọn ca Cho ít Nhất 2 Ngày Trong Tuần");
+        }
+    });
+    // show detail ajax ////////////////////
+    $(document).ready(function() {
+        $("button[id^='button_edit_']").click(function() {
+            html = "";
+            id = event.currentTarget.attributes.id.value.replace('button_edit_', '');
+            $.ajax({
+                url: '/admin/schedule_learn/show/edit/' + id,
+                method: 'get',
+                success: function(response) {
+                    // đổ dữ liệu
+                    html = `
+                        <tr>
+                                <th scope="row">Thứ 2</th>
+                                <td class="pr-0" colspan="3">
+                                    <select class="form-control h-100 mt-2" name="2" id="2">
+                                        <option value="0">Chọn Ca</option>
+                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
+                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
+                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
+                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
+                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
+                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Thứ 3</th>
+                                <td class="pr-0" colspan="3">
+                                    <select class="form-control h-100 mt-2" name="3" id="3">
+                                        <option value="0">Chọn Ca</option>
+                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
+                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
+                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
+                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
+                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
+                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Thứ 4</th>
+                                <td class="pr-0" colspan="3">
+                                    <select class="form-control h-100 mt-2" name="4" id="4">
+                                        <option value="0">Chọn Ca</option>
+                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
+                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
+                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
+                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
+                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
+                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Thứ 5</th>
+                                <td class="pr-0" colspan="3">
+                                    <select class="form-control h-100 mt-2" name="5" id="5">
+                                        <option value="0">Chọn Ca</option>
+                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
+                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
+                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
+                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
+                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
+                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Thứ 6</th>
+                                <td class="pr-0" colspan="3">
+                                    <select class="form-control h-100 mt-2" name="6" id="6">
+                                        <option value="0">Chọn Ca</option>
+                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
+                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
+                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
+                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
+                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
+                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Thứ 7</th>
+                                <td class="pr-0" colspan="3">
+                                    <select class="form-control h-100 mt-2" name="7" id="7">
+                                        <option value="0">Chọn Ca</option>
+                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
+                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
+                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
+                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
+                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
+                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        `;
+                    $(`.show_edit_${id}`).html(html);
+                    $.each(response, function(weekday, slot) {
+                        console.log(weekday)
+                        $(`#${weekday} option[value="${slot}"]`).prop("selected", "selected")
+                    });
+                }
+            });
+        });
     });
 </script>
 @endpush

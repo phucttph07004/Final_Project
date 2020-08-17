@@ -34,14 +34,17 @@ Route::resource('/category','backend\CategoryController');
 Route::resource('/course', 'backend\CourseController');
 Route::resource('/class','backend\ClassController');
 Route::resource('/class-detail','backend\ClassDetailController');
-
 Route::resource('/schedule_learn','backend\schedule_learnController');
+Route::resource('/schedule_teach','backend\schedule_teachController');
+
 // Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
 // Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
+Route::get('/student/create/selected/{slot}/{level}','backend\ExcelController@show_class_add');
+Route::get('/schedule_learn/show/edit/{id}','backend\ExcelController@show_edit_schedule');
+
+
 Route::get('/search', 'SearchController@action')->name('search.action');
 Route::get('/changeStatus' , 'ChangeStatusController@changeStatus');
-Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
-Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 });
 
 
