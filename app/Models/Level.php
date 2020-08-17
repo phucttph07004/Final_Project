@@ -9,10 +9,12 @@ class Level extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'level'
+        'level',
+        'description',
+        'fee'
     ];
     public function CountClass()
     {
-        return $this->hasMany('App\Models\Classroom', 'level_id', 'id');
+        return $this->hasMany('App\Models\Classes', 'level_id', 'id');
     }
 }

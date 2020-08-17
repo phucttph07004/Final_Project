@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Writing_essay extends Model
+class Feedback extends Model
 {
+    public $table ='feedback';
+    
 }

@@ -1,145 +1,149 @@
 @extends('./backend/layout/master')
 @section('title','Quản Trị Học Viên')
-@section('title_page','Sửa  Học Viên')
+@section('title_page','Sửa Học Viên')
 @section('content')
 <form enctype="multipart/form-data" class="pl-5 pt-5" action="{{ route('student.update',"$get_student->id") }}" method="POST">
     @csrf
     @method('PUT')
-        @if(session('thongbao'))
-        <div class="alert alert-primary" role="alert">
+    @if(session('thongbao'))
+    <div class="alert alert-primary" role="alert">
         {{session('thongbao')}}
-        </div>
-        @endif
+    </div>
+    @endif
     <div class="form-group">
-      <label for="exampleFormControlInput1">Họ Tên</label>
-    <br>
-      {!! ShowErrors($errors,'fullname') !!}
-    <input name="fullname" value="{{ $get_student->fullname }}" type="text" class="form-control" >
+        <label for="exampleFormControlInput1">Họ Tên</label>
+        <br>
+        {!! ShowErrors($errors,'fullname') !!}
+        <input name="fullname" type="text" value="{{ $get_student->fullname }}" class="form-control">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Ảnh</label>
         <img src="storage/{{ $get_student->avatar }}" alt="">
-        <input name="avatar" value="{{ $get_student->avatar }}" type="hidden" >
-      <br>
-        {!! ShowErrors($errors,'avatar') !!}
         <br>
-        <input type="file" name="avatar" class="form-control" >
-      </div>
-      <div class="form-group">
+        {!! ShowErrors($errors,'avatar') !!}
+        <input type="hidden" name="avatar" value="{{ $get_student->avatar }}">
+        <input type="file" name="avatar" class="form-control">
+    </div>
+    <div class="form-group">
         <label for="exampleFormControlInput1">ngày Sinh</label>
-      <br>
+        <br>
         {!! ShowErrors($errors,'date_of_birth') !!}
-        <input name="date_of_birth" value="{{ $get_student->date_of_birth }}" type="date" class="form-control" >
-      </div>
-      <div class="form-group">
+        <input name="date_of_birth" value="{{ $get_student->date_of_birth }}" type="date" class="form-control">
+    </div>
+    <div class="form-group">
         <label for="exampleFormControlInput1">Số Điện Thoại</label>
-      <br>
+        <br>
         {!! ShowErrors($errors,'phone') !!}
-        <input name="phone" value="{{ $get_student->phone }}" type="number" class="form-control" >
-      </div>
-      <div class="form-group">
+        <input name="phone" value="{{ $get_student->phone }}" type="number" class="form-control">
+    </div>
+    <div class="form-group">
         <label for="exampleFormControlInput1">email</label>
-      <br>
+        <br>
         {!! ShowErrors($errors,'email') !!}
-        <input name="email" value="{{ $get_student->email }}" type="email" class="form-control" >
-      </div>
-      <div class="form-group">
+        <input name="email" value="{{ $get_student->email }}" type="email" class="form-control">
+    </div>
+    <div class="form-group">
         <label for="exampleFormControlInput1">Địa Chỉ</label>
-      <br>
+        <br>
         {!! ShowErrors($errors,'address') !!}
-        <input name="address" value="{{ $get_student->address }}" type="text" class="form-control" >
-      </div>
-
-      <div class="form-group">
-        <label for="exampleFormControlSelect1">Chi Nhánh</label>
-        @foreach ($get_all_class as $class)
-        @if($get_student->ClassName->id == $class->id)
-        @foreach ($get_all_branch as $branch)
-        @if($branch->id == $class->branch_id)
-        <input readonly name="branch" value="{{ $branch->branch_name }}"  type="text" class="form-control" >
+        <input name="address" value="{{ $get_student->address }}" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Khóa Học</label>
+        @foreach($get_all_course as $course)
+        @if($course->id == $get_student->ClassName->course_id)
+        <input value="{{ $course->course_name }}" readonly type="text" class="form-control">
         @endif
         @endforeach
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Level</label>
+        @foreach($get_all_level as $level)
+        @if($level->id == $get_student->ClassName->level_id)
+        <input value="Level :{{ $level->level }}" readonly type="text" class="form-control">
         @endif
         @endforeach
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlSelect1">Lớp hiện tại</label>
-        <input  value="{{ $get_student->ClassName->class_name }}" readonly type="text" class="form-control" >
-        <input name="class_id" value="{{ $get_student->ClassName->id }}" type="hidden" class="form-control" >
-      </div>
-      <div class="form-group">
-          <label for="exampleFormControlSelect1">Level hiện tại</label>
-          <input readonly value="Level : {{ $get_student->ClassName->level_id }}"  type="text" class="form-control" >
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">lớp Học</label>
+        <input name="class_id" value="{{ $get_student->ClassName->name }}" readonly type="text" class="form-control">
+        <input name="class_id" value="{{ $get_student->ClassName->id }}" type="hidden">
+    </div>
+    {!! ShowErrors($errors,'class_id') !!}
+    <div class="form-group ">
+        <span class="error_level" style="color: red"></span>
+        <br>
+        {!! ShowErrors($errors,'level_id') !!}
+        <select class="form-control h-100 mt-2" name="level_id" id="Level">
+            <option value="">Chọn Level</option>
+            @foreach($get_all_level as $level)
+            <option value="{{$level->id}}">Level: {{$level->level}}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="form-group ">
+        <br>
+        {!! ShowErrors($errors,'slot_add') !!}
+        <select class="form-control h-100 mt-2" name="slot_add" id="slot">
+            <option value="">Chọn Ca</option>
+            <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
+            <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
+            <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
+            <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
+            <option value="5">Ca 5 ( 6h đến 8h )</option>
+            <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+        </select>
+    </div>
+    <div class="form-group ">
+        <div class="row paste_class">
+            {{-- show class --}}
         </div>
-
-
-
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chọn Chi Nhánh Lever Và Lớp</button>
-            <ul class="dropdown-menu">
-            @foreach ($get_all_branch as $item)
-              <li class="dropdown-submenu">
-              <a class="test" tabindex="-1">{{ $item->branch_name }}<span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    @foreach ($get_all_level as $level)
-                     <li class="dropdown-submenu">
-                     <a class="test">Level: {{ $level->level }}<span class="caret"></span></a>
-                       <ul class="dropdown-menu">
-                        <?php $i=0 ?>
-                        @foreach ($get_all_class as $class)
-                           @if($class->branch_id == $item->id && $class->level_id == $level->id)
-                           <input style="margin-left: 15px;" type="radio" id="id_{{$class->id}}" name="class_id" value="{{$class->id}}">
-                           <label class="w-90" for="id_{{$class->id}}">{{$class->class_name}}</label>
-                           <br>
-                            <?php $i++; ?>
-                           @endif
-                           @endforeach
-                           @if($i == 0)
-                           <p style="margin-left: 15px;">Chưa có lớp nào</p>
-                           @endif
-                       </ul>
-                     </li>
-                     @endforeach
-                   </ul>
-               </li>
-               @endforeach
-            </ul>
-          </div>
-          <div class="form-group mt-3">
-            <label for="exampleFormControlSelect1">Trạng Thái</label>
-            <select class="form-control" name="is_active" id="">
-                <option @if($get_student->is_active == 1) selected @endif value="1">Hoạt Động</option>
-                <option @if($get_student->is_active == 0) selected @endif value="0">Tạm Dừng</option>
-            </select>
-          </div>
-
-
-    <button type="submit" class="mt-5 mb-5 btn btn-primary">Sửa Học Viên</button>
-  </form>
-  <style>
-    .dropdown-submenu {
-     position: relative;
-    }
-
-    .dropdown-submenu .dropdown-menu {
-     top: 0;
-     left: 100%;
-     margin-top: -1px;
-    }
-    </style>
-  @endsection
-
-  @push('scripts')
-  <script>
-    $(document).ready(function () {
-      $('.dropdown-submenu a.test').on("click", function(e){
-           $(this).next('ul').toggle();
-           e.stopPropagation();
-           e.preventDefault();
-           });
-  });
-  </script>
-  @endpush
-
-
-
+    </div>
+    <button type="submit" class="mt-5 mb-5 btn btn-primary">Xác Nhận Sửa Học Viên</button>
+</form>
+@endsection
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('#Level').change(function() {
+            if ($('#Level').val() != 0) {
+                $('.error_level').html('');
+                $("#slot option[value='']").prop("selected", "selected")
+            }
+        });
+        $('#slot').on('change', function() {
+            if ($('#Level').val() == 0) {
+                $('.error_level').html('Không được bỏ trống level');
+            } else {
+                $.ajax({
+                    url: '/admin/student/create/selected/' + $(this).val() + '/' + $('#Level').val(),
+                    method: 'get',
+                    success: function(response) {
+                        // đổ dữ liệu
+                        if (response == -1) {
+                            html = "<p class='pl-4'>Các khóa học đã kết thúc hoặc quá 10% số buổi học viên sẽ không đổi được ca và lớp học</p>"
+                        } else {
+                            if (response.length === 0) {
+                                html = "<p class='pl-4'>Chưa có lớp nào trong ca này</p>"
+                            } else {
+                                html = "";
+                                response.map(x => {
+                                    html += `
+                            <div class="form-check col-3">
+                            <input class="form-check-input" type="radio" name="class_id" id="${x.id}" value="${x.id}">
+                            <label class="form-check-label ml-2 pl-4" for="${x.id}">
+                                ${x.name}
+                            </label>
+                            </div>
+                            `;
+                                })
+                            }
+                        }
+                        $('.paste_class').html(html);
+                    }
+                });
+            }
+        });
+    });
+</script>
+@endpush

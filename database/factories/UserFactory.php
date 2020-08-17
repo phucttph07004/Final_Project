@@ -27,6 +27,6 @@ $factory->define(User::class, function (Faker $faker) {
         'phone' =>'0123456789',
         'role' =>1,
         'password' => bcrypt('123456'),
-        'is_active' => 1,
+        'status' => 1,
     ];
 });

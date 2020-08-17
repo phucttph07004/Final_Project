@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 style="color: #007bff" class="mt-5 pl-5 m-0 font-weight-bold">@yield('title_page')</h1>
+            <h1 style="color: #007bff" class="mt-1 pl-5 m-0 font-weight-bold">@yield('title_page')</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->

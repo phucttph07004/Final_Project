@@ -2,15 +2,9 @@
 
 namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
-use App\Models\{Notification, Category, User};
-use App\Http\Requests\backend\notification\NotificationRequest;
-use Illuminate\Http\Request;
-use PHPExcel;
-use PHPExcel_IOFactory;
-use Arr;
-use Str;
-use Auth;
-use Carbon\Carbon;
+use App\Imports\StudentsImport;
+use Excel;
+use App\Models\{Student,Schedule,Classes,Course};
 
 class ExcelController extends Controller
 {
@@ -19,30 +13,70 @@ class ExcelController extends Controller
     return view('backend.pages.student.create_excel');
    }
 
-   public function student_store_excel()
-   {
-       // lấy ra file tải lên
-       $file=$_FILES['excel']["tmp_name"];
-       // load
-       $objPHPExcel = PHPExcel_IOFactory::load($file);
-       // lấy ra các sheet
-       $objWorksheet = $objPHPExcel->getActiveSheet();
-       // lấy ra tổng số row
-       $highestRow = $objWorksheet->getHighestRow();
-       // chuyển dữ liệu thành mảng
-       $SheetData=$objWorksheet->toArray('null',true,true,true);
+//    public function student_store_excel()
+//     {
+//         $import = Excel::import(new StudentsImport, request()->file('excel'));
+//         return redirect()->back()->with('thongbao', 'Thêm Học Viên Thành Công');
+//     }
 
-       for ($row = 2; $row <= $highestRow; $row++) {
-           $ky_thu =$SheetData[$row]['A'];
-           $hoc_ky =$SheetData[$row]['B'];
-           $mon =$SheetData[$row]['C'];
-           $ma_mon =$SheetData[$row]['D'];
-           $so_tin =$SheetData[$row]['E'];
-           $diem =$SheetData[$row]['F'];
-           $trang_thai =$SheetData[$row]['G'];
-       }
-    // return view('backend.pages.student.create_excel');
-   }
+    public function show_class_add($slot,$level )
+    {
+        $get_all_course = array();
+        foreach (Course::all() as $value) {
+            $first_date = strtotime($value->start_date);
+            $second_date = strtotime($value->finish_date);
+            $datediff = abs($first_date - $second_date);
+            $time_allowed = floor($datediff / (60 * 60 * 24) / 10);
+            $start_date = strtotime(date("Y-m-d", strtotime($value->start_date)) . " +$time_allowed days");
+            $start_date_plus10 = strftime("%Y-%m-%d", $start_date);
+
+            if ($start_date_plus10 >= date('Y-m-d')) {
+                $get_all_course[] = $value;
+            }
+        }
+
+        if( count($get_all_course) !=0 ){
+
+        $get_class=Schedule::where([['slot',$slot],['level_id',$level]])->get();
+        if(count($get_class) == 0){
+            return $get_class;
+        }else{
+            foreach($get_class as $class_id){
+                $class[]=$class_id->class_id;
+            }
+            $class_id=0;
+            for($i=0 ; $i < count($class) ;$i++){
+                if($class_id != $class[$i]){
+                    $class_id=$class[$i];
+                    $get_all_class[]=Classes::find($class[$i]);
+                }
+            }
+            return $get_all_class;
+        }
+        }else{
+            return -1;
+        }
+    }
+
+
+
+    public function show_edit_schedule($id)
+    {
+        $week_slot=array();
+        foreach (Schedule::where('class_id',$id)->get() as $value) {
+
+            if(array_search($value->weekday, $week_slot) === false){
+                $week_slot[$value->weekday]=$value->slot;
+            }
+        }
+        return $week_slot;
+    }
+
+
+
+
+
+
 
 
 

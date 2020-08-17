@@ -33,7 +33,8 @@
                             <p class="login__form-title">Đăng nhập</p>
                             <form action="{{route('auth.login')}}" method="POST">
                                 @csrf
-                                <input class="login__form-input" type="text" name="email" value="{{old('email')}}" placeholder="Email">
+                                <input class="login__form-input" type="text" name="email" value="{{old('email')}}"
+                                    placeholder="Email">
                                 {!! ShowErrors($errors,'email') !!}
                                 <div class="login__form-password">
                                     <input class="login__form-input" type="password" name="password" id="password"
@@ -43,10 +44,20 @@
                                     </div>
                                 </div>
                                 {!! ShowErrors($errors,'password') !!}
-                                @if(session('thongbao'))
-                                <span style='color: red'>{{session('thongbao')}}</span>
+                                
+                                @if(session()->has('success'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('success') }}
+                                </div>
+                                @elseif(session()->has('danger'))
+                                <div class="alert alert-danger">
+                                    {{ session()->get('danger') }}
+                                </div>
                                 @endif
-                                <button type="submit" class="btn login__form-btn">Đăng nhập</button>
+                                <div class="d-flex align-items-center">
+                                    <button type="submit" style="margin-right:40px" class="btn login__form-btn">Đăng nhập</button>
+                                    <a href="{{route('get.forgotpassword')}}">Quên mật khẩu</a>
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -19,10 +19,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(10);
-        return view('backend.pages.user.user',['users' => $users]);
+        if($request->all() != null && $request['page'] == null){
+            foreach($request->all() as $key => $value){
+                if($key == 'status'){
+                    $data['users']=User::where("$key","$value")->paginate(10);
+                }else{
+                    $data['users']=User::where("$key",'LIKE',"%$value%")->paginate(10);
+                }
+            }
+        }else{
+            $data['users'] = User::paginate(10);
+        }
+    return view('backend.pages.user.user',$data);
     }
 
     /**
@@ -46,7 +56,7 @@ class UserController extends Controller
         $data = Arr::except($request->all(),['_token']);
         $data['password']=bcrypt($data['password']);
         $data['type']='text';
-        $data['is_active']='1';
+        $data['status']='1';
         if($request->hasFile('avatar')){
             $data['avatar']=$request->file('avatar')->store('images','public');
         }else{

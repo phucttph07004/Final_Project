@@ -13,7 +13,8 @@ $factory->define(Enrollment::class, function (Faker $faker) {
         'phone' =>'0123456789',
         'address' => "hà nội",
         'status' => 1,
-        'note' =>$faker->realText($maxNbChars = 200, $indexSize = 3),
+        'weekday' => $faker->numberBetween($min = 1, $max = 7),
+        'slot' =>$faker->numberBetween($min = 1, $max = 6),
         'level_id' => Level::inRandomOrder()->first()->id,
         'email' => $faker->unique()->safeEmail,
     ];

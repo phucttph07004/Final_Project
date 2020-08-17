@@ -16,6 +16,9 @@ class CreateClassesTable extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('number_of_sessions');
+            $table->date('start_date');
+            $table->date('finish_date');
             $table->integer('teacher_id')->unsigned()->nullable();
             $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('level_id')->unsigned();
@@ -24,7 +27,7 @@ class CreateClassesTable extends Migration
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('is_active');
+            $table->integer('status');
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\backend\classes\{ClassRequest,ClassEditRequest};
 
-use App\Models\{Classes,Course,Level,User};
+use App\Models\{Classes,Course,Level,User,Student};
 
 use Arr;
 use Auth;
@@ -22,18 +22,24 @@ class ClassController extends Controller
      */
     public function index(Request $request)
     {
-        // if($request->all() != null && $request['page'] == null){
-        //     foreach($request->all() as $key => $value){
-        //         if($key == 'is_active'){
-        //             $data['classes']=Classes::where("$key","$value")->paginate(10);
-        //         }else{
-        //             $data['classes']=Classes::where("$key",'LIKE',"%$value%")->paginate(10);
-        //         }
-        //     }
-        // }else{
-        //     $data['classes']=Classes::paginate(10);
-        // }
-        $data['classes']=Classes::paginate(10);
+        if($request->all() != null && $request['page'] == null){
+            foreach($request->all() as $key => $value){
+                if($key == 'status'){
+                    $data['levels']=Level::all();
+                    $data['courses']=Course::all();
+                    $data['classes']=Classes::where("$key","$value")->paginate(10);
+                }else{
+                    $data['levels']=Level::all();
+                    $data['courses']=Course::all();
+                    $data['classes']=Classes::where("$key",'LIKE',"$value")->paginate(10);
+                }
+            }
+        }else{
+            $data['levels']=Level::all();
+            $data['courses']=Course::all();
+            $data['classes'] = Classes::paginate(10);
+            
+        }
         return view('backend.pages.class.class',$data);
     }
 
@@ -44,6 +50,7 @@ class ClassController extends Controller
      */
     public function create(Request $request)
     {
+        $data['courses'][]=null;
         foreach(Course::all() as $value){
             $first_date = strtotime($value->start_date);
             $second_date = strtotime($value->finish_date);
@@ -71,10 +78,8 @@ class ClassController extends Controller
     {
         $data = Arr::except($request->all(), ['_token']);
         $data['user_id'] = Auth::user()->id;
-        $data['is_active'] = '1';
-
+        $data['status'] = '1';
         Classes::create($data);
-
         return redirect()->route('class.index')->with('thongbao','Thêm lớp thành công');
     }
 
@@ -86,6 +91,8 @@ class ClassController extends Controller
      */
     public function show($id)
     {
+        $data['students'] = Student::where('class_id','=',$id)->get();
+        $data['allstudents'] = Student::all();
         $data['class'] = Classes::find($id);
         return view('backend.pages.class.detail-class',$data);
     }
@@ -103,7 +110,7 @@ class ClassController extends Controller
         $levels = Level::all();
         $courses = Course::all();
         return view('backend.pages.class.edit-class',$data,['levels' => $levels,'courses' => $courses,'teachers'=>$teachers]);
-    }                                                   
+    }
 
     /**
      * Update the specified resource in storage.
@@ -118,7 +125,6 @@ class ClassController extends Controller
         $data = Arr::except(request()->all(), ["_token ,'_method'"]);
         $update_at = Carbon::now()->toarray();
         $data['update_at'] = $update_at['formatted'];
-
         $classes->update($data);
 
         return redirect()->route('class.index')->with('thongbao','Cập nhật lớp học thành công');
@@ -131,15 +137,15 @@ class ClassController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy($id){
+    public function destroy(Request $request,$id){
         $class = Classes::find($id);
         $data = Arr::except(request()->all(), ["_token ,'_method'"]);
 
-        if($data['is_active'] == 0){
-            $data['is_active'] = 1;
+        if($data['status'] == 0){
+            $data['status'] = 1;
         }
         else {
-            $data['is_active'] = 0;
+            $data['status'] = 0;
         }
 
         $class->update($data);

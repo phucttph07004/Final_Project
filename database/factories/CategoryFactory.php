@@ -10,6 +10,6 @@ $factory->define(Category::class, function (Faker $faker) {
         'name'=> $faker->name,
         'type' => $faker->randomElement($array = array ('news','notification')),
         'User_id' =>User::inRandomOrder()->first()->id,
-        'is_active' => 1,
+        'status' => 1,
     ];
 });

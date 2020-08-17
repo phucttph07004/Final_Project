@@ -30,10 +30,36 @@
         <br>
         {!! ShowErrors($errors,'course_id') !!}
         <select name="course_id" class="form-control">
+            
             @foreach ($courses as $course)
-            <option value="{{ $course->id }}">{{ $course->course_name}}</option>
+                @if($course == null)
+                <option >Hiện tại không có khoá học phù hợp</option>
+
+                @else
+                <option value="{{ $course->id }}">{{ $course->course_name}}</option>
+                @endif
             @endforeach
         </select>
+    </div>
+    <div class="form-group">
+        <label for="">Ngày bắt đầu</label>
+        <br>
+        {!! ShowErrors($errors,'start_date') !!}
+        <input data-date="" data-date-format="DD MM YYYY" type="date" value="{{ old('start_date')}}" name="start_date"
+            class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="">Ngày kết thúc dự kiến</label>
+        <br>
+        {!! ShowErrors($errors,'finish_date') !!}
+        <input data-date="" data-date-format="DD MM YYYY" name="finish_date" type="date" value="{{ old('finish_date')}}"
+            class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="">Số buổi học</label>
+        <br>
+        {!! ShowErrors($errors,'number_of_sessions') !!}
+        <input name="number_of_sessions" type="text" value="{{ old('number_of_sessions')}}" class="form-control">
     </div>
     <div class="d-flex align-items-center">
         <a class="btn btn-danger mr-4" href="{{route('class.index')}}">Quay lại</a>

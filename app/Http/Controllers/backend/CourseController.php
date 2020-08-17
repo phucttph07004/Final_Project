@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\backend\course\{CourseRequest,CourseEditRequest};
 
 
-use App\Models\Course;
+use App\Models\{Course,Classes};
 
 use Arr;
 use Str;
@@ -23,9 +23,20 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
-        $courses = Course::paginate(10);
+        if($request->all() != null && $request['page'] == null){
+            foreach($request->all() as $key => $value){
+                if($key == 'status'){
+                    $data['courses']=Course::where("$key","$value")->paginate(10);
+                }else{
+                    $data['courses']=Course::where("$key",'LIKE',"%$value%")->paginate(10);
+                }
+            }
+        }else{
+            $data['courses'] = Course::paginate(10);
+        }
 
-        return view('backend.pages.course.course',compact('courses'));
+
+        return view('backend.pages.course.course',$data);
     }
 
     /**
@@ -35,8 +46,8 @@ class CourseController extends Controller
      */
     public function create(Request $request)
     {
-        
-      
+
+
         return view('backend.pages.course.create-course');
     }
 
@@ -64,7 +75,9 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['course'] = Course::find($id);
+        $data['classes'] = Classes::where('course_id','=',$id)->get();
+        return view('backend.pages.course.detail-course',$data);
     }
 
     /**

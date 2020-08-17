@@ -41,13 +41,19 @@
                         <li class="nav-item">
                             <a href="{{route('student.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Quản Trị Học Sinh</p>
+                                <p>Quản Trị Học Viên</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('branch.index')}}" class="nav-link">
+                            <a href="{{route('schedule_learn.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Quản Trị Chi Nhánh</p>
+                                <p>Quản Trị Lịch Học</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('schedule_teach.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Quản Trị Lịch Dạy</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -83,7 +89,7 @@
                         <li class="nav-item">
                             <a href="{{route('user.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Quản trị tài khoản</p>
+                                <p>Quản trị nhân viên</p>
                             </a>
                         </li>
                         <li class="nav-item">

@@ -16,6 +16,7 @@ $factory->define(Student::class, function (Faker $faker) {
         'date_of_birth' => $faker->date(),
         'phone' =>'0123456789',
         'code' =>'ph07004',
-        'is_active' => 1,
+        'fee_status' =>$faker->numberBetween($min = 1, $max = 0),
+        'status' => 1,
     ];
 });
