@@ -1,6 +1,6 @@
 @extends('./backend/layout/master')
 @section('title','Quản Trị Lịch Học')
-@section('title_page','Danh Sách Lớp Chưa Có Lịch')
+@section('title_page','Xếp Lịch Học Cho Các Lớp')
 @section('content')
 <div class="col-12">
     <div style="padding-left: 45px" class="row bg-light form-inline">
@@ -244,7 +244,13 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Lớp Thay Đổi</th>
+                                <th scope="col">
+                                    @if($item->count_studen_count == 0)
+                                    Lớp Thay Đổi
+                                    @else
+                                    Chi Tiết Lớp
+                                    @endif
+                                </th>
                                 <th scope="col">Lớp : {{$item->name}}</th>
                                 @foreach ($get_all_level as $level)
                                 @if($item->level_id == $level->id)

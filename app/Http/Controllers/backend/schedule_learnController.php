@@ -92,7 +92,7 @@ class schedule_learnController extends Controller
                 'user_id' => Auth::user()->id,
                 'level_id' => $data['level_id'],
                 'class_id' => $class->id,
-                'teacher_id' => 1,
+                'teacher_id' => null,
             );
             foreach ($weekday as $key => $value) {
                 $dayInWeek = $value;

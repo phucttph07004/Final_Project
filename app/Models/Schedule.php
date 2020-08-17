@@ -15,4 +15,9 @@ class Schedule extends Model
         return $this->beLongsTo('App\Models\Classes', 'class_id','id');
     }
 
+    public function getNameTeacher()
+    {
+        return $this->beLongsTo('App\Models\User', 'teacher_id','id');
+    }
+
 }
