@@ -30,19 +30,16 @@
                 <div class="d-flex align-items-center justify-content-center h-100">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="login__form">
-                            <p class="login__form-title">Đăng nhập</p>
-                            <form action="{{route('student.login')}}" method="POST">
+                            <p class="login__form-title">Nhập lại mật khẩu</p>
+                            <form method="post">
                                 @csrf
-                                <input class="login__form-input" type="text" name="email" value="{{old('email')}}" placeholder="Email">
-                                {!! ShowErrors($errors,'email') !!}
-                                <div class="login__form-password">
-                                    <input class="login__form-input" type="password" name="password" id="password"
-                                        placeholder="Mật khẩu">
-                                    <div class="show-pass">
-                                        <i class="fa fa-lock "></i>
-                                    </div>
-                                </div>
+                                <input class="login__form-input" type="password" name="password"
+                                    placeholder="Mật khẩu">
                                 {!! ShowErrors($errors,'password') !!}
+                                <input class="login__form-input" type="password" name="cfpassword"
+                                    placeholder="Xác nhận lại mật khẩu">
+                                {!! ShowErrors($errors,'cfpassword') !!}
+
                                 @if(session()->has('success'))
                                 <div class="alert alert-success">
                                     {{ session()->get('success') }}
@@ -52,10 +49,7 @@
                                     {{ session()->get('danger') }}
                                 </div>
                                 @endif
-                                <div class="d-flex align-items-center">
-                                    <button type="submit" style="margin-right:40px" class="btn login__form-btn">Đăng nhập</button>
-                                    <a href="{{route('get.studentforgotpassword')}}">Quên mật khẩu</a>
-                                </div>
+                                <button type="submit" style="" class="btn login__form-btn">Xác nhận</button>
                             </form>
                         </div>
                     </div>

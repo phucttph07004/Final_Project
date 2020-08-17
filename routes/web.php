@@ -16,7 +16,7 @@ Route::post('register',       'frontend\RegisterController@store')->name('regist
 
 // các chức năng của admin
 Route::group([ 'prefix' => 'admin',
-            //    'middleware' => ['check_role_admin','check_auth'],
+               'middleware' => ['check_role_admin','check_auth'],
 ], function () {
 
 Route::resource('/','backend\IndexController');
@@ -51,9 +51,12 @@ Route::group([
     Route::get('login', 'backend\AuthController@getLoginForm');
     Route::post('login', 'backend\AuthController@login')->name('auth.login');
     Route::get('logout','backend\AuthController@logout')->name('auth.logout');
+    Route::get('forgot-password', 'backend\ResetPasswordController@getform')->name('get.forgotpassword');
+    Route::post('forgot-password', 'backend\ResetPasswordController@sendCode')->name('post.forgotpassword');
+    Route::get('reset-password', 'backend\ResetPasswordController@resetform')->name('get.resetpassword');
+    Route::post('reset-password', 'backend\ResetPasswordController@changePassword')->name('post.resetpassword');
+
 });
-
-
 
 
 //Student 
@@ -67,14 +70,19 @@ Route::group([
     Route::get('login', 'student\AuthController@getLoginForm');
     Route::post('login', 'student\AuthController@login')->name('student.login');
     Route::get('logout','student\AuthController@logout')->name('student.logout');
+    Route::get('forgot-password', 'student\ResetPasswordController@getform')->name('get.studentforgotpassword');
+    Route::post('forgot-password', 'student\ResetPasswordController@sendCode')->name('post.studentforgotpassword');
+    Route::get('reset-password', 'student\ResetPasswordController@resetform')->name('get.studentresetpassword');
+    Route::post('reset-password', 'student\ResetPasswordController@changePassword')->name('post.studentresetpassword');
 });
 
 
 Route::group([
     'prefix'=> 'student',
-    'middleware' => ['check_auth'],
+    'middleware' => ['check_student'],
 ],
 function()
 {
     Route::get('/', 'student\IndexController@index');
+    Route::resource('notification','student\NotificationController');
 });

@@ -11,7 +11,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $data['notifications'] = Notification::all();
+        $data['notifications'] = Notification::where('is_active', 1)->get();
         return view('student.pages.index',$data);
     }
 }

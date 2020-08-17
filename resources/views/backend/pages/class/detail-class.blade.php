@@ -56,12 +56,27 @@
         </div>
         <div class="col-6">
             <div class="form-group">
+                <label for="">Ngày bắt đầu</label>
+                <input type="text" readonly="readonly" class="form-control" name="start_date" id=""
+                    value="{{$class->start_date}}">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label for="">Ngày kết thúc</label>
+                <input type="text" readonly="readonly" class="form-control" name="finish_date" id=""
+                    value="{{$class->finish_date}}">
+            </div>
+        </div>
+        <!-- <div class="col-6">
+            <div class="form-group">
                 <label for="">Số buổi học</label>
                 <input type="text" readonly="readonly" class="form-control" name="number_of_sessions" id=""
                     value="{{$class->number_of_sessions}}">
             </div>
-        </div>
+        </div> -->
     </div>
+    <h3 class="ml-4 mb-3">Danh sách học viên</h3>
 
     <table style="background-color: white" class="table ml-5">
         @if(session('thongbao'))
@@ -78,9 +93,9 @@
                 <th scope="col">Email</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col">
-                    <a type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#students"
+                    <!-- <a type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#students"
                         data-whatever="@mdo">Thêm học viên
-                    </a>
+                    </a> -->
                 </th>
             </tr>
         </thead>
