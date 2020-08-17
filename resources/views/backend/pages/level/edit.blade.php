@@ -29,5 +29,6 @@
       <input name="fee"  value="{{ $get_level->fee}}" type="text" class="form-control" >
     </div>
     <button type="submit" class="mb-5 btn btn-primary"> Sửa Level</button>
+    <a href="{{route('level.index')}}" class="mb-5 btn btn-warning">Quay lại</a>
   </form>
   @endsection

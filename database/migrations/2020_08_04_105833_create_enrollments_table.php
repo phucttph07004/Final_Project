@@ -19,7 +19,6 @@ class CreateEnrollmentsTable extends Migration
             $table->date('date_of_birth');
             $table->string('phone');
             $table->text('address');
-            $table->integer('note');
             $table->integer('slot');
             $table->integer('weekday');
             $table->integer('status');

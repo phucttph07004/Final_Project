@@ -63,29 +63,37 @@
                 <td>{{ $class->name }}</td>
                 <td>{{ $class->levelName->level}}</td>
                 <td>{{ $class->courseName->course_name}}</td>
-                <td>{{date('d-m-Y', strtotime($course->start_date))}}</td>
-                <td>{{date('d-m-Y', strtotime($course->finish_date))}}</td>
+                <td>{{date('d-m-Y', strtotime($class->start_date))}}</td>
+                <td>{{date('d-m-Y', strtotime($class->finish_date))}}</td>
                 <td>
-                    <input data-id="{{$class->id}}" class="toggle-class" type="checkbox" data-onstyle="success"
+                    <!-- <input data-id="{{$class->id}}" id="btn_deactive_{{ $class->id }}" class="toggle-class" type="checkbox" data-onstyle="success"
                         data-offstyle="danger" data-toggle="toggle" data-on="Mở" data-off="Đóng"
-                        {{ $class->status ? 'checked' : '' }}>
+                        {{ $class->status ? 'checked' : '' }}> -->
+                    <a class="toggle-class" id="btn_deactive_{{ $class->id }}">
+                        <input type="checkbox" @if($class->status == 1) checked @endif
+                        data-toggle="toggle" data-on="Mở "
+                        data-off="Đóng" data-onstyle="success" data-offstyle="danger"
+                        >
+                    </a>
                 </td>
                 <td>
                     <a class="btn btn-outline-info" href="{{ route('class.show',"$class->id") }}"> Chi Tiết
                     </a>
-                    <a class="btn btn-outline-warning" href="{{ route('class.edit',"$class->id") }}">Sửa</a>
+                    <a data-start="{{$class->start_date}}" class="btn btn-outline-warning edit-class"
+                        href="{{route('class.edit',"$class->id")}}">Sửa</a>
+
                     <!-- @if($class->status == 1)
                     <button id="btn_deactive_{{ $class->id }}" class="btn btn-outline-danger">Đóng</button>
                     @else
                     <button id="btn_deactive_{{ $class->id }}" class="btn btn-outline-success">Mở</button>
-                    @endif
+                    @endif -->
 
                     <form id="deactive_form_{{ $class->id }}" action="{{ route('class.destroy',$class->id) }}"
                         method="post" style="display: none;">
                         @method('DELETE')
-                        <input type="hidden" name="is_active" value="{{$class->is_active}}">
+                        <input type="hidden" name="status" value="{{$class->status}}">
                         @csrf
-                    </form> -->
+                    </form>
                 </td>
             </tr>
             @endforeach
@@ -99,27 +107,9 @@
 
 @push('scripts')
 <script>
-$("button[id^='btn_deactive_']").click(function(event) {
+$("a[id^='btn_deactive_']").click(function(event) {
     id = event.currentTarget.attributes.id.value.replace('btn_deactive_', '');
     $("#deactive_form_" + id).submit();
 });
-
-$('.toggle-class').change(function() {
-    var status = $(this).prop('checked') == true ? 1 : 0;
-    var id = $(this).data('id');
-    console.log(id);
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: '/admin/changeStatus',
-        data: {
-            'status': status,
-            'id': id
-        },
-        success: function(data) {
-            console.log(data.success)
-        }
-    });
-})
 </script>
 @endpush

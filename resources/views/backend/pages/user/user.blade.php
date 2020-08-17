@@ -3,68 +3,93 @@
 @section('title_page','Quản Trị Tài Khoản')
 @section('content')
 <section class="content">
-<table style="background-color: white" class="table ml-5">
-    @if(session('thongbao'))
-    <div class="alert alert-primary text-center" role="alert">
-        {{session('thongbao') }}
-    </div>
-    @endif
-    <thead>
-        <tr>
-            <th scope="col">STT</th>
-            <th scope="col">Ảnh</th>
-            <th scope="col">Họ Tên</th>
-            <th scope="col">Chức vụ</th>
-            <th scope="col">Trạng thái</th>
-            <th scope="col">
-                <a href="{{ route('user.create') }}">
-                    <button type="button" class="btn btn-outline-primary">Tạo tài khoản mới</button>
-                </a>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php $i=1 ?>
-        @foreach ($users as $user)
-        <tr>
-            <th scope="row">{{ $i++ }}</th>
-            <td><img style="width:70px;height:50px" src="storage/{{ $user->avatar }}" alt=""></td>
-            <td>{{ $user->fullname }}</td>
-            <td>
-                @if($user->role == 6)<span>Tổng giám đốc</span>
-                @elseif( $user->role == 5 ) <span>Giám đốc chi nhánh</span>
-                @elseif( $user->role == 4 ) <span>Giáo viên</span>
-                @elseif( $user->role == 3 ) <span>Trợ giảng</span>
-                @elseif( $user->role == 2 ) <span>Admin</span>
-                @endif
-            </td>
-            <td>
-                @if($user->status == 1) <span style='color: green'>Hoạt động</span>
-                @else <span style='color: red'>Khoá</span>
-                @endif
-            </td>
-            <td>
-                <a href="{{ route('user.show',"$user->id") }}">
-                    <button type="button" class="btn btn-outline-info">Chi Tiết</button>
-                </a>
-                <a href="{{ route('user.edit',"$user->id") }}">
-                    <button type="button" class="btn btn-outline-warning">Sửa</button>
-                </a>
+    <table style="background-color: white" class="table ml-5">
+        @if(session('thongbao'))
+        <div class="alert alert-primary text-center" role="alert">
+            {{session('thongbao') }}
+        </div>
+        @endif
+        <div class="d-flex align-items-center ml-5">
+            <div class="col-5">
+                <form action="">
+                    <input class="form-control" type="text" name="fullname" value="" placeholder="Lọc theo tên">
+                </form>
+            </div>
+            <div class="ml-5 dropdown pt-3 pb-4 mt-2">
+                <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button"
+                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Lọc Theo Chức vụ
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @foreach ($users as $user)
+                    <a class="dropdown-item" href="{{route('user.index')}}?role={{ $user->role }}">
+                        @if($user->role == 6)<span>Tổng giám đốc</span>
+                        @elseif( $user->role == 5 ) <span>Giám đốc chi nhánh</span>
+                        @elseif( $user->role == 4 ) <span>Giáo viên</span>
+                        @elseif( $user->role == 3 ) <span>Trợ giảng</span>
+                        @elseif( $user->role == 2 ) <span>Admin</span>
+                        @endif
+                    </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Ảnh</th>
+                <th scope="col">Họ Tên</th>
+                <th scope="col">Chức vụ</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">
+                    <a href="{{ route('user.create') }}">
+                        <button type="button" class="btn btn-outline-primary">Tạo tài khoản mới</button>
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i=1 ?>
+            @foreach ($users as $user)
+            <tr>
+                <th scope="row">{{ $i++ }}</th>
+                <td><img style="width:70px;height:50px" src="storage/{{ $user->avatar }}" alt=""></td>
+                <td>{{ $user->fullname }}</td>
+                <td>
+                    @if($user->role == 6)<span>Tổng giám đốc</span>
+                    @elseif( $user->role == 5 ) <span>Giám đốc chi nhánh</span>
+                    @elseif( $user->role == 4 ) <span>Giáo viên</span>
+                    @elseif( $user->role == 3 ) <span>Trợ giảng</span>
+                    @elseif( $user->role == 2 ) <span>Admin</span>
+                    @endif
+                </td>
+                <td>
+                    @if($user->status == 1) <span style='color: green'>Hoạt động</span>
+                    @else <span style='color: red'>Khoá</span>
+                    @endif
+                </td>
+                <td>
+                    <a href="{{ route('user.show',"$user->id") }}">
+                        <button type="button" class="btn btn-outline-info">Chi Tiết</button>
+                    </a>
+                    <a href="{{ route('user.edit',"$user->id") }}">
+                        <button type="button" class="btn btn-outline-warning">Sửa</button>
+                    </a>
 
-                <!-- <a id="btn_delete_{{ $user->id }}" class="btn btn-outline-danger">Xóa</a>
+                    <!-- <a id="btn_delete_{{ $user->id }}" class="btn btn-outline-danger">Xóa</a>
                 <form id="delete_form_{{ $user->id }}" action="{{ route('user.destroy',$user->id) }}"
                     method="post" style="display: none;">
                     @method('DELETE')
                     @csrf
                 </form> -->
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-<div class="container justify-content-center d-flex mt-5 pb-5">
-    {{$users->links()}}
-</div>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <div class="container justify-content-center d-flex mt-5 pb-5">
+        {{$users->links()}}
+    </div>
 </section>
 @endsection
 

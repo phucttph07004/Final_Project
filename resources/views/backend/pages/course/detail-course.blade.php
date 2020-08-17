@@ -29,6 +29,15 @@
             </tr>
         </thead>
         <tbody>
+            @if(count($classes) == 0)
+            <td colspan="7">
+                <div class="mt-5 col-12 justify-content-center d-flex">
+                    <div class=" alert alert-danger" role="alert">
+                        Khoá học hiện tại chưa có lớp
+                    </div>
+                </div>
+            </td>
+            @endif
             <?php $i=1 ?>
             @foreach ($classes as $class)
             <tr>

@@ -30,8 +30,14 @@
         <br>
         {!! ShowErrors($errors,'course_id') !!}
         <select name="course_id" class="form-control">
+            
             @foreach ($courses as $course)
+                @if($course == null)
+                <option >Hiện tại không có khoá học phù hợp</option>
+
+                @else
                 <option value="{{ $course->id }}">{{ $course->course_name}}</option>
+                @endif
             @endforeach
         </select>
     </div>
@@ -39,13 +45,15 @@
         <label for="">Ngày bắt đầu</label>
         <br>
         {!! ShowErrors($errors,'start_date') !!}
-        <input data-date="" data-date-format="DD MM YYYY" type="date" value="{{ old('start_date')}}"  name="start_date" class="form-control">
+        <input data-date="" data-date-format="DD MM YYYY" type="date" value="{{ old('start_date')}}" name="start_date"
+            class="form-control">
     </div>
     <div class="form-group">
         <label for="">Ngày kết thúc dự kiến</label>
         <br>
         {!! ShowErrors($errors,'finish_date') !!}
-        <input data-date="" data-date-format="DD MM YYYY" name="finish_date" type="date" value="{{ old('finish_date')}}" class="form-control">
+        <input data-date="" data-date-format="DD MM YYYY" name="finish_date" type="date" value="{{ old('finish_date')}}"
+            class="form-control">
     </div>
     <div class="form-group">
         <label for="">Số buổi học</label>

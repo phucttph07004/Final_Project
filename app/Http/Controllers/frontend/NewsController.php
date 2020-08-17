@@ -12,13 +12,14 @@ use App\Models\Setting;
 class NewsController extends Controller
 {
     public function index(){
-        $settings = Setting::All();
+        $settings = Setting::limit(1)->get();
+
         $news = News::where('type','new')->where('status',1)->OrderBy('created_at','desc')->paginate(6);
         return view('frontend.news',['news' => $news,'settings' => $settings]);
     }
 
     public function getNews($id){
-        $settings = Setting::All();
+        $settings = Setting::limit(1)->get();
         $news = News::where('id','=',$id)->get();
         $relaNews = News::where('id','!=',$id)->where('type','new')->where('status' , 1)->orderBy('created_at','desc')->limit(3)->get();
 

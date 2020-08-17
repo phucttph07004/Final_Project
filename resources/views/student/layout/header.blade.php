@@ -67,7 +67,7 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto d-flex align-items-center">
-                <li><a class="danger mr-5" href="{{ route('auth.logout') }}">Đăng xuất</a></li>
+                <li><a class="danger mr-5" href="{{ route('student.logout') }}">Đăng xuất</a></li>
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
