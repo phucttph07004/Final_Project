@@ -54,7 +54,8 @@ class schedule_learnController extends Controller
                             }
                         }
                         $data['check'] = true;
-                        $data['get_all_class'] = collect($collection);
+                        $check=count($collection)!=0?$collection:array();
+                        $data['get_all_class'] =collect($check);
                     } else {
                         foreach (Classes::all() as $value) {
                             if (array_search($value->id, $class) !== false && array_search($value->course_id, $get_all_course) !== false) {
@@ -62,8 +63,8 @@ class schedule_learnController extends Controller
                             }
                         }
                         $data['check'] = true;
-                        $check=collect($collection)[0]!=null?collect($collection):array();
-                        $data['get_all_class'] = $check;
+                        $check=count($collection)!=0?$collection:array();
+                        $data['get_all_class'] =collect($check);
                     }
             }
         } else {
