@@ -99,6 +99,11 @@
             {{-- show class --}}
         </div>
     </div>
+    @if($check_course == null)
+    <input type="hidden" id="check_course" value="0">
+    @else
+    <input type="hidden" id="check_course" value="1">
+    @endif
     <button type="submit" class="mt-5 mb-5 btn btn-primary">Xác Nhận Sửa Học Viên</button>
 </form>
 @endsection
@@ -112,7 +117,11 @@
             }
         });
         $('#slot').on('change', function() {
-            if ($('#Level').val() == 0) {
+            if($('#check_course').val() == 0){
+                html = "<p class='pl-4'>khóa học và lớp đã kết thúc hoặc quá 10% số buổi, nên không thể thay đổi lịch</p>"
+                $('.paste_class').html(html);
+            }else{
+                if ($('#Level').val() == 0) {
                 $('.error_level').html('Không được bỏ trống level');
             } else {
                 $.ajax({
@@ -142,6 +151,7 @@
                         $('.paste_class').html(html);
                     }
                 });
+            }
             }
         });
     });

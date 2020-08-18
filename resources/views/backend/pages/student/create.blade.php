@@ -47,21 +47,50 @@
         <input name="address" value="{{ old('address') }}" type="text" class="form-control">
     </div>
     {!! ShowErrors($errors,'class_id') !!}
-    <div class="form-group ">
+
+
+
+<div class="row">
+    <div class="form-group col-4">
+        <span class="error_course" style="color: red"></span>
+    </div>
+
+    <div class="form-group col-4">
         <span class="error_level" style="color: red"></span>
-        <br>
         {!! ShowErrors($errors,'level_id') !!}
-        <select class="form-control h-100 mt-2" name="level_id" id="Level">
+    </div>
+
+    <div class="form-group col-4">
+        {!! ShowErrors($errors,'slot_add') !!}
+    </div>
+
+    <div class="form-group col-4">
+        <select class="form-control h-100" name="course_id" id="course">
+            @if(count($get_all_course) == 0)
+            <option value="-1">Khóa đã kết thức hoặc quá 10% số buổi vui lòng tạo khóa và lớp mới hoặc  chọn level và ca học để lưu vào danh sách chờ</option>
+            @else
+            <option value="-2">Chọn Khóa</option>
+            @endif
+            @if(count($get_all_course) != 0)
+            @foreach($get_all_course as $course)
+            <option value="{{$course->id}}"> {{$course->course_name}}</option>
+            @endforeach
+            @endif
+        </select>
+    </div>
+
+    <div class="form-group col-4">
+        <select class="form-control h-100" name="level_id" id="Level">
             <option value="">Chọn Level</option>
             @foreach($get_all_level as $level)
             <option value="{{$level->id}}">Level: {{$level->level}}</option>
             @endforeach
         </select>
     </div>
-    <div class="form-group ">
-        <br>
-        {!! ShowErrors($errors,'slot_add') !!}
-        <select class="form-control h-100 mt-2" name="slot_add" id="slot">
+
+
+    <div class="form-group col-4">
+        <select class="form-control h-100" name="slot_add" id="slot">
             <option value="">Chọn Ca</option>
             <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
             <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
@@ -71,6 +100,9 @@
             <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
         </select>
     </div>
+
+</div>
+
     <div class="form-group ">
         <div class="row paste_class">
             {{-- show class --}}
@@ -88,7 +120,19 @@
                 $("#slot option[value='']").prop("selected", "selected")
             }
         });
+
+        $('#course').change(function() {
+            if ($('#course').val() != -2) {
+                $('.error_course').html('');
+                $("#slot option[value='']").prop("selected", "selected")
+                $("#Level option[value='']").prop("selected", "selected")
+            }
+        });
+
         $('#slot').on('change', function() {
+            if ($('#course').val() == -2) {
+                $('.error_course').html('Nếu bỏ trống Khóa Học học viên sẽ được lưu vào danh sách chờ');
+            }
             if ($('#Level').val() == 0) {
                 $('.error_level').html('Không được bỏ trống level');
             } else {
@@ -98,17 +142,18 @@
                     success: function(response) {
                         // đổ dữ liệu
                         if (response == -1) {
-                            html = "<p class='pl-4'>Các khóa học đã kết thúc hoặc quá 10% số buổi học viên sẽ được lưu vào danh sách chờ </p>"
+                            html = "<p class='pl-4 text-danger'>Các khóa học đã kết thúc hoặc quá 10% số buổi học viên sẽ được lưu vào danh sách chờ </p>"
                         } else {
                             if (response.length === 0) {
-                                html = "<p class='pl-4'>Chưa có lớp nào trong ca này</p>"
+                                html = "<p class='pl-4 mt-5 text-danger'>Chưa có lớp nào trong ca này vui lòng chọn ca khác nếu không học viên sẽ được lưu vào danh sách chờ</p>"
                             } else {
                                 html = "";
                                 response.map(x => {
                                     html += `
-                            <div class="form-check col-3">
+                            <div class="form-check col-3 mt-3">
+                            <h5 class="font-weight-bold">Danh Sách Lớp</h5>
                             <input class="form-check-input" type="radio" name="class_id" id="${x.id}" value="${x.id}">
-                            <label class="form-check-label ml-2 pl-4" for="${x.id}">
+                            <label class="form-check-label font-weight-normal ml-2 pl-4" for="${x.id}">
                                 ${x.name}
                             </label>
                             </div>
@@ -116,10 +161,13 @@
                                 })
                             }
                         }
-                        $('.paste_class').html(html);
+                        if($('#course').val() != -2){
+                            $('.paste_class').html(html);
+                        }
                     }
                 });
             }
+
         });
     });
 </script>

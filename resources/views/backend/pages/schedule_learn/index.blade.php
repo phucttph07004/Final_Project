@@ -3,9 +3,8 @@
 @section('title_page','Xếp Lịch Học Cho Các Lớp')
 @section('content')
 <div class="col-12">
-    <div style="padding-left: 45px" class="row bg-light form-inline">
-        <div class="col-5"></div>
-        <div class="col-7">
+    <div class="row bg-light d-flex justify-content-end">
+        <div class="">
             <div class="row pl-5">
                 <div class="ml-5 dropdown pt-3 pb-4 mt-2">
                     <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -13,13 +12,12 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/admin/schedule_learn">Tất Cả</a>
-                        <a class="dropdown-item" href="/admin/schedule_learn?status=0">Đã Đóng</a>
                         <a class="dropdown-item" href="/admin/schedule_learn?weekday=1">Đã Xếp</a>
                         <a class="dropdown-item" href="/admin/schedule_learn?weekday=0">Chưa Xếp</a>
                     </div>
                 </div>
-                <div style="width: 300px;">
-                    <form class="form-inline pt-4">
+                <div>
+                    <form style="margin-right:95px" class="form-inline pt-4">
                         <input name="name" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo Tên Lớp" aria-label="Search">
                         <a>
                             <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -53,6 +51,7 @@
         @endif
         <?php $i = 1 ?>
         @foreach ($get_all_class as $item)
+        @if( array_search($item->course_id ,$check_course) !== false)
         <tr>
             <th scope="row">{{ $i++ }}</th>
             <td>{{ $item->name }}</td>
@@ -86,6 +85,7 @@
                 @endif
             </td>
         </tr>
+        @endif
         @endforeach
     </tbody>
 </table>
