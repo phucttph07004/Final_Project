@@ -10,10 +10,21 @@
             {{session('thongbao') }}
         </div>
         @endif
-        <div class="d-flex align-items-center ml-5">
-            <form action="">
-                <input type="text" name="name" value="" placeholder="Lọc theo tên">
+        <div class="d-flex flex-wrap align-items-center ml-5 pt-4">
+            <form action="" class="d-flex mb-4 ">
+                <div class="col-4"><input type="date" class="form-control border-success" name="start_date" id=""></div>
+                <div class="col-4"><input type="date" class="form-control border-success" name="finish_date" id=""></div>
+                <div class="col-3">
+                    <button type="submit" class="btn btn-outline-info">
+                        Lọc theo ngày tháng
+                    </button>
+                </div>
             </form>
+           <div class="col-4">
+            <form action="">
+                <input class="form-control border-success" type="text" name="name" value="" placeholder="Tìm theo tên lớp">
+            </form>
+           </div>
             <div class="ml-5 dropdown pt-3 pb-4 mt-2">
                 <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button"
                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

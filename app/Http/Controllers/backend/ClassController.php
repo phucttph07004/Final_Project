@@ -28,10 +28,26 @@ class ClassController extends Controller
                     $data['levels']=Level::all();
                     $data['courses']=Course::all();
                     $data['classes']=Classes::where("$key","$value")->paginate(10);
-                }else{
+                }
+                elseif($key == 'course_id'){
+                    $data['levels']=Level::all();
+                    $data['courses']=Course::all();
+                    $data['classes']=Classes::where("$key",'LIKE',"$value")->paginate(10);
+                }
+                elseif($key == 'level_id'){
+                    $data['levels']=Level::all();
+                    $data['courses']=Course::all();
+                    $data['classes']=Classes::where("$key",'LIKE',"$value")->paginate(10);
+                }
+                elseif($key == 'name'){
                     $data['levels']=Level::all();
                     $data['courses']=Course::all();
                     $data['classes']=Classes::where("$key",'LIKE',"%$value%")->paginate(10);
+                }
+                else{
+                    $data['levels']=Level::all();
+                    $data['courses']=Course::all();
+                    $data['classes']=Classes::whereBetween('start_date', array($request->start_date, $request->finish_date))->paginate(10);
                 }
             }
         }else{
