@@ -104,6 +104,12 @@
                                 <p>Quản trị lớp học</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('feedback.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Quản trị Feedbacks</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

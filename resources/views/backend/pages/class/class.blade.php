@@ -20,6 +20,7 @@
                     Lọc Theo Level
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{route('class.index')}}">Tất cả</a>
                     @foreach ($levels as $level)
                     <a class="dropdown-item"
                         href="{{route('class.index')}}?level_id={{ $level->id }}">{{ $level->level }}</a>
@@ -32,10 +33,22 @@
                     Lọc Theo Khoá
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{route('class.index')}}">Tất cả</a>
                     @foreach ($courses as $course)
                     <a class="dropdown-item"
                         href="{{route('class.index')}}?course_id={{ $course->id }}">{{ $course->course_name }}</a>
                     @endforeach
+                </div>
+            </div>
+            <div class="ml-5 dropdown pt-3 pb-4 mt-2">
+                <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button"
+                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Lọc Theo Trạng Thái
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{route('class.index')}}">Tất cả</a>
+                    <a class="dropdown-item" href="{{route('class.index')}}?status=0">Đóng</a>
+                    <a class="dropdown-item" href="{{route('class.index')}}?status=1">Mở</a>
                 </div>
             </div>
         </div>
@@ -56,6 +69,15 @@
             </tr>
         </thead>
         <tbody>
+            @if(count($classes) == 0)
+            <td colspan="7">
+                <div class="mt-5 col-12 justify-content-center d-flex">
+                    <div class=" alert alert-danger" role="alert">
+                        Không có lớp học trong level hoặc khoá học này
+                    </div>
+                </div>
+            </td>
+            @endif
             <?php $i=1 ?>
             @foreach ($classes as $class)
             <tr>

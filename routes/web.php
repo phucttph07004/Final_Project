@@ -36,6 +36,7 @@ Route::resource('/class','backend\ClassController');
 Route::resource('/class-detail','backend\ClassDetailController');
 Route::resource('/schedule_learn','backend\schedule_learnController');
 Route::resource('/schedule_teach','backend\schedule_teachController');
+Route::resource('/feedback','backend\FeedbackController');
 
 // Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
 // Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
@@ -90,6 +91,8 @@ Route::group([
 ],
 function()
 {
-    Route::get('/', 'student\IndexController@index');
+    Route::get('/', 'student\IndexController@index')->name('home.student');
     Route::resource('notification','student\NotificationController');
+    Route::get('feedback','student\StudentFeedbackController@getFormFeedback')->name('get.StudentFeedback');
+    Route::post('feedback','student\StudentFeedbackController@postFormFeedback')->name('post.StudentFeedback');
 });

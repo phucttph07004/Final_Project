@@ -31,7 +31,7 @@ class ClassController extends Controller
                 }else{
                     $data['levels']=Level::all();
                     $data['courses']=Course::all();
-                    $data['classes']=Classes::where("$key",'LIKE',"$value")->paginate(10);
+                    $data['classes']=Classes::where("$key",'LIKE',"%$value%")->paginate(10);
                 }
             }
         }else{
@@ -50,7 +50,6 @@ class ClassController extends Controller
      */
     public function create(Request $request)
     {
-        $data['courses'][]=null;
         foreach(Course::all() as $value){
             $first_date = strtotime($value->start_date);
             $second_date = strtotime($value->finish_date);
@@ -61,6 +60,8 @@ class ClassController extends Controller
 
             if($start_date_plus10 >= date('Y-m-d')){
                 $data['courses'][]=$value;
+            }else{
+                $data['courses']=null;
             }
         }
 
