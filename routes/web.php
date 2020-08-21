@@ -28,6 +28,7 @@ Route::resource('/notifications','backend\NotificationController');
 Route::POST('/notification/store/default','backend\ExcelController@student_store_default');
 Route::resource('/student','backend\StudentController');
 Route::resource('/account','backend\AccountController');
+Route::resource('/password','backend\AccountChangePassController');
 Route::resource('/level','backend\LevelController');
 Route::resource('/user','backend\UserController');
 Route::resource('/category','backend\CategoryController');
@@ -43,9 +44,6 @@ Route::resource('/feedback','backend\FeedbackController');
 Route::get('/student/create/selected/{slot}/{level}','backend\ExcelController@show_class_add');
 Route::get('/schedule_learn/show/edit/{id}','backend\ExcelController@show_edit_schedule');
 
-
-Route::get('/search', 'SearchController@action')->name('search.action');
-Route::get('/changeStatus' , 'ChangeStatusController@changeStatus');
 });
 
 
