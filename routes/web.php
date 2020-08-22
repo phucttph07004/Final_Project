@@ -30,6 +30,7 @@ Route::resource('/student','backend\StudentController');
 Route::resource('/enrollment','backend\EnrollmentController');
 Route::resource('/changeStatus', 'backend\StudentController@changeStatus');
 Route::resource('/account','backend\AccountController');
+Route::resource('/password','backend\AccountChangePassController');
 Route::resource('/level','backend\LevelController');
 Route::resource('/user','backend\UserController');
 Route::resource('/category','backend\CategoryController');
@@ -38,15 +39,13 @@ Route::resource('/class','backend\ClassController');
 Route::resource('/class-detail','backend\ClassDetailController');
 Route::resource('/schedule_learn','backend\schedule_learnController');
 Route::resource('/schedule_teach','backend\schedule_teachController');
+Route::resource('/feedback','backend\FeedbackController');
 
 // Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
 // Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 Route::get('/student/create/selected/{slot}/{level}','backend\ExcelController@show_class_add');
 Route::get('/schedule_learn/show/edit/{id}','backend\ExcelController@show_edit_schedule');
 
-
-Route::get('/search', 'SearchController@action')->name('search.action');
-Route::get('/changeStatus' , 'ChangeStatusController@changeStatus');
 });
 
 
@@ -92,6 +91,8 @@ Route::group([
 ],
 function()
 {
-    Route::get('/', 'student\IndexController@index');
+    Route::get('/', 'student\IndexController@index')->name('home.student');
     Route::resource('notification','student\NotificationController');
+    Route::get('feedback','student\StudentFeedbackController@getFormFeedback')->name('get.StudentFeedback');
+    Route::post('feedback','student\StudentFeedbackController@postFormFeedback')->name('post.StudentFeedback');
 });

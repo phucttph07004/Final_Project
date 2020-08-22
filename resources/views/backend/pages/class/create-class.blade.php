@@ -30,15 +30,14 @@
         <br>
         {!! ShowErrors($errors,'course_id') !!}
         <select name="course_id" class="form-control">
-            
+            @if($courses == 0)
+            <option >Hiện tại không có khoá học phù hợp vui lòng tạo một khoá mới</option>
+            @else
             @foreach ($courses as $course)
-                @if($course == null)
-                <option >Hiện tại không có khoá học phù hợp</option>
-
-                @else
                 <option value="{{ $course->id }}">{{ $course->course_name}}</option>
-                @endif
             @endforeach
+            @endif
+
         </select>
     </div>
     <div class="form-group">

@@ -45,18 +45,16 @@ class StudentRequest extends FormRequest
 
         return [
             'fullname'=>'required|min:6',
-<<<<<<< HEAD
-            
-=======
             'email'=>'required|email|unique:students',
             'address'=>'required|min:10',
             'phone'=>'required|numeric|digits:10',
-            'class_id'=>$required,
+            // 'class_id'=>$required,
             'date_of_birth'=>'required|date',
             'avatar'=>'required|mimes:jpeg,jpg,png',
-            'level_id'=>$required_waitinglist,
-            'slot_add'=>$required_waitinglist,
->>>>>>> a7e8bede8c69dce8b4f6849eb403e6473c160878
+            // 'level_id'=>$required_waitinglist,
+            // 'slot_add'=>$required_waitinglist,
+            'level_id'=>'required',
+            'slot_add'=>'required',
 
         ];
     }
@@ -73,7 +71,7 @@ class StudentRequest extends FormRequest
             'phone.required'=>'Không được bỏ trống số điện thoại',
             'phone.numeric'=>'số điện thoại phải là chữ số',
             'phone.digits'=>'số điện thoại phải đúng định dạng',
-            'class_id.required'=>'Không được bỏ trống lớp học',
+            // 'class_id.required'=>'Không được bỏ trống lớp học',
             'date_of_birth.required'=>'Không được bỏ trống ngày sinh',
             'date_of_birth.date'=>'phải đúng định dạng ngày tháng',
             'avatar.required'=>'ảnh không được bỏ trống',

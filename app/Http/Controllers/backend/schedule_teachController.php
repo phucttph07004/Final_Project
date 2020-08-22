@@ -32,6 +32,7 @@ class schedule_teachController extends Controller
             return view('backend.pages.schedule_teach.index', $data);
         }
 
+        // xếp giáo iên thì thêm id vào cả của bảng class
 
 
 

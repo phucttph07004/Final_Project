@@ -4,6 +4,7 @@ namespace App\Http\Requests\backend\news;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use App\Models\News;
 class NewsRequest extends FormRequest
 {
     /**
@@ -22,11 +23,17 @@ class NewsRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    {$segments = request()->segments();
+        $news = News::find((int) end($segments));
+        if(request('avatar') != $news->avatar){
+            $mimes ='|mimes:jpeg,jpg,png';
+        }else{
+            $mimes ='required';
+        }
         return [
             'title'=>'required|min:6',
             'content'=>'required',
-            'image'=>'required|mimes:jpeg,jpg,png'
+            'image'=>$mimes,
         ];
     }
 

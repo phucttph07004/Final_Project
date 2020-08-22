@@ -44,18 +44,10 @@
         <label for="exampleFormControlInput1">Vai trò</label>
         <br>
         <select class="form-control" name="role" id="">
-            <option @if ($users->role == 5) selected @endif value="5">Giám đốc chi nhánh</option>
+            <option @if ($users->role == 5) selected @endif value="5">Giám đốc</option>
             <option @if ($users->role == 4) selected @endif value="4">Giáo viên</option>
-            <option @if ($users->role == 3) selected @endif value="3">Trợ giảng</option>
+            <option @if ($users->role == 3) selected @endif value="3">Quản lý</option>
             <option @if ($users->role == 2) selected @endif value="2">Admin</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlInput1">Trạng thái</label>
-        <br>
-        <select class="form-control" name="status" id="">
-            <option @if ($users->status == 1) selected @endif value="1">Hoạt động</option>
-            <option @if ($users->status == 0) selected @endif value="0">Khoá</option>
         </select>
     </div>
     <a class="btn btn-danger mb-5" href="{{ route('user.index') }}">Quay lại</a>

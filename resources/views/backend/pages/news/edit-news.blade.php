@@ -53,12 +53,12 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="">Thumbnail</label> <br>
-            <img src="storage/{{ $news->image }}" width="30%" alt="">
-        </div>
-        <div class="form-group">
-            <label for="">Đổi ảnh mới</label>
-            <input class="form-control" type="file" name="image" id="">
+            <label for="exampleFormControlInput1">Ảnh</label> <br>
+            <img style="width:30%" src="storage/{{ $news->image }}" alt="">
+            <br>
+            {!! ShowErrors($errors,'image') !!}
+            <input type="hidden" name="image" value="{{ $news->image }}">
+            <input type="file" name="image" class="form-control">
         </div>
     </div>
     <div class="card-footer">

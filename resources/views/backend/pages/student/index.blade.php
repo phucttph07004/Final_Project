@@ -3,10 +3,10 @@
 @section('title_page','Quản Trị Học Viên')
 @section('content')
 <div class="row">
-    <div class="col-12">
-        <div style="padding-left: 45px" class="row bg-light form-inline">
-            <div style="margin-right: -60px;z-index: 2;" class="col-5 text-right pr-0">
-                <div class="ml-5 dropdown pt-3 pb-4 mt-2">
+    <div class="col-12 ">
+        <div class="row bg-light d-flex justify-content-end ">
+            <div class=" text-right">
+                <div class="mr-4 dropdown pt-3 pb-4 mt-2">
                     <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Lọc Theo Khóa
                     </button>
@@ -18,10 +18,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-7">
-                <div class="row pl-5">
-                    <div class="ml-5 dropdown pt-3 pb-4 mt-2">
-                        <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="">
+                <div class="row">
+                    <div class="dropdown pt-3 pb-4 mr-2 mt-2">
+                        <button class="border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Lọc Theo Trạng Thái
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -32,14 +32,12 @@
                             <a class="dropdown-item" href="/admin/student?status=0">Bảo Lưu</a>
                         </div>
                     </div>
-                    <div style="width: 300px;">
-                        <form class="form-inline pt-4">
+                        <form style="margin-right: 75px" class="form-inline">
                             <input name="code" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo mã Học Viên" aria-label="Search">
                             <a>
                                 <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                             </a>
                         </form>
-                    </div>
                 </div>
             </div>
         </div>

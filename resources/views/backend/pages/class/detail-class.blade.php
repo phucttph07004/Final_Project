@@ -68,13 +68,13 @@
                     value="{{$class->finish_date}}">
             </div>
         </div>
-        <!-- <div class="col-6">
+        <div class="col-6">
             <div class="form-group">
                 <label for="">Số buổi học</label>
                 <input type="text" readonly="readonly" class="form-control" name="number_of_sessions" id=""
                     value="{{$class->number_of_sessions}}">
             </div>
-        </div> -->
+        </div>
     </div>
     <h3 class="ml-4 mb-3">Danh sách học viên</h3>
 

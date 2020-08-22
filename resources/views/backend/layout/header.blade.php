@@ -44,7 +44,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
     <link rel="stylesheet" href="dist/css/notification.css">
     <!-- CK EDITOR -->
-    <!-- <script src="ckeditor/ckeditor.js"></script> -->
+    <style>
+        select.form-control{
+            height:auto!important;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">

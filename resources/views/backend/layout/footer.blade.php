@@ -42,14 +42,6 @@ $(function() {
     $('.textarea').summernote();
 
     $("input").on("change", function() {
-    this.setAttribute(
-        "data-date",
-        moment(this.value, "YYYY-MM-DD")
-        .format( this.getAttribute("data-date-format") )
-    )
-}).trigger("change")
-
-  })
         this.setAttribute(
             "data-date",
             moment(this.value, "YYYY-MM-DD")
@@ -58,28 +50,6 @@ $(function() {
     }).trigger("change")
 
 })
-
-$(document).ready(function() {
-
-    $(document).on('keyup', '#search', function() {
-        var query = $(this).val();
-        $.ajax({
-            type: 'GET',
-            url: "{{ route('search.action') }}",
-            method: 'GET',
-            data: {
-                query: query
-            },
-            dataType: 'json',
-            success: function(data) {
-                $('#tbody').html(data);
-                console.log(data);
-            }
-        })
-    });
-
-
-});
 </script>
 
 <script type="text/javascript">

@@ -8,7 +8,7 @@
     <!-- Plugin -->
     <link rel="stylesheet" href="/plugins/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" href="/plugins/box/jquery.fancybox.min.css">
-    <link rel="stylesheet" href="/plugins/carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="/x/carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="/plugins/carousel/owl.theme.default.min.css">
     <link rel="stylesheet" href="/plugins/animation/animate.css">
 

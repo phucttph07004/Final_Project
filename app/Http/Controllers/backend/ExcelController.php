@@ -19,7 +19,7 @@ class ExcelController extends Controller
 //         return redirect()->back()->with('thongbao', 'Thêm Học Viên Thành Công');
 //     }
 
-    public function show_class_add($slot,$level )
+    public function show_class_add($slot,$level)
     {
         $get_all_course = array();
         foreach (Course::all() as $value) {
@@ -35,8 +35,9 @@ class ExcelController extends Controller
             }
         }
 
-        if( count($get_all_course) !=0 ){
 
+
+        if( count($get_all_course) !=0 ){
         $get_class=Schedule::where([['slot',$slot],['level_id',$level]])->get();
         if(count($get_class) == 0){
             return $get_class;
