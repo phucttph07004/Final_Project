@@ -36,8 +36,8 @@
 
 <script src="plugins/summernote/summernote-bs4.min.js"></script>
 
-<script>
-  $(function () {
+<script type="text/javascript">
+$(function() {
     // Summernote
     $('.textarea').summernote();
 
@@ -48,13 +48,48 @@
         .format( this.getAttribute("data-date-format") )
     )
 }).trigger("change")
-    
-  })
 
+  })
+        this.setAttribute(
+            "data-date",
+            moment(this.value, "YYYY-MM-DD")
+            .format(this.getAttribute("data-date-format"))
+        )
+    }).trigger("change")
+
+})
+
+$(document).ready(function() {
+
+    $(document).on('keyup', '#search', function() {
+        var query = $(this).val();
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('search.action') }}",
+            method: 'GET',
+            data: {
+                query: query
+            },
+            dataType: 'json',
+            success: function(data) {
+                $('#tbody').html(data);
+                console.log(data);
+            }
+        })
+    });
+
+
+});
 </script>
 
+<script type="text/javascript">
+$.ajaxSetup({
+    headers: {
+        'csrftoken': '{{ csrf_token() }}'
+    }
+});
+</script>
 @stack('scripts')
-
-
 </body>
+
 </html>

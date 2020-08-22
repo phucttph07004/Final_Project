@@ -27,6 +27,7 @@ class CreateStudentsTable extends Migration
             $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             $table->integer('status');
             $table->bigInteger('fee_status');
+            $table->string('code_reset_password')->nullable();
             $table->timestamps();
         });
     }

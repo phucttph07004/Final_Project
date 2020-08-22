@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\backend;
-use App\Models\{Level,Classes};
+use App\Models\{Level,Classes,Course};
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\backend\level\{LevelRequest,LevelRequestEdit};
@@ -32,8 +32,27 @@ class LevelController extends Controller
         return redirect()->back()->with('thongbao','Thêm Level Thành Công');
     }
 
-    public function show(Level $level){
-        $data['get_level']=$level;
+    public function show(Request $request,$id){
+        
+
+        if($request->all() != null && $request['page'] == null){
+            foreach($request->all() as $key => $value){
+                if($key == 'status'){
+                    $data['level'] = Level::find($id);
+                   $data['courses']=Course::all();
+                    $data['classes']=Classes::where('level_id','=',$id)->where("$key","$value")->paginate(10);
+                }else{
+                    $data['level'] = Level::find($id);
+                    $data['courses']=Course::all();
+                    $data['classes']=Classes::where('level_id','=',$id)->where("$key",'LIKE',"%$value%")->paginate(10);
+                }
+            }
+        }else{
+            $data['level'] = Level::find($id);
+            $data['classes']=Classes::where('level_id','=',$id)->get();
+            $data['courses']=Course::all();
+        }
+        $request->get('course_id');
         return view('backend.pages.level.detail',$data);
     }
 

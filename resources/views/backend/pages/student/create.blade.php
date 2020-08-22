@@ -2,7 +2,7 @@
 @section('title','Quản Trị Học Viên')
 @section('title_page','Thêm Mới Học Viên')
 @section('content')
-<form enctype="multipart/form-data" class="pl-5 pt-5" action="{{ route('student.store') }}" method="POST">
+<form enctype="multipart/form-data" class="pl-5 pt-5 col-10" action="{{ route('student.store') }}" method="POST">
     @csrf
     @if(session('thongbao'))
     <div class="alert alert-primary" role="alert">
@@ -10,50 +10,6 @@
     </div>
     @endif
     <div class="form-group">
-<<<<<<< HEAD
-      <label for="exampleFormControlInput1">Họ Tên</label>
-    <br>
-      
-    <input name="fullname" type="text" value="{{ old('fullname') }}" class="form-control" >
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlInput1">Ảnh</label>
-      <br>
-        
-        <input type="file" name="avatar" class="form-control" >
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlInput1">ngày Sinh</label>
-      <br>
-        
-        <input name="date_of_birth" value="{{ old('date_of_birth') }}" type="date" class="form-control" >
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlInput1">Số Điện Thoại</label>
-      <br>
-       
-        <input name="phone" value="{{ old('phone') }}" type="number" class="form-control" >
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlInput1">email</label>
-      <br>
-       
-        <input name="email" value="{{ old('email') }}" type="email" class="form-control" >
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlInput1">Địa Chỉ</label>
-      <br>
-       
-        <input name="address" value="{{ old('address') }}" type="text" class="form-control" >
-      </div>
-
-
-
-
-
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chọn Chi Nhánh Lever Và Lớp</button>
-=======
         <label for="exampleFormControlInput1">Họ Tên</label>
         <br>
         {!! ShowErrors($errors,'fullname') !!}
@@ -76,6 +32,7 @@
         <br>
         {!! ShowErrors($errors,'phone') !!}
         <input name="phone" value="{{ old('phone') }}" type="number" class="form-control">
+        <input name="class_id" value="" type="hidden">
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">email</label>
@@ -89,69 +46,125 @@
         {!! ShowErrors($errors,'address') !!}
         <input name="address" value="{{ old('address') }}" type="text" class="form-control">
     </div>
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Chọn khóa học Level Và Lớp học</button>
->>>>>>> e8e75107bbba5fb44d3af803dbe24a4550fcc1bc
-        <br>
-       
-        <ul class="dropdown-menu">
+    {!! ShowErrors($errors,'class_id') !!}
 
-            @if($get_all_course == null)
-            Các khóa học đã kết thúc hoặc quá 10% số buổi học
+
+
+<div class="row">
+    <div class="form-group col-4">
+        <span class="error_course" style="color: red"></span>
+    </div>
+
+    <div class="form-group col-4">
+        <span class="error_level" style="color: red"></span>
+        {!! ShowErrors($errors,'level_id') !!}
+    </div>
+
+    <div class="form-group col-4">
+        {!! ShowErrors($errors,'slot_add') !!}
+    </div>
+
+    <div class="form-group col-4">
+        <select class="form-control h-100" name="course_id" id="course">
+            @if(count($get_all_course) == 0)
+            <option value="-1">Khóa đã kết thức hoặc quá 10% số buổi vui lòng tạo khóa và lớp mới hoặc  chọn level và ca học để lưu vào danh sách chờ</option>
             @else
-            @foreach ($get_all_course as $item)
-            <li class="dropdown-submenu">
-                <a style="width: 245px;" class="test" tabindex="-1">{{ $item->course_name }}<span style="margin-top: 8px" class="caret float-right"></span></a>
-                <ul class="dropdown-menu">
-                    @foreach ($get_all_level as $level)
-                    <li class="dropdown-submenu">
-                        <a style="padding-left: 20px" class="test">Level: {{ $level->level }}<span class="caret ml-4"></span></a>
-                        <ul class="dropdown-menu">
-                            <?php $i = 0 ?>
-                            @foreach ($get_all_class as $class)
-                            @if($class->course_id == $item->id && $class->level_id == $level->id && $class->status == 1)
-                            <input style="margin-left: 15px;" type="radio" id="id_{{$class->id}}" name="class_id" value="{{$class->id}}">
-                            <label for="id_{{$class->id}}">{{$class->name}}</label>
-                            <br>
-                            <?php $i++; ?>
-                            @endif
-                            @endforeach
-                            @if($i == 0)
-                            <p style="margin-left: 15px;">Chưa có lớp nào ở level và trong khóa này</p>
-                            @endif
-                        </ul>
-                    </li>
-                    @endforeach
-                </ul>
-            </li>
+            <option value="-2">Chọn Khóa</option>
+            @endif
+            @if(count($get_all_course) != 0)
+            @foreach($get_all_course as $course)
+            <option value="{{$course->id}}"> {{$course->course_name}}</option>
             @endforeach
             @endif
-        </ul>
+        </select>
+    </div>
+
+    <div class="form-group col-4">
+        <select class="form-control h-100" name="level_id" id="Level">
+            <option value="">Chọn Level</option>
+            @foreach($get_all_level as $level)
+            <option value="{{$level->id}}">Level: {{$level->level}}</option>
+            @endforeach
+        </select>
     </div>
 
 
+    <div class="form-group col-4">
+        <select class="form-control h-100" name="slot_add" id="slot">
+            <option value="">Chọn Ca</option>
+            <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
+            <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
+            <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
+            <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
+            <option value="5">Ca 5 ( 6h đến 8h )</option>
+            <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+        </select>
+    </div>
+
+</div>
+
+    <div class="form-group ">
+        <div class="row paste_class">
+            {{-- show class --}}
+        </div>
+    </div>
     <button type="submit" class="mt-5 mb-5 btn btn-primary">Thêm Học Viên</button>
 </form>
-<style>
-    .dropdown-submenu {
-        position: relative;
-    }
-
-    .dropdown-submenu .dropdown-menu {
-        top: 0;
-        left: 100%;
-        margin-top: -1px;
-    }
-</style>
 @endsection
-
 @push('scripts')
 <script>
     $(document).ready(function() {
-        $('.dropdown-submenu a.test').on("click", function(e) {
-            $(this).next('ul').toggle();
-            e.stopPropagation();
-            e.preventDefault();
+        $('#Level').change(function() {
+            if ($('#Level').val() != 0) {
+                $('.error_level').html('');
+                $("#slot option[value='']").prop("selected", "selected")
+            }
+        });
+        $('#course').change(function() {
+            if ($('#course').val() != -2) {
+                $('.error_course').html('');
+                $("#slot option[value='']").prop("selected", "selected")
+                $("#Level option[value='']").prop("selected", "selected")
+            }
+        });
+        $('#slot').on('change', function() {
+            if ($('#course').val() == -2) {
+                $('.error_course').html('Nếu bỏ trống Khóa Học học viên sẽ được lưu vào danh sách chờ');
+            }
+            if ($('#Level').val() == 0) {
+                $('.error_level').html('Không được bỏ trống level');
+            } else {
+                $.ajax({
+                    url: '/admin/student/create/selected/' + $(this).val() + '/' + $('#Level').val(),
+                    method: 'get',
+                    success: function(response) {
+                        // đổ dữ liệu
+                        if (response == -1) {
+                            html = "<p class='pl-4 text-danger'>Các khóa học đã kết thúc hoặc quá 10% số buổi học viên sẽ được lưu vào danh sách chờ </p>"
+                        } else {
+                            if (response.length === 0) {
+                                html = "<p class='pl-4 mt-5 text-danger'>Chưa có lớp nào trong ca này vui lòng chọn ca khác nếu không học viên sẽ được lưu vào danh sách chờ</p>"
+                            } else {
+                                html = "";
+                                response.map(x => {
+                                    html += `
+                            <div class="form-check col-3 mt-3">
+                            <h5 class="font-weight-bold">Danh Sách Lớp</h5>
+                            <input class="form-check-input" type="radio" name="class_id" id="${x.id}" value="${x.id}">
+                            <label class="form-check-label font-weight-normal ml-2 pl-4" for="${x.id}">
+                                ${x.name}
+                            </label>
+                            </div>
+                            `;
+                                })
+                            }
+                        }
+                        if($('#course').val() != -2){
+                            $('.paste_class').html(html);
+                        }
+                    }
+                });
+            }
         });
     });
 </script>

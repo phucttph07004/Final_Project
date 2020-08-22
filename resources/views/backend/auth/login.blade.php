@@ -38,7 +38,8 @@
                                 
 =======
                                 @csrf
-                                <input class="login__form-input" type="text" name="email" value="{{old('email')}}" placeholder="Email">
+                                <input class="login__form-input" type="text" name="email" value="{{old('email')}}"
+                                    placeholder="Email">
                                 {!! ShowErrors($errors,'email') !!}
 >>>>>>> e8e75107bbba5fb44d3af803dbe24a4550fcc1bc
                                 <div class="login__form-password">
@@ -52,11 +53,25 @@
                          
 =======
                                 {!! ShowErrors($errors,'password') !!}
-                                @if(session('thongbao'))
-                                <span style='color: red'>{{session('thongbao')}}</span>
+                                
+                                @if(session()->has('success'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('success') }}
+                                </div>
+                                @elseif(session()->has('danger'))
+                                <div class="alert alert-danger">
+                                    {{ session()->get('danger') }}
+                                </div>
                                 @endif
+<<<<<<< HEAD
 >>>>>>> e8e75107bbba5fb44d3af803dbe24a4550fcc1bc
                                 <button type="submit" class="btn login__form-btn">Đăng nhập</button>
+=======
+                                <div class="d-flex align-items-center">
+                                    <button type="submit" style="margin-right:40px" class="btn login__form-btn">Đăng nhập</button>
+                                    <a href="{{route('get.forgotpassword')}}">Quên mật khẩu</a>
+                                </div>
+>>>>>>> a7e8bede8c69dce8b4f6849eb403e6473c160878
                             </form>
                         </div>
                     </div>

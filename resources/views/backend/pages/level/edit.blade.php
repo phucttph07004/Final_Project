@@ -16,6 +16,19 @@
       {!! ShowErrors($errors,'level') !!}
       <input name="level"  value="{{ $get_level->level }}" type="text" class="form-control" >
     </div>
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Mô tả</label>
+    <br>
+      {!! ShowErrors($errors,'description') !!}
+      <input name="description"  value="{{ $get_level->description }}" type="text" class="form-control" >
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Học phí</label>
+    <br>
+      {!! ShowErrors($errors,'fee') !!}
+      <input name="fee"  value="{{ $get_level->fee}}" type="text" class="form-control" >
+    </div>
     <button type="submit" class="mb-5 btn btn-primary"> Sửa Level</button>
+    <a href="{{route('level.index')}}" class="mb-5 btn btn-warning">Quay lại</a>
   </form>
   @endsection

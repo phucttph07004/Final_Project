@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\backend\student;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\{Course};
 class StudentRequest extends FormRequest
 {
     /**
@@ -21,9 +22,41 @@ class StudentRequest extends FormRequest
      */
     public function rules()
     {
+        $get_all_course = array();
+        foreach (Course::all() as $value) {
+            $first_date = strtotime($value->start_date);
+            $second_date = strtotime($value->finish_date);
+            $datediff = abs($first_date - $second_date);
+            $time_allowed = floor($datediff / (60 * 60 * 24) / 10);
+            $start_date = strtotime(date("Y-m-d", strtotime($value->start_date)) . " +$time_allowed days");
+            $start_date_plus10 = strftime("%Y-%m-%d", $start_date);
+            if ($start_date_plus10 >= date('Y-m-d')) {
+                $get_all_course[] = $value;
+            }
+        }
+        if(count($get_all_course) !=0 ){
+            $required='required';
+            $required_waitinglist='';
+        }else{
+            $required='';
+            $required_waitinglist='required';
+        }
+
+
         return [
             'fullname'=>'required|min:6',
+<<<<<<< HEAD
             
+=======
+            'email'=>'required|email|unique:students',
+            'address'=>'required|min:10',
+            'phone'=>'required|numeric|digits:10',
+            'class_id'=>$required,
+            'date_of_birth'=>'required|date',
+            'avatar'=>'required|mimes:jpeg,jpg,png',
+            'level_id'=>$required_waitinglist,
+            'slot_add'=>$required_waitinglist,
+>>>>>>> a7e8bede8c69dce8b4f6849eb403e6473c160878
 
         ];
     }
@@ -45,6 +78,8 @@ class StudentRequest extends FormRequest
             'date_of_birth.date'=>'phải đúng định dạng ngày tháng',
             'avatar.required'=>'ảnh không được bỏ trống',
             'avatar.mimes'=>'Ảnh phải đúng định dạng jpg , png ,jpeg',
+            'level_id.required'=>'Không được bỏ trống level',
+            'slot_add.required'=>'Không được bỏ trống slot',
         ];
     }
 }

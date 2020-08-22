@@ -26,17 +26,20 @@ class ClassController extends Controller
             foreach($request->all() as $key => $value){
                 if($key == 'status'){
                     $data['levels']=Level::all();
+                    $data['courses']=Course::all();
                     $data['classes']=Classes::where("$key","$value")->paginate(10);
                 }else{
                     $data['levels']=Level::all();
-                    $data['classes']=Classes::where("$key",'LIKE',"%$value%")->paginate(10);
+                    $data['courses']=Course::all();
+                    $data['classes']=Classes::where("$key",'LIKE',"$value")->paginate(10);
                 }
             }
         }else{
             $data['levels']=Level::all();
+            $data['courses']=Course::all();
             $data['classes'] = Classes::paginate(10);
+            
         }
-
         return view('backend.pages.class.class',$data);
     }
 
@@ -47,6 +50,7 @@ class ClassController extends Controller
      */
     public function create(Request $request)
     {
+        $data['courses'][]=null;
         foreach(Course::all() as $value){
             $first_date = strtotime($value->start_date);
             $second_date = strtotime($value->finish_date);
@@ -75,9 +79,7 @@ class ClassController extends Controller
         $data = Arr::except($request->all(), ['_token']);
         $data['user_id'] = Auth::user()->id;
         $data['status'] = '1';
-
         Classes::create($data);
-
         return redirect()->route('class.index')->with('thongbao','Thêm lớp thành công');
     }
 
@@ -123,7 +125,6 @@ class ClassController extends Controller
         $data = Arr::except(request()->all(), ["_token ,'_method'"]);
         $update_at = Carbon::now()->toarray();
         $data['update_at'] = $update_at['formatted'];
-
         $classes->update($data);
 
         return redirect()->route('class.index')->with('thongbao','Cập nhật lớp học thành công');
@@ -136,7 +137,7 @@ class ClassController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy($id){
+    public function destroy(Request $request,$id){
         $class = Classes::find($id);
         $data = Arr::except(request()->all(), ["_token ,'_method'"]);
 

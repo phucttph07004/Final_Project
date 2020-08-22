@@ -1,21 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\student;
 
 use App\Http\Controllers\Controller;
-use App\Models\{Branch, Student,Classroom,Level};
 use Illuminate\Http\Request;
 
+use App\Models\Notification;
 
-use App\Models\{Classes,Course,Level,User,Student};
-
-use Arr;
-use Auth;
-use Carbon\Carbon;
-
-class ClassDetailController extends Controller
+class NotificationController extends Controller
 {
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         //
@@ -29,8 +27,6 @@ class ClassDetailController extends Controller
     public function create()
     {
         //
-        $data['get_all_level']=Level::all();
-        return view('frontend.register',$data);
     }
 
     /**
@@ -41,11 +37,7 @@ class ClassDetailController extends Controller
      */
     public function store(Request $request)
     {
-       
-        $data = Arr::except($request->all(), ['_token']);
-        $data['status']=0;
-        $register = Register::create($data);
-        return redirect()->back()->with('thongbao','Bạn đã đăng ký thành công');;
+        //
     }
 
     /**
@@ -56,7 +48,8 @@ class ClassDetailController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['notification'] = Notification::find($id);
+        return view('student.pages.notification.notification',$data);
     }
 
     /**
@@ -70,8 +63,8 @@ class ClassDetailController extends Controller
         //
     }
 
-    /**;
-     * Update the; specified resource in storage.
+    /**
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -79,11 +72,7 @@ class ClassDetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $students = Student::find($id);
-        $data = Arr::except(request()->all(), ["_token ,'_method'"]);
-        $students->update($data);
-
-        return redirect()->route('class.index')->with('thongbao','Cập nhật lớp học thành công');
+        //
     }
 
     /**
