@@ -41,6 +41,7 @@ Route::resource('/schedule_teach','backend\schedule_teachController');
 // Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 Route::get('/student/create/selected/{slot}/{level}','backend\ExcelController@show_class_add');
 Route::get('/schedule_learn/show/edit/{id}','backend\ExcelController@show_edit_schedule');
+Route::get('/schedule_teach/create/{id}','backend\ExcelController@show_teacher_schedule_teach');
 
 
 Route::get('/search', 'SearchController@action')->name('search.action');
