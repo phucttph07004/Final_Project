@@ -24,7 +24,7 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $settings = Setting::all();
+        $settings = Setting::limit(1)->get();
         $abouts = News::where('type','about')->limit(1)->get();
         return view('backend.pages.setting.setting',['settings' => $settings,'abouts' => $abouts]);
     }

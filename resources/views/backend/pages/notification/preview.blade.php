@@ -55,9 +55,9 @@
             <div class="row">
                 <div class="col-4 ml-4">
                     <div class="form-group">
-                        <select class="form-control" name="is_active" id="">
+                        <select class="form-control" name="status" id="">
                             <br>
-                            {!! ShowErrors($errors,'is_active') !!}
+                            {!! ShowErrors($errors,'status') !!}
                             <option>Chọn Xác Nhận</option>
                             <option value="1">Xác Nhận Gửi Thông Báo</option>
                             <option value="2">Lưu thông Báo Vào Nháp</option>

@@ -28,10 +28,10 @@ class AccountController extends Controller
         }
         $updated_at=Carbon::now()->toarray();
 
-        if ($request->hasFile('image')) {
-            $data['image']=$request->file('image')->store('images','public');
+        if ($request->hasFile('avatar')) {
+            $data['avatar']=$request->file('avatar')->store('images','public');
          }else{
-             $data['image']=$user->avatar;
+             $data['avatar']=$user->avatar;
          }
 
         $data['updated_at']=$updated_at['formatted'];

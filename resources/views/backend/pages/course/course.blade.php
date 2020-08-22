@@ -1,0 +1,82 @@
+@extends('./backend/layout/master')
+@section('title','Quản Lý Khoá Học')
+@section('title_page','Quản Lý Khoá Học')
+@section('content')
+<section class="content">
+    <form action="" class="d-flex mb-4 ml-5 pt-4">
+        <div class="col-4"><input type="date" class="form-control" name="start_date" id=""></div>
+        <div class="col-4"><input type="date" class="form-control" name="finish_date" id=""></div>
+        <div class="col-3">
+            <button type="submit" class="btn btn-outline-info">
+                Lọc theo ngày tháng
+            </button>
+        </div>
+    </form>
+    <form class="ml-5 d-flex align-items-center" action="">
+        <div class="col-6">
+        <input class="form-control" type="text" name="course_name" placeholder="Lọc theo tên khoá">
+        </div>
+        <button type="submit" class="btn btn-outline-info mr-4">Lọc</button>
+        <a href="{{route('course.index')}}" class="btn btn-outline-success">Bỏ lọc</a>
+    </form>
+    <table style="background-color: white" class="table ml-5">
+        @if(session('thongbao'))
+        <div class="alert alert-primary text-center" role="alert">
+            {{session('thongbao') }}
+        </div>
+        @endif
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Khoá</th>
+                <th scope="col">Ngày Khai Giảng</th>
+                <th scope="col">Dự kiến kết thúc</th>
+                <th scope="col">Người tạo</th>
+                <th scope="col">
+                    <a href="{{ route('course.create') }}">
+                        <button type="button" class="btn btn-outline-primary">Tạo khoá học mới</button>
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i=1 ?>
+            @foreach ($courses as $course)
+            <tr>
+                <th scope="row">{{ $i++ }}</th>
+                <td>{{ $course->course_name }}</td>
+                <td>{{date('d-m-Y', strtotime($course->start_date))}}</td>
+                <td>{{date('d-m-Y', strtotime($course->finish_date))}}</td>
+                <td>{{$course->userName->fullname}}</td>
+                <td>
+                    <a class="btn btn-outline-info" href="{{ route('course.show',"$course->id") }}">Chi Tiết</a>
+                    <a class="btn btn-outline-warning" href="{{ route('course.edit',"$course->id") }}">Sửa</a>
+                    <a id="btn_delete_{{ $course->id }}" class="btn btn-outline-danger">Xóa</a>
+                    <form id="delete_form_{{ $course->id }}" action="{{ route('course.destroy',$course->id) }}"
+                        method="post" style="display: none;">
+                        @method('DELETE')
+                        @csrf
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <div class="container justify-content-center d-flex mt-5 pb-5">
+        <nav aria-label="" class="news__pagination">
+            {{ $courses->links() }}
+        </nav>
+    </div>
+</section>
+@endsection
+
+@push('scripts')
+<script>
+$("a[id^='btn_delete_']").click(function(event) {
+    id = event.currentTarget.attributes.id.value.replace('btn_delete_', '');
+    if (confirm('Bạn có muốn xóa không')) {
+        $("#delete_form_" + id).submit();
+    }
+});
+</script>
+@endpush

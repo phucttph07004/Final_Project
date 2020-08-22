@@ -2,17 +2,17 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\{Classroom,Branch,User,Level,Schedule};
+use App\Models\{Classes,User,Level,Course};
 use Faker\Generator as Faker;
 
-$factory->define(Classroom::class, function (Faker $faker) {
+$factory->define(Classes::class, function (Faker $faker) {
     return [
-        'branch_id' =>Branch::inRandomOrder()->first()->id,
+        'name' =>$faker->name,
+        'number_of_sessions'=>$faker->numberBetween($min = 1, $max = 5),
         'teacher_id' =>User::inRandomOrder()->first()->id,
-        'teaching_assitant_id' =>User::inRandomOrder()->first()->id,
         'level_id' =>Level::inRandomOrder()->first()->id,
-        'schedule_id' =>Schedule::inRandomOrder()->first()->id,
-        'class_name' =>$faker->name,
-        'code' =>'ph07004',
+        'user_id' =>User::inRandomOrder()->first()->id,
+        'course_id' =>Course::inRandomOrder()->first()->id,
+        'status' => 1,
     ];
 });

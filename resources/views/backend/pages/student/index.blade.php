@@ -3,7 +3,7 @@
 @section('title_page','Quản Trị Học Viên')
 @section('content')
 <div class="col-12">
-    <div style="padding-left: 165px" class="row bg-light form-inline">
+    <div style="padding-left: 45px" class="row bg-light form-inline">
         <div class="col-5"></div>
         <div class="col-7">
             <div class="row pl-5">
@@ -12,9 +12,13 @@
                     Lọc Theo Trạng Thái
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/admin/student">Tất Cả</a>
-                    <a class="dropdown-item" href="/admin/student?is_active=1">Đang Hoạt Động</a>
-                    <a class="dropdown-item" href="/admin/student?is_active=0">Đang Tạm Dừng</a>
+                    <a class="dropdown-student" href="/admin/student">Tất Cả</a>
+
+                    <a class="dropdown-student" href="/admin/student?fee_status=1">Đã Lộp Tiền</a>
+                    <a class="dropdown-student" href="/admin/student?fee_status=0">Chưa Lộp Tiền</a>
+
+                    <a class="dropdown-student" href="/admin/student?status=1">Hoạt Động</a>
+                    <a class="dropdown-student" href="/admin/student?status=0">Bảo Lưu</a>
                 </div>
             </div>
         <div style="width: 300px;">
@@ -29,7 +33,7 @@
         </div>
 </div>
 </div>
-<table style="background-color: white" class="table ml-5 col-10">
+<table style="background-color: white" class="table ml-5 col-12">
     @if(session('thongbao'))
     <div class="alert alert-primary text-center" role="alert">
         {{session('thongbao') }}
@@ -41,15 +45,16 @@
             <th scope="col">Ảnh</th>
             <th scope="col">Họ Tên</th>
             <th scope="col">Mã Học Viên</th>
-            <th scope="col">Chi Nhánh</th>
+            <th scope="col">Khóa Học</th>
+            <th scope="col">Học Phí</th>
             <th scope="col">Trạng Thái</th>
             <th scope="col">
                     <div class="text-left">
-                        <div class="col-12">
-                            <a href="/student/create/excel">
+                        {{-- <div class="col-12">
+                            <a href="/admin/student/create/excel">
                                 <button type="button" class="border-primary btn btn-outline-primary">Thêm File Excel</button>
                             </a>
-                        </div>
+                        </div> --}}
                         <div class="col-12 pt-1">
                             <a href="{{ route('student.create') }}">
                                 <button type="button" class="border-primary btn btn-outline-primary">Thêm Học Viên</button>
@@ -70,44 +75,47 @@
         </td>
         @endif
         <?php $i = 1 ?>
-        @foreach ($get_all_student as $item)
+        @foreach ($get_all_student as $student)
         <tr>
             <th scope="row">{{ $i++ }}</th>
-            <td><img width="100px" src="storage/{{ $item->avatar }}" alt=""></td>
-            <td>{{ $item->fullname }}</td>
-            <td>{{ $item->code }}</td>
+            <td><img width="100px" src="storage/{{ $student->avatar }}" alt=""></td>
+            <td>{{ $student->fullname }}</td>
+            <td>{{ $student->code }}</td>
             <td>
                 @foreach ($get_all_class as $class)
-                @if($item->class_id == $class->id)
-                @foreach ($get_all_branch as $branch)
-                @if($class->branch_id == $branch->id)
-                {{ $branch->branch_name }}
+                @if($student->class_id == $class->id)
+                @foreach ($get_all_course as $course)
+                @if($class->course_id == $course->id)
+                {{ $course->course_name }}
                 @endif
                 @endforeach
                 @endif
-                @endforeach
             </td>
             <td>
-                @if($item->is_active == 1)
-                <p class="text-primary">Đang Hoạt Động</p>
-                @else
-                <p class="text-warning">Không Hoạt Động</p>
-                @endif
-
+            <input data-id="{{$student->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $student->fee_status ? 'checked' : '' }}>
+            @endforeach
+            
             </td>
             <td>
-                <a href="{{ route('student.show',"$item->id") }}">
-                    <button type="button" class="border-info btn btn-outline-info">Chi Tiết</button>
+                <a id="btn_delete_{{ $student->id }}">
+                <input type="checkbox"  @if($student->status == 1) checked @endif
+                data-toggle="toggle" data-on="Hoạt Động"
+                data-off="Bảo Lưu" data-onstyle="success" data-offstyle="danger"
+                >
                 </a>
-                <a href="{{ route('student.edit',"$item->id") }}">
-                    <button type="button" class="border-warning btn btn-outline-warning">Sửa</button>
-                </a>
-
-                {{-- <a id="btn_delete_{{ $item->id }}"class="btn btn-outline-danger">Xóa</a>
-                <form id="delete_form_{{ $item->id }}" action="{{ route('student.destroy',$item->id) }}" method="post" style="display: none;">
+                <form id="delete_form_{{ $student->id }}" action="{{ route('student.destroy',$student->id) }}" method="post" style="display: none;">
                     @method('DELETE')
                     @csrf
-                </form> --}}
+                <input type="hidden" name="status" value="{{ $student->status }}">
+                </form>
+            </td>
+            <td>
+                <a href="{{ route('student.show',"$student->id") }}">
+                    <button type="button" class="border-info btn btn-outline-info">Chi Tiết</button>
+                </a>
+                {{-- <a href="{{ route('student.edit',"$student->id") }}">
+                    <button type="button" class="border-warning btn btn-outline-warning">Sửa</button>
+                </a> --}}
             </td>
         </tr>
         @endforeach
@@ -122,9 +130,25 @@
 <script>
     $("a[id^='btn_delete_']").click(function(event) {
         id = event.currentTarget.attributes.id.value.replace('btn_delete_', '');
-        if (confirm('Bạn có muốn xóa không')) {
             $("#delete_form_" + id).submit();
-        }
     });
 </script>
 @endpush
+<script>
+  $(document).ready(function(){
+    $('.toggle-class').change(function () {
+        let fee_status = $(this).prop('checked') === true ? 1 : 0;
+        let id = $(this).data('id');
+        
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: 'admin/changeStatus',
+            data: {'fee_status': fee_status, 'student_id': id},
+            success: function (data) {
+                console.log(data.message);
+            }
+        });
+    });
+});
+</script>

@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Register extends Model
 {
-    //
-        protected $fillable = [
-            'fullname','date_of_birth','phone','address','level','is_active','email','note'
-        ];
+    protected $fillable = [
+        'fullname', 'email', 'address', 'phone', 'class_id', 'date_of_birth','status'
+    ];
 }

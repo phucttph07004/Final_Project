@@ -21,13 +21,12 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'fullname' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'type' => $faker->randomElement($array = array ('admin','teacher','teaching_asistant','general_manager','branch_manager')),
         'avatar'=>$faker->imageUrl(150, 150, 'cats'),
         'address' => "hà nội",
         'date_of_birth' => $faker->date(),
         'phone' =>'0123456789',
         'role' =>1,
         'password' => bcrypt('123456'),
-        'is_active' => 1,
+        'status' => 1,
     ];
 });
