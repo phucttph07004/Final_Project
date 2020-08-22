@@ -45,6 +45,7 @@ Route::resource('/feedback','backend\FeedbackController');
 // Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 Route::get('/student/create/selected/{slot}/{level}','backend\ExcelController@show_class_add');
 Route::get('/schedule_learn/show/edit/{id}','backend\ExcelController@show_edit_schedule');
+Route::get('/schedule_teach/create/{id}','backend\ExcelController@show_teacher_schedule_teach');
 
 });
 
