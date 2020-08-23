@@ -49,7 +49,7 @@
         </div>
         <div class="col-6">
             <div class="form-group">
-                <label for="">Giáo viên</label>
+                <label for="">Giảng viên</label>
                     @foreach($users as $user)
                     @if($class->teacher_id == $user->id )
                     <input type="text" readonly="readonly" class="form-control" name="teacher_id" id=""

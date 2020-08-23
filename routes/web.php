@@ -94,3 +94,15 @@ function()
     Route::get('feedback','student\StudentFeedbackController@getFormFeedback')->name('get.StudentFeedback');
     Route::post('feedback','student\StudentFeedbackController@postFormFeedback')->name('post.StudentFeedback');
 });
+
+//Student
+Route::group([
+    'prefix'=> 'teacher',
+    'middleware' => ['check_role_admin','check_auth'],
+],
+function()
+{
+    Route::get('/', 'teacher\TeacherController@index')->name('home.teacher');
+    Route::get('schedule-teach', 'teacher\TeacherController@schedule')->name('teacher.scheduleTeach');
+});
+
