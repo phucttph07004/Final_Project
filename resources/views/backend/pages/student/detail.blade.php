@@ -5,38 +5,57 @@
 <form enctype="multipart/form-data" class="pl-5 pt-5" action="" method="POST">
     @csrf
     <div class="row">
+        <div class="col-12">
+            <div class="row">
         <div class="col-6">
-            <div class="form-group col-12">
+            <div class="row">
+            <div class="form-group col-11">
+                <div class="row">
                 <label for="exampleFormControlInput1">Họ Tên</label>
                 <input name="fullname" value="{{ $get_student->fullname }}" type="text" class="form-control">
             </div>
-            <div class="form-group col-12">
+            </div>
+            <div class="form-group col-11">
+                <div class="row">
                 <label for="exampleFormControlInput1">Mã Học Viên</label>
                 <input name="fullname" value="{{ $get_student->code }}" type="text" class="form-control">
             </div>
-            <div class="form-group col-12">
+            </div>
+            <div class="form-group col-11">
+                <div class="row">
                 <label for="exampleFormControlInput1">Ảnh</label>
                 <img src="storage/{{ $get_student->avatar }}" alt="">
             </div>
-            <div class="form-group col-12">
+            </div>
+            <div class="form-group col-11">
+                <div class="row">
                 <label for="exampleFormControlInput1">ngày Sinh</label>
                 <input name="date_of_birth" value="{{ $get_student->date_of_birth }}" type="date" class="form-control">
             </div>
-            <div class="form-group col-12">
+            </div>
+            <div class="form-group col-11">
+                <div class="row">
                 <label for="exampleFormControlInput1">Số Điện Thoại</label>
                 <input name="phone" value="{{ $get_student->phone }}" type="number" class="form-control">
             </div>
-            <div class="form-group col-12">
+            </div>
+            <div class="form-group col-11">
+                <div class="row">
                 <label for="exampleFormControlInput1">email</label>
                 <input name="email" value="{{ $get_student->email }}" type="email" class="form-control">
             </div>
-            <div class="form-group col-12">
+            </div>
+            <div class="form-group col-11">
+                <div class="row">
                 <label for="exampleFormControlInput1">Địa Chỉ</label>
                 <input name="address" value="{{ $get_student->address }}" type="text" class="form-control">
+            </div>
+            </div>
             </div>
         </div>
         <div class="col-6">
             <div class="form-group col-12">
+                <div class="row">
                 <label for="exampleFormControlInput1">Khóa Học</label>
                 @foreach($get_all_course as $course)
                 @if($course->id == $get_student->ClassName->course_id)
@@ -44,7 +63,9 @@
                 @endif
                 @endforeach
             </div>
+            </div>
             <div class="form-group col-12">
+                <div class="row">
                 <label for="exampleFormControlInput1">Level</label>
                 @foreach($get_all_level as $level)
                 @if($level->id == $get_student->ClassName->level_id)
@@ -52,11 +73,15 @@
                 @endif
                 @endforeach
             </div>
+            </div>
             <div class="form-group col-12">
+                <div class="row">
                 <label for="exampleFormControlInput1">lớp Học</label>
                 <input name="address" value="{{ $get_student->ClassName->name }}" type="text" class="form-control">
             </div>
+            </div>
             <div class="form-group col-12 mt-5">
+                <div class="row">
                 <label for="exampleFormControlInput1">Điểm Và Các Level Đã Học Tại Trung Tâm </label>
                 <table class="table mt-4 pl-0">
                     <thead>
@@ -99,10 +124,17 @@
                     </tbody>
                 </table>
             </div>
+            </div>
         </div>
     </div>
+</div>
+    </div>
+    <div class="row">
     <a href="{{ route('student.edit',"$get_student->id") }}">
+        <div class="row">
         <button type="button" class="border-blue bg-blue btn btn-outline-warning ml-4">Sửa Học Viên</button>
+        </div>
     </a>
+    </div>
 </form>
 @endsection
