@@ -2,7 +2,8 @@
 @section('title','Quản Trị Học Viên')
 @section('title_page','Thêm Mới Học Viên')
 @section('content')
-<form enctype="multipart/form-data" class="pl-5 pt-5 col-10" action="{{ route('student.store') }}" method="POST">
+<div class="row">
+<form enctype="multipart/form-data" class="pl-5 pt-5 col-12" action="{{ route('student.store') }}" method="POST">
     @csrf
     @if(session('thongbao'))
     <div class="alert alert-primary" role="alert">
@@ -110,6 +111,7 @@
     </div>
     <button type="submit" class="mt-5 mb-5 btn btn-primary">Thêm Học Viên</button>
 </form>
+</div>
 @endsection
 @push('scripts')
 <script>
