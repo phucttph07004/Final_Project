@@ -40,6 +40,12 @@ class Classes extends Model
         return $this->belongsToMany('App\Models\User');
     }
 
+    public function Get_teacher_Name()
+    {
+        return $this->belongsTo('App\Models\User', 'teacher_id','id');
+    }
+
+
     public function levelName()
     {
         return $this->belongsTo('App\Models\Level', 'level_id','id');

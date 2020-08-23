@@ -95,9 +95,9 @@
             <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
             <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
             <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
-            <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
-            <option value="5">Ca 5 ( 6h đến 8h )</option>
-            <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+            <option value="4">Ca 4 ( 15h45 đến 17h45 )</option>
+            <option value="5">Ca 5 ( 18h00 đến 20h00 )</option>
+            <option value="6">Ca 6 ( 20h15 đến 22h15 )</option>
         </select>
     </div>
 

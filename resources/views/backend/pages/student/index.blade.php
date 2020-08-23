@@ -74,7 +74,7 @@
         <td colspan="7">
             <div class="mt-5 col-12 justify-content-center d-flex">
                 <div class=" alert alert-danger" role="alert">
-                    Không Có kết Quả Tìm Kiếm Nào
+                    Không Có kết Quả  Nào
                 </div>
             </div>
         </td>
