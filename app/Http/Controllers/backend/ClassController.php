@@ -111,6 +111,7 @@ class ClassController extends Controller
         $data['students'] = Student::where('class_id','=',$id)->get();
         $data['allstudents'] = Student::all();
         $data['class'] = Classes::find($id);
+        $data['users']=User::all();
         return view('backend.pages.class.detail-class',$data);
     }
 

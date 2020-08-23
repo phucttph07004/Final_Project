@@ -50,8 +50,17 @@
         <div class="col-6">
             <div class="form-group">
                 <label for="">Giáo viên</label>
-                <input type="text" readonly="readonly" class="form-control" name="teacher_id" id=""
-                    value="{{$class->teacher_id}}">
+                    @foreach($users as $user)
+                    @if($class->teacher_id == $user->id )
+                    <input type="text" readonly="readonly" class="form-control" name="teacher_id" id=""
+                    value="{{ $user->fullname }}">
+                        <?php break; ?>
+                    @else
+                    <input type="text" readonly="readonly" class="form-control" name="teacher_id" id=""
+                    value="Chưa có giảng viên">
+                        <?php break; ?>
+                    @endif
+                    @endforeach
             </div>
         </div>
         <div class="col-6">

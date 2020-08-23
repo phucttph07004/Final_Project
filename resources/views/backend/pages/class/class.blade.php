@@ -108,6 +108,7 @@
                         data-off="Đóng" data-onstyle="success" data-offstyle="danger"
                         >
                     </a>
+
                 </td>
                 <td>
                     <a class="btn btn-outline-info" href="{{ route('class.show',"$class->id") }}"> Chi Tiết

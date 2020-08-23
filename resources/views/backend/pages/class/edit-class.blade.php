@@ -31,6 +31,11 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="">Số buổi</label>
+            <input type="text" class="form-control" name="number_of_sessions" id="" value="{{ $class->number_of_sessions }}">
+            {!! ShowErrors($errors,'number_of_sessions') !!}
+        </div>
+        <div class="form-group">
             <label for="">Ngày bắt đầu</label>
             <input class="form-control" type="date" name="start_date" id="" value="{{$class->start_date}}">
         </div>

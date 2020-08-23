@@ -51,27 +51,6 @@ $(function() {
 
 })
 
-$(document).ready(function() {
-
-    $(document).on('keyup', '#search', function() {
-        var query = $(this).val();
-        $.ajax({
-            type: 'GET',
-            url: "{{ route('search.action') }}",
-            method: 'GET',
-            data: {
-                query: query
-            },
-            dataType: 'json',
-            success: function(data) {
-                $('#tbody').html(data);
-                console.log(data);
-            }
-        })
-    });
-
-    
-});
 </script>
 
 <script type="text/javascript">

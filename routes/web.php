@@ -38,7 +38,6 @@ Route::resource('/class-detail','backend\ClassDetailController');
 Route::resource('/schedule_learn','backend\schedule_learnController');
 Route::resource('/schedule_teach','backend\schedule_teachController');
 Route::resource('/feedback','backend\FeedbackController');
-
 // Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
 // Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 Route::get('/student/create/selected/{slot}/{level}','backend\ExcelController@show_class_add');
