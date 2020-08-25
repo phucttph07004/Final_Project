@@ -2,7 +2,9 @@
 @section('title','Quản Trị Thông Báo')
 @section('title_page','Chi Tiết Thông Báo')
 @section('content')
-<form class="pl-5 pt-5">
+
+<div class="col-12">
+    <form>
     <div class="form-group">
       <label for="exampleFormControlInput1">Người Gửi</label>
       <input type="text" class="form-control" value="{{ $Notification->userName->fullname}}" readonly>
@@ -28,5 +30,5 @@
         <input type="text" class="form-control" value="{{ Carbon\carbon::parse($Notification->updated_at)->format('d-m-Y') }}" readonly>
       </div>
   </form>
-
+</div>
 @endsection

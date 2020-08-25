@@ -142,6 +142,6 @@ class schedule_learnController extends Controller
             }
             if ($i >= $class->number_of_sessions) break;
         }
-        return redirect()->back();
+        return redirect()->back()->with('thongbao', 'Xếp Lịch Học Cho Lớp Thành Công');
     }
 }

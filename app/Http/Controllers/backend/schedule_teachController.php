@@ -105,6 +105,6 @@ class schedule_teachController extends Controller
         foreach ($Schedule as $value) {
             $Schedule_update = Schedule::find($value->id)->update($data);
         }
-        return redirect()->back();
+        return redirect()->back()->with('thongbao', 'Xếp Giảng Viên Cho Lớp Thành Công');
     }
 }

@@ -2,9 +2,9 @@
 @section('title','Quản Trị Học Viên')
 @section('title_page','Thông Tin Học Viên')
 @section('content')
-<form enctype="multipart/form-data" class="pl-5 pt-5" action="" method="POST">
+<div class="col-12">
+<form enctype="multipart/form-data" action="" method="POST">
     @csrf
-    <div class="row">
         <div class="col-12">
             <div class="row">
         <div class="col-6">
@@ -24,7 +24,7 @@
             <div class="form-group col-11">
                 <div class="row">
                 <label for="exampleFormControlInput1">Ảnh</label>
-                <img src="storage/{{ $get_student->avatar }}" alt="">
+                <img class="ml-5" src="storage/{{ $get_student->avatar }}" alt="">
             </div>
             </div>
             <div class="form-group col-11">
@@ -128,13 +128,11 @@
         </div>
     </div>
 </div>
-    </div>
     <div class="row">
     <a href="{{ route('student.edit',"$get_student->id") }}">
-        <div class="row">
         <button type="button" class="border-blue bg-blue btn btn-outline-warning ml-4">Sửa Học Viên</button>
-        </div>
     </a>
     </div>
 </form>
+</div>
 @endsection
