@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\backend\classes\{ClassRequest,ClassEditRequest};
 
-use App\Models\{Classes,Course,Level,User,Student};
+use App\Models\{Classes,Course,Level,User,Student,Schedule};
 
 use Arr;
 use Auth;
@@ -96,6 +96,7 @@ class ClassController extends Controller
         $data = Arr::except($request->all(), ['_token']);
         $data['user_id'] = Auth::user()->id;
         $data['status'] = '1';
+        $data['number_of_sessions'] = 24;
         Classes::create($data);
         return redirect()->route('class.index')->with('thongbao','Thêm lớp thành công');
     }
@@ -112,6 +113,8 @@ class ClassController extends Controller
         $data['allstudents'] = Student::all();
         $data['class'] = Classes::find($id);
         $data['users']=User::all();
+        $data['pasts'] = Schedule::where('time','<', now())->where('class_id',$id)->get();
+
         return view('backend.pages.class.detail-class',$data);
     }
 

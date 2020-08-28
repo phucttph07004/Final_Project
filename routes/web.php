@@ -90,19 +90,34 @@ Route::group([
 function()
 {
     Route::get('/', 'student\IndexController@index')->name('home.student');
+    Route::get('/schedule', 'student\IndexController@schedule')->name('student.scheduleLearn');
     Route::resource('notification','student\NotificationController');
     Route::get('feedback','student\StudentFeedbackController@getFormFeedback')->name('get.StudentFeedback');
     Route::post('feedback','student\StudentFeedbackController@postFormFeedback')->name('post.StudentFeedback');
+    Route::get('profile/{id}','student\ProfileController@index')->name('student.profile');
+    Route::get('attendence','student\IndexController@attendence')->name('student.attendence');
 });
 
-//Student
+//Teacher
 Route::group([
     'prefix'=> 'teacher',
-    'middleware' => ['check_role_admin','check_auth'],
+    'middleware' => ['check_role_teacher','check_auth'],
 ],
 function()
 {
     Route::get('/', 'teacher\TeacherController@index')->name('home.teacher');
     Route::get('schedule-teach', 'teacher\TeacherController@schedule')->name('teacher.scheduleTeach');
+    Route::get('profile/{id}','teacher\ProfileController@index')->name('teacher.profile');
+    Route::get('schedule-teach/{id}', 'teacher\TeacherController@detailSchedule')->name('teacher.detailSchedule');
+    Route::get('schedule-teach/class-list/{id}', 'teacher\TeacherController@classList')->name('teacher.classList');
 });
 
+Route::group([
+    'prefix' => 'teacher',
+],
+ function()
+ {
+    Route::get('login', 'teacher\AuthController@getLoginForm');
+    Route::post('login', 'teacher\AuthController@login')->name('teacher.login');
+    Route::get('logout','teacher\AuthController@logout')->name('teacher.logout');
+});
