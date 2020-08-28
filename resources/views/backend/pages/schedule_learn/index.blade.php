@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="col-12">
-    <div style="padding-left: 120px" class="row bg-light form-inline">
+    <div style="padding-left: 140px" class="row bg-light form-inline">
         <div class="col-5"></div>
         <div class="col-7">
             <div class="row pl-5">
@@ -20,7 +20,7 @@
                 </div>
                 <div>
                     <form style="margin-left:0px" class="form-inline pt-4">
-                        <input name="name" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo Tên Lớp" aria-label="Search">
+                        <input style="width: 200px;" name="name" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo Tên Lớp" aria-label="Search">
                         <a>
                             <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </a>
@@ -31,7 +31,11 @@
     </div>
 </div>
 
-
+@if(session('thongbao'))
+    <div class="alert alert-primary text-center" role="alert">
+        {{session('thongbao') }}
+      </div>
+    @endif
 <table class="table">
     <thead>
         <tr>
@@ -79,12 +83,12 @@
                 <button type="button" class="border-secondary btn btn-outline-secondary">Đã Đóng</button>
                 @else
                 @if(array_search($item->id, $get_schedule) === false)
-                <button data-toggle="modal" data-target="#exampleModal_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Xếp Lịch</button>
+                <button style="width: 85px;" data-toggle="modal" data-target="#exampleModal_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Xếp Lịch</button>
                 @else
-                @if($item->count_studen_count == 0 && $item->teacher_id ==null)
-                <button data-toggle="modal" data-target="#exampleModal_edit_{{$item->id}}" id="button_edit_{{$item->id}}" type="button" class="border-warning btn btn-outline-warning">Đổi Lịch</button>
+                @if($item->count_studen_count == 0 && $item->teacher_id == null)
+                <button style="width: 85px;" data-toggle="modal" data-target="#exampleModal_edit_{{$item->id}}" id="button_edit_{{$item->id}}" type="button" class="border-warning btn btn-outline-warning">Đổi Lịch</button>
                 @else
-                <button data-toggle="modal" data-target="#exampleModal_edit_{{$item->id}}" id="button_edit_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Xem Lịch</button>
+                <button style="width: 85px;" data-toggle="modal" data-target="#exampleModal_edit_{{$item->id}}" id="button_edit_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Xem Lịch</button>
                 @endif
                 @endif
                 @endif
@@ -354,7 +358,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    @if($item->count_studen_count == 0)
+                    @if($item->count_studen_count == 0 && $item->teacher_id == null)
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                     <a id="btn_edit_{{ $item->id }}">
                         <button type="button" class="btn btn-primary">Đổi Lịch Học</button>

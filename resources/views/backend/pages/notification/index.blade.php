@@ -3,9 +3,8 @@
 @section('title_page','Quản Trị Thông Báo')
 @section('content')
 
-
 <div class="col-12">
-    <div style="padding-left: 210px" class="row bg-light form-inline">
+    <div style="padding-left: 110px" class="row bg-light form-inline">
         <div class="col-5"></div>
         <div class="col-7">
             <div class="row pl-5">
@@ -33,7 +32,7 @@
         </div>
 </div>
 </div>
-<table style="background-color: white" class="table ml-5">
+<table style="background-color: white" class="table">
     @if(session('thongbao'))
     <div class="alert alert-primary text-center" role="alert">
         {{session('thongbao') }}
@@ -41,7 +40,7 @@
     @endif
     <thead>
       <tr>
-        <th scope="col">STT</th>
+        <th class="pl-3" scope="col">STT</th>
         <th scope="col">Tiêu Đề</th>
         <th scope="col">Danh Mục</th>
         <th scope="col">Người Gửi</th>
@@ -67,7 +66,7 @@
         <?php $i=1 ?>
         @foreach ($get_all_notification as $item)
         <tr>
-        <th scope="row">{{ $i++ }}</th>
+        <th class="pl-3" scope="row">{{ $i++ }}</th>
             <td>{{ $item->title }}</td>
             <td>{{ $item->categoryName->name }}</td>
             <td>{{ $item->userName->fullname }}</td>
@@ -114,7 +113,7 @@
         @endforeach
     </tbody>
   </table>
- <div class="container justify-content-center d-flex mt-5 pb-5">
+ <div class="container justify-content-center d-flex mt-5">
         {{$get_all_notification->links()}}
     </div>
 @endsection

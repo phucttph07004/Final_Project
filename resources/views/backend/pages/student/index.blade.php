@@ -33,7 +33,7 @@
                         </div>
                     </div>
                         <form class="form-inline">
-                            <input name="code" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo mã Học Viên" aria-label="Search">
+                            <input style="width: 217px;" name="code" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo mã Học Viên" aria-label="Search">
                             <a>
                                 <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                             </a>
@@ -121,7 +121,7 @@
             <td>
                 <?php $id = $item['id'];  ?>
                 <a href="{{ route("student.show",$id) }}">
-                    <button type="button" class="border-info btn btn-outline-info">Chi Tiết</button>
+                    <button style="width: 90px;" type="button" class="border-info btn btn-outline-info">Chi Tiết</button>
                 </a>
             </td>
         </tr>
@@ -172,7 +172,7 @@
             </td>
             <td>
                 <a href="{{ route('student.show',"$item->id") }}">
-                    <button type="button" class="border-info btn btn-outline-info">Chi Tiết</button>
+                    <button style="width: 90px;" type="button" class="border-info btn btn-outline-info">Chi Tiết</button>
                 </a>
             </td>
         </tr>

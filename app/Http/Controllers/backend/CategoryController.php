@@ -35,7 +35,7 @@ class CategoryController extends Controller
     public function create()
     {
         return view('backend.pages.category.create-category');
-        
+
     }
 
     /**
@@ -48,7 +48,7 @@ class CategoryController extends Controller
     {
         $data = Arr::except($request->all(), ['_token']);
         $data['user_id']=Auth::user()->id;
-
+        $data['status']=1;
         Category::create($data);
 
         return redirect()->back()->with('thongbao','Thêm danh mục thành công');

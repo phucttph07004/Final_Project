@@ -29,6 +29,11 @@
         </div>
     </div>
 </div>
+@if(session('thongbao'))
+    <div class="alert alert-primary text-center" role="alert">
+        {{session('thongbao') }}
+      </div>
+    @endif
 <table class="table">
     <thead>
         <tr>
