@@ -19,6 +19,7 @@
                                 <th>Ca Học</th>
                                 <th>Thời gian</th>
                                 <th>Giảng viên</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -45,6 +46,9 @@
                                         @else
                                         {{$schedule->getNameTeacher->fullname}}
                                         @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{route('roll-call.edit',"$schedule->id")}}">Điểm danh</a>
                                     </td>
                                 </tr>
                             @endforeach

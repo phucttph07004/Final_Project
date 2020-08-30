@@ -39,6 +39,14 @@
 {{-- <script src="/plugins/dashboard/dashboard.init.js"></script> --}}
 
 <script src="/js/app.js"></script>
+
+<script>
+    $("input[id^='attendence_status_']").change(function(event) {
+        id = event.currentTarget.attributes.id.value.replace('attendence_status_', '');
+        console.log(id);
+        $('.student_id').text(id);
+    });
+</script>
 </body>
 
 </html>

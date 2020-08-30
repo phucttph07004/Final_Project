@@ -54,4 +54,5 @@ class TeacherController extends Controller
         $data['students'] = Student::where('class_id', $id)->get();
         return view('teacher.pages.schedule_teach.class_list',$data);
     }
+
 }

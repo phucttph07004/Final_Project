@@ -110,6 +110,7 @@ function()
     Route::get('profile/{id}','teacher\ProfileController@index')->name('teacher.profile');
     Route::get('schedule-teach/{id}', 'teacher\TeacherController@detailSchedule')->name('teacher.detailSchedule');
     Route::get('schedule-teach/class-list/{id}', 'teacher\TeacherController@classList')->name('teacher.classList');
+    Route::resource('roll-call','teacher\RollCallController');
 });
 
 Route::group([

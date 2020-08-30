@@ -23,6 +23,7 @@
                             <tbody>
                             <?php $i=1 ?>
                             @foreach ($schedules as $schedule)
+                          
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td>
@@ -30,10 +31,12 @@
                                     </td>
                                     <td>{{$schedule->getClass->name}}</td>
                                     <td>{{$schedule->slot}}</td>
-                                    <td @if($schedule->student_id != Auth::guard('student')->user()->id) style="color:red;" @else style="color:green" @endif>
-                                        @if($schedule->time > now())
+
+                                    <td @if(array_search(Auth::guard('student')->user()->id,explode(',', $schedule->student_id)) === false) style="color:red;" @else style="color:green" @endif>
                                         
-                                        @elseif($schedule->student_id != Auth::guard('student')->user()->id)
+                                        @if($schedule->time > now())
+                                
+                                        @elseif(array_search(Auth::guard('student')->user()->id,explode(',', $schedule->student_id)) === false)
                                             Vắng mặt
                                         @else
                                             Có mặt

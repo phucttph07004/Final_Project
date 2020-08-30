@@ -33,6 +33,11 @@ class IndexController extends Controller
         if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)->finish_date > now()){
             $data['schedules'] = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->get();
             $data['status'] = Schedule::where('student_id', '<>' , Auth::guard('student')->user()->id)->where('time' ,'<=', now())->get();
+            // foreach (Schedule::all() as $value) {
+            //     if(array_search(Auth::guard('student')->user()->id,explode(',', $value->student_id)) === true){
+            //         $data['status']= $value;
+            //     }
+            // }
         }   
         return view('student.pages.attendence.attendence',$data);
     }
