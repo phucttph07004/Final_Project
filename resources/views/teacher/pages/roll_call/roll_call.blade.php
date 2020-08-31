@@ -29,8 +29,10 @@
                                         </td>
                                     <td>{{$student->code}}</td>
                                     <td>
-                                        <input @if(array_search($student->id,explode(',', $schedule->student_id)) === false) @else checked @endif type="checkbox" class="abc" name="student_id" id="attendence_status_{{$student->id}}">
-                                        <label for="attendence_status_{{$student->id}}">Có mặt</label>
+                                        {{-- <input @if(array_search($student->id,explode(',', $schedule->student_id)) === false) @else checked @endif type="checkbox" class="student_status" value="{{$student->id}}" name="student_id" data-student="{{$student->id}}" id="attendence_status_{{$student->id}}">
+                                        <label for="attendence_status_{{$student->id}}">Có mặt</label> --}}
+                                        <input @if(array_search($student->id,explode(',', $schedule->student_id)) === true)  @else checked @endif type="radio" class="present" value="{{$student->id}}" name="student_id__{{$student->id}}" data-student="{{$student->id}}" id="attendence_status_{{$student->id}}">
+                                        <input @if(array_search($student->id,explode(',', $schedule->student_id)) === false) checked  @else  @endif type="radio" class="absent"  value="{{$student->id}}" name="student_id__{{$student->id}}"  id="attendence_status_{{$student->id}}">
                                     </td>
                                 </tr>
                                 @endforeach
@@ -39,7 +41,7 @@
                             <form action="{{route('roll-call.update',$schedule->id) }}" method="POST" class="button-items">
                                 @method('PUT')
                                  @csrf
-                                 <input type="text" name="student_id" value="{{$schedule->student_id}}" class="student_id" id="">
+                                 <input type="text" name="student_id" value="{{$schedule->student_id}}" class="student_id" id="student_id">
                                 <button style="margin:0 auto; display: block;" class="btn btn-primary waves-effect waves-light" type="submit">Xác nhận</button>
                             </form>
                         </div>
@@ -50,10 +52,3 @@
     </div>
 @endsection
 
-@push('scripts')
-<script>
-$('#attendence_status_{{$student->id}}').change(function () {
-    alert('changed');
- });
-</script>
-@endpush
