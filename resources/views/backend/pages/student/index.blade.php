@@ -33,7 +33,7 @@
                         </div>
                     </div>
                         <form class="form-inline">
-                            <input style="width: 217px;" name="code" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo mã Học Viên" aria-label="Search">
+                            <input style="width: 217px;" name="code" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Tìm Theo mã Học Viên" aria-label="Search">
                             <a>
                                 <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                             </a>

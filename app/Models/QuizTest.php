@@ -4,15 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Question_test extends Model
+class QuizTest extends Model
 {
-    public $table = "questions_test";
-
+    public $table = "quiz_test";
 
     protected $fillable = [
-        'question', 'answer', 'correct_answer','user_id','status','level_id','quiz_id',
+        'quiz', 'level_id', 'user_id','time','status',
     ];
-
 
     public function userName()
     {

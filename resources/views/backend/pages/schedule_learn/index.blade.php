@@ -20,7 +20,7 @@
                 </div>
                 <div>
                     <form style="margin-left:0px" class="form-inline pt-4">
-                        <input style="width: 200px;" name="name" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo Tên Lớp" aria-label="Search">
+                        <input style="width: 200px;" name="name" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Tìm Theo Tên Lớp" aria-label="Search">
                         <a>
                             <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </a>
@@ -49,18 +49,17 @@
         </tr>
     </thead>
     <tbody>
-        @if(count($get_all_class) == 0)
+        @if(count($check_course) == 0)
         <td colspan="7">
             <div class="mt-5 col-12 justify-content-center d-flex">
                 <div class=" alert alert-danger" role="alert">
-                    Không Có kết Quả  Nào
+                    Không Có kết Quả Nào
                 </div>
             </div>
         </td>
         @endif
         <?php $i = 1 ?>
         @foreach ($get_all_class as $item)
-        @if( array_search($item->course_id ,$check_course) !== false)
         <tr>
             <th class="pl-3" scope="row">{{ $i++ }}</th>
             <td>{{ $item->name }}</td>
@@ -94,7 +93,6 @@
                 @endif
             </td>
         </tr>
-        @endif
         @endforeach
     </tbody>
 </table>
