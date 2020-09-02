@@ -28,6 +28,8 @@
         <link href="/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
         <!-- Profile css -->
         <link rel="stylesheet" href="/css/profile.css" type="text/css">
+        <!-- Sweet alert css -->
+        <link href="/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
     </head>
 

@@ -15,7 +15,8 @@
                                     <th>Tên</th>
                                     <th>Ảnh</th>
                                     <th>Mã Học Viên</th>
-                                    <th>Trạng thái</th>
+                                    <th>Có mặt</th>
+                                    <th>Vắng mặt</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -31,18 +32,61 @@
                                     <td>
                                         {{-- <input @if(array_search($student->id,explode(',', $schedule->student_id)) === false) @else checked @endif type="checkbox" class="student_status" value="{{$student->id}}" name="student_id" data-student="{{$student->id}}" id="attendence_status_{{$student->id}}">
                                         <label for="attendence_status_{{$student->id}}">Có mặt</label> --}}
-                                        <input @if(array_search($student->id,explode(',', $schedule->student_id)) === true)  @else checked @endif type="radio" class="present" value="{{$student->id}}" name="student_id__{{$student->id}}" data-student="{{$student->id}}" id="attendence_status_{{$student->id}}">
-                                        <input @if(array_search($student->id,explode(',', $schedule->student_id)) === false) checked  @else  @endif type="radio" class="absent"  value="{{$student->id}}" name="student_id__{{$student->id}}"  id="attendence_status_{{$student->id}}">
+                                        <input @if(array_search($student->id,explode(',', $schedule->student_id)) === true)  @else checked @endif type="radio" class="present" value="{{$student->id}}" name="student_id_{{$student->id}}" data-student="{{$student->id}}">
+                                    </td>
+                                    <td>
+                                        <input @if(array_search($student->id,explode(',', $schedule->student_id)) === false) checked  @else  @endif type="radio" class="absent"  value="{{$student->id}}" name="student_id_{{$student->id}}" data-absent="{{$student->id}}">
                                     </td>
                                 </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            <form action="{{route('roll-call.update',$schedule->id) }}" method="POST" class="button-items">
+                            <form @if($schedule->time != now()->toDateString()) action="{{route('roll-call.update',$schedule->id) }}" @endif method="POST" class="button-items">
                                 @method('PUT')
                                  @csrf
-                                 <input type="text" name="student_id" value="{{$schedule->student_id}}" class="student_id" id="student_id">
-                                <button style="margin:0 auto; display: block;" class="btn btn-primary waves-effect waves-light" type="submit">Xác nhận</button>
+                                 <input type="hidden" name="student_id" value="{{$schedule->student_id}}" class="student_id" id="student_id">
+                                 @if($schedule->slot == 1)
+                                    @if(now()->toTimeString() > '07:25:00')
+                                        <p class="text-center" >Đã hết giờ điểm danh ca 1</p>
+                                    @else
+                                        <button @if($schedule->time != now()->toDateString()) disabled @else  @endif style="margin:0 auto; display: block;" class="btn btn-primary waves-effect waves-light" type="submit">Xác nhận</button>
+                                    @endif
+                                 @endif
+                                 @if($schedule->slot == 2)
+                                    @if(now()->toTimeString() > '09:40:00')
+                                        <p class="text-center" >Đã hết giờ điểm danh ca 2</p>
+                                    @else
+                                        <button @if($schedule->time != now()->toDateString()) disabled @else  @endif style="margin:0 auto; display: block;" class="btn btn-primary waves-effect waves-light" type="submit">Xác nhận</button>
+                                    @endif
+                                 @endif
+                                 @if($schedule->slot == 3)
+                                    @if(now()->toTimeString() > '13:40:00')
+                                        <p class="text-center" >Đã hết giờ điểm danh ca 3</p>
+                                    @else
+                                        <button @if($schedule->time != now()->toDateString()) disabled @else  @endif style="margin:0 auto; display: block;" class="btn btn-primary waves-effect waves-light" type="submit">Xác nhận</button>
+                                    @endif
+                                 @endif
+                                 @if($schedule->slot == 4)
+                                    @if(now()->toTimeString() > '15:55:00')
+                                        <p class="text-center" >Đã hết giờ điểm danh</p>
+                                    @else
+                                        <button @if($schedule->time != now()->toDateString()) disabled @else  @endif style="margin:0 auto; display: block;" class="btn btn-primary waves-effect waves-light" type="submit">Xác nhận</button>
+                                    @endif
+                                 @endif
+                                 @if($schedule->slot == 5)
+                                    @if(now()->toTimeString() > '18:10:00')
+                                        <p class="text-center" >Đã hết giờ điểm danh</p>
+                                    @else
+                                        <button @if($schedule->time != now()->toDateString()) disabled @else  @endif style="margin:0 auto; display: block;" class="btn btn-primary waves-effect waves-light" type="submit">Xác nhận</button>
+                                    @endif
+                                 @endif
+                                 @if($schedule->slot == 6)
+                                    @if(now()->toTimeString() > '20:25:00')
+                                        <p class="text-center" >Đã hết giờ điểm danh</p>
+                                    @else
+                                        <button @if($schedule->time != now()->toDateString()) disabled @else  @endif style="margin:0 auto; display: block;" class="btn btn-primary waves-effect waves-light" type="submit">Xác nhận</button>
+                                    @endif
+                                 @endif
                             </form>
                         </div>
                 </div>
@@ -51,4 +95,3 @@
 
     </div>
 @endsection
-

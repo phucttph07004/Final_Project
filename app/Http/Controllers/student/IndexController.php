@@ -26,19 +26,23 @@ class IndexController extends Controller
         return view('student.pages.schedule_learn.schedule_learn',$data);
     }
 
-    public function attendence()
+    public function attendance()
     {
-        // $data=array();
-        // $now = Carbon::now()->toDateString();
         if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)->finish_date > now()){
             $data['schedules'] = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->get();
-            $data['status'] = Schedule::where('student_id', '<>' , Auth::guard('student')->user()->id)->where('time' ,'<=', now())->get();
-            // foreach (Schedule::all() as $value) {
-            //     if(array_search(Auth::guard('student')->user()->id,explode(',', $value->student_id)) === true){
-            //         $data['status']= $value;
-            //     }
-            // }
+
+            foreach (Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->where('time' ,'<=', now())->get() as $value) {
+                $ar = array($value);
+                dd($ar);
+                if(array_search(Auth::guard('student')->user()->id,explode(',', $value->student_id)) === false)
+                    {
+                        $data['status'][] = $value; 
+                    }
+                else{
+                    $data['status'] = null;  
+                }
+            }
         }   
-        return view('student.pages.attendence.attendence',$data);
+        return view('student.pages.attendance.attendance',$data);
     }
 }

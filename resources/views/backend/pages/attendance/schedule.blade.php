@@ -1,4 +1,4 @@
-@extends('teacher.layout.master')
+@extends('backend.layout.master')
 @section('title','Chi tiết lịch dạy')
 @section('content')
 <div class="container-fluid">
@@ -51,10 +51,8 @@
                                 <td>
                                     @if($schedule->time > now()->toDateString() )
                                        
-                                    @elseif($schedule->time < now()->toDateString())
-                                        <a class="btn btn-primary waves-effect waves-light" href="{{route('roll-call.edit',"$schedule->id")}}">Xem lại điểm danh</a>
                                     @else
-                                        <a class="btn btn-primary waves-effect waves-light" href="{{route('roll-call.edit',"$schedule->id")}}">Điểm danh</a>
+                                        <a class="btn btn-primary waves-effect waves-light" href="{{route('attendance.edit',"$schedule->id")}}">Điểm danh</a>
                                     @endif
                                 </td>
                             </tr>

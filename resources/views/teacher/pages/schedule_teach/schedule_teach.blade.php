@@ -16,7 +16,7 @@
                                 <th>Ngày Bắt Đầu</th>
                                 <th>Ngày Kết Thúc</th>
                                 <th>Chi Tiết</th>
-                                <th>Danh sách lớp</th>
+                                <th>Danh sách học viên</th>
                                 {{-- <th>Đã học</th> --}}
                             </tr>
                             </thead>
@@ -95,6 +95,7 @@
                                     @endif
                                 </td>
                                 <td>
+                                    {{$pasts->count('time')}}
                                 </td>
                             </tr>
                             @endforeach

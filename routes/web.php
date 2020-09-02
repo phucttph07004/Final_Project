@@ -43,6 +43,7 @@ Route::resource('/feedback','backend\FeedbackController');
 Route::get('/student/create/selected/{slot}/{level}','backend\ExcelController@show_class_add');
 Route::get('/schedule_learn/show/edit/{id}','backend\ExcelController@show_edit_schedule');
 Route::get('/schedule_teach/create/{id}','backend\ExcelController@show_teacher_schedule_teach');
+Route::resource('/attendance','backend\AttendanceController');
 
 });
 
@@ -95,7 +96,7 @@ function()
     Route::get('feedback','student\StudentFeedbackController@getFormFeedback')->name('get.StudentFeedback');
     Route::post('feedback','student\StudentFeedbackController@postFormFeedback')->name('post.StudentFeedback');
     Route::get('profile/{id}','student\ProfileController@index')->name('student.profile');
-    Route::get('attendence','student\IndexController@attendence')->name('student.attendence');
+    Route::get('attendance','student\IndexController@attendance')->name('student.attendance');
 });
 
 //Teacher

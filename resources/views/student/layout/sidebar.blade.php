@@ -24,7 +24,7 @@
                 </li>
 
                 <li>
-                    <a href="{{route('student.attendence')}}" class=" waves-effect">
+                    <a href="{{route('student.attendance')}}" class=" waves-effect">
                         <i class="ri-account-circle-line"></i>
                         <span>Điểm danh</span>
                     </a>

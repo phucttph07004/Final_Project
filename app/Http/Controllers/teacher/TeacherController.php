@@ -40,7 +40,7 @@ class TeacherController extends Controller
     {
         $data = array(); 
         if(Classes::find($id)->finish_date > now() ){
-            $data['schedules'] = Schedule::where("class_id", $id)->whereDate('time' , '>=', now())->get();
+            $data['schedules'] = Schedule::where("class_id", $id)->get();
         } 
         $data['class'] = Classes::find($id);
         $data['pasts'] = Schedule::where('time','<', now())->get();

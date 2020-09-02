@@ -3,9 +3,8 @@
 namespace App\Http\Requests\backend\news;
 
 use Illuminate\Foundation\Http\FormRequest;
-
 use App\Models\News;
-class NewsRequest extends FormRequest
+class NewsEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +22,18 @@ class NewsRequest extends FormRequest
      * @return array
      */
     public function rules()
-    { 
+    {$segments = request()->segments();
+        $news = News::find((int) end($segments));
+        if(request('image') != $news->image){
+            $mimes ='|mimes:jpeg,jpg,png';
+        }else{
+            $mimes ='required';
+        }
         return [
-        'title'=>'required|min:6',
-        'description'=>'required|min:6',
-        'content'=>'required',
-        'image'=>'required||mimes:jpeg,jpg,png',
+            'title'=>'required|min:6',
+            'description'=>'required|min:6',
+            'content'=>'required',
+            'image'=>$mimes,
         ];
     }
 

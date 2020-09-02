@@ -40,28 +40,15 @@
 
 <script src="/js/app.js"></script>
 
-<script>
-    // $("input[id^='attendence_status_']").change(function(event) {
-    //     id = event.currentTarget.attributes.id.value.replace('attendence_status_', '');
-    //     console.log(id);
-    //     $('.student_id').val(id);
-    // });
-    $(".present").change(function () { 
-        var student_id = $(this).data('student');
-        $("#student_id").val(function() {
-        return this.value + student_id + ',';
-    });
+<!-- Sweet Alerts js -->
+<script src="/plugins/sweetalert2/sweetalert2.min.js"></script>
 
-    $(".absent").change(function () {
-        var student_id = $(this).val();
-        var student_absent = $('#student_id').val();
-        $('#student_id').val(function(){
-            return this.value.replace(student_id, " ")
-        });
-    })
-});
+<!-- Sweet alert init js-->
+<script src="/plugins/sweetalert2/sweet-alerts.init.js"></script>
 
-</script>
+<!-- Attendance js-->
+
+<script src="/js/attendance.js"></script>
 </body>
 
 </html>
