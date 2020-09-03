@@ -19,7 +19,7 @@
                 </div>
                 <div style="width: 300px;">
                     <form class="form-inline pt-4">
-                        <input name="name" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo Tên Lớp" aria-label="Search">
+                        <input name="name" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Tìm Theo Tên Lớp" aria-label="Search">
                         <a>
                             <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </a>

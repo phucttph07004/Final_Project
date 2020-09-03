@@ -38,6 +38,12 @@ Route::resource('/class-detail','backend\ClassDetailController');
 Route::resource('/schedule_learn','backend\schedule_learnController');
 Route::resource('/schedule_teach','backend\schedule_teachController');
 Route::resource('/feedback','backend\FeedbackController');
+// quản lý bài quiz của admin
+Route::resource('quiz', 'backend\QuestionTestController');
+Route::resource('detail_question_test', 'backend\detail_question_test');
+Route::resource('quiz_test', 'backend\QuizController');
+//end quản lý bài quiz của admin
+
 // Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
 // Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 Route::get('/student/create/selected/{slot}/{level}','backend\ExcelController@show_class_add');
@@ -49,7 +55,6 @@ Route::resource('/attendance','backend\AttendanceController');
 
 
 // Auth Admin
-
 Route::group([
     'prefix' => 'admin',
 ],
@@ -112,6 +117,7 @@ function()
     Route::get('schedule-teach/{id}', 'teacher\TeacherController@detailSchedule')->name('teacher.detailSchedule');
     Route::get('schedule-teach/class-list/{id}', 'teacher\TeacherController@classList')->name('teacher.classList');
     Route::resource('roll-call','teacher\RollCallController');
+    Route::resource('open-quiz', 'teacher\Teacher_qiuz_Controller');
 });
 
 Route::group([

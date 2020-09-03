@@ -68,7 +68,17 @@ class schedule_learnController extends Controller
                     }
             }
         } else {
-                $data['get_all_class'] = Classes::where('status','!=',0)->withcount('CountStuden')->paginate(10);
+
+                //         $collection[] = Classes::where('status','<>',0)->withcount('CountStuden')->first();
+
+                foreach (Classes::all() as $value) {
+                    if (array_search($value->course_id, $get_all_course) !== false) {
+                        $collection[] = Classes::where([['id', $value->id],['status','!=',0]])->withcount('CountStuden')->first();
+                    }
+                }
+                $data['check'] = true;
+                $check=count($collection)!=0?$collection:array();
+                $data['get_all_class'] =collect($check);
         }
         return view('backend.pages.schedule_learn.index', $data);
     }

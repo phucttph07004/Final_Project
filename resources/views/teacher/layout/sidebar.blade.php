@@ -29,6 +29,13 @@
                         <span>Điểm danh</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="open-quiz" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Mở Quiz </span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

@@ -57,6 +57,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{route('quiz.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Quản Trị Quiz</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('level.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Quản Trị Levels</p>
