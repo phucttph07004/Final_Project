@@ -37,17 +37,7 @@
 @endif
 <!-- Start main slider -->
 <section class="homeSlider">
-    <div class="homeSlider-carousel owl-carousel ow-theme">
-        <div class="homeSlider__item">
-            <div class="homeSlider__image">
-                <img src="/images/homeslider.jpg" alt="Home Slide">
-            </div>
-        </div>
-        <div class="homeSlider__item">
-            <div class="homeSlider__image">
-                <img src="/images/homeslider.jpg" alt="Home Slide">
-            </div>
-        </div>
+    <div class="homeSlider-carousel">
         <div class="homeSlider__item">
             <div class="homeSlider__image">
                 <img src="/images/homeslider.jpg" alt="Home Slide">
