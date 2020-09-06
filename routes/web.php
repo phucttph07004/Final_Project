@@ -50,6 +50,7 @@ Route::get('/student/create/selected/{slot}/{level}','backend\ExcelController@sh
 Route::get('/schedule_learn/show/edit/{id}','backend\ExcelController@show_edit_schedule');
 Route::get('/schedule_teach/create/{id}','backend\ExcelController@show_teacher_schedule_teach');
 Route::resource('/attendance','backend\AttendanceController');
+Route::resource('waiting-list','backend\WaitingListController');
 
 });
 

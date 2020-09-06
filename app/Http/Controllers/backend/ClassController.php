@@ -66,6 +66,8 @@ class ClassController extends Controller
      */
     public function create(Request $request)
     {
+        $courses = array();
+
         foreach(Course::all() as $value){
             $first_date = strtotime($value->start_date);
             $second_date = strtotime($value->finish_date);
@@ -73,14 +75,11 @@ class ClassController extends Controller
             $time_allowed=floor($datediff / (60*60*24)/10);
             $start_date=strtotime(date("Y-m-d", strtotime($value->start_date)) . " +$time_allowed days");
             $start_date_plus10 = strftime("%Y-%m-%d", $start_date);
-
-            if($start_date_plus10 >= date('Y-m-d')){
-                $data['courses'][]=$value;
-            }else{
-                $data['courses']=null;
+            if ($start_date_plus10 >= date('Y-m-d')) {
+                 $courses[]=$value;
             }
         }
-
+        $data['courses'] = $courses;
         $data['levels'] = Level::all();
         return view('backend.pages.class.create-class',$data);
     }

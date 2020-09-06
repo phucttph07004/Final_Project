@@ -30,7 +30,7 @@
         <br>
         {!! ShowErrors($errors,'course_id') !!}
         <select name="course_id" class="form-control">
-            @if($courses == 0)
+            @if($courses == null)
             <option >Hiện tại không có khoá học phù hợp vui lòng tạo một khoá mới</option>
             @else
             @foreach ($courses as $course)

@@ -39,6 +39,14 @@
 {{-- <script src="/plugins/dashboard/dashboard.init.js"></script> --}}
 
 <script src="/js/app.js"></script>
+<script src="/js/attendance.js"></script>
+
+<script>
+   $(document).ready(function() {
+    var colCount = $("#datatable-buttons tr .absent").length;
+    document.querySelector(".absent-count").innerHTML = colCount;
+});
+</script>
 </body>
 
 </html>
