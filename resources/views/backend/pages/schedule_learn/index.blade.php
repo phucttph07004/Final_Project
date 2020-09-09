@@ -218,7 +218,7 @@
                     <input name="class_id" type="hidden" value="{{ $item->id }}">
                     @foreach ($get_all_level as $level)
                     @if($item->level_id == $level->id)
-                    <input name="level_id" type="hidden" value=" {{ $level->level }}">
+                    <input name="level_id" type="hidden" value=" {{ $level->id }}">
                     @endif
                     @endforeach
 
@@ -367,7 +367,7 @@
                     <input name="class_id" type="hidden" value="{{ $item->id }}">
                     @foreach ($get_all_level as $level)
                     @if($item->level_id == $level->id)
-                    <input name="level_id" type="hidden" value=" {{ $level->level }}">
+                    <input name="level_id" type="hidden" value=" {{ $level->id }}">
                     @endif
                     @endforeach
 

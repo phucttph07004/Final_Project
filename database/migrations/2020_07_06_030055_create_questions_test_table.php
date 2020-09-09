@@ -17,8 +17,8 @@ class CreateQuestionsTestTable extends Migration
             $table->increments('id');
             $table->text('question');
             $table->integer('quiz_id');
-            $table->json('answer');
-            $table->text('correct_answer');
+            $table->longText('answer');
+            $table->longText('correct_answer');
             $table->integer('status');
             $table->integer('level_id')->unsigned();
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');

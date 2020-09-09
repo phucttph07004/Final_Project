@@ -29,6 +29,13 @@
                         <span>Điểm danh</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{route('do-quiz.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Làm Bài Quiz</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->
