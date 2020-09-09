@@ -58,7 +58,7 @@ class QuizController extends Controller
                 $question_and_answer .= " \"$question_test->question\" " . ':' . $question_test->answer . ',';
 
                 // tạo câu trả lời của hv mặc định = null (inset vào lịch sử làm bài)
-                $selected_answer .= " \"$question_test->question\" " . ':' . '"null"' . ',';
+                $selected_answer .= " \"$question_test->question\" " . ':' . '"undefined"' . ',';
 
                 // lấy ra đáp án đúng ở từng câu hỏi (inset vào lịch sử làm bài)
                 foreach (json_decode(str_replace("\'", "'", $question_test->answer)) as $answer => $value) {
@@ -72,7 +72,7 @@ class QuizController extends Controller
                 $question_and_answer .= " \"$question_test->question\" " . ':' . $question_test->answer;
 
                 // tạo câu trả lời của hv mặc định = null (inset vào lịch sử làm bài)
-                $selected_answer .= " \"$question_test->question\" " . ':' . '"null"';
+                $selected_answer .= " \"$question_test->question\" " . ':' . '"undefined"';
 
                 // lấy ra đáp án đúng ở từng câu hỏi (inset vào lịch sử làm bài)
                 foreach (json_decode(str_replace("\'", "'", $question_test->answer)) as $answer => $value) {

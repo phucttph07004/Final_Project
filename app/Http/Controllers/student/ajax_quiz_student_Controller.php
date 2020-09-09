@@ -45,27 +45,26 @@ class ajax_quiz_student_Controller extends Controller
         }
         // lưu đáp án vào
         $answer = '{' .  $answer . '}';
-        // tính điểm
-        $score = Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['level_id', $level_id], ['quiz', $quiz]])->first()->score;
-
-        foreach (json_decode(str_replace("\'", "'", $answer)) as $key_answer_student_selected => $answer_student_selected) {
-
-            foreach (json_decode(str_replace("\'", "'", Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['level_id', $level_id], ['quiz', $quiz]])->first()->correct_answer)) as $key_correct_answer => $correct_answer) {
-
-                foreach (json_decode(json_encode($correct_answer)) as $dap_an => $value_dap_an) {
-
-                    return $correct_answer;
-                    if ($key_answer_student_selected == $key_correct_answer && $answer_student_selected == $dap_an) {
-                        $score++;
-                    }
-                }
-            }
-        }
-        // lưu vào bảng
-        $data['score'] = (int)$score;
+        // lưu đáp án vào vừa chọn vào bảng
         $data['selected_answer'] = $answer;
         Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['level_id', $level_id], ['quiz', $quiz]])->first()->update($data);
-        return $data;
+
+
+        // lấy ở ô selected_answer đã lưu câu hỏi và câu trả lời của hv vừa click
+        foreach (json_decode(str_replace("\'", "'", $answer)) as $key_answer_student_selected => $answer_student_selected) {
+            $a[$key_answer_student_selected] = $answer_student_selected;
+        }
+        // lấy ở ô correct_answer đã lưu câu hỏi và câu trả lời đúng
+        foreach (json_decode(str_replace("\'", "'", Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['level_id', $level_id], ['quiz', $quiz]])->first()->correct_answer)) as $key_correct_answer => $correct_answer) {
+
+            foreach (json_decode(json_encode($correct_answer)) as $dap_an => $value_dap_an) {
+                $b[$key_correct_answer]=$dap_an;
+            }
+        }
+
+        // lưu điểm vào bảng
+        $data['score'] = (int)count(array_intersect_assoc($b,$a));
+        Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['level_id', $level_id], ['quiz', $quiz]])->first()->update($data);
     }
 
     public function end_time($level_id, $quiz)
