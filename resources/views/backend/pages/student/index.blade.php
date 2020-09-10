@@ -130,18 +130,19 @@
         @foreach ($get_all_student as $item)
         <tr>
             <th scope="row">{{ $i++ }}</th>
-            <td><img width="100px" src="storage/{{ $student->avatar }}" alt=""></td>
-            <td>{{ $student->fullname }}</td>
-            <td>{{ $student->code }}</td>
+            <td><img width="100px" src="storage/{{ $item->avatar }}" alt=""></td>
+            <td>{{ $item->fullname }}</td>
+            <td>{{ $item->code }}</td>
             <td>
                 @foreach ($get_all_class as $class)
-                @if($student->class_id == $class->id)
+                @if($item->class_id == $class->id)
                 @foreach ($get_all_course as $course)
                 @if($class->course_id == $course->id)
                 {{ $course->course_name }}
                 @endif
                 @endforeach
                 @endif
+                @endforeach
             </td>
             <td>
                 <a class="fee_status" id="btn_edit_fee_status_{{ $item->id }}">
@@ -170,7 +171,7 @@
                 </form>
             </td>
             <td>
-                <a href="{{ route('student.show',"$student->id") }}">
+                <a href="{{ route('student.show',"$item->id") }}">
                     <button type="button" class="border-info btn btn-outline-info">Chi Tiết</button>
                 </a>
             </td>
@@ -192,7 +193,6 @@
         if (confirm('Bạn có chắc chắn muốn thay đổi trạng thái học phí')) {
             $("#btn_edit_fee_status_form_" + id).submit();
         } else {
-
         }
     });
     $("a[id^='btn_edit_status_']").click(function(event) {
@@ -203,21 +203,3 @@
     });
 </script>
 @endpush
-<script>
-  $(document).ready(function(){
-    $('.toggle-class').change(function () {
-        let fee_status = $(this).prop('checked') === true ? 1 : 0;
-        let id = $(this).data('id');
-        
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: 'admin/changeStatus',
-            data: {'fee_status': fee_status, 'student_id': id},
-            success: function (data) {
-                console.log(data.message);
-            }
-        });
-    });
-});
-</script>

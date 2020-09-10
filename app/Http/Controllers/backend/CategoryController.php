@@ -6,15 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\backend\category\CategoryRequest;
 
-<<<<<<< HEAD:app/Http/Controllers/backend/RegisterController.php
-use Illuminate\Support\Arr;
-
-use App\Models\Register;
-use App\Models\Test;
-use App\Http\Requests\frontend\register\RegisterRequest;
-=======
 use App\Models\Category;
->>>>>>> e8e75107bbba5fb44d3af803dbe24a4550fcc1bc:app/Http/Controllers/backend/CategoryController.php
 
 use Arr;
 use Str;

@@ -33,6 +33,7 @@ Route::resource('/account','backend\AccountController');
 Route::resource('/password','backend\AccountChangePassController');
 Route::resource('/level','backend\LevelController');
 Route::resource('/user','backend\UserController');
+Route::resource('/attendance','backend\AttendanceController');
 Route::resource('/category','backend\CategoryController');
 Route::resource('/course', 'backend\CourseController');
 Route::resource('/class','backend\ClassController');
