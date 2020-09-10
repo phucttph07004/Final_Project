@@ -7,9 +7,9 @@ Route::get('/',             'frontend\HomeController@index')->name('home.index')
 Route::get('/news',         'frontend\NewsController@index')->name('news.index');
 Route::get('/news/{id}',    'frontend\NewsController@getNews')->name('news.news-detail');
 Route::get('register',        'frontend\RegisterController@create');
-// Route::get('thankyou', 'frontend\RegisterController@thankyou')->name('register.thankyou');
 Route::post('register',       'frontend\RegisterController@store')->name('register');
-
+Route::get('schedule-opening', 'frontend\ScheduleOpeningController@index')->name('schedule-opening.index');
+Route::get('about', 'frontend\AboutController@index')->name('home.about');
 // Route::get('/', function () {return redirect()->route('home.index');});
 // login và logout
 
@@ -51,6 +51,7 @@ Route::get('/schedule_learn/show/edit/{id}','backend\ExcelController@show_edit_s
 Route::get('/schedule_teach/create/{id}','backend\ExcelController@show_teacher_schedule_teach');
 Route::resource('/attendance','backend\AttendanceController');
 Route::resource('waiting-list','backend\WaitingListController');
+Route::resource('about' , 'backend\AboutController');
 
 });
 
@@ -103,6 +104,7 @@ function()
     Route::post('feedback','student\StudentFeedbackController@postFormFeedback')->name('post.StudentFeedback');
     Route::get('profile/{id}','student\ProfileController@index')->name('student.profile');
     Route::get('attendance','student\IndexController@attendance')->name('student.attendance');
+    Route::resource('student-password','student\PasswordController');
 });
 
 //Teacher
@@ -119,6 +121,7 @@ function()
     Route::get('schedule-teach/class-list/{id}', 'teacher\TeacherController@classList')->name('teacher.classList');
     Route::resource('roll-call','teacher\RollCallController');
     Route::resource('open-quiz', 'teacher\Teacher_qiuz_Controller');
+    Route::resource('teacher-password','teacher\PasswordController');
 });
 
 Route::group([

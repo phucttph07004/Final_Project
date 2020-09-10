@@ -19,15 +19,17 @@ class IndexController extends Controller
 
     public function schedule()
     {
-        $data=array();
+        $schedules=array();
         if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)->finish_date > now()){
-            $data['schedules'] = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->whereDate('time' , '>=', now())->get();
+            $schedules = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->whereDate('time' , '>=', now())->get();
         }    
+        $data['schedules'] = $schedules;
         return view('student.pages.schedule_learn.schedule_learn',$data);
     }
 
     public function attendance()
     {
+        $data['schedules']=array();
         if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)->finish_date > now()){
             $data['schedules'] = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->get();
             $data['status'] = null;

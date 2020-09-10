@@ -11,5 +11,6 @@ $factory->define(Level::class, function (Faker $faker) {
         'description'=> $faker->realText($maxNbChars = 100, $indexSize = 3),
         'user_id' =>User::inRandomOrder()->first()->id,
         'fee'=>$faker->randomNumber(),
+        'image' =>$faker->imageUrl(200, 200, 'cats'),
     ];
 });

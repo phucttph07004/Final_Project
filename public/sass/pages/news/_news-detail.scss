@@ -30,6 +30,26 @@
             &:not(:last-child) {
                 margin-bottom: 20px;
             }
+            p {
+                font-family: nunito-regular!important;
+                font-size: 1.8rem!important;
+                a {
+                    color: $base-color!important;
+                }
+            }
+            p {}
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-family: nunito-bold!important;
+                font-size: 2.4rem;
+                a {
+                    color: $base-color!important;
+                }
+            }
         }
     }
     &__mid {

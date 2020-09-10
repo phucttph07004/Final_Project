@@ -28,6 +28,12 @@ class LevelController extends Controller
 
     public function store(LevelRequest $request){
         $data = Arr::except($request, ['_token'])->toarray();
+        $data['user_id']=Auth::user()->id;
+        if ($request->hasFile('image')) {
+            $data['image']=$request->file('image')->store('images','public');
+        }else{
+            $data['image']='noImage.jpg';
+        }
         Level::create($data);
         return redirect()->back()->with('thongbao','Thêm Level Thành Công');
     }
@@ -63,7 +69,12 @@ class LevelController extends Controller
 
     public function update(LevelRequestEdit $request,$id){
         $data = Arr::except($request, ['_token','_method'])->toarray();
-        $level=Level::find($id)->first();
+        $level=Level::find($id);
+        if ($request->hasFile('image')) {
+            $data['image']=$request->file('image')->store('images','public');
+         }else{
+             $data['image']=$news->image;
+         }
         $level->update($data);
         return redirect()->back()->with('thongbao','Cập Nhật level Thành Công');
     }
