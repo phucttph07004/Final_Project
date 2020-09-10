@@ -50,7 +50,7 @@ class NotificationController extends Controller
 
     public function create()
     {
-        $data['get_all_category'] = Category::all();
+        $data['get_all_category'] = Category::where('type', 'notification')->get();
         return view('backend.pages.notification.create', $data);
     }
 
@@ -72,7 +72,30 @@ class NotificationController extends Controller
     {
         $data = Arr::except($request, ['_token', '_method'])->toarray();
         $data['user_id'] = Auth::user()->id;
-        Notification::create($data);
-        return redirect()->back()->with('thongbao', 'Cập Nhật Thông Báo Thành Công');
+        $warnings = array();
+        if ($data['is_active'] == 0 || $data['content'] == null || $data['title'] == null || strlen($data['content']) < 6 || strlen($data['title']) < 6) {
+
+            if ($data['is_active'] == 0) {
+                $warnings['is_active'] = 'Vui Lòng Chọn Xác Nhận';
+            }
+            if ($data['content'] == null) {
+                $warnings['content'] = 'Không Được Để Trống Nội Dung';
+            } else if (strlen($data['content']) < 6) {
+                $warnings['content'] = 'Nội Dung Không Được Đươi 6 Ký Tự';
+            }
+            if ($data['title'] == null) {
+                $warnings['title'] = 'Không Được Để Trống Tiêu Đề';
+            } else if (strlen($data['title']) < 6) {
+                $warnings['title'] = 'Nội Dung Không Được Đươi 6 Ký Tự';
+            }
+
+            $preview['get_users'] = User::all();
+            $preview['Notification'] = $data;
+            $preview['get_categories'] = Category::all();
+            return view('backend.pages.notification.preview', $preview, ['warnings' => $warnings]);
+        } else {
+            Notification::create($data);
+            return redirect()->back()->with('thongbao', 'Cập Nhật Thông Báo Thành Công');
+        }
     }
 }

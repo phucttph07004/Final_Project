@@ -41,18 +41,24 @@ Route::resource('/class-detail','backend\ClassDetailController');
 Route::resource('/schedule_learn','backend\schedule_learnController');
 Route::resource('/schedule_teach','backend\schedule_teachController');
 Route::resource('/feedback','backend\FeedbackController');
+// quản lý bài quiz của admin
+Route::resource('quiz', 'backend\QuestionTestController');
+Route::resource('detail_question_test', 'backend\detail_question_test');
+Route::resource('quiz_test', 'backend\QuizController');
+//end quản lý bài quiz của admin
 
 // Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
 // Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 Route::get('/student/create/selected/{slot}/{level}','backend\ExcelController@show_class_add');
 Route::get('/schedule_learn/show/edit/{id}','backend\ExcelController@show_edit_schedule');
 Route::get('/schedule_teach/create/{id}','backend\ExcelController@show_teacher_schedule_teach');
+Route::resource('/attendance','backend\AttendanceController');
+Route::resource('waiting-list','backend\WaitingListController');
 
 });
 
 
 // Auth Admin
-
 Route::group([
     'prefix' => 'admin',
 ],
@@ -94,7 +100,36 @@ Route::group([
 function()
 {
     Route::get('/', 'student\IndexController@index')->name('home.student');
+    Route::get('/schedule', 'student\IndexController@schedule')->name('student.scheduleLearn');
     Route::resource('notification','student\NotificationController');
     Route::get('feedback','student\StudentFeedbackController@getFormFeedback')->name('get.StudentFeedback');
     Route::post('feedback','student\StudentFeedbackController@postFormFeedback')->name('post.StudentFeedback');
+    Route::get('profile/{id}','student\ProfileController@index')->name('student.profile');
+    Route::get('attendance','student\IndexController@attendance')->name('student.attendance');
+});
+
+//Teacher
+Route::group([
+    'prefix'=> 'teacher',
+    'middleware' => ['check_role_teacher','check_auth'],
+],
+function()
+{
+    Route::get('/', 'teacher\TeacherController@index')->name('home.teacher');
+    Route::get('schedule-teach', 'teacher\TeacherController@schedule')->name('teacher.scheduleTeach');
+    Route::get('profile/{id}','teacher\ProfileController@index')->name('teacher.profile');
+    Route::get('schedule-teach/{id}', 'teacher\TeacherController@detailSchedule')->name('teacher.detailSchedule');
+    Route::get('schedule-teach/class-list/{id}', 'teacher\TeacherController@classList')->name('teacher.classList');
+    Route::resource('roll-call','teacher\RollCallController');
+    Route::resource('open-quiz', 'teacher\Teacher_qiuz_Controller');
+});
+
+Route::group([
+    'prefix' => 'teacher',
+],
+ function()
+ {
+    Route::get('login', 'teacher\AuthController@getLoginForm');
+    Route::post('login', 'teacher\AuthController@login')->name('teacher.login');
+    Route::get('logout','teacher\AuthController@logout')->name('teacher.logout');
 });

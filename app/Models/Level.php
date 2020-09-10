@@ -17,4 +17,14 @@ class Level extends Model
     {
         return $this->hasMany('App\Models\Classes', 'level_id', 'id');
     }
+
+    public function Countquestion_test()
+    {
+        return $this->hasMany('App\Models\Question_test', 'level_id', 'id');
+    }
+
+    public function Countquestion_quiz()
+    {
+        return $this->hasMany('App\Models\QuizTest', 'level_id', 'id');
+    }
 }

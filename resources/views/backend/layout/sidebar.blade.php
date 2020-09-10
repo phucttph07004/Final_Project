@@ -57,6 +57,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{route('quiz.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Quản Trị Quiz</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('level.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Quản Trị Levels</p>
@@ -114,6 +120,18 @@
                             <a href="{{route('feedback.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Quản trị Feedbacks</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('attendance.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Điểm danh</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('waiting-list.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Quản trị danh sách chờ</p>
                             </a>
                         </li>
                     </ul>

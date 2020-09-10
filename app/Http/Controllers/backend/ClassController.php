@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\backend\classes\{ClassRequest,ClassEditRequest};
 
-use App\Models\{Classes,Course,Level,User,Student};
+use App\Models\{Classes,Course,Level,User,Student,Schedule};
 
 use Arr;
 use Auth;
@@ -66,6 +66,8 @@ class ClassController extends Controller
      */
     public function create(Request $request)
     {
+        $courses = array();
+
         foreach(Course::all() as $value){
             $first_date = strtotime($value->start_date);
             $second_date = strtotime($value->finish_date);
@@ -73,14 +75,11 @@ class ClassController extends Controller
             $time_allowed=floor($datediff / (60*60*24)/10);
             $start_date=strtotime(date("Y-m-d", strtotime($value->start_date)) . " +$time_allowed days");
             $start_date_plus10 = strftime("%Y-%m-%d", $start_date);
-
-            if($start_date_plus10 >= date('Y-m-d')){
-                $data['courses'][]=$value;
-            }else{
-                $data['courses']=null;
+            if ($start_date_plus10 >= date('Y-m-d')) {
+                 $courses[]=$value;
             }
         }
-
+        $data['courses'] = $courses;
         $data['levels'] = Level::all();
         return view('backend.pages.class.create-class',$data);
     }
@@ -96,6 +95,7 @@ class ClassController extends Controller
         $data = Arr::except($request->all(), ['_token']);
         $data['user_id'] = Auth::user()->id;
         $data['status'] = '1';
+        $data['number_of_sessions'] = 24;
         Classes::create($data);
         return redirect()->route('class.index')->with('thongbao','Thêm lớp thành công');
     }
@@ -111,6 +111,9 @@ class ClassController extends Controller
         $data['students'] = Student::where('class_id','=',$id)->get();
         $data['allstudents'] = Student::all();
         $data['class'] = Classes::find($id);
+        $data['users']=User::all();
+        $data['pasts'] = Schedule::where('time','<', now())->where('class_id',$id)->get();
+
         return view('backend.pages.class.detail-class',$data);
     }
 

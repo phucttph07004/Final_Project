@@ -27,7 +27,6 @@ class ClassRequest extends FormRequest
             'name' => 'required|unique:classes',
             'start_date' =>'required|after:yesterday',
             'finish_date' =>'required|after:start_date',
-            'number_of_sessions' => 'required|numeric|min:15',
         ];
     }
 
@@ -42,12 +41,7 @@ class ClassRequest extends FormRequest
 
             'finish_date.required' => 'Không để trống ngày kết thúc dự kiến',
             'finish_date.after' => 'Ngày kết thúc phải sau ngày khai giảng',
-
-            'number_of_sessions.required' => 'Không để trống số buổi học',
-            'number_of_sessions.numeric' => 'Số buổi học phải là số',
-            'number_of_sessions.min' => 'Số buổi học phải trên 15 buổi',
-
-            
+           
         ];
     }
 }

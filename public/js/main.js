@@ -2,7 +2,6 @@
     window.onload = function() {
         $(document).ready(function() {
             showPassword();
-            homeSlider();
             feedback();
             gallerySlider();
             showMenuMobile();
@@ -11,46 +10,6 @@
     };
 })(jQuery);
 
-function homeSlider() {
-    $('.homeSlider-carousel').owlCarousel({
-        loop: true,
-        margin: 0,
-        nav: false,
-        dots: true,
-        autoplay: true,
-        autoplayTimeout: 5000,
-        responsiveClass: true,
-        dotsEach: true,
-        responsive: {
-            0: {
-                items: 1,
-                nav: false,
-                dots: true,
-            },
-            576: {
-                items: 1,
-                nav: false,
-                dots: true,
-            },
-            768: {
-                items: 1,
-                nav: false,
-                dots: true,
-            },
-            1024: {
-                items: 1,
-                nav: false,
-                dots: true,
-            },
-
-            1400: {
-                items: 1,
-                nav: false,
-                dots: true,
-            }
-        }
-    })
-}
 
 function feedback() {
     $('.feedback-carousel').owlCarousel({

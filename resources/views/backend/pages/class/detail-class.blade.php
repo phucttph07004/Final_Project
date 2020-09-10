@@ -49,9 +49,10 @@
         </div>
         <div class="col-6">
             <div class="form-group">
-                <label for="">Giáo viên</label>
-                <input type="text" readonly="readonly" class="form-control" name="teacher_id" id=""
-                    value="{{$class->teacher_id}}">
+                <label for="">Giảng viên</label>
+                <input type="text" readonly="readonly" class="form-control" name="start_date" id=""
+                value="{{$class->Get_teacher_Name->fullname}}">
+                   
             </div>
         </div>
         <div class="col-6">
@@ -73,6 +74,13 @@
                 <label for="">Số buổi học</label>
                 <input type="text" readonly="readonly" class="form-control" name="number_of_sessions" id=""
                     value="{{$class->number_of_sessions}}">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label for="">Số buổi đã học</label>
+                <input type="text" readonly="readonly" class="form-control" name="number_of_sessions" id=""
+                    value="{{$pasts->count('time')}}">
             </div>
         </div>
     </div>

@@ -10,6 +10,11 @@
             <input type="text" class="form-control" name="title" value="{{ old('title')}}" id="">
             {!! ShowErrors($errors,'title') !!}
         </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Mô tả</label>
+            <input type="text" class="form-control" name="description" value="{{ old('description')}}" id="">
+            {!! ShowErrors($errors,'description') !!}
+        </div>
         <section class="content">
             <div class="row">
                 <div class="col-md-12">

@@ -36,6 +36,8 @@
 
 <script src="plugins/summernote/summernote-bs4.min.js"></script>
 
+<script src="/js/attendance.js"></script>
+
 <script type="text/javascript">
 $(function() {
     // Summernote

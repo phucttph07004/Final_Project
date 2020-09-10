@@ -11,6 +11,11 @@
             <input type="text" class="form-control" name="title" id="" value="{{ $news->title }}">
             {!! ShowErrors($errors,'title') !!}
         </div>
+        <div class="form-group">
+            <label for="">Mô tả</label>
+            <input type="text" class="form-control" name="description" id="" value="{{ $news->description }}">
+            {!! ShowErrors($errors,'description') !!}
+        </div>
         <section class="content">
             <div class="row">
                 <div class="col-md-12">

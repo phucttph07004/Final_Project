@@ -3,7 +3,7 @@
 @section('title_page','Xếp Lịch Dạy Cho Giảng viên')
 @section('content')
 <div class="col-12">
-    <div style="padding-left: 150px" class="row bg-light form-inline">
+    <div style="padding-left: 110px" class="row bg-light form-inline">
         <div class="col-5"></div>
         <div class="col-7">
             <div class="row pl-5">
@@ -11,16 +11,15 @@
                     <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Lọc Theo Trạng Thái
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/admin/schedule_learn">Tất Cả</a>
-                        <a class="dropdown-item" href="/admin/schedule_learn?status=0">Đã Đóng</a>
-                        <a class="dropdown-item" href="/admin/schedule_learn?weekday=1">Đã Xếp</a>
-                        <a class="dropdown-item" href="/admin/schedule_learn?weekday=0">Chưa Xếp</a>
+                    <div style="width: 172px;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/admin/schedule_teach">Tất Cả</a>
+                        <a class="dropdown-item" href="/admin/schedule_teach?teacher=1">Đã Xếp</a>
+                        <a class="dropdown-item" href="/admin/schedule_teach?teacher=0">Chưa Xếp</a>
                     </div>
                 </div>
                 <div style="width: 300px;">
                     <form class="form-inline pt-4">
-                        <input name="name" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo Tên Lớp" aria-label="Search">
+                        <input name="name" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Tìm Theo Tên Lớp" aria-label="Search">
                         <a>
                             <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </a>
@@ -30,15 +29,21 @@
         </div>
     </div>
 </div>
-<table class="table ml-5">
+@if(session('thongbao'))
+    <div class="alert alert-primary text-center" role="alert">
+        {{session('thongbao') }}
+      </div>
+    @endif
+<table class="table">
     <thead>
         <tr>
-            <th scope="col">STT</th>
+            <th class="pl-3" scope="col">STT</th>
             <th scope="col">Tên Lớp</th>
             <th scope="col">Level</th>
             <th scope="col">Khóa</th>
             <th scope="col">Số Học Viên Trong Lớp</th>
             <th scope="col">Giảng Viên Được Phân Công</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -54,7 +59,7 @@
         <?php $i = 1 ?>
         @foreach ($get_all_class as $item)
         <tr>
-            <th scope="row">{{ $i++ }}</th>
+            <th class="pl-3" scope="row">{{ $i++ }}</th>
             <td>{{ $item->name }}</td>
             <td>{{ $item->levelName->level }}</td>
             <td>{{ $item->courseName->course_name }}</td>
@@ -68,17 +73,16 @@
             </td>
             <td>
                 @if($item->teacher_id == null)
-                <button style="width: 47%;" data-toggle="modal" data-target="#exampleModal_{{ $item->id }}" type="button" id="btn_create_teacher_{{ $item->id }}" class="border-primary btn btn-outline-primary">Xếp Giảng Viên</button>
+                <button style="width: 47%;" data-toggle="modal" data-target="#exampleModal_{{ $item->id }}" type="button" id="btn_create_teacher_{{ $item->id }}" class="create border-primary btn btn-outline-primary">Xếp Giảng Viên</button>
                 @else
-                <button style="width: 47%;" data-toggle="modal" data-target="#exampleModal_{{ $item->id }}" type="button" id="btn_create_teacher_{{ $item->id }}" class="border-warning btn btn-outline-warning">Đổi Giảng Viên</button>
+                <button style="width: 47%;" data-toggle="modal" data-target="#exampleModal_{{ $item->id }}" type="button" id="btn_create_teacher_{{ $item->id }}" class="create border-warning btn btn-outline-warning">Đổi Giảng Viên</button>
                 @endif
-                <button data-toggle="modal" data-target="#exampleModal_{{ $item->id }}" type="button" id="btn_create_teacher_{{ $item->id }}" class="border-success btn btn-outline-success">Chi Tiết</button>
+                <button data-toggle="modal" data-target="#exampleModal_{{ $item->id }}" type="button" id="btn_create_teacher_{{ $item->id }}" class="border-success btn btn-outline-success chitiet">Chi Tiết</button>
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
-
 
 {{-- xếp giảng viên --}}
 @foreach ($get_all_class as $item)
@@ -90,14 +94,20 @@
         <div class="modal-dialog" role="document">
             <div style="width: 150%;margin-left: -120px" class="modal-content">
                 <div class="modal-header m-auto">
-                    <h4 class="modal-title text-primary font-weight-bold" id="exampleModalLabel">Xếp Giảng Viên</h4>
+                    <h4 class="modal-title text-primary font-weight-bold" id="exampleModalLabel">
+                        @if($item->teacher_id == null)
+                        Xếp Giảng Viên
+                        @else
+                        <span id="title">Đổi Giảng Viên</span>
+                        @endif
+                    </h4>
                 </div>
                 <h4 class="error text-center text-danger"></h4>
                 <div class="modal-body">
                     <table class="table">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Lớp Được Xêp:</th>
+                                <th scope="col">Lớp Được Xếp:</th>
                                 <th scope="col">Lớp : {{ $item->name }}</th>
                                 <th scope="col">Level : {{ $item->levelName->level }}</th>
                                 <th scope="col">Khóa : {{ $item->courseName->course_name }}</th>
@@ -137,15 +147,18 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+
+                    <div id="detail_{{ $item->id }}">
                     @if($item->teacher_id == null)
                         <a id="btn_create_teacher_{{ $item->id }}">
-                            <button type="button" class="btn btn-primary">Xếp Giảng  Viên</button>
+                            <button type="button" class=" btn btn-primary">Xếp Giảng  Viên</button>
                         </a>
                     @else
                     <a id="btn_create_teacher_{{ $item->id }}">
                         <button type="button" class="btn btn-primary">Đổi Giảng  Viên</button>
                     </a>
                     @endif
+                </div>
 
                 </div>
             </div>
@@ -153,8 +166,6 @@
     </div>
 </form>
 @endforeach
-
-
 
 {{-- <div class="container justify-content-center d-flex mt-5 pb-5">
     {{$get_all_class->links()}}
@@ -171,6 +182,19 @@
             $("#btn_create_teacher_form_" + id).submit();
         }
     });
+    // ấn chi tiết thì ẩn nút tạo đi và thay đổi title
+    $(".chitiet").click(function() {
+        id=event.currentTarget.attributes.id.value.replace('btn_create_teacher_', '');
+        $(`#error_teacher_${id}`).html('');
+        $(`#detail_${id}`).addClass('d-none');
+        $(`#title`).html('Thông Tin Chi Tiết');
+     });
+
+     // ấn create thì hiện nút tạo
+    $(".create").click(function() {
+        id=event.currentTarget.attributes.id.value.replace('btn_create_teacher_', '');
+        $(`#detail_${id}`).removeClass('d-none');
+     });
 
     // show teacher and weekday and slot
     $(document).ready(function() {
@@ -182,7 +206,6 @@
                 url: '/admin/schedule_teach/create/' + id,
                 method: 'get',
                 success: function(response) {
-                    console.log(response[2][0]);
                     // đổ dữ liệu weekday and slot
                     var time_slot = null;
                     $.each(response[1], function(weekday, slot) {

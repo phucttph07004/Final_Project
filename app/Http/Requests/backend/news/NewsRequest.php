@@ -23,17 +23,12 @@ class NewsRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {$segments = request()->segments();
-        $news = News::find((int) end($segments));
-        if(request('avatar') != $news->avatar){
-            $mimes ='|mimes:jpeg,jpg,png';
-        }else{
-            $mimes ='required';
-        }
+    { 
         return [
-            'title'=>'required|min:6',
-            'content'=>'required',
-            'image'=>$mimes,
+        'title'=>'required|min:6',
+        'description'=>'required|min:6',
+        'content'=>'required',
+        'image'=>'required||mimes:jpeg,jpg,png',
         ];
     }
 
@@ -42,6 +37,8 @@ class NewsRequest extends FormRequest
         return [
             'title.required'=>'Không được bỏ trống tiêu đề',
             'title.min'=>'Tên tiêu đề không được dưới 6 ký tự',
+            'description.required'=>'Không được bỏ trống mô tả',
+            'description.min'=>'Tên mô tả không được dưới 6 ký tự',
             'content.required'=>'Không được bỏ trống nội dung',
             'content.min'=>'nội dung không được dưới 6 ký tự',
             'image.required'=>'Không để trống thumbnail',
