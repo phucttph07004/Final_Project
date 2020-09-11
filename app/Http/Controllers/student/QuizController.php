@@ -25,8 +25,19 @@ class QuizController extends Controller
             $date_quiz[] = $schedule;
         }
 
+
+        // check nút làm bài
+        $student_id_and_quiz_and_level_id = array();
+        foreach (Homeworks_history::all() as $Homeworks_history) {
+            if (new Carbon($Homeworks_history->timeout) <= now()) {
+                $student_id_and_quiz_and_level_id[] = $Homeworks_history->student_id . ',' . $Homeworks_history->level_id . ',' . $Homeworks_history->quiz;
+            }
+        }
+
+
         $data['date_quiz'] = $date_quiz;
         $data['quiz'] = $quiz;
+        $data['student_id_and_quiz_and_level_id'] = $student_id_and_quiz_and_level_id;
 
         return view('student.pages.quiz.index', $data);
     }
@@ -63,7 +74,7 @@ class QuizController extends Controller
                 // lấy ra đáp án đúng ở từng câu hỏi (inset vào lịch sử làm bài)
                 foreach (json_decode(str_replace("\'", "'", $question_test->answer)) as $answer => $value) {
                     if ($answer == $question_test->correct_answer) {
-                        $value=addslashes($value);
+                        $value = addslashes($value);
                         $correct_answer .= " \"$question_test->question\" " . ':' . "{ \"$answer\":\"$value\" }" . ',';
                     }
                 }
@@ -77,7 +88,7 @@ class QuizController extends Controller
                 // lấy ra đáp án đúng ở từng câu hỏi (inset vào lịch sử làm bài)
                 foreach (json_decode(str_replace("\'", "'", $question_test->answer)) as $answer => $value) {
                     if ($answer == $question_test->correct_answer) {
-                        $value=addslashes($value);
+                        $value = addslashes($value);
                         $correct_answer .= " \"$question_test->question\" " . ':' . "{ \"$answer\":\"$value\" }";
                     }
                 }
@@ -97,6 +108,7 @@ class QuizController extends Controller
         // check các bài đã làm chưa và nếu chưa thì làm còn làm rồi thì check thời gian làm xem còn đc làm tiếp k
         $time = array();
         if (Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first() == null) {
+            $data['score'] = 0;
             Homeworks_history::create($data);
             //tính khoảng thời gian giữa 2 thời điểm
             $init = (int)strtotime(Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first()->timeout) - strtotime(now());
@@ -106,22 +118,23 @@ class QuizController extends Controller
 
             $time[0] = $minutes;
             $time[1] = $seconds;
-        } else {
-            if (new Carbon(Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first()->timeout) <= now()) {
-                // có nghĩa là bài làm xong rồi chỉ show ra kết quả.
-                dd('hết time');
-            } else {
-                //tính khoảng thời gian giữa 2 thời điểm
-                $init = (int)strtotime(Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first()->timeout) - strtotime(now());
-                $hours = floor($init / 3600);
-                $minutes = floor(($init / 60) % 60);
-                $seconds = $init % 60;
+        } else if (new Carbon(Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first()->timeout) >= now()) {
+            //tính khoảng thời gian giữa 2 thời điểm
+            $init = (int)strtotime(Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first()->timeout) - strtotime(now());
+            $hours = floor($init / 3600);
+            $minutes = floor(($init / 60) % 60);
+            $seconds = $init % 60;
 
-                $time[0] = $minutes;
-                $time[1] = $seconds;
-            }
+            $time[0] = $minutes;
+            $time[1] = $seconds;
+        } else {
+            $info = Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first();
+            $data['question_and_answer'] = $info->question_and_answer;
+            $data['correct_answer'] = $info->correct_answer;
+            $data['selected_answer'] = $info->selected_answer;
+            $data['score'] = $info->score;
+            return view('student.pages.quiz.detail', $data);
         }
-        // dd(json_decode(str_replace("\'", "'",$data['selected_answer'])));
         return view('student.pages.quiz.do_quiz', [
             'question_test' => $question,
             'time' => $time,
@@ -129,5 +142,16 @@ class QuizController extends Controller
             'level_id' => $data['level_id'],
 
         ]);
+    }
+    public function show(Request $request)
+    {
+        $data = Arr::except($request, ['_token', '_method'])->toarray();
+        // có nghĩa là bài làm xong rồi chỉ show ra kết quả.
+        $info = Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first();
+        $data['question_and_answer'] = $info->question_and_answer;
+        $data['correct_answer'] = $info->correct_answer;
+        $data['selected_answer'] = $info->selected_answer;
+        $data['score'] = $info->score;
+        return view('student.pages.quiz.detail', $data);
     }
 }

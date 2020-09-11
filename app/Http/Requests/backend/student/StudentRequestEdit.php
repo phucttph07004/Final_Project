@@ -37,7 +37,7 @@ class StudentRequestEdit extends FormRequest
             'address'=>'required|min:10',
             'phone'=>'required|numeric|digits:10',
             'class_id'=>'required',
-            'date_of_birth'=>'required|date',
+            'date_of_birth'=>'required|date|before:today',
             'avatar'=>$mimes,
 
         ];
@@ -58,6 +58,7 @@ class StudentRequestEdit extends FormRequest
             'class_id.required'=>'Không được bỏ trống lớp học',
             'date_of_birth.required'=>'Không được bỏ trống ngày sinh',
             'date_of_birth.date'=>'phải đúng định dạng ngày tháng',
+            'date_of_birth.before'=>'ngày sinh phải là ngày ở quá khứ',
             'avatar.required'=>'ảnh không được bỏ trống',
             'avatar.mimes'=>'Ảnh phải đúng định dạng jpg , png ,jpeg',
         ];
