@@ -98,7 +98,7 @@
                                 </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <!-- item-->
-                                <a class="dropdown-item" href="{{route('teacher.profile',[Auth::user()->id])}}"><i class="ri-user-line align-middle mr-1"></i> Profile</a>
+                                <a class="dropdown-item" href="{{route('teacher.profile',[Auth::user()->id])}}"><i class="ri-user-line align-middle mr-1"></i>Hồ sơ</a>
                                 <a class="dropdown-item d-block"  href="{{route('teacher-password.edit',[Auth::user()->id])}}"><i class="ri-settings-2-line align-middle mr-1"></i>Đổi mật khẩu</a>
                                 <a class="dropdown-item text-danger" href="{{ route('teacher.logout') }}"><i class="ri-shut-down-line align-middle mr-1 text-danger"></i>Đăng xuất</a>
                             </div>

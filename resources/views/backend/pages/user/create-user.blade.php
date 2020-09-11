@@ -55,9 +55,9 @@
         <label for="role">Vai trò</label>
         <br>
         <select class="form-control" name="role" id="role">
-            <option value="5">Giám đốc chi nhánh</option>
+            <option value="5">Giám đốc</option>
             <option value="4">Giáo viên</option>
-            <option value="3">Trợ giảng</option>
+            <option value="3">Quản lý</option>
             <option value="2">Admin</option>
         </select>
     </div>

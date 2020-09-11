@@ -9,9 +9,9 @@
                         <div class="d-flex justify-content-between">
                             <h4 class="card-title">Điểm danh</h4>
                            {{-- <p style="font-size:18px" >Đã vắng: @if($status == null) 0 @else {{$status->count('student_id')}} @endif/24</p> --}}
-                           <p style="font-size:18px" >Đã vắng: <span class="absent-count"></span>/24</p>
+                           {{-- <p style="font-size:18px" >Đã vắng: <span class="absent-count"></span>/24</p> --}}
                         </div>
-                        <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
                                 <th>STT</th>
@@ -56,7 +56,7 @@
 
 @push('scripts')
 <script>
-    var colCount = $("#datatable-buttons tr .absent").length;
-    document.querySelector(".absent-count").innerHTML = colCount;
+    // var colCount = $("#datatable-buttons tr .absent").length;
+    // document.querySelector(".absent-count").innerHTML = colCount;
 </script>
 @endpush

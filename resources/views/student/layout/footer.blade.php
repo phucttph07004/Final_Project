@@ -18,7 +18,16 @@
 <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 
 <!-- Buttons examples -->
-
+<script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/plugins/jszip/jszip.min.js"></script>
+<script src="/plugins/pdfmake/build/pdfmake.min.js"></script>
+<script src="/plugins/pdfmake/build/vfs_fonts.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="/plugins/datatables-keytable/js/dataTables.keyTable.min.js"></script>
+<script src="/plugins/datatables-select/js/dataTables.select.min.js"></script>
 
 <!-- Datatable init js -->
 <script src="/js/datatables.init.js"></script>
@@ -36,21 +45,10 @@
 
 <script src="/js/app.js"></script>
 <script src="/js/attendance.js"></script>
+<script src="/js/absent.js"></script>
+
 
 <script>
-
-    function checkabsent(){
-        var colCount = $("#datatable tr .absent").length;
-        var absent = document.querySelector(".absent-count");
-        console.log(absent);
-        if(absent == null){
-            return 0;
-        }else{
-            absent.innerHTML = colCount;
-        }
-    }
-    checkabsent();
-
 
 
 </script>
