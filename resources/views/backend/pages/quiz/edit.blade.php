@@ -3,7 +3,7 @@
 @section('title_page','Chỉnh Sửa Câu Hỏi')
 @section('content')
 
-<?php $answer=json_decode($Question_test->answer);?>
+<?php $answer=json_decode(str_replace("\'","'",$Question_test->answer));?>
 <div class="col-12 m-auto">
     <form class="mt-4" action="{{ route('quiz.update',$Question_test->id) }}" method="POST">
         @csrf
@@ -18,7 +18,7 @@
             <label>Câu Hỏi: </label>
             <br>
             {!! ShowErrors($errors,'question') !!}
-            <textarea class="form-control pt-4" name="question" cols="10" rows="5">{{ $Question_test->question  }}</textarea>
+            <textarea class="form-control pt-4" name="question" cols="10" rows="5">{{ str_replace('\"', '"', str_replace("\'", "'", $Question_test->question))   }}</textarea>
         </div>
         <div class="form-group">
             <label>Câu Trả Lời A: </label>

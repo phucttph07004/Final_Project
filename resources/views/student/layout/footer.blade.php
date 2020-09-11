@@ -1,5 +1,5 @@
 </div>
- 
+
 <!-- JAVASCRIPT -->
 <script src="/js/jquery.min.js"></script>
 <script src="/dist/js/bootstrap.bundle.min.js"></script>
@@ -29,6 +29,11 @@
 
 {{-- <script src="/plugins/dashboard/dashboard.init.js"></script> --}}
 
+{{-- phần trang làm bài quiz --}}
+<script src="/plugins/pagination/jquery.min.js"></script>
+<script src="/plugins/pagination/pagination.min.js"></script>
+
+
 <script src="/js/app.js"></script>
 <script src="/js/attendance.js"></script>
 
@@ -50,6 +55,7 @@
 
 </script>
 
+@stack('scripts')
 </body>
 
 </html>
