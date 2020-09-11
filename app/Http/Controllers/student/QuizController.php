@@ -121,6 +121,10 @@ class QuizController extends Controller
         } else if (new Carbon(Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first()->timeout) >= now()) {
             //tính khoảng thời gian giữa 2 thời điểm
             $init = (int)strtotime(Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first()->timeout) - strtotime(now());
+
+            // lấy ra các câu hỏi đã làm để làm tiếp kp làm lại từ đầu
+            $selected_answer_do_quiz = Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first()->selected_answer;
+
             $hours = floor($init / 3600);
             $minutes = floor(($init / 60) % 60);
             $seconds = $init % 60;
@@ -140,6 +144,7 @@ class QuizController extends Controller
             'time' => $time,
             'quiz' => $data['quiz'],
             'level_id' => $data['level_id'],
+            'selected_answer_do_quiz' => $selected_answer_do_quiz,
 
         ]);
     }

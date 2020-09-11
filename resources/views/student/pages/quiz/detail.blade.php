@@ -34,6 +34,7 @@
                                         </label>
                                         <br>
                                     </div>
+                                    <br>
                                     @endforeach
                                 </div>
                                 <div class="col-12 mt-4 pt-4 pb-3 border-top">
