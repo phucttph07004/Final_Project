@@ -5,7 +5,6 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-
                     <h4 class="card-title">Bài Quiz</h4>
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
@@ -18,6 +17,7 @@
                         </thead>
                         <tbody>
                             <?php $i = 1 ?>
+                            <?php $check = array()  ?>
                             @foreach ($quiz as $item)
                             <tr>
                                 <td>{{ $i }}</td>
@@ -28,8 +28,16 @@
                                 <td>
                                     {{ 'Thứ '.$date->weekday." Ngày ".$date->time }}
                                 </td>
-                                <td>
-                                    @if($date->time <= now()) <a id="do_quiz_{{ $item->id }}" class="btn btn-primary text-white">Làm Quiz</a>
+                                <td class="text-center">
+                                    <?php $a[0] = Auth::guard('student')->user()->id . ',' . $item->level_id . ',' . $item->quiz; ?>
+                                    @if($date->time <= now() && array_search($a[0],$student_id_and_quiz_and_level_id) !==false) <a style="width:40%" id="do_quiz_{{ $item->id }}" class="btn btn-primary text-white">Xem Lại</a>
+                                        <form id="do_quiz_form_{{ $item->id }}" action="{{ route('do-quiz.show',$item->quiz) }}" method="get" style="display: none;">
+                                            @csrf
+                                            <input type="hidden" name="quiz" value="{{ $item->quiz }}">
+                                            <input type="hidden" name="level_id" value="{{ $item->level_id }}">
+                                        </form>
+                                        @else
+                                        <a id="do_quiz_{{ $item->id }}" class="btn btn-primary text-white">Làm Quiz</a>
                                         <form id="do_quiz_form_{{ $item->id }}" action="{{ route('do-quiz.edit',$item->quiz) }}" method="get" style="display: none;">
                                             @csrf
                                             <input type="hidden" name="quiz" value="{{ $item->quiz }}">
@@ -40,9 +48,6 @@
                                 <?php break; ?>
                                 @endif
                                 @endforeach
-
-
-
 
                             </tr>
                             <?php $i++ ?>

@@ -58,17 +58,17 @@ class ajax_quiz_student_Controller extends Controller
         foreach (json_decode(str_replace("\'", "'", Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['level_id', $level_id], ['quiz', $quiz]])->first()->correct_answer)) as $key_correct_answer => $correct_answer) {
 
             foreach (json_decode(json_encode($correct_answer)) as $dap_an => $value_dap_an) {
-                $b[$key_correct_answer]=$dap_an;
+                $b[$key_correct_answer] = $dap_an;
             }
         }
 
         // lưu điểm vào bảng
-        $data['score'] = (int)count(array_intersect_assoc($b,$a));
+        $data['score'] = (int)count(array_intersect_assoc($b, $a));
         Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['level_id', $level_id], ['quiz', $quiz]])->first()->update($data);
     }
 
-    public function end_time($level_id, $quiz)
-    {
-        return [$level_id, $quiz];
-    }
+    // public function end_time($level_id, $quiz)
+    // {
+    //     return [$level_id, $quiz];
+    // }
 }
