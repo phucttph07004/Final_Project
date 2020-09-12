@@ -1,6 +1,8 @@
 @extends('backend.layout.master')
+@section('title','Quản Lý Landing Page')
+@section('title_page','Quản Lý Landing Page')
 @section('content')
-<section class="content">
+<section class="content" style="margin:0!important;">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -17,7 +19,7 @@
                     @endif
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table class="table table-bordered">
+                        <table class="table table-striped table-bordered dt-responsive nowrap ">
                             <thead>
                                 <tr>
                                     <th>Logo</th>
@@ -54,7 +56,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table class="table table-bordered">
+                        <table class="table table-striped table-bordered dt-responsive nowrap ">
                             <thead>
                                 <tr>
                                     <th>Tiêu đề</th>

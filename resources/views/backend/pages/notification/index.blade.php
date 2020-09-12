@@ -3,11 +3,9 @@
 @section('title_page','Quản Trị Thông Báo')
 @section('content')
 
-<div class="col-12">
-    <div style="padding-left: 110px" class="row bg-light form-inline">
-        <div class="col-5"></div>
-        <div class="col-7">
-            <div class="row pl-5">
+    <div style="" class="row bg-light form-inline">
+        <div class="col-12">
+            <div class="row ">
             <div class="ml-5 dropdown pt-3 pb-4 mt-2">
                 <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Lọc Theo Trạng Thái
@@ -20,7 +18,7 @@
                     <a class="dropdown-item" href="/admin/notifications?status=2">Thông Báo Khẩn Cấp</a>
                 </div>
             </div>
-        <div style="width: 300px;">
+        <div style="">
                 <form class="form-inline pt-4">
                     <input name="title" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Tìm Theo Tiêu Đề " aria-label="Search">
                     <a>
@@ -31,8 +29,7 @@
     </div>
         </div>
 </div>
-</div>
-<table style="background-color: white" class="table">
+<table style="background-color: white" class="table table-striped table-bordered dt-responsive nowrap">
     @if(session('thongbao'))
     <div class="alert alert-primary text-center" role="alert">
         {{session('thongbao') }}

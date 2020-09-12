@@ -2,7 +2,7 @@
 @section('title','Đổi mật khẩu')
 @section('title_page','Đổi mật khẩu')
 @section('content')
-<form enctype="multipart/form-data" class="col-10 pl-5 pb-5 pt-5" action="{{ route('password.update',"$user->id") }}" method="POST">
+<form enctype="multipart/form-data" class="col-10 pl-5 pb-5 " action="{{ route('password.update',"$user->id") }}" method="POST">
     @csrf
     @method('PUT')
         <div class="form-group">

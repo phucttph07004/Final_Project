@@ -13,7 +13,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $data['notifications'] = Notification::where('is_active', 1)->limit(5)->get();
+        $data['notifications'] = Notification::where('is_active', 1)->orderBy('created_at','DESC')->limit(5)->get();
         return view('student.pages.index',$data);
     }
 
@@ -21,7 +21,7 @@ class IndexController extends Controller
     {
         $schedules=array();
         if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)->finish_date > now()){
-            $schedules = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->whereDate('time' , '>=', now())->get();
+            $schedules = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->whereDate('time' , '>=', now())->paginate(10);
         }    
         $data['schedules'] = $schedules;
         return view('student.pages.schedule_learn.schedule_learn',$data);

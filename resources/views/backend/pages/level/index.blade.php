@@ -2,7 +2,7 @@
 @section('title','Quản Trị Level')
 @section('title_page','Quản Trị Level')
 @section('content')
-<table style="background-color: white" class="table ml-5">
+<table style="background-color: white" class="table table-striped table-bordered dt-responsive nowrap">
     @if(session('thongbao'))
     <div class="alert alert-primary text-center" role="alert">
         {{session('thongbao') }}
@@ -28,7 +28,7 @@
         <tr>
         <th scope="row">{{ $i++ }}</th>
             <td>Level: {{ $item->level }}</td>
-            <td>{{$item->description}}</td>
+            <td style="width:40%;">{{$item->description}}</td>
             <td>{{number_format($item->fee, 0, ',', '.')}} đ</td>
             <td>
               <img style="width:80px" src="storage/{{$item->image}}" alt="level image">

@@ -2,20 +2,19 @@
 @section('title','Quản Trị Danh Sách Chờ')
 @section('title_page','Quản Trị Danh Sách Chờ')
 @section('content')
-<section class="content">
-    <table style="background-color: white" class="table ml-5">
+<section class="content" style="margin:0;">
+        <div class="col-6 mb-3">
+            <form action="" class="d-flex">
+                <input class="form-control mr-2" type="text" name="fullname" value="" placeholder="Tìm theo tên">
+                <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+            </form>
+        </div>
+    <table style="background-color: white" class="table table-striped table-bordered dt-responsive nowrap">
         @if(session('thongbao'))
         <div class="alert alert-primary text-center" role="alert">
             {{session('thongbao') }}
         </div>
         @endif
-        <div class="d-flex align-items-center ml-5">
-            <div class="col-5">
-                <form action="">
-                    <input class="form-control" type="text" name="fullname" value="" placeholder="Lọc theo tên">
-                </form>
-            </div>
-        </div>
         <thead>
             <tr>
                 <th class="pl-3" scope="col">STT</th>

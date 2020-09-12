@@ -1,139 +1,118 @@
- <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a>
+<!-- ========== Left Sidebar Start ========== -->
+<div class="vertical-menu">
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
-            <div class="image">
-                <img src="storage/{{Auth::user()->avatar}}" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="{{route('account.show', [Auth::user()->id])}}" class="d-block">{{Auth::user()->fullname}}</a>
-            </div>
-        </div>
+    <div data-simplebar class="h-100">
 
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview menu-open">
-                <a href="/admin" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li class="menu-title">Menu</li>
+
+                <li>
+                    <a href="/admin" class="waves-effect">
+                        <i class="ri-dashboard-line"></i><span
+                            class="badge badge-pill badge-success float-right">3</span>
+                        <span>Dashboard</span>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('notifications.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản Trị Thông Báo</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('student.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản Trị Học Viên</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('schedule_learn.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản Trị Lịch Học</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('schedule_teach.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản Trị Lịch Dạy</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('quiz.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản Trị Quiz</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('level.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản Trị Levels</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('category.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản trị danh mục</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('news.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản Trị Tin Tức</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('setting.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản Trị LandingPage</p>
-                            </a>
-                        </li>
-                        <!-- <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách đăng ký kiểm tra đầu vào</p>
-                            </a>
-                        </li> -->
-                        <li class="nav-item">
-                            <a href="{{route('user.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản trị nhân viên</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('course.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản trị khoá học</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('class.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản trị lớp học</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('feedback.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản trị Feedbacks</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('attendance.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Điểm danh</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('waiting-list.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Quản trị danh sách chờ</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
+                <li>
+                    <a href="{{route('notifications.index')}}" class=" waves-effect">
+                        <i class="ri-calendar-2-line"></i>
+                        <span>Quản trị thông báo</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{route('student.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Học Viên</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{route('schedule_learn.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Lịch Học</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('schedule_teach.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Lịch Dạy</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('schedule_learn.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Lịch Học</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('quiz.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Quiz</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('level.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Level</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('category.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Danh Mục</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('news.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Tin Tức</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('setting.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Landing Page</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('user.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Nhân Viên</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{route('course.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Khoá Học</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('class.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Lớp Học</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('feedback.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Feedback</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('waiting-list.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Danh Sách Chờ</span>
+                    </a>
+                </li>
             </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
+        </div>
+        <!-- Sidebar -->
     </div>
-    <!-- /.sidebar -->
-</aside>
+</div>
+<!-- Left Sidebar End -->

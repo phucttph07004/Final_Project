@@ -3,7 +3,7 @@
 @section('title_page','Danh sách lớp học theo level')
 @section('content')
 
-<section class="content">
+<section class="content" style="margin:0;">
     <!-- <div class="ml-5 dropdown pt-3 pb-4 mt-2">
         <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button"
             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,17 +26,20 @@
             <button>submit</button>
         </form>
     </div> -->
-
-    <form class="ml-5 d-flex align-items-center" action="">
+    <div class="row">
+        <div class="col-6"><h3 class="">Danh sách lớp học level {{$level->level}}</h3></div>
         <div class="col-6">
-        <input class="form-control" type="text" name="name" placeholder="Tìm kiếm theo tên lớp">
+            <form class="d-flex align-items-center mb-4" action="">
+                <input class="form-control mr-2" type="text" name="name" placeholder="Tìm kiếm theo tên lớp">
+                <button type="submit" class="btn btn-outline-info mr-4">Tìm</button>
+                <!-- <a href="{{route('course.index')}}" class="btn btn-outline-success">Bỏ lọc</a> -->
+            </form>
         </div>
-        <button type="submit" class="btn btn-outline-info mr-4">Tìm</button>
-        <!-- <a href="{{route('course.index')}}" class="btn btn-outline-success">Bỏ lọc</a> -->
-    </form>
+    </div>
 
-    <h3 class="ml-5">Danh sách lớp học level {{$level->level}}</h3>
-    <table style="background-color: white" class="table ml-5">
+    
+
+    <table style="background-color: white" class="table table-striped table-bordered dt-responsive nowrap">
         @if(session('thongbao'))
         <div class="alert alert-primary text-center" role="alert">
             {{session('thongbao') }}
@@ -51,6 +54,7 @@
                 <th scope="col">Ngày bắt đầu</th>
                 <th scope="col">Ngày Kết thúc</th>
                 <th scope="col">Trạng thái</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>

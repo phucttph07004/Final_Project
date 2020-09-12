@@ -1,38 +1,52 @@
-<!-- Main Footer -->
-{{-- <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.2
-    </div>
-  </footer> --}}
-</div>
-<!-- ./wrapper -->
+<!-- JAVASCRIPT -->
+<script src="/js/jquery.min.js"></script>
+<script src="/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/metisMenu.min.js"></script>
+<script src="/js/simplebar.min.js"></script>
+<script src="/js/waves.min.js"></script>
 
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-<script src="js/jquery.min.js"></script>
-<script src="js/moment.min.js"></script>
-<!-- Bootstrap -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- overlayScrollbars -->
-{{-- <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script> --}}
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
+<!-- apexcharts -->
 
-<!-- OPTIONAL SCRIPTS -->
-<script src="dist/js/demo.js"></script>
+<!-- jquery.vectormap map -->
+<script src="/plugins/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="/plugins/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js"></script>
 
-<!-- PAGE PLUGINS -->
-<!-- jQuery Mapael -->
-{{-- <script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-<script src="plugins/raphael/raphael.min.js"></script>
-<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script> --}}
-{{-- <script src="plugins/jquery-mapael/maps/usa_states.min.js"></script> --}}
-<!-- ChartJS -->
+<!-- Required datatable js -->
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- Buttons examples -->
+<script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/plugins/jszip/jszip.min.js"></script>
+<script src="/plugins/pdfmake/build/pdfmake.min.js"></script>
+<script src="/plugins/pdfmake/build/vfs_fonts.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="/plugins/datatables-keytable/js/dataTables.keyTable.min.js"></script>
+<script src="/plugins/datatables-select/js/dataTables.select.min.js"></script>
+
+<!-- Datatable init js -->
+<script src="/js/datatables.init.js"></script>
+
+<!-- Responsive examples -->
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+{{-- <script src="/plugins/dashboard/dashboard.init.js"></script> --}}
+
+<script src="/js/app.js"></script>
+
+<!-- Sweet Alerts js -->
+<script src="/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+<!-- Sweet alert init js-->
+<script src="/plugins/sweetalert2/sweet-alerts.init.js"></script>
+
 <script src="plugins/chart.js/Chart.min.js"></script>
 <!-- PAGE SCRIPTS -->
-<script src="dist/js/pages/dashboard2.js"></script>
+{{-- <script src="dist/js/pages/dashboard2.js"></script> --}}
 
 <script src="plugins/summernote/summernote-bs4.min.js"></script>
 

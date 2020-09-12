@@ -29,7 +29,7 @@
         <link href="/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
         {{-- Profile --}}
-        <link rel="stylesheet" href="/css/profile.css" type="text/css">z
+        <link rel="stylesheet" href="/css/profile.css" type="text/css">
 
     </head>
 
