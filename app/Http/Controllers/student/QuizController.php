@@ -105,6 +105,7 @@ class QuizController extends Controller
         $selected_answer = '{' .  $selected_answer . '}';
         $data['selected_answer'] = $selected_answer;
 
+        $selected_answer_do_quiz=array();
         // check các bài đã làm chưa và nếu chưa thì làm còn làm rồi thì check thời gian làm xem còn đc làm tiếp k
         $time = array();
         if (Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first() == null) {

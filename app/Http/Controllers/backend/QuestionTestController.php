@@ -59,6 +59,65 @@ class QuestionTestController extends Controller
         $answer['C'] = addslashes($request['answer3']);
         $answer['D'] = addslashes($request['answer4']);
         $answer_json = null;
+
+        // //check câu trả lời không được trùng nhau
+        // if (
+        //     $answer['A'] == $answer['B'] || $answer['A'] == $answer['C'] || $answer['A'] == $answer['D'] ||
+        //     $answer['B'] == $answer['A'] || $answer['B'] == $answer['C'] || $answer['B'] == $answer['D'] ||
+        //     $answer['C'] == $answer['A'] || $answer['C'] == $answer['B'] || $answer['C'] == $answer['D'] || $answer['D'] == $answer['A'] || $answer['D'] == $answer['B'] || $answer['D'] == $answer['C']
+        // ) {
+        //     // check A
+        //     $A = "";
+        //     if ($answer['A'] == $answer['B']) {
+        //         $A = "Không Thể Có 2 Câu Trả Lời Giống Nhau Trong 1 Câu Hỏi";
+        //     }
+        //     if ($answer['A'] == $answer['C']) {
+        //         $A = "Không Thể Có 2 Câu Trả Lời Giống Nhau Trong 1 Câu Hỏi";
+        //     }
+        //     if ($answer['A'] == $answer['D']) {
+        //         $A = "Không Thể Có 2 Câu Trả Lời Giống Nhau Trong 1 Câu Hỏi";
+        //     }
+
+        //     // check A
+        //     $B = "";
+        //     if ($answer['B'] == $answer['A']) {
+        //         $B = "Không Thể Có 2 Câu Trả Lời Giống Nhau Trong 1 Câu Hỏi";
+        //     }
+        //     if ($answer['B'] == $answer['C']) {
+        //         $B = "Không Thể Có 2 Câu Trả Lời Giống Nhau Trong 1 Câu Hỏi";
+        //     }
+        //     if ($answer['B'] == $answer['D']) {
+        //         $B = "Không Thể Có 2 Câu Trả Lời Giống Nhau Trong 1 Câu Hỏi";
+        //     }
+
+        //     // check C
+        //     $C = "";
+        //     if ($answer['C'] == $answer['A']) {
+        //         $C = "Không Thể Có 2 Câu Trả Lời Giống Nhau Trong 1 Câu Hỏi";
+        //     }
+        //     if ($answer['C'] == $answer['B']) {
+        //         $C = "Không Thể Có 2 Câu Trả Lời Giống Nhau Trong 1 Câu Hỏi";
+        //     }
+        //     if ($answer['C'] == $answer['D']) {
+        //         $C = "Không Thể Có 2 Câu Trả Lời Giống Nhau Trong 1 Câu Hỏi";
+        //     }
+
+        //     // check D
+        //     $D = "";
+        //     if ($answer['D'] == $answer['A']) {
+        //         $D = "Không Thể Có 2 Câu Trả Lời Giống Nhau Trong 1 Câu Hỏi";
+        //     }
+        //     if ($answer['D'] == $answer['B']) {
+        //         $D = "Không Thể Có 2 Câu Trả Lời Giống Nhau Trong 1 Câu Hỏi";
+        //     }
+        //     if ($answer['D'] == $answer['C']) {
+        //         $D = "Không Thể Có 2 Câu Trả Lời Giống Nhau Trong 1 Câu Hỏi";
+        //     }
+
+
+
+        //     return redirect()->back();
+        // }
         foreach ($answer as $key => $value) {
             if ($key != 'D') {
                 $answer_json .= " \"$key\" " . ':' . " \"$value\" ,";

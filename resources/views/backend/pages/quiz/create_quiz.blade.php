@@ -18,13 +18,20 @@
             <br>
             {!! ShowErrors($errors,'quiz') !!}
             <select class="form-control pt-3 pb-3" name="quiz" id="">
+                @if(count($quiz) > 0)
                 @foreach ($quiz as $key => $item)
-            <option value="{{ $item }}">Buổi Số :{{ $item }}</option>
+                <option value="{{ $item }}">Buổi Số :{{ $item }}</option>
                 @endforeach
+                @else
+                <option value="">Đã Đủ Số Buổi Quiz</option>
+                @endif
+
             </select>
         </div>
     <input type="hidden" name="level_id" value="{{ $level }}">
+        @if(count($quiz) > 0)
         <button type="submit" class="mt-5 mb-5 btn btn-primary">Tạo Buổi Quiz</button>
+        @endif
     </form>
 </div>
 @endsection

@@ -1,6 +1,6 @@
 @extends('./backend/layout/master')
 @section('title','Quản Trị Quiz')
-@section('title_page','Thêm Mới Câu Hỏi 2')
+@section('title_page','Thêm Mới Câu Hỏi')
 @section('content')
 
 
