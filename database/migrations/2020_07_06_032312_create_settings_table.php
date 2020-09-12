@@ -18,6 +18,13 @@ class CreateSettingsTable extends Migration
             $table->text('logo');
             $table->text('slogan');
             $table->string('phone');
+            $table->text('banner');
+            $table->text('address');
+            $table->text('welcome');
+            $table->text('welcome_content');
+            $table->text('welcome_image');
+            $table->text('breadcrumb');
+            $table->text('fanpage')->nullable();
             $table->string('email',100)->unique();
             $table->timestamps();
         });

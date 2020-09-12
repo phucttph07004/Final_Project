@@ -4,6 +4,8 @@ namespace App\Http\Requests\backend\user;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use App\Models\User;
+
 class UserEditRequest extends FormRequest
 {
     /**
@@ -23,12 +25,19 @@ class UserEditRequest extends FormRequest
      */
     public function rules()
     {
+        $segments = request()->segments();
+        $users = User::find((int) end($segments));
+        if(request('avatar') != $users->avatar){
+            $mimes ='|mimes:jpeg,jpg,png';
+        }else{
+            $mimes ='required';
+        }
         return [
             'fullname'=>'required|min:6',
             'email'=>'required|email|',
             'phone'=>'required|numeric|digits:10',
             'date_of_birth'=>'required|date',
-            'avatar'=>'mimes:jpeg,jpg,png',
+            'avatar'=>$mimes,
         ];
     }
     public function messages()

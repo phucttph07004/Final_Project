@@ -8,7 +8,7 @@
                     <div class="card-body">
 
                         <h4 class="card-title">Lịch Học</h4>
-                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
                                 <th>STT</th>
@@ -20,6 +20,15 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @if(count($schedules) == 0)
+                            <td colspan="7">
+                                <div class="mt-5 col-12 justify-content-center d-flex">
+                                    <div class=" alert alert-danger" role="alert">
+                                        Hiện tại chưa có lịch học
+                                    </div>
+                                </div>
+                            </td>
+                            @endif
                             <?php $i=1 ?>
                             @foreach ($schedules as $schedule)
                                 <tr>
@@ -48,6 +57,9 @@
                             @endforeach
                             </tbody>
                         </table>
+                        {{-- <div class="container justify-content-center d-flex mt-5 pb-5">
+                            {{$schedules->links()}}
+                        </div> --}}
                     </div>
                 </div>
             </div> <!-- end col -->

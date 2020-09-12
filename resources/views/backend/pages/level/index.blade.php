@@ -2,7 +2,7 @@
 @section('title','Quản Trị Level')
 @section('title_page','Quản Trị Level')
 @section('content')
-<table style="background-color: white" class="table ml-5">
+<table style="background-color: white" class="table table-striped table-bordered dt-responsive nowrap">
     @if(session('thongbao'))
     <div class="alert alert-primary text-center" role="alert">
         {{session('thongbao') }}
@@ -14,12 +14,7 @@
         <th scope="col">Level</th>
         <th scope="col">Mô tả</th>
         <th scope="col">Học phí</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th scope="col">Ảnh</th>
         <th scope="col">
         <a href="{{ route('level.create') }}">
                 <button type="button" class="btn btn-outline-primary">Thêm Level</button>
@@ -33,14 +28,11 @@
         <tr>
         <th scope="row">{{ $i++ }}</th>
             <td>Level: {{ $item->level }}</td>
-            <td>{{$item->description}}</td>
+            <td style="width:40%;">{{$item->description}}</td>
             <td>{{number_format($item->fee, 0, ',', '.')}} đ</td>
-            <td> </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>
+              <img style="width:80px" src="storage/{{$item->image}}" alt="level image">
+            </td>
             <td>
                 <a href="{{ route('level.show',"$item->id") }}">
             <button type="button" class="btn btn-outline-info">Chi Tiết</button>

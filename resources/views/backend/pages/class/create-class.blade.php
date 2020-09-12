@@ -2,7 +2,7 @@
 @section('title','Quản Trị Lớp')
 @section('title_page','Thêm Mới Lớp')
 @section('content')
-<form enctype="multipart/form-data" class="pl-5 pt-5" action="{{ route('class.store') }}" method="POST">
+<form enctype="multipart/form-data" class="card-body" action="{{ route('class.store') }}" method="POST">
     @csrf
     @if(session('thongbao'))
     <div class="alert alert-primary" role="alert">
@@ -30,7 +30,7 @@
         <br>
         {!! ShowErrors($errors,'course_id') !!}
         <select name="course_id" class="form-control">
-            @if($courses == 0)
+            @if($courses == null)
             <option >Hiện tại không có khoá học phù hợp vui lòng tạo một khoá mới</option>
             @else
             @foreach ($courses as $course)

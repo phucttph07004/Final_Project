@@ -15,12 +15,12 @@ class AccountController extends Controller
 {
 
     public function show(){
-        $data['user']=User::find(Auth::user()->id);
+        $data['profile']=User::find(Auth::user()->id);
         return view('backend.pages.account.account',$data);
     }
 
     public function edit($id){
-        $data['user'] = User::find(Auth::user()->id);
+        $data['profile'] = User::find(Auth::user()->id);
         return view('backend.pages.account.edit-account',$data);
     }
 

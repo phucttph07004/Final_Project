@@ -2,17 +2,12 @@
 @section('title','Quản Trị Nhân Viên')
 @section('title_page','Quản Trị Nhân Viên')
 @section('content')
-<section class="content">
-    <table style="background-color: white" class="table ml-5">
-        @if(session('thongbao'))
-        <div class="alert alert-primary text-center" role="alert">
-            {{session('thongbao') }}
-        </div>
-        @endif
-        <div class="d-flex align-items-center ml-5">
+<section class="content" style="margin:0;">
+<div class="d-flex align-items-center">
             <div class="col-5">
-                <form action="">
-                    <input class="form-control" type="text" name="fullname" value="" placeholder="Lọc theo tên">
+                <form action="" class="d-flex">
+                    <input class="form-control mr-2" type="text" name="fullname" value="" placeholder="Tìm theo tên">
+                    <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
                 </form>
             </div>
             <div class="ml-5 dropdown pt-3 pb-4 mt-2">
@@ -23,10 +18,9 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @foreach ($users as $user)
                     <a class="dropdown-item" href="{{route('user.index')}}?role={{ $user->role }}">
-                        @if($user->role == 6)<span>Tổng giám đốc</span>
-                        @elseif( $user->role == 5 ) <span>Giám đốc chi nhánh</span>
+                        @if( $user->role == 5 ) <span>Giám đốc</span>
                         @elseif( $user->role == 4 ) <span>Giáo viên</span>
-                        @elseif( $user->role == 3 ) <span>Trợ giảng</span>
+                        @elseif( $user->role == 3 ) <span>Quản lý</span>
                         @elseif( $user->role == 2 ) <span>Admin</span>
                         @endif
                     </a>
@@ -34,6 +28,13 @@
                 </div>
             </div>
         </div>
+    <table style="background-color: white" class="table table-striped table-bordered dt-responsive flex-wrap ">
+        @if(session('thongbao'))
+        <div class="alert alert-primary text-center" role="alert">
+            {{session('thongbao') }}
+        </div>
+        @endif
+        
         <thead>
             <tr>
                 <th scope="col">STT</th>

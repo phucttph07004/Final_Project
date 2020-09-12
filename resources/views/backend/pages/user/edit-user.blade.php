@@ -10,6 +10,15 @@
         {{session('thongbao')}}
     </div>
     @endif
+     <div class="form-group">
+        <label for="">Ảnh</label><br>
+        <img width="30%" src="storage/{{$users->avatar}}" alt="">
+    </div>
+    <div class="form-group">
+        <label for="">Thay Ảnh</label> <br>
+        <input type="file" class="form-control" name="avatar">
+        {!! ShowErrors($errors,'avatar') !!}
+    </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Họ Tên</label>
         <br>

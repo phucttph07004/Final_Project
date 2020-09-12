@@ -3,7 +3,7 @@
 @section('title_page','Danh sách lớp học theo level')
 @section('content')
 
-<section class="content">
+<section class="content" style="margin:0;">
     <!-- <div class="ml-5 dropdown pt-3 pb-4 mt-2">
         <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button"
             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,17 +26,20 @@
             <button>submit</button>
         </form>
     </div> -->
-
-    <form class="ml-5 d-flex align-items-center" action="">
+    <div class="row">
+        <div class="col-6"><h3 class="">Danh sách lớp học level {{$level->level}}</h3></div>
         <div class="col-6">
-        <input class="form-control" type="text" name="name" placeholder="Tìm kiếm theo tên lớp">
+            <form class="d-flex align-items-center mb-4" action="">
+                <input class="form-control mr-2" type="text" name="name" placeholder="Tìm kiếm theo tên lớp">
+                <button type="submit" class="btn btn-outline-info mr-4">Tìm</button>
+                <!-- <a href="{{route('course.index')}}" class="btn btn-outline-success">Bỏ lọc</a> -->
+            </form>
         </div>
-        <button type="submit" class="btn btn-outline-info mr-4">Tìm</button>
-        <!-- <a href="{{route('course.index')}}" class="btn btn-outline-success">Bỏ lọc</a> -->
-    </form>
+    </div>
 
-    <h3 class="ml-5">Danh sách lớp học level {{$level->level}}</h3>
-    <table style="background-color: white" class="table ml-5">
+    
+
+    <table style="background-color: white" class="table table-striped table-bordered dt-responsive nowrap">
         @if(session('thongbao'))
         <div class="alert alert-primary text-center" role="alert">
             {{session('thongbao') }}
@@ -48,13 +51,10 @@
                 <th scope="col">Tên lớp</th>
                 <th scope="col">Level</th>
                 <th scope="col">Khoá</th>
-                <!-- <th scope='col'>Số buổi học</th> -->
+                <th scope="col">Ngày bắt đầu</th>
+                <th scope="col">Ngày Kết thúc</th>
                 <th scope="col">Trạng thái</th>
-                <th scope="col">
-                    <a href="{{ route('class.create') }}">
-                        <button type="button" class="btn btn-outline-primary">Tạo lớp mới</button>
-                    </a>
-                </th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -74,29 +74,38 @@
                 <td>{{ $class->name }}</td>
                 <td>{{ $class->levelName->level}}</td>
                 <td>{{ $class->courseName->course_name}}</td>
-                <!-- <td>{{ $class->number_of_sessions}}</td> -->
+                <td>{{date('d-m-Y', strtotime($class->start_date))}}</td>
+                <td>{{date('d-m-Y', strtotime($class->finish_date))}}</td>
                 <td>
-                    <input data-id="{{$class->id}}" class="toggle-class" type="checkbox" data-onstyle="success"
+                    <!-- <input data-id="{{$class->id}}" id="btn_deactive_{{ $class->id }}" class="toggle-class" type="checkbox" data-onstyle="success"
                         data-offstyle="danger" data-toggle="toggle" data-on="Mở" data-off="Đóng"
-                        {{ $class->status ? 'checked' : '' }}>
+                        {{ $class->status ? 'checked' : '' }}> -->
+                    <a class="toggle-class" id="btn_deactive_{{ $class->id }}">
+                        <input type="checkbox" @if($class->status == 1) checked @endif
+                        data-toggle="toggle" data-on="Mở "
+                        data-off="Đóng" data-onstyle="success" data-offstyle="danger"
+                        >
+                    </a>
+
                 </td>
                 <td>
                     <a class="btn btn-outline-info" href="{{ route('class.show',"$class->id") }}"> Chi Tiết
                     </a>
-                    <a class="btn btn-outline-warning" href="{{ route('class.edit',"$class->id") }}">Sửa</a>
+                    <a data-start="{{$class->start_date}}" class="btn btn-outline-warning edit-class"
+                        href="{{route('class.edit',"$class->id")}}">Sửa</a>
 
                     <!-- @if($class->status == 1)
                     <button id="btn_deactive_{{ $class->id }}" class="btn btn-outline-danger">Đóng</button>
                     @else
                     <button id="btn_deactive_{{ $class->id }}" class="btn btn-outline-success">Mở</button>
-                    @endif
+                    @endif -->
 
                     <form id="deactive_form_{{ $class->id }}" action="{{ route('class.destroy',$class->id) }}"
                         method="post" style="display: none;">
                         @method('DELETE')
-                        <input type="hidden" name="is_active" value="{{$class->is_active}}">
+                        <input type="hidden" name="status" value="{{$class->status}}">
                         @csrf
-                    </form> -->
+                    </form>
                 </td>
             </tr>
             @endforeach
@@ -109,5 +118,9 @@
 
 @push('scripts')
 <script>
+    $("a[id^='btn_deactive_']").click(function(event) {
+    id = event.currentTarget.attributes.id.value.replace('btn_deactive_', '');
+    $("#deactive_form_" + id).submit();
+});
 </script>
 @endpush

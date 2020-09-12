@@ -41,12 +41,12 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <form @if($schedule->time != now()->toDateString()) action="{{route('roll-call.update',$schedule->id) }}" @endif method="POST" class="button-items">
+                            <form @if($schedule->time != now()->toDateString()) @else action="{{route('roll-call.update',$schedule->id) }}" @endif method="POST" class="button-items">
                                 @method('PUT')
                                  @csrf
                                  <input type="hidden" name="student_id" value="{{$schedule->student_id}}" class="student_id" id="student_id">
                                  @if($schedule->slot == 1)
-                                    @if(now()->toTimeString() > '07:25:00')
+                                    @if(now()->toTimeString() > '23:25:00')
                                         <p class="text-center" >Đã hết giờ điểm danh ca 1</p>
                                     @else
                                         <button @if($schedule->time != now()->toDateString()) disabled @else  @endif style="margin:0 auto; display: block;" class="btn btn-primary waves-effect waves-light" type="submit">Xác nhận</button>

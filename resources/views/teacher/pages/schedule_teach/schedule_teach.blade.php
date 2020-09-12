@@ -62,7 +62,6 @@
                                 <th>Lớp</th>
                                 <th>Ca Học</th>
                                 <th>Thời gian</th>
-                                <th>Buổi học</th>
                             </tr>
                             </thead>
 
@@ -93,9 +92,6 @@
                                     @elseif ($schedule->slot == 5) 18h00 - 20h00
                                     @elseif ($schedule->slot == 6) 20h15 - 22h15
                                     @endif
-                                </td>
-                                <td>
-                                    {{$pasts->count('time')}}
                                 </td>
                             </tr>
                             @endforeach

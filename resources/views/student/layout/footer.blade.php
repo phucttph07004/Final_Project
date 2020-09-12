@@ -44,6 +44,15 @@
 
 
 <script src="/js/app.js"></script>
+<script src="/js/attendance.js"></script>
+<script src="/js/absent.js"></script>
+
+
+<script>
+
+
+</script>
+
 @stack('scripts')
 </body>
 

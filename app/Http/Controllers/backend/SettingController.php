@@ -12,8 +12,7 @@ use Str;
 use Auth;
 use Carbon\Carbon;
 
-use App\Models\News;
-use App\Models\Setting;
+use App\Models\{News,Setting};
 
 class SettingController extends Controller
 {
@@ -24,9 +23,9 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $settings = Setting::limit(1)->get();
-        $abouts = News::where('type','about')->limit(1)->get();
-        return view('backend.pages.setting.setting',['settings' => $settings,'abouts' => $abouts]);
+        $data['settings'] = Setting::limit(1)->get();
+        $data['abouts'] = News::where('type','about')->limit(1)->get();
+        return view('backend.pages.setting.setting',$data);
     }
 
     /**
@@ -91,9 +90,27 @@ class SettingController extends Controller
 
         if ($request->hasFile('logo')) {
             $data['logo']=$request->file('logo')->store('images','public');
-         }else{
-             $data['logo']=$settings->image;
-         }
+        }else{
+             $data['logo']=$settings->logo;
+        }
+
+        if ($request->hasFile('banner')) {
+            $data['banner']=$request->file('banner')->store('images','public');
+        }else{
+             $data['banner']=$settings->banner;
+        }
+
+        if ($request->hasFile('welcome_image')) {
+            $data['welcome_image']=$request->file('welcome_image')->store('images','public');
+        }else{
+             $data['welcome_image']=$settings->welcome_image;
+        }
+
+        if ($request->hasFile('breadcrumb')) {
+            $data['breadcrumb']=$request->file('breadcrumb')->store('images','public');
+        }else{
+             $data['breadcrumb']=$settings->breadcrumb;
+        }
 
         $settings->update($data);
 

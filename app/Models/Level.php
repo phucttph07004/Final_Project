@@ -11,7 +11,9 @@ class Level extends Model
     protected $fillable = [
         'level',
         'description',
-        'fee'
+        'fee',
+        'user_id',
+        'image'
     ];
     public function CountClass()
     {
