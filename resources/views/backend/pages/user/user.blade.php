@@ -18,7 +18,7 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @foreach ($users as $user)
                     <a class="dropdown-item" href="{{route('user.index')}}?role={{ $user->role }}">
-                        @elseif( $user->role == 5 ) <span>Giám đốc</span>
+                        @if( $user->role == 5 ) <span>Giám đốc</span>
                         @elseif( $user->role == 4 ) <span>Giáo viên</span>
                         @elseif( $user->role == 3 ) <span>Quản lý</span>
                         @elseif( $user->role == 2 ) <span>Admin</span>
