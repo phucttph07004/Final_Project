@@ -160,4 +160,19 @@ class QuizController extends Controller
         $data['score'] = $info->score;
         return view('student.pages.quiz.detail', $data);
     }
+
+    public function update(Request $request)
+    {
+        $data = Arr::except($request, ['_token', '_method'])->toarray();
+        $info = Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first();
+        // update lại timeout
+        $timeout['timeout']=now();
+        $info->update($timeout);
+        // show ra chi tiết bài làm
+        $data['question_and_answer'] = $info->question_and_answer;
+        $data['correct_answer'] = $info->correct_answer;
+        $data['selected_answer'] = $info->selected_answer;
+        $data['score'] = $info->score;
+        return view('student.pages.quiz.detail', $data);
+    }
 }
