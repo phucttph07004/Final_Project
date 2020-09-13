@@ -19,11 +19,9 @@
             <th scope="col">Trạng Thái</th>
             <th style="width: 300px"></th>
             <th style="margin-right: 23px"  scope="col">
-                @if(count($get_all_Question_test) < 24)
                     <a href="{{ route('detail_question_test.create','level='.$level) }}">
-                        <button style="width: 93%" type="button" class="border-primary btn btn-outline-primary"> Thêm Mới Bài Quiz</button>
+                        <button style="width: 100%" type="button" class="border-primary btn btn-outline-primary"> Thêm Mới Bài Quiz</button>
                     </a>
-                @endif
             </th>
         </tr>
     </thead>
@@ -41,11 +39,11 @@
         @foreach ($get_all_Question_test as $item)
             </tr>
         <td>{{ $i++ }}</td>
-        <td>
+        <td style="width: 16%;">
             Bài Quiz Buổi : {{ $item->quiz }}
         </td>
-        <td>{{ $item->userName->fullname }}</td>
-        <td>
+        <td style="width: 15%;">{{ $item->userName->fullname }}</td>
+        <td style="width: 15%;">
             <?php $count=0; ?>
             @foreach ($questions_test as $questions)
             @if($questions->quiz_id == $item->quiz && $item->level_id == $questions->level_id)
@@ -54,15 +52,15 @@
             @endforeach
             {{ $count }}
         </td>
-        <td>
+        <td style="width: 20%;">
             @if($count < 10)
             <p class="text-red">Chưa Đủ Câu Hỏi</p>
             @else
             <p class="text-primary">Đã Đủ Câu Hỏi</p>
             @endif
         </td>
-        <td style="width: 300px"></td>
-            <td>
+        <td style="width: 100px"></td>
+            <td style="width: 22%;">
             <a href="{{ route('detail_question_test.show',$item->id) }}">
                 <button type="button" class="border-primary btn btn-outline-primary"> Câu Hỏi </button>
             </a>

@@ -25,25 +25,16 @@
                                     <div class="col-12 mt-4">
                                         @foreach(json_decode(str_replace("\'","'",$value->answer)) as $key => $answer)
 
-
-                                        {{-- @foreach( json_decode(str_replace("\'", "'" ,$selected_answer_do_quiz)) as $key3 => $selectedanswer)
-                                            <?php dd(str_replace('\"', '"', str_replace("\'", "'", $value->question)), $key3);  ?>
-
-                                            @if($key == $selectedanswer && str_replace('\"', '"',str_replace("\'", "'", $value->question)) == $key3 )
-                                            checked
-                                            @endif
-                                            @endforeach --}}
-
-
-
-
-
                                         <div class="form-check">
-                                            <input @foreach( json_decode(str_replace("\'", "'" ,$selected_answer_do_quiz)) as $key3=> $selectedanswer)
+                                            <input
+                                            @if($selected_answer_do_quiz != null)
+                                            @foreach( json_decode(str_replace("\'", "'" ,$selected_answer_do_quiz)) as $key3=> $selectedanswer)
                                             @if($key == $selectedanswer && str_replace('\"', '"',str_replace("\'", "'", $value->question)) == $key3 )
                                             checked
                                             @endif
                                             @endforeach
+                                            @endif
+
                                             onclick="add_ajax( '{{ $value->question }}','{{ $key }}','{{ $level_id }}','{{ $quiz }}')" class="form-check-input" type="radio" name="exampleRadios_{{ $i }}" id="exampleRadios_{{ $key }}">
                                             <label class="form-check-label" for="exampleRadios_{{ $key }}">
                                                 {{ $key.": " }} {{ $answer }}
