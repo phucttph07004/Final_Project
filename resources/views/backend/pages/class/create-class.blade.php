@@ -47,13 +47,6 @@
         <input data-date="" data-date-format="DD MM YYYY" type="date" value="{{ old('start_date')}}" name="start_date"
             class="form-control">
     </div>
-    <div class="form-group">
-        <label for="">Ngày kết thúc dự kiến</label>
-        <br>
-        {!! ShowErrors($errors,'finish_date') !!}
-        <input data-date="" data-date-format="DD MM YYYY" name="finish_date" type="date" value="{{ old('finish_date')}}"
-            class="form-control">
-    </div>
     <div class="d-flex align-items-center">
         <a class="btn btn-danger mr-4" href="{{route('class.index')}}">Quay lại</a>
         <button type="submit" class="btn btn-primary">Thêm Lớp</button>

@@ -14,7 +14,6 @@
                                 <th>STT</th>
                                 <th>Lớp</th>
                                 <th>Ngày Bắt Đầu</th>
-                                <th>Ngày Kết Thúc</th>
                                 <th>Chi Tiết</th>
                                 <th>Danh sách học viên</th>
                                 {{-- <th>Đã học</th> --}}
@@ -29,7 +28,6 @@
                                 <td>{{$i++}}</td>
                                 <td>{{$class->name}}</td>
                                 <td>{{$class->start_date}}</td>
-                                <td>{{$class->finish_date}}</td>
                                 <td>
                                     <a href="{{route('teacher.detailSchedule',$class->id)}}">Chi Tiết</a>
                                 </td>

@@ -11,7 +11,7 @@
 
                 <li>
                     <a href="index.html" class="waves-effect">
-                        <i class="ri-dashboard-line"></i><span class="badge badge-pill badge-success float-right">3</span>
+                        <i class="ri-dashboard-line"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
@@ -23,17 +23,17 @@
                     </a>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a href="apps-chat.html" class=" waves-effect">
                         <i class="ri-account-circle-line"></i>
                         <span>Điểm danh</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li>
-                    <a href="open-quiz" class=" waves-effect">
+                    <a href="{{route('score.index')}}" class=" waves-effect">
                         <i class="ri-account-circle-line"></i>
-                        <span>Mở Quiz </span>
+                        <span>Nhập điểm cuối kỳ</span>
                     </a>
                 </li>
             </ul>

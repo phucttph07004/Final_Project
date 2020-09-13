@@ -50,7 +50,11 @@
                 <td>{{$course->userName->fullname}}</td>
                 <td>
                     <a class="btn btn-outline-info" href="{{ route('course.show',"$course->id") }}">Chi Tiết</a>
+                    @if($course->start_date > now()->toDateString()) 
                     <a class="btn btn-outline-warning" href="{{ route('course.edit',"$course->id") }}">Sửa</a>
+                    @else
+                    
+                    @endif 
                 </td>
             </tr>
             @endforeach

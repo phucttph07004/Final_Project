@@ -5,7 +5,7 @@ namespace App\Http\Controllers\student;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\{Notification,Schedule,Student,Classes};
+use App\Models\{Notification,Schedule,Student,Classes,History_learned_class};
 use Auth;
 use Carbon\Carbon;
 
@@ -46,5 +46,11 @@ class IndexController extends Controller
             // }
         }   
         return view('student.pages.attendance.attendance',$data);
+    }
+
+    public function history_learned_class()
+    {
+        $data['histories'] = History_learned_class::where('student_id',Auth::guard('student')->user()->id)->get();
+        return view('student.pages.history.history',$data);
     }
 }

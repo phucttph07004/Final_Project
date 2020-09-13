@@ -11,8 +11,7 @@
 
                 <li>
                     <a href="/admin" class="waves-effect">
-                        <i class="ri-dashboard-line"></i><span
-                            class="badge badge-pill badge-success float-right">3</span>
+                        <i class="ri-dashboard-line"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
@@ -30,16 +29,9 @@
                         <span>Quản Trị Học Viên</span>
                     </a>
                 </li>
-
-                <li>
-                    <a href="{{route('schedule_learn.index')}}" class=" waves-effect">
-                        <i class="ri-account-circle-line"></i>
-                        <span>Quản Trị Lịch Học</span>
-                    </a>
-                </li>
                 <li>
                     <a href="{{route('schedule_teach.index')}}" class=" waves-effect">
-                        <i class="ri-account-circle-line"></i>
+                        <i class="ri-calendar-event-fill"></i>
                         <span>Quản Trị Lịch Dạy</span>
                     </a>
                 </li>
@@ -51,31 +43,31 @@
                 </li>
                 <li>
                     <a href="{{route('quiz.index')}}" class=" waves-effect">
-                        <i class="ri-account-circle-line"></i>
+                        <i class="ri-pencil-fill"></i>
                         <span>Quản Trị Quiz</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('level.index')}}" class=" waves-effect">
-                        <i class="ri-account-circle-line"></i>
+                        <i class=" ri-ball-pen-fill"></i>
                         <span>Quản Trị Level</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('category.index')}}" class=" waves-effect">
-                        <i class="ri-account-circle-line"></i>
+                        <i class=" ri-list-check"></i>
                         <span>Quản Trị Danh Mục</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('news.index')}}" class=" waves-effect">
-                        <i class="ri-account-circle-line"></i>
+                        <i class=" ri-newspaper-line"></i>
                         <span>Quản Trị Tin Tức</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('setting.index')}}" class=" waves-effect">
-                        <i class="ri-account-circle-line"></i>
+                        <i class=" ri-pages-line"></i>
                         <span>Quản Trị Landing Page</span>
                     </a>
                 </li>
@@ -88,13 +80,13 @@
 
                 <li>
                     <a href="{{route('course.index')}}" class=" waves-effect">
-                        <i class="ri-account-circle-line"></i>
+                        <i class=" ri-book-open-line"></i>
                         <span>Quản Trị Khoá Học</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('class.index')}}" class=" waves-effect">
-                        <i class="ri-account-circle-line"></i>
+                        <i class=" ri-folder-user-line"></i>
                         <span>Quản Trị Lớp Học</span>
                     </a>
                 </li>

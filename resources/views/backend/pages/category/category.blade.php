@@ -34,9 +34,7 @@
             </td>
             
             <td>
-                <a href="{{ route('category.edit',"$category->id") }}">
-                    <button type="button" class="btn btn-outline-warning">Sửa</button>
-                </a>
+                <a href="{{ route('category.edit',"$category->id") }}" class="btn btn-outline-warning border-warning">Sửa</a>
                 <a id="btn_delete_{{ $category->id }}" class="btn btn-outline-danger">Xóa</a>
                 <form id="delete_form_{{ $category->id }}" action="{{ route('category.destroy',$category->id) }}"
                     method="post" style="display: none;">

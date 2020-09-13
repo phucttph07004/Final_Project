@@ -111,6 +111,7 @@ Route::group(
         Route::get('profile/{id}', 'student\ProfileController@index')->name('student.profile');
         Route::get('attendance', 'student\IndexController@attendance')->name('student.attendance');
         Route::resource('student-password','student\PasswordController');
+        Route::get('history','student\IndexController@history_learned_class')->name('student.history_learned');
     }
 );
 
@@ -129,6 +130,7 @@ Route::group(
         Route::resource('roll-call', 'teacher\RollCallController');
         Route::resource('open-quiz', 'teacher\Teacher_qiuz_Controller');
         Route::resource('teacher-password','teacher\PasswordController');
+        Route::resource('score', 'teacher\FinalScoreController');
     }
 );
 

@@ -62,20 +62,13 @@
                     value="{{$class->start_date}}">
             </div>
         </div>
-        <div class="col-6">
+        {{-- <div class="col-6">
             <div class="form-group">
                 <label for="">Ngày kết thúc</label>
                 <input type="text" readonly="readonly" class="form-control" name="finish_date" id=""
                     value="{{$class->finish_date}}">
             </div>
-        </div>
-        <div class="col-6">
-            <div class="form-group">
-                <label for="">Số buổi học</label>
-                <input type="text" readonly="readonly" class="form-control" name="number_of_sessions" id=""
-                    value="{{$class->number_of_sessions}}">
-            </div>
-        </div>
+        </div> --}}
         <div class="col-6">
             <div class="form-group">
                 <label for="">Số buổi đã học</label>
