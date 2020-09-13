@@ -12,7 +12,13 @@
                                     <input id="minute" type="hidden" value="{{ (int)$time[0] }}">
                                     <input id="seconds" type="hidden" value="{{ (int)$time[1] }}">
                                     <div class="text-center" id="timer">Thời Gian Làm Bài: <span id="m">{{ (int)$time[0] }}</span> Phút : <span id="s">{{ (int)$time[1] }}</span> Giây </span></div>
-                                    <a href="" class="text-left position-absolute" style="top: 0px">Kết Thúc Bài Kiểm Tra</a>
+                                    <input onclick="end_do_quiz_click()" type="button" class="end_do_quiz_click text-left position-absolute text-primary" value="Kết Thúc Bài Kiểm Tra">
+                                    <form id="end_do_quiz_click" action="{{ route('do-quiz.update',$quiz) }}" method="post" style="display: none;">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="level_id" id="level_id" value="{{ $level_id }}">
+                                        <input type="hidden" name="quiz" id="quiz" value="{{ $quiz }}">
+                                    </form>
                                 </div>
                             </tr>
                         </thead>
@@ -25,25 +31,14 @@
                                     <div class="col-12 mt-4">
                                         @foreach(json_decode(str_replace("\'","'",$value->answer)) as $key => $answer)
 
-
-                                        {{-- @foreach( json_decode(str_replace("\'", "'" ,$selected_answer_do_quiz)) as $key3 => $selectedanswer)
-                                            <?php dd(str_replace('\"', '"', str_replace("\'", "'", $value->question)), $key3);  ?>
-
-                                            @if($key == $selectedanswer && str_replace('\"', '"',str_replace("\'", "'", $value->question)) == $key3 )
-                                            checked
-                                            @endif
-                                            @endforeach --}}
-
-
-
-
-
                                         <div class="form-check">
-                                            <input @foreach( json_decode(str_replace("\'", "'" ,$selected_answer_do_quiz)) as $key3=> $selectedanswer)
+                                            <input @if($selected_answer_do_quiz !=null) @foreach( json_decode(str_replace("\'", "'" ,$selected_answer_do_quiz)) as $key3=> $selectedanswer)
                                             @if($key == $selectedanswer && str_replace('\"', '"',str_replace("\'", "'", $value->question)) == $key3 )
                                             checked
                                             @endif
                                             @endforeach
+                                            @endif
+
                                             onclick="add_ajax( '{{ $value->question }}','{{ $key }}','{{ $level_id }}','{{ $quiz }}')" class="form-check-input" type="radio" name="exampleRadios_{{ $i }}" id="exampleRadios_{{ $key }}">
                                             <label class="form-check-label" for="exampleRadios_{{ $key }}">
                                                 {{ $key.": " }} {{ $answer }}
@@ -116,6 +111,17 @@
     button.button_show {
         margin: 60px 200px 200px 375px !important;
     }
+    input.end_do_quiz_click:focus{
+    border: none;
+    outline: none;
+    }
+    input.end_do_quiz_click{
+        top: 0px;
+        border: none;
+        margin-left: -14px;
+        cursor: pointer;
+        background: none;
+    }
 </style>
 @push('scripts')
 <script>
@@ -135,6 +141,12 @@
     // chuyển sang xem chi tiết
     function End_Quiz() {
         $("#end_do_quiz_form").submit();
+    }
+    // ấn kết thúc bài
+    function end_do_quiz_click() {
+        if(confirm('Bạn Chắc Chắn Muốn Kết Thúc Bài Kiểm Tra Tại Đây ?')){
+            $("#end_do_quiz_click").submit();
+        }
     }
 
     // phân trang

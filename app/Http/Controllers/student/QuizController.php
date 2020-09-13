@@ -105,6 +105,7 @@ class QuizController extends Controller
         $selected_answer = '{' .  $selected_answer . '}';
         $data['selected_answer'] = $selected_answer;
 
+        $selected_answer_do_quiz=array();
         // check các bài đã làm chưa và nếu chưa thì làm còn làm rồi thì check thời gian làm xem còn đc làm tiếp k
         $time = array();
         if (Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first() == null) {
@@ -153,6 +154,21 @@ class QuizController extends Controller
         $data = Arr::except($request, ['_token', '_method'])->toarray();
         // có nghĩa là bài làm xong rồi chỉ show ra kết quả.
         $info = Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first();
+        $data['question_and_answer'] = $info->question_and_answer;
+        $data['correct_answer'] = $info->correct_answer;
+        $data['selected_answer'] = $info->selected_answer;
+        $data['score'] = $info->score;
+        return view('student.pages.quiz.detail', $data);
+    }
+
+    public function update(Request $request)
+    {
+        $data = Arr::except($request, ['_token', '_method'])->toarray();
+        $info = Homeworks_history::where([['student_id', Auth::guard('student')->user()->id], ['quiz', $data['quiz']]])->first();
+        // update lại timeout
+        $timeout['timeout']=now();
+        $info->update($timeout);
+        // show ra chi tiết bài làm
         $data['question_and_answer'] = $info->question_and_answer;
         $data['correct_answer'] = $info->correct_answer;
         $data['selected_answer'] = $info->selected_answer;

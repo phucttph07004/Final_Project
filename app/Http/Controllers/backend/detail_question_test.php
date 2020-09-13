@@ -33,6 +33,7 @@ class detail_question_test extends Controller
         foreach (QuizTest::where('level_id', $data['level'])->get() as $value) {
             $quiz_already_exist[] = $value->quiz;
         }
+        $quiz=array();
         for ($i = 1; $i < 25; $i++) {
             if (array_search($i, $quiz_already_exist) === false) {
                 $quiz[] = $i;

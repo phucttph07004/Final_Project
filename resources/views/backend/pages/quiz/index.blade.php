@@ -59,7 +59,7 @@
             {{ date("Y-m-d", strtotime($max)) }}
         </td>
         <td>
-            @if($item->countquestion_quiz_count < 25)
+            @if($item->countquestion_quiz_count < 24)
             <p class="text-red">Chưa Đủ Bài Quiz</p>
             @else
             <p class="text-primary">Đã Đủ Bài Quiz</p>
@@ -67,7 +67,7 @@
         </td>
             <td class="text-left">
             <a href="{{ route('quiz.show',$item->id) }}">
-                <button style="width:55%" type="button" class="border-primary btn btn-outline-primary"> Quiz </button>
+                <button style="width:90%" type="button" class="border-primary btn btn-outline-primary"> Quiz </button>
                 </a>
             </td>
             </tr>

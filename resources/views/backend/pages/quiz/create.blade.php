@@ -1,6 +1,6 @@
 @extends('./backend/layout/master')
 @section('title','Quản Trị Quiz')
-@section('title_page','Thêm Mới Câu Hỏi 2')
+@section('title_page','Thêm Mới Câu Hỏi')
 @section('content')
 
 
@@ -48,27 +48,27 @@
         <label>Câu Trả Lời Chính Xác: </label>
         <br>
         {!! ShowErrors($errors,'correct_answer') !!}
-        <div class="form-check pl-0">
+        <div class="form-check pl-4">
             <input name="correct_answer" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="A">
-            <label class="form-check-label pl-5" for="exampleRadios2">
+            <label class="form-check-label pl-2" for="exampleRadios2">
                 A
             </label>
         </div>
-        <div class="form-check pl-0">
+        <div class="form-check pl-4">
             <input name="correct_answer" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="B">
-            <label class="form-check-label pl-5" for="exampleRadios3">
+            <label class="form-check-label pl-2" for="exampleRadios3">
                 B
             </label>
         </div>
-        <div class="form-check pl-0">
+        <div class="form-check pl-4">
             <input name="correct_answer" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="C">
-            <label class="form-check-label pl-5" for="exampleRadios4">
+            <label class="form-check-label pl-2" for="exampleRadios4">
                 C
             </label>
         </div>
-        <div class="form-check pl-0">
+        <div class="form-check pl-4">
             <input name="correct_answer" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5" value="D">
-            <label class="form-check-label pl-5" for="exampleRadios5">
+            <label class="form-check-label pl-2" for="exampleRadios5">
                 D
             </label>
         </div>

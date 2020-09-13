@@ -17,9 +17,11 @@
             <th scope="col">Người Tạo</th>
             <th style="width: 250px;" scope="col">Ngày Cập Nhật</th>
             <th style="margin-right: 23px"  scope="col">
+                @if(count($get_all_Question_test) < 10)
                     <a href="{{ route('quiz.create','level='.$level_id.'&quiz='.$quiz->quiz) }}">
                         <button style="width: 77%" type="button" class="border-primary btn btn-outline-primary"> Thêm Câu Hỏi</button>
                     </a>
+                @endif
             </th>
         </tr>
     </thead>

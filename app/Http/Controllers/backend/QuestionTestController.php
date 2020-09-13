@@ -59,6 +59,7 @@ class QuestionTestController extends Controller
         $answer['C'] = addslashes($request['answer3']);
         $answer['D'] = addslashes($request['answer4']);
         $answer_json = null;
+
         foreach ($answer as $key => $value) {
             if ($key != 'D') {
                 $answer_json .= " \"$key\" " . ':' . " \"$value\" ,";
