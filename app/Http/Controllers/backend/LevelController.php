@@ -73,7 +73,7 @@ class LevelController extends Controller
         if ($request->hasFile('image')) {
             $data['image']=$request->file('image')->store('images','public');
          }else{
-             $data['image']=$news->image;
+             $data['image']=$level->image;
          }
         $level->update($data);
         return redirect()->back()->with('thongbao','Cập Nhật level Thành Công');

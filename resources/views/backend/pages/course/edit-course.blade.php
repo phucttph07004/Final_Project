@@ -24,7 +24,7 @@
     </div>
     <div class="card-footer">
         <a href="{{route('course.index')}}" class="btn btn-danger">Quay lại</a>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
     </div>
 
     </section>

@@ -24,6 +24,15 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @if(count($students) == 0)
+                                <td colspan="7">
+                                    <div class="mt-5 col-12 justify-content-center d-flex">
+                                        <div class=" alert alert-danger" role="alert">
+                                            Lớp học chưa có học viên nào
+                                        </div>
+                                    </div>
+                                </td>
+                            @endif
                             <?php $i=1 ?>
                             @foreach($students as $student)
                             <tr>
@@ -94,19 +103,5 @@
 @endsection
 
 @push('scripts')
-    <script>
-            // $("a[id^='btn_create_']").click(function(event) {
-            // id = event.currentTarget.attributes.id.value.replace('btn_create_', '');
-            // var score = $('#student_score_{{$student->id}}').val();
-            // var error = document.querySelector('.abc');
 
-            // if(score == 0 ){
-            //     error.innerHTML = "Không để trống điểm";
-            // }
-            // document.querySelector('.abc').innerHTML = "Không để trống điểm";
-            // else {
-            //     $(".error").html("Vui Lòng Chọn ca Cho ít Nhất 2 Ngày Trong Tuần");
-            // }
-        });
-    </script>
 @endpush

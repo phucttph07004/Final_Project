@@ -20,7 +20,7 @@ class IndexController extends Controller
     public function schedule()
     {
         $schedules=array();
-        if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)->finish_date > now()){
+        if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)){
             $schedules = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->whereDate('time' , '>=', now())->paginate(10);
         }    
         $data['schedules'] = $schedules;
@@ -30,7 +30,7 @@ class IndexController extends Controller
     public function attendance()
     {
         $data['schedules']=array();
-        if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)->finish_date > now()){
+        if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)){
             $data['schedules'] = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->get();
             $data['status'] = null;
             // foreach (Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->where('time' ,'<=', now())->get() as $value) {

@@ -1,3 +1,4 @@
+</div>
 <!-- JAVASCRIPT -->
 <script src="/js/jquery.min.js"></script>
 <script src="/dist/js/bootstrap.bundle.min.js"></script>
@@ -57,13 +58,6 @@ $(function() {
     // Summernote
     $('.textarea').summernote();
 
-    $("input").on("change", function() {
-        this.setAttribute(
-            "data-date",
-            moment(this.value, "YYYY-MM-DD")
-            .format(this.getAttribute("data-date-format"))
-        )
-    }).trigger("change")
 
 })
 </script>

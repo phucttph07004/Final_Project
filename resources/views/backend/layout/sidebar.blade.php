@@ -102,6 +102,12 @@
                         <span>Quản Trị Danh Sách Chờ</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('attendance.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Điểm danh</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

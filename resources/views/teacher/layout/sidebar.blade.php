@@ -7,15 +7,6 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title">Menu</li>
-
-                <li>
-                    <a href="index.html" class="waves-effect">
-                        <i class="ri-dashboard-line"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-
                 <li>
                 <a href="{{route('teacher.scheduleTeach')}}" class=" waves-effect">
                         <i class="ri-calendar-2-line"></i>
@@ -33,7 +24,7 @@
                 <li>
                     <a href="{{route('score.index')}}" class=" waves-effect">
                         <i class="ri-account-circle-line"></i>
-                        <span>Nhập điểm cuối kỳ</span>
+                        <span>Nhập điểm thi cuối khoá</span>
                     </a>
                 </li>
             </ul>
