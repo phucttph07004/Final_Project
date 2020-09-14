@@ -62,6 +62,17 @@ class FinalScoreController extends Controller
         $data['class'] = Classes::find($id);
         $data['students'] = Student::where('class_id', $id)->get();
         $data['scores'] = History_learned_class::all();
+
+        $data['history'] = History_learned_class::all();
+        if ($data['history'] != null) {
+            $student = array();
+            foreach ($data['history'] as $value) {
+                if (array_search($value->student_id, $student) === false) {
+                    $student[] = $value->student_id;
+                }
+            }
+            $data['history'] = $student;
+        }
         return view('teacher.pages.score.class_list',$data);
     }
 
@@ -85,7 +96,14 @@ class FinalScoreController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $score = History_learned_class::find($id);
+        $data = Arr::except(request()->all(), ["_token ,'_method'"]);
+        $update_at = Carbon::now()->toarray();
+        $data['update_at'] = $update_at['formatted'];
+        $score->update($data);
+
+        return redirect()->back()->with('thongbao','Nhập điểm thành công');
+
     }
 
     /**
