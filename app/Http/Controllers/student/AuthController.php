@@ -21,11 +21,11 @@ class AuthController extends Controller
         
         $data = Arr::except($request->all(), ['_token']);
         if ($result = Auth::guard('student')->attempt($data)) {
-            // if(Auth::guard('student')->status == 0 ){
-            //     return redirect()->route('student.login')->with('thongbao','Tài Khoản Của Bạn Đã Bị Khóa');
-            // }else{
-            //     return redirect('student');
-            // }
+            if(Auth::guard('student')->user()->status == 0 ){
+                return redirect()->route('student.login')->with('danger','Tài Khoản Của Bạn Đã Bị Khóa');
+            }else{
+                return redirect('student');
+            }
             return redirect('student');
         } else {
             return redirect()->back()->with('danger','Bạn Nhập sai tài khoản hoặc mật khẩu');

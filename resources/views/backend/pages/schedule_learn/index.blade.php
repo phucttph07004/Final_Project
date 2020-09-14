@@ -2,25 +2,25 @@
 @section('title','Quản Trị Lịch Học')
 @section('title_page','Xếp Lịch Học Cho Các Lớp')
 @section('content')
+
 <div class="col-12">
-    <div style="padding-left: 45px" class="row bg-light form-inline">
+    <div style="padding-left: 140px" class="row bg-light form-inline">
         <div class="col-5"></div>
         <div class="col-7">
             <div class="row pl-5">
-                <div class="ml-5 dropdown pt-3 pb-4 mt-2">
+                <div class="dropdown pt-3 pb-4 mt-2">
                     <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Lọc Theo Trạng Thái
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div style="width: 172px;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/admin/schedule_learn">Tất Cả</a>
-                        <a class="dropdown-item" href="/admin/schedule_learn?status=0">Đã Đóng</a>
                         <a class="dropdown-item" href="/admin/schedule_learn?weekday=1">Đã Xếp</a>
                         <a class="dropdown-item" href="/admin/schedule_learn?weekday=0">Chưa Xếp</a>
                     </div>
                 </div>
-                <div style="width: 300px;">
-                    <form class="form-inline pt-4">
-                        <input name="name" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo Tên Lớp" aria-label="Search">
+                <div>
+                    <form style="margin-left:0px" class="form-inline pt-4">
+                        <input style="width: 200px;" name="name" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Tìm Theo Tên Lớp" aria-label="Search">
                         <a>
                             <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </a>
@@ -30,23 +30,30 @@
         </div>
     </div>
 </div>
-<table class="table ml-3">
+
+@if(session('thongbao'))
+    <div class="alert alert-primary text-center" role="alert">
+        {{session('thongbao') }}
+      </div>
+    @endif
+<table class="table">
     <thead>
         <tr>
-            <th scope="col">STT</th>
+            <th class="pl-3" scope="col">STT</th>
             <th scope="col">Tên Lớp</th>
             <th scope="col">Level</th>
             <th scope="col">Khóa Học</th>
             <th scope="col">Số Học Viên Trong Lớp</th>
             <th scope="col">Trạng Thái</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
-        @if(count($get_all_class) == 0)
+        @if(count($check_course) == 0)
         <td colspan="7">
             <div class="mt-5 col-12 justify-content-center d-flex">
                 <div class=" alert alert-danger" role="alert">
-                    Không Có kết Quả Tìm Kiếm Nào
+                    Không Có kết Quả Nào
                 </div>
             </div>
         </td>
@@ -54,7 +61,7 @@
         <?php $i = 1 ?>
         @foreach ($get_all_class as $item)
         <tr>
-            <th scope="row">{{ $i++ }}</th>
+            <th class="pl-3" scope="row">{{ $i++ }}</th>
             <td>{{ $item->name }}</td>
             <td>{{ $item->levelName->level }}</td>
             <td>{{ $item->courseName->course_name }}</td>
@@ -75,12 +82,12 @@
                 <button type="button" class="border-secondary btn btn-outline-secondary">Đã Đóng</button>
                 @else
                 @if(array_search($item->id, $get_schedule) === false)
-                <button data-toggle="modal" data-target="#exampleModal_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Xếp Lịch</button>
+                <button style="width: 85px;" data-toggle="modal" data-target="#exampleModal_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Xếp Lịch</button>
                 @else
-                @if($item->count_studen_count == 0)
-                <button data-toggle="modal" data-target="#exampleModal_edit_{{$item->id}}" id="button_edit_{{$item->id}}" type="button" class="border-warning btn btn-outline-warning">Đổi Lịch</button>
+                @if($item->count_studen_count == 0 && $item->teacher_id == null)
+                <button style="width: 85px;" data-toggle="modal" data-target="#exampleModal_edit_{{$item->id}}" id="button_edit_{{$item->id}}" type="button" class="border-warning btn btn-outline-warning">Đổi Lịch</button>
                 @else
-                <button data-toggle="modal" data-target="#exampleModal_edit_{{$item->id}}" id="button_edit_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Xem Lịch</button>
+                <button style="width: 85px;" data-toggle="modal" data-target="#exampleModal_edit_{{$item->id}}" id="button_edit_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Xem Lịch</button>
                 @endif
                 @endif
                 @endif
@@ -124,9 +131,9 @@
                                         <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
                                         <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
                                         <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
-                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
-                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
-                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+                                        <option value="4">Ca 4 ( 15h45 đến 17h45 )</option>
+                                        <option value="5">Ca 5 ( 18h00 đến 20h00 )</option>
+                                        <option value="6">Ca 6 ( 20h15 đến 22h15 )</option>
                                     </select>
                                 </td>
                             </tr>
@@ -138,9 +145,9 @@
                                         <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
                                         <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
                                         <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
-                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
-                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
-                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+                                        <option value="4">Ca 4 ( 15h45 đến 17h45 )</option>
+                                        <option value="5">Ca 5 ( 18h00 đến 20h00 )</option>
+                                        <option value="6">Ca 6 ( 20h15 đến 22h15 )</option>
                                     </select>
                                 </td>
                             </tr>
@@ -152,9 +159,9 @@
                                         <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
                                         <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
                                         <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
-                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
-                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
-                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+                                        <option value="4">Ca 4 ( 15h45 đến 17h45 )</option>
+                                        <option value="5">Ca 5 ( 18h00 đến 20h00 )</option>
+                                        <option value="6">Ca 6 ( 20h15 đến 22h15 )</option>
                                     </select>
                                 </td>
                             </tr>
@@ -166,9 +173,9 @@
                                         <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
                                         <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
                                         <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
-                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
-                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
-                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+                                        <option value="4">Ca 4 ( 15h45 đến 17h45 )</option>
+                                        <option value="5">Ca 5 ( 18h00 đến 20h00 )</option>
+                                        <option value="6">Ca 6 ( 20h15 đến 22h15 )</option>
                                     </select>
                                 </td>
                             </tr>
@@ -180,9 +187,9 @@
                                         <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
                                         <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
                                         <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
-                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
-                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
-                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+                                        <option value="4">Ca 4 ( 15h45 đến 17h45 )</option>
+                                        <option value="5">Ca 5 ( 18h00 đến 20h00 )</option>
+                                        <option value="6">Ca 6 ( 20h15 đến 22h15 )</option>
                                     </select>
                                 </td>
                             </tr>
@@ -194,9 +201,9 @@
                                         <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
                                         <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
                                         <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
-                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
-                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
-                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
+                                        <option value="4">Ca 4 ( 15h45 đến 17h45 )</option>
+                                        <option value="5">Ca 5 ( 18h00 đến 20h00 )</option>
+                                        <option value="6">Ca 6 ( 20h15 đến 22h15 )</option>
                                     </select>
                                 </td>
                             </tr>
@@ -211,7 +218,7 @@
                     <input name="class_id" type="hidden" value="{{ $item->id }}">
                     @foreach ($get_all_level as $level)
                     @if($item->level_id == $level->id)
-                    <input name="level_id" type="hidden" value=" {{ $level->level }}">
+                    <input name="level_id" type="hidden" value=" {{ $level->id }}">
                     @endif
                     @endforeach
 
@@ -260,13 +267,96 @@
                                 <th scope="col"></th>
                             </tr>
                         </thead>
-                        <tbody class="mt-5 show_edit_{{$item->id}}">
-                            {{-- show detail edit --}}
+                        <tbody class="mt-5">
+                            <tr>
+                                <th scope="row">Thứ 2</th>
+                                <td class="pr-0" colspan="3">
+                                    <select class="form-control h-100 mt-2" name="2" id="2_{{$item->id}}">
+                                        <option value="0">Chọn Ca</option>
+                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
+                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
+                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
+                                        <option value="4">Ca 4 ( 15h45 đến 17h45 )</option>
+                                        <option value="5">Ca 5 ( 18h00 đến 20h00 )</option>
+                                        <option value="6">Ca 6 ( 20h15 đến 22h15 )</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Thứ 3</th>
+                                <td class="pr-0" colspan="3">
+                                    <select class="form-control h-100 mt-2" name="3" id="3_{{$item->id}}">
+                                        <option value="0">Chọn Ca</option>
+                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
+                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
+                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
+                                        <option value="4">Ca 4 ( 15h45 đến 17h45 )</option>
+                                        <option value="5">Ca 5 ( 18h00 đến 20h00 )</option>
+                                        <option value="6">Ca 6 ( 20h15 đến 22h15 )</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Thứ 4</th>
+                                <td class="pr-0" colspan="3">
+                                    <select class="form-control h-100 mt-2" name="4" id="4_{{$item->id}}">
+                                        <option value="0">Chọn Ca</option>
+                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
+                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
+                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
+                                        <option value="4">Ca 4 ( 15h45 đến 17h45 )</option>
+                                        <option value="5">Ca 5 ( 18h00 đến 20h00 )</option>
+                                        <option value="6">Ca 6 ( 20h15 đến 22h15 )</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Thứ 5</th>
+                                <td class="pr-0" colspan="3">
+                                    <select class="form-control h-100 mt-2" name="5" id="5_{{$item->id}}">
+                                        <option value="0">Chọn Ca</option>
+                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
+                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
+                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
+                                        <option value="4">Ca 4 ( 15h45 đến 17h45 )</option>
+                                        <option value="5">Ca 5 ( 18h00 đến 20h00 )</option>
+                                        <option value="6">Ca 6 ( 20h15 đến 22h15 )</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Thứ 6</th>
+                                <td class="pr-0" colspan="3">
+                                    <select class="form-control h-100 mt-2" name="6" id="6_{{$item->id}}">
+                                        <option value="0">Chọn Ca</option>
+                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
+                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
+                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
+                                        <option value="4">Ca 4 ( 15h45 đến 17h45 )</option>
+                                        <option value="5">Ca 5 ( 18h00 đến 20h00 )</option>
+                                        <option value="6">Ca 6 ( 20h15 đến 22h15 )</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Thứ 7</th>
+                                <td class="pr-0" colspan="3">
+                                    <select class="form-control h-100 mt-2" name="7" id="7_{{$item->id}}">
+                                        <option value="0">Chọn Ca</option>
+                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
+                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
+                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
+                                        <option value="4">Ca 4 ( 15h45 đến 17h45 )</option>
+                                        <option value="5">Ca 5 ( 18h00 đến 20h00 )</option>
+                                        <option value="6">Ca 6 ( 20h15 đến 22h15 )</option>
+                                    </select>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="modal-footer">
-                    @if($item->count_studen_count == 0)
+                    @if($item->count_studen_count == 0 && $item->teacher_id == null)
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                     <a id="btn_edit_{{ $item->id }}">
                         <button type="button" class="btn btn-primary">Đổi Lịch Học</button>
@@ -277,7 +367,7 @@
                     <input name="class_id" type="hidden" value="{{ $item->id }}">
                     @foreach ($get_all_level as $level)
                     @if($item->level_id == $level->id)
-                    <input name="level_id" type="hidden" value=" {{ $level->level }}">
+                    <input name="level_id" type="hidden" value=" {{ $level->id }}">
                     @endif
                     @endforeach
 
@@ -288,7 +378,7 @@
 </form>
 @endif
 @endforeach
-<div class="container justify-content-center d-flex mt-5 pb-5">
+<div class="container justify-content-center d-flex mt-5">
     @if($check == false)
     {{$get_all_class->links()}}
     @endif
@@ -333,103 +423,14 @@
     // show detail ajax ////////////////////
     $(document).ready(function() {
         $("button[id^='button_edit_']").click(function() {
-            html = "";
             id = event.currentTarget.attributes.id.value.replace('button_edit_', '');
             $.ajax({
                 url: '/admin/schedule_learn/show/edit/' + id,
                 method: 'get',
                 success: function(response) {
                     // đổ dữ liệu
-                    html = `
-                        <tr>
-                                <th scope="row">Thứ 2</th>
-                                <td class="pr-0" colspan="3">
-                                    <select class="form-control h-100 mt-2" name="2" id="2">
-                                        <option value="0">Chọn Ca</option>
-                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
-                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
-                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
-                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
-                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
-                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Thứ 3</th>
-                                <td class="pr-0" colspan="3">
-                                    <select class="form-control h-100 mt-2" name="3" id="3">
-                                        <option value="0">Chọn Ca</option>
-                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
-                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
-                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
-                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
-                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
-                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Thứ 4</th>
-                                <td class="pr-0" colspan="3">
-                                    <select class="form-control h-100 mt-2" name="4" id="4">
-                                        <option value="0">Chọn Ca</option>
-                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
-                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
-                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
-                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
-                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
-                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Thứ 5</th>
-                                <td class="pr-0" colspan="3">
-                                    <select class="form-control h-100 mt-2" name="5" id="5">
-                                        <option value="0">Chọn Ca</option>
-                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
-                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
-                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
-                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
-                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
-                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Thứ 6</th>
-                                <td class="pr-0" colspan="3">
-                                    <select class="form-control h-100 mt-2" name="6" id="6">
-                                        <option value="0">Chọn Ca</option>
-                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
-                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
-                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
-                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
-                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
-                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Thứ 7</th>
-                                <td class="pr-0" colspan="3">
-                                    <select class="form-control h-100 mt-2" name="7" id="7">
-                                        <option value="0">Chọn Ca</option>
-                                        <option value="1">Ca 1 ( 7h15 đến 9h15 )</option>
-                                        <option value="2">Ca 2 ( 9h30 đến 11h30 )</option>
-                                        <option value="3">Ca 3 ( 1h30 đến 3h30 )</option>
-                                        <option value="4">Ca 4 ( 3h45 đến 5h45 )</option>
-                                        <option value="5">Ca 5 ( 6h đến 8h )</option>
-                                        <option value="6">Ca 6 ( 8h15 đến 10h15 )</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        `;
-                    $(`.show_edit_${id}`).html(html);
                     $.each(response, function(weekday, slot) {
-                        console.log(weekday)
-                        $(`#${weekday} option[value="${slot}"]`).prop("selected", "selected")
+                        $(`#${weekday}_${id} option[value="${slot}"]`).prop("selected", "selected");
                     });
                 }
             });

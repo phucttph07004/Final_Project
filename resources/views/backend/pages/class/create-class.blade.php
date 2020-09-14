@@ -2,7 +2,7 @@
 @section('title','Quản Trị Lớp')
 @section('title_page','Thêm Mới Lớp')
 @section('content')
-<form enctype="multipart/form-data" class="pl-5 pt-5" action="{{ route('class.store') }}" method="POST">
+<form enctype="multipart/form-data" class="card-body" action="{{ route('class.store') }}" method="POST">
     @csrf
     @if(session('thongbao'))
     <div class="alert alert-primary" role="alert">
@@ -30,15 +30,14 @@
         <br>
         {!! ShowErrors($errors,'course_id') !!}
         <select name="course_id" class="form-control">
-            
+            @if($courses == null)
+            <option >Hiện tại không có khoá học phù hợp vui lòng tạo một khoá mới</option>
+            @else
             @foreach ($courses as $course)
-                @if($course == null)
-                <option >Hiện tại không có khoá học phù hợp</option>
-
-                @else
                 <option value="{{ $course->id }}">{{ $course->course_name}}</option>
-                @endif
             @endforeach
+            @endif
+
         </select>
     </div>
     <div class="form-group">
@@ -54,12 +53,6 @@
         {!! ShowErrors($errors,'finish_date') !!}
         <input data-date="" data-date-format="DD MM YYYY" name="finish_date" type="date" value="{{ old('finish_date')}}"
             class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="">Số buổi học</label>
-        <br>
-        {!! ShowErrors($errors,'number_of_sessions') !!}
-        <input name="number_of_sessions" type="text" value="{{ old('number_of_sessions')}}" class="form-control">
     </div>
     <div class="d-flex align-items-center">
         <a class="btn btn-danger mr-4" href="{{route('class.index')}}">Quay lại</a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\backend\account\EditAccountRequest;
 
 use Arr;
 use Auth;
@@ -14,25 +15,24 @@ class AccountController extends Controller
 {
 
     public function show(){
-        $data['user']=User::find(Auth::user()->id);
+        $data['profile']=User::find(Auth::user()->id);
         return view('backend.pages.account.account',$data);
     }
 
-    public function update(Request $request){
-        $user = User::find(Auth::user()->id);
-        if($request->password == $user->password ){
-            $data = Arr::except($request, ['_token','created_at','password'])->toarray();
-        }else{
-            $data = Arr::except($request, ['_token','created_at','updated_at'])->toarray();
-            $data['password']=bcrypt($request->password);
-        }
-        $updated_at=Carbon::now()->toarray();
+    public function edit($id){
+        $data['profile'] = User::find(Auth::user()->id);
+        return view('backend.pages.account.edit-account',$data);
+    }
 
-        if ($request->hasFile('avatar')) {
-            $data['avatar']=$request->file('avatar')->store('images','public');
-         }else{
-             $data['avatar']=$user->avatar;
-         }
+    public function update(EditAccountRequest $request){
+        $user = User::find(Auth::user()->id);
+        $data = Arr::except(request()->all(), ["_token ,'_method'"]);
+        $updated_at=Carbon::now()->toarray();
+        // $data['password']=bcrypt($data['password']);
+
+         if ($data['avatar'] != $user->avatar) {
+            $data['avatar'] = $request->file('avatar')->store('images', 'public');
+        }
 
         $data['updated_at']=$updated_at['formatted'];
         $user->update($data);

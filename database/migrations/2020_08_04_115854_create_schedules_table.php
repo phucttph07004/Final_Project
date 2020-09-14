@@ -17,8 +17,7 @@ class CreateSchedulesTable extends Migration
             $table->increments('id');
             $table->string('weekday')->nullable();
             $table->string('slot')->nullable();
-            $table->integer('student_id')->unsigned()->nullable();
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->text('student_id')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('teacher_id')->unsigned()->nullable();

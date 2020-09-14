@@ -27,8 +27,11 @@ class CourseController extends Controller
             foreach($request->all() as $key => $value){
                 if($key == 'status'){
                     $data['courses']=Course::where("$key","$value")->paginate(10);
-                }else{
+                }elseif($key == 'course_name'){
                     $data['courses']=Course::where("$key",'LIKE',"%$value%")->paginate(10);
+                }
+                else{
+                    $data['courses']=Course::whereBetween('start_date', array($request->start_date, $request->finish_date))->paginate(10);
                 }
             }
         }else{
@@ -120,7 +123,7 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        Course::destroy($id);
-        return redirect()->back();
+        // Course::destroy($id);
+        // return redirect()->back();
     }
 }

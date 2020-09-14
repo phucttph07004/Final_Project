@@ -51,13 +51,13 @@
   src: url(/font/Nunito-Bold.ttf); }
 @font-face {
   font-family: asl-light;
-  src: url(/font/AveriaSansLibre-Light.ttf); }
+  src: url(/font/Nunito-Regular.ttf); }
 @font-face {
   font-family: asl-regular;
-  src: url(/font/AveriaSansLibre-Regular.ttf); }
+  src: url(/font/Nunito-SemiBold.ttf); }
 @font-face {
   font-family: asl-bold;
-  src: url(/font/AveriaSansLibre-Bold.ttf); }
+  src: url(/font/Nunito-Bold.ttf); }
 /* Social Media
 --------------------------------------------- */
 /* Main Color
@@ -183,7 +183,8 @@ html {
 body {
   line-height: 1.5;
   overflow-x: hidden;
-  font-size: 1.6rem; }
+  font-size: 1.6rem;
+  font-family: nunito-regular; }
 
 ol,
 ul {
@@ -1392,6 +1393,26 @@ body.hc-nav-open {
       font-family: nunito-regular; }
       .news-detail__content .content:not(:last-child) {
         margin-bottom: 20px; }
+      .news-detail__content .content p {
+        font-family: nunito-regular !important;
+        font-size: 1.8rem !important; }
+        .news-detail__content .content p a {
+          color: #341c77 !important; }
+      .news-detail__content .content h1,
+      .news-detail__content .content h2,
+      .news-detail__content .content h3,
+      .news-detail__content .content h4,
+      .news-detail__content .content h5,
+      .news-detail__content .content h6 {
+        font-family: nunito-bold !important;
+        font-size: 2.4rem; }
+        .news-detail__content .content h1 a,
+        .news-detail__content .content h2 a,
+        .news-detail__content .content h3 a,
+        .news-detail__content .content h4 a,
+        .news-detail__content .content h5 a,
+        .news-detail__content .content h6 a {
+          color: #341c77 !important; }
   .news-detail__mid {
     padding: 30px 0;
     display: flex;
@@ -1579,6 +1600,16 @@ body.hc-nav-open {
     height: auto;
     text-align: center; }
 
+.schedule-opening__inner {
+  margin-bottom: 40px; }
+  .schedule-opening__inner .schedule-opening__head {
+    display: block;
+    text-align: center;
+    background-color: #341c77;
+    padding: 10px;
+    font-size: 17px;
+    color: #fff; }
+
 .login {
   background: url(../images/login-background.jpg);
   background-position: center;
@@ -1714,7 +1745,7 @@ body.hc-nav-open {
       height: auto;
       text-align: center; }
   .footer__mid {
-    padding: 95px 0; }
+    padding: 10px 0; }
     .footer__mid-item {
       margin-bottom: 20px; }
       @media only screen and (max-width: 767px) {

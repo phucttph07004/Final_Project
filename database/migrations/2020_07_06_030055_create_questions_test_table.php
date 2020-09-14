@@ -16,13 +16,14 @@ class CreateQuestionsTestTable extends Migration
         Schema::create('questions_test', function (Blueprint $table) {
             $table->increments('id');
             $table->text('question');
-            $table->json('answer');
-            $table->text('correct_answer');
+            $table->integer('quiz_id');
+            $table->longText('answer');
+            $table->longText('correct_answer');
             $table->integer('status');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('level_id')->unsigned();
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

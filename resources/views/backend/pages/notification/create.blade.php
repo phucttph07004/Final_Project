@@ -2,7 +2,8 @@
 @section('title','Quản Trị Thông Báo')
 @section('title_page','Gửi Thông Báo')
 @section('content')
-<form class=" col-11 pl-5 pt-5" action="{{ route('notifications.store') }}" method="POST">
+<div class="col-12">
+<form action="{{ route('notifications.store') }}" method="POST">
     @csrf
         @if(session('thongbao'))
         <div class="alert alert-primary" role="alert">
@@ -17,10 +18,11 @@
     </div>
 
     <div class="form-group">
-      <label for="exampleFormControlSelect1">Loại Thông Báo</label>
+      <label for="exampleFormControlSelect1">Danh Mục Thông Báo</label>
       <br>
         {!! ShowErrors($errors,'category_id') !!}
       <select class="form-control" name="category_id" id="type">
+        <option value="">Chọn Danh Mục</option>
         @foreach ($get_all_category as $item)
       <option value="{{ $item->id }}">{{ $item->name }}</option>
         @endforeach
@@ -45,4 +47,5 @@
     </div>
     <button type="submit" class="mb-5 btn btn-primary">Tạo Thông Báo</button>
   </form>
+</div>
   @endsection

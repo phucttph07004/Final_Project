@@ -1,15 +1,16 @@
 @extends('frontend.layout.layout')
 @section('content')
-<section class="breadCrumb" style="background: url(/images/contact-breadcrumb.jpg); background-repeat: no-repeat;background-size:cover;">
+@foreach($news as $new)
+
+<section class="breadCrumb" style="background: url(/storage/{{$new->image}}); background-repeat: no-repeat;background-size:cover;">
             <div class="container">
-            @foreach($news as $new)
                 <h1 class="breadCrumb__title">{{$new->title}}</h1>
-                @endforeach
             </div>
-            <a href="index.html" class="breadCrumb__homeIcon">
+            <a href="{{route('home.index')}}" class="breadCrumb__homeIcon">
                 <i class="fa fa-home"></i>
             </a>
-        </section>
+</section>
+@endforeach
         <!-- End breadcrumb -->
 
         <!-- Start news -->
@@ -27,32 +28,11 @@
                                     <!-- <p class="news-comment">3 comment</p> -->
                                 </div>
                                 <h1 class="news__detail-title">{{$new->title}}</h1>
-                                <p class="content">
+                                <div class="content">
                                 {!!$new->content!!}
-                                </p>
+                                </div>
                             </div>
                         @endforeach
-                        <div class="news-detail__mid">
-                            <div class="tag">
-                                <p>Tag: </p>
-                                <ul class="tag__list">
-                                    <li class="tag__item">
-                                        <a href="" class="item-link">english</a>
-                                    </li>
-                                    <li class="tag__item">
-                                        <a href="" class="item-link">school</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ul class="share">
-                                <li class="share__item">
-                                    <a href="" class="item-link"><i class="fa fa-facebook"></i></a>
-                                </li>
-                                <li class="share__item">
-                                    <a href="" class="item-link"><i class="fa fa-twitter"></i></a>
-                                </li>
-                            </ul>
-                        </div>
                         <!-- <div class="comment">
                             <p class="comment-title">2 Comment</p>
                             <div class="comment__detail">

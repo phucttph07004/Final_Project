@@ -28,20 +28,67 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Slogan</label>
-                                <input type="text" class="form-control" name="slogan" id="" value="{{ $setting->slogan }}">
+                                <input type="text" class="form-control" name="slogan" value="{{ $setting->slogan }}">
                                 {!! ShowErrors($errors,'slogan') !!}
                             </div>
 
                             <div class="form-group">
                                 <label for="">Email</label>
-                                <input type="email" class="form-control" name="email" id="" value="{{ $setting->email }}">
+                                <input type="email" class="form-control" name="email" value="{{ $setting->email }}">
                                 {!! ShowErrors($errors,'email') !!}
                             </div>
                             <div class="form-group">
                                 <label for="">Số điện thoại</label>
-                                <input type="text" class="form-control" name="phone" id="" value="{{ $setting->phone }}">
+                                <input type="text" class="form-control" name="phone" value="{{ $setting->phone }}">
                                 {!! ShowErrors($errors,'phone') !!}
                             </div>
+                            <div class="form-group">
+                                <label for="">Banner</label><br>
+                                <img width="30%" src="storage/{{$setting->banner}}" alt="">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Thay banner</label> <br>
+                                <input type="file" class="form-control" name="banner">
+                                {!! ShowErrors($errors,'banner') !!}
+                            </div>
+                            <div class="form-group">
+                                <label for="">Welcome</label>
+                                <input type="text" class="form-control" name="welcome" value="{{ $setting->welcome }}">
+                                {!! ShowErrors($errors,'welcome') !!}
+                            </div>
+                            <div class="form-group">
+                                <label for="">Welcome content</label>
+                                <input type="text" class="form-control" name="welcome_content" value="{{ $setting->welcome_content }}">
+                                {!! ShowErrors($errors,'welcome_content') !!}
+                            </div>
+                            <div class="form-group">
+                                <label for="">Ảnh lời chào</label><br>
+                                <img width="30%" src="storage/{{$setting->welcome_image}}" alt="">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Thay ảnh</label> <br>
+                                <input type="file" class="form-control" name="welcome_image">
+                                {!! ShowErrors($errors,'welcome_image') !!}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Ảnh Breadcrumb</label><br>
+                                <img width="30%" src="storage/{{$setting->breadcrumb}}" alt="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Thay Ảnh Breadcrumb</label> <br>
+                                <input type="file" class="form-control" name="breadcrumb">
+                                {!! ShowErrors($errors,'breadcrumb') !!}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Fanpage</label><br>
+                                {!!$setting->fanpage!!}
+                                <input type="text" class="form-control" name="fanpage" value="{{ $setting->fanpage }}">
+                                {!! ShowErrors($errors,'fanpage') !!}
+                            </div>
+                            
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>

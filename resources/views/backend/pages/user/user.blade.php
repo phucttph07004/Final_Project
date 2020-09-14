@@ -1,18 +1,13 @@
 @extends('./backend/layout/master')
-@section('title','Quản Trị Tài Khoản')
-@section('title_page','Quản Trị Tài Khoản')
+@section('title','Quản Trị Nhân Viên')
+@section('title_page','Quản Trị Nhân Viên')
 @section('content')
-<section class="content">
-    <table style="background-color: white" class="table ml-5">
-        @if(session('thongbao'))
-        <div class="alert alert-primary text-center" role="alert">
-            {{session('thongbao') }}
-        </div>
-        @endif
-        <div class="d-flex align-items-center ml-5">
+<section class="content" style="margin:0;">
+<div class="d-flex align-items-center">
             <div class="col-5">
-                <form action="">
-                    <input class="form-control" type="text" name="fullname" value="" placeholder="Lọc theo tên">
+                <form action="" class="d-flex">
+                    <input class="form-control mr-2" type="text" name="fullname" value="" placeholder="Tìm theo tên">
+                    <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
                 </form>
             </div>
             <div class="ml-5 dropdown pt-3 pb-4 mt-2">
@@ -23,10 +18,9 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @foreach ($users as $user)
                     <a class="dropdown-item" href="{{route('user.index')}}?role={{ $user->role }}">
-                        @if($user->role == 6)<span>Tổng giám đốc</span>
-                        @elseif( $user->role == 5 ) <span>Giám đốc chi nhánh</span>
+                        @if( $user->role == 5 ) <span>Giám đốc</span>
                         @elseif( $user->role == 4 ) <span>Giáo viên</span>
-                        @elseif( $user->role == 3 ) <span>Trợ giảng</span>
+                        @elseif( $user->role == 3 ) <span>Quản lý</span>
                         @elseif( $user->role == 2 ) <span>Admin</span>
                         @endif
                     </a>
@@ -34,6 +28,13 @@
                 </div>
             </div>
         </div>
+    <table style="background-color: white" class="table table-striped table-bordered dt-responsive flex-wrap ">
+        @if(session('thongbao'))
+        <div class="alert alert-primary text-center" role="alert">
+            {{session('thongbao') }}
+        </div>
+        @endif
+        
         <thead>
             <tr>
                 <th scope="col">STT</th>
@@ -56,24 +57,32 @@
                 <td><img style="width:70px;height:50px" src="storage/{{ $user->avatar }}" alt=""></td>
                 <td>{{ $user->fullname }}</td>
                 <td>
-                    @if($user->role == 6)<span>Tổng giám đốc</span>
-                    @elseif( $user->role == 5 ) <span>Giám đốc chi nhánh</span>
+                    @if( $user->role == 5 ) <span>Giám đốc</span>
                     @elseif( $user->role == 4 ) <span>Giáo viên</span>
-                    @elseif( $user->role == 3 ) <span>Trợ giảng</span>
+                    @elseif( $user->role == 3 ) <span>Quản lý</span>
                     @elseif( $user->role == 2 ) <span>Admin</span>
                     @endif
                 </td>
                 <td>
-                    @if($user->status == 1) <span style='color: green'>Hoạt động</span>
-                    @else <span style='color: red'>Khoá</span>
-                    @endif
+                    <a class="toggle-class" id="btn_deactive_{{ $user->id }}">
+                        <input type="checkbox" @if($user->status == 1) checked @endif
+                        data-toggle="toggle" data-on="Hoạt động"
+                        data-off="Khoá" data-onstyle="success" data-offstyle="danger">
+                    </a>
+
+                    <form id="deactive_form_{{ $user->id }}" action="{{ route('user.destroy',$user->id) }}"
+                        method="post" style="display: none;">
+                        @method('DELETE')
+                        <input type="hidden" name="status" value="{{$user->status}}">
+                        @csrf
+                    </form>
                 </td>
                 <td>
-                    <a href="{{ route('user.show',"$user->id") }}">
-                        <button type="button" class="btn btn-outline-info">Chi Tiết</button>
+                    <a class="btn border-info btn-outline-info" href="{{ route('user.show',"$user->id") }}">
+                        Chi Tiết
                     </a>
-                    <a href="{{ route('user.edit',"$user->id") }}">
-                        <button type="button" class="btn btn-outline-warning">Sửa</button>
+                    <a class="btn border-warning btn-outline-warning" href="{{ route('user.edit',"$user->id") }}">
+                        Sửa
                     </a>
 
                     <!-- <a id="btn_delete_{{ $user->id }}" class="btn btn-outline-danger">Xóa</a>
@@ -95,11 +104,12 @@
 
 @push('scripts')
 <script>
-$("a[id^='btn_delete_']").click(function(event) {
-    id = event.currentTarget.attributes.id.value.replace('btn_delete_', '');
-    if (confirm('Bạn có muốn xóa không')) {
-        $("#delete_form_" + id).submit();
+$("a[id^='btn_deactive_']").click(function(event) {
+    id = event.currentTarget.attributes.id.value.replace('btn_deactive_', '');
+    if (confirm('Bạn có muốn thay đổi trạng thái của tài khoản')) {
+        $("#deactive_form_" + id).submit();
     }
 });
+
 </script>
 @endpush

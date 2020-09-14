@@ -2,15 +2,17 @@
 @section('content')
 
 <!-- Start breadcrumb -->
+@foreach($settings as $setting)
 <section class="breadCrumb"
-    style="background: url(/images/contact-breadcrumb.jpg); background-repeat: no-repeat;background-size:cover;">
+    style="background: url(storage/{{$setting->breadcrumb}}); background-repeat: no-repeat;background-size:cover;">
     <div class="container">
-        <h1 class="breadCrumb__title">News</h1>
+        <h1 class="breadCrumb__title">Tin tức</h1>
     </div>
-    <a href="index.html" class="breadCrumb__homeIcon">
+    <a href="{{route('home.index')}}" class="breadCrumb__homeIcon">
         <i class="fa fa-home"></i>
     </a>
 </section>
+@endforeach
 <!-- End breadcrumb -->
 
 <!-- Start news -->

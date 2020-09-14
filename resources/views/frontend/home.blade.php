@@ -37,94 +37,35 @@
 @endif
 <!-- Start main slider -->
 <section class="homeSlider">
-    <div class="homeSlider-carousel owl-carousel ow-theme">
+    <div class="homeSlider-carousel">
         <div class="homeSlider__item">
             <div class="homeSlider__image">
-                <img src="/images/homeslider.jpg" alt="Home Slide">
-            </div>
-        </div>
-        <div class="homeSlider__item">
-            <div class="homeSlider__image">
-                <img src="/images/homeslider.jpg" alt="Home Slide">
-            </div>
-        </div>
-        <div class="homeSlider__item">
-            <div class="homeSlider__image">
-                <img src="/images/homeslider.jpg" alt="Home Slide">
+                @foreach ($settings as $setting)
+                <img src="storage/{{$setting->banner}}" alt="Home Slide">
+                @endforeach
             </div>
         </div>
     </div>
 </section>
 <!-- End main slider -->
 
-<!-- Start offer -->
-<section class="offer">
-    <div class="container">
-        <h1 class="section__title">Toàn diện 4 kỹ năng</h1>
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-3 ">
-                <div class="offer__block wow bounce">
-                    <div class="offer__block-circle">
-                        <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
-                    </div>
-                    <p class="offer__block-name">
-                        Nghe 
-                    </p>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="offer__block wow bounce">
-                    <div class="offer__block-circle">
-                        <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
-                    </div>
-                    <p class="offer__block-name">
-                       Nói
-                    </p>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="offer__block wow bounce">
-                    <div class="offer__block-circle">
-                        <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
-                    </div>
-                    <p class="offer__block-name">
-                       Đọc
-                    </p>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="offer__block wow bounce">
-                    <div class="offer__block-circle">
-                        <img src="/images/offer-icon-1.png" alt="Offer" class="offer__block-image">
-                    </div>
-                    <p class="offer__block-name">
-                       Viết
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End offer -->
-
 <!-- Start welcome -->
 <section class="welcome">
     <div class="container">
         <div class="row align-items-end justify-content-between">
-            <div class="col-md-5 wow slideInLeft">
+            @foreach($settings as $setting)
+            <div class="col-md-5">
                 <div class="welcome__image ">
-                    <img src="/images/gallery-1.jpg" alt="welcome">
+                    <img src="storage/{{$setting->welcome_image}}" alt="welcome">
                 </div>
             </div>
-            <div class="col-md-6 wow slideInRight">
+            <div class="col-md-6">
                 <div class="welcome__content ">
-                    <h1 class="section__title">Chào mừng bạn đến với Bee English Center </h1>
-                    <p class="welcome__content-desc">
-                    Chúng tôi cam kết chuyển giao kiến thức thực tiễn dựa trên nền tảng tư duy giáo dục định hướng & phát huy tối đa khả năng sáng tạo của học viên với mục tiêu tối thượng là giúp người học thay đổi tư duy, phát triển kỹ năng cần thiết, nghe nói tiếng Anh dễ dàng, trôi chảy và tự động.
-                    </p>
-                    <a href="" class="welcome__readMore">Xem thêm</a>
+                    <h1 class="section__title">{{$setting->welcome}}</h1>
+                    <p class="welcome__content-desc">{{$setting->welcome_content}}</p>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -133,86 +74,29 @@
 <!-- Start programs -->
 <section class="programs">
     <div class="container">
-        <h1 class="section__title">Hệ Thống Khoá Học</h1>
+        <h1 class="section__title">Các level</h1>
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-4">
-                <div class="programs__block">
-                    <div class="programs__block-image">
-                        <img src="https://via.placeholder.com/350x150" alt="programs">
-                    </div>
-                    <div class="programs__block-text">
-                        <h5 class="programs__block-name">COMBO 1</h5>
-                        <p class="programs__block-desc">Nền tảng tiếng Anh</p>
-                    </div>
+          @foreach ($levels as $level)
+          <div class="col-12 col-md-4 col-lg-4">
+            <div class="programs__block">
+                <div class="programs__block-image">
+                    <img src="storage/{{$level->image}}" alt="programs">
+                </div>
+                <div class="programs__block-text">
+                    <h5 class="programs__block-name">Level: {{$level->level}}</h5>
+                    <p class="programs__block-desc">{{$level->description}}</p>
                 </div>
             </div>
-            <div class="col-12 col-md-4 col-lg-4">
-                <div class="programs__block">
-                    <div class="programs__block-image">
-                        <img src="https://via.placeholder.com/350x150" alt="programs">
-                    </div>
-                    <div class="programs__block-text">
-                        <h5 class="programs__block-name">COMBO 2</h5>
-                        <p class="programs__block-desc">Toàn diện 4 kỹ năng</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-4">
-                <div class="programs__block">
-                    <div class="programs__block-image">
-                        <img src="https://via.placeholder.com/350x150" alt="programs">
-                    </div>
-                    <div class="programs__block-text">
-                        <h5 class="programs__block-name">COMBO 3</h5>
-                        <p class="programs__block-desc">Chuẩn đầu ra TOEIC</p>
-                    </div>
-                </div>
-            </div>
+        </div>
+          @endforeach
         </div>
     </div>
 </section>
 <!-- End programs -->
 
-<!-- Start feedback -->
-<section class="feedback">
-    <div class="container">
-        <h1 class="section__title section__title--white">Cảm nhận của học viên</h1>
-        <div class="feedback-carousel owl-carousel owl-theme">
-            <div class="feedback__item">
-                <p class="feedback__item-content">
-                Mình cảm thấy rất may mắn khi được biết đến trung tâm giao tiếp tiếng Anh từ đầu. Mình thực sự rất ấn tượng với phương pháp dạy và học ở Langmaster ạ. Học không còn chỉ là trên lý thuyết như mình được học trên trường mà đó là sự áp dụng lý thuyết vào thực tiễn. Điều này giúp mình nhớ lâu nhanh hơn. 
-                </p>
-                <p class="feedback__item-author">Nguyễn Quang Trường</p>
-                <div class="feedback__item-avatar">
-                    <img src="" alt="">
-                </div>
-            </div>
-             <div class="feedback__item">
-                <p class="feedback__item-content">
-                Mình cảm thấy rất may mắn khi được biết đến trung tâm giao tiếp tiếng Anh từ đầu. Mình thực sự rất ấn tượng với phương pháp dạy và học ở Langmaster ạ. Học không còn chỉ là trên lý thuyết như mình được học trên trường mà đó là sự áp dụng lý thuyết vào thực tiễn. Điều này giúp mình nhớ lâu nhanh hơn. 
-                </p>
-                <p class="feedback__item-author">Nguyễn Quang Trường</p>
-                <div class="feedback__item-avatar">
-                    <img src="" alt="">
-                </div>
-            </div>
-             <div class="feedback__item">
-                <p class="feedback__item-content">
-                Mình cảm thấy rất may mắn khi được biết đến trung tâm giao tiếp tiếng Anh từ đầu. Mình thực sự rất ấn tượng với phương pháp dạy và học ở Langmaster ạ. Học không còn chỉ là trên lý thuyết như mình được học trên trường mà đó là sự áp dụng lý thuyết vào thực tiễn. Điều này giúp mình nhớ lâu nhanh hơn. 
-                </p>
-                <p class="feedback__item-author">Nguyễn Quang Trường</p>
-                <div class="feedback__item-avatar">
-                    <img src="" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End feedback -->
-
 
 <!-- Start teacher -->
-<section class="teacher">
+<section class="teacher" >
     <div class="container">
         <h1 class="section__title">Đội ngũ giảng viên</h1>
         <div class="teacher-carousel owl-carousel">
@@ -231,6 +115,34 @@
     </div>
 </section>
 <!-- End teacher -->
+
+<section class="about__number" style="background-color:#f7f2ea">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="about__number-item">
+                    <p class="number">{{$students->count()}}</p>
+                    <p class="item__name">Học viên</p>
+                    <div class="lines lines--orange"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="about__number-item">
+                    <p class="number">{{$teachers->count()}}</p>
+                    <p class="item__name">Giảng viên</p>
+                    <div class="lines lines--yellow"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="about__number-item">
+                    <p class="number">{{$levels->count()}}</p>
+                    <p class="item__name">Level</p>
+                    <div class="lines lines--violet"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Start news -->
 <section class="news">
@@ -251,7 +163,7 @@
                             <a class="news__item-title" href="{{route('news.news-detail',[$new->id])}}">
                                 {{$new -> title}}</a>
                         </h2>
-                        <p class="news__item-desc">{{$new->content}}</p>
+                        <p class="news__item-desc">{{$new->description}}</p>
                     </div>
                 </div>
             </div>
@@ -261,70 +173,4 @@
 </section>
 <!-- End news -->
 
-<!-- Start Gallery -->
-<!-- <div class="gallery">
-    <div class="gallery-carousel owl-carousel">
-        <div class="gallery__item">
-            <a href="/images/gallery-1.jpg"  data-fancybox="gallery" alt="gallery">
-                <div class="gallery__item-image">
-                    <div class="gallery__item-plus">
-                        <i class="fa fa-plus"></i>
-                    </div>
-                    <div class="overlay"></div>
-
-                    <img src="/images/gallery-1.jpg" alt="gallery">
-                </div>
-            </a>
-        </div>
-        <div class="gallery__item">
-            <a href="/images/gallery-2.jpg"  data-fancybox="gallery" alt="gallery">
-                <div class="gallery__item-image">
-                    <div class="gallery__item-plus">
-                        <i class="fa fa-plus"></i>
-                    </div>
-                    <div class="overlay"></div>
-
-                    <img src="/images/gallery-2.jpg" alt="gallery">
-                </div>
-            </a>
-        </div>
-        <div class="gallery__item">
-            <a href="/images/gallery-3.jpg"  data-fancybox="gallery" alt="gallery">
-                <div class="gallery__item-image">
-                    <div class="gallery__item-plus">
-                        <i class="fa fa-plus"></i>
-                    </div>
-                    <div class="overlay"></div>
-
-                    <img src="/images/gallery-3.jpg" alt="gallery">
-                </div>
-            </a>
-        </div>
-        <div class="gallery__item">
-            <a href="/images/gallery-4.jpg"  data-fancybox="gallery" alt="gallery">
-                <div class="gallery__item-image">
-                    <div class="gallery__item-plus">
-                        <i class="fa fa-plus"></i>
-                    </div>
-                    <div class="overlay"></div>
-
-                    <img src="/images/gallery-4.jpg" alt="gallery">
-                </div>
-            </a>
-        </div>
-        <div class="gallery__item">
-            <a href="/images/gallery-5.jpg"  data-fancybox="gallery" alt="gallery">
-                <div class="gallery__item-image">
-                    <div class="gallery__item-plus">
-                        <i class="fa fa-plus"></i>
-                    </div>
-                    <div class="overlay"></div>
-
-                    <img src="/images/gallery-5.jpg" alt="gallery">
-                </div>
-            </a>
-        </div>
-    </div>
-</div> -->
-<!-- End Gallery -->
 @endsection

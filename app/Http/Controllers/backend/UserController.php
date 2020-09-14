@@ -55,7 +55,6 @@ class UserController extends Controller
     {
         $data = Arr::except($request->all(),['_token']);
         $data['password']=bcrypt($data['password']);
-        $data['type']='text';
         $data['status']='1';
         if($request->hasFile('avatar')){
             $data['avatar']=$request->file('avatar')->store('images','public');
@@ -127,7 +126,20 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return redirect()->route('user.index');
+        // User::destroy($id);
+        // return redirect()->route('user.index');
+        $user = User::find($id);
+        $data = Arr::except(request()->all(), ["_token ,'_method'"]);
+
+        if($data['status'] == 0){
+            $data['status'] = 1;
+        }
+        else {
+            $data['status'] = 0;
+        }
+
+        $user->update($data);
+
+        return redirect()->back();
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\backend;
 use Illuminate\Support\Arr;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\backend\news\NewsRequest;
+use App\Http\Requests\backend\news\{NewsRequest,NewsEditRequest};
 
 use Str;
 use Auth;
@@ -92,7 +92,7 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(NewsRequest $request,$id)
+    public function update(NewsEditRequest $request,$id)
     {
         $news = News::find($id);
 

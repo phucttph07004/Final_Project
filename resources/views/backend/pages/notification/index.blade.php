@@ -3,12 +3,9 @@
 @section('title_page','Quản Trị Thông Báo')
 @section('content')
 
-
-<div class="col-12">
-    <div style="padding-left: 210px" class="row bg-light form-inline">
-        <div class="col-5"></div>
-        <div class="col-7">
-            <div class="row pl-5">
+    <div style="" class="row bg-light form-inline">
+        <div class="col-12">
+            <div class="row ">
             <div class="ml-5 dropdown pt-3 pb-4 mt-2">
                 <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Lọc Theo Trạng Thái
@@ -21,9 +18,9 @@
                     <a class="dropdown-item" href="/admin/notifications?status=2">Thông Báo Khẩn Cấp</a>
                 </div>
             </div>
-        <div style="width: 300px;">
+        <div style="">
                 <form class="form-inline pt-4">
-                    <input name="title" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo Tiêu Đề " aria-label="Search">
+                    <input name="title" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Tìm Theo Tiêu Đề " aria-label="Search">
                     <a>
                         <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </a>
@@ -32,8 +29,7 @@
     </div>
         </div>
 </div>
-</div>
-<table style="background-color: white" class="table ml-5">
+<table style="background-color: white" class="table table-striped table-bordered dt-responsive nowrap">
     @if(session('thongbao'))
     <div class="alert alert-primary text-center" role="alert">
         {{session('thongbao') }}
@@ -41,7 +37,7 @@
     @endif
     <thead>
       <tr>
-        <th scope="col">STT</th>
+        <th class="pl-3" scope="col">STT</th>
         <th scope="col">Tiêu Đề</th>
         <th scope="col">Danh Mục</th>
         <th scope="col">Người Gửi</th>
@@ -59,7 +55,7 @@
         <td colspan="7">
             <div class="mt-5 col-12 justify-content-center d-flex">
                 <div class=" alert alert-danger" role="alert">
-                    Không Có kết Quả Tìm Kiếm Nào
+                    Không Có kết Quả  Nào
                 </div>
             </div>
         </td>
@@ -67,7 +63,7 @@
         <?php $i=1 ?>
         @foreach ($get_all_notification as $item)
         <tr>
-        <th scope="row">{{ $i++ }}</th>
+        <th class="pl-3" scope="row">{{ $i++ }}</th>
             <td>{{ $item->title }}</td>
             <td>{{ $item->categoryName->name }}</td>
             <td>{{ $item->userName->fullname }}</td>
@@ -114,7 +110,7 @@
         @endforeach
     </tbody>
   </table>
- <div class="container justify-content-center d-flex mt-5 pb-5">
+ <div class="container justify-content-center d-flex mt-5">
         {{$get_all_notification->links()}}
     </div>
 @endsection

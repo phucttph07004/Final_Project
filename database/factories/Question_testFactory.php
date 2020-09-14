@@ -10,30 +10,9 @@ $factory->define(Question_test::class, function (Faker $faker) {
         'question' => $faker->realText($maxNbChars = 200, $indexSize = 1),
         'answer' =>json_encode(["A" => "realTextA ","B" => "realTextB ","C" => "realTextC ","D" => "realTextD "] ),
         'correct_answer' => $faker->randomElement($array = array ('A','B','C','D')),
-        'level_id' => Level::inRandomOrder()->first()->id,
         'status' => 1,
+        'quiz_id' => $faker->randomElement($array = array ('1','2','3','4')),
         'user_id' =>User::inRandomOrder()->first()->id,
+        'level_id' =>Level::inRandomOrder()->first()->id,
     ];
 });
-
-
-// 'reciever_id'=>'{
-//     id:1,
-//     result:[
-//         {
-//             1:"a"
-//         },
-//         {
-//             2:"b"
-//         }
-//     },
-//     id:2,
-//     result:[
-//         {
-//             1:"a"
-//         },
-//         {
-//             2:"b"
-//         }
-//     }
-//     }',

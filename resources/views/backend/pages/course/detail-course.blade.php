@@ -3,11 +3,11 @@
 @section('title_page','Chi tiết khoá học')
 @section('content')
 
-<section class="content">
-    <h3 class="ml-5">Danh sách lớp học của khoá {{$course->course_name}}</h3>
-    <p class="ml-5">Ngày khai giảng: {{date('d-m-Y', strtotime($course->start_date))}}</p>
-    <p class="ml-5">Ngày kết thúc dự kiến: {{date('d-m-Y', strtotime($course->finish_date))}}</p>
-    <table style="background-color: white" class="table ml-5">
+<section class="content" style="margin:0;">
+    <h3 class="ml-1">Danh sách lớp học của khoá {{$course->course_name}}</h3>
+    <p class="ml-1">Ngày khai giảng: {{date('d-m-Y', strtotime($course->start_date))}}</p>
+    <p class="ml-1">Ngày kết thúc dự kiến: {{date('d-m-Y', strtotime($course->finish_date))}}</p>
+    <table style="background-color: white" class="table table-striped table-bordered dt-responsive nowrap">
         @if(session('thongbao'))
         <div class="alert alert-primary text-center" role="alert">
             {{session('thongbao') }}
@@ -21,11 +21,11 @@
                 <th scope="col">Khoá</th>
                 <th scope='col'>Số buổi học</th>
                 <th scope="col">Trạng thái</th>
-                <th scope="col">
+                {{-- <th scope="col">
                     <a href="{{ route('class.create') }}">
                         <button type="button" class="btn btn-outline-primary">Tạo lớp mới</button>
                     </a>
-                </th>
+                </th> --}}
             </tr>
         </thead>
         <tbody>

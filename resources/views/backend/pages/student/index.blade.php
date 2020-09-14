@@ -2,15 +2,15 @@
 @section('title','Quản Trị Học Viên')
 @section('title_page','Quản Trị Học Viên')
 @section('content')
-<div class="row">
-    <div class="col-12">
-        <div style="padding-left: 45px" class="row bg-light form-inline">
-            <div style="margin-right: -60px;z-index: 2;" class="col-5 text-right pr-0">
-                <div class="ml-5 dropdown pt-3 pb-4 mt-2">
+
+    <div class="col-12 ">
+        <div style="padding-left: 430px" class="row bg-light form-inline">
+            <div class=" text-right">
+                <div class="mr-4 dropdown pt-3 pb-4 mt-2">
                     <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Lọc Theo Khóa
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                    <div style="min-width: 138px;"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/admin/student">Tất Cả</a>
                         @foreach ($get_all_course as $item)
                         <a class="dropdown-item" href="/admin/student?course={{ $item->id }}">{{ $item->course_name }}</a>
@@ -18,13 +18,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-7">
-                <div class="row pl-5">
-                    <div class="ml-5 dropdown pt-3 pb-4 mt-2">
-                        <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="">
+                <div class="row">
+                    <div class="dropdown pt-3 pb-4 mr-2 mt-2">
+                        <button class="border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Lọc Theo Trạng Thái
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div style="width: 172px;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="/admin/student">Tất Cả</a>
                             <a class="dropdown-item" href="/admin/student?fee_status=1">Đã nộp Tiền</a>
                             <a class="dropdown-item" href="/admin/student?fee_status=0">Chưa nộp Tiền</a>
@@ -32,23 +32,21 @@
                             <a class="dropdown-item" href="/admin/student?status=0">Bảo Lưu</a>
                         </div>
                     </div>
-                    <div style="width: 300px;">
-                        <form class="form-inline pt-4">
-                            <input name="code" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo mã Học Viên" aria-label="Search">
+                        <form class="form-inline">
+                            <input style="width: 217px;" name="code" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Tìm Theo mã Học Viên" aria-label="Search">
                             <a>
                                 <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                             </a>
                         </form>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<table style="background-color: white" class="table ml-5 col-12">
+
+<table style="background-color: white" class="table">
     <thead>
         <tr>
-            <th scope="col">STT</th>
+            <th class="pl-3" scope="col">STT</th>
             <th scope="col">Ảnh</th>
             <th scope="col">Họ Tên</th>
             <th scope="col">Mã Học Viên</th>
@@ -76,7 +74,7 @@
         <td colspan="7">
             <div class="mt-5 col-12 justify-content-center d-flex">
                 <div class=" alert alert-danger" role="alert">
-                    Không Có kết Quả Tìm Kiếm Nào
+                    Không Có kết Quả  Nào
                 </div>
             </div>
         </td>
@@ -85,7 +83,7 @@
         @if($check == true)
         @foreach ($get_all_student as $item)
         <tr>
-            <th scope="row">{{ $i++ }}</th>
+            <th class="pl-3" scope="row">{{ $i++ }}</th>
             <td><img width="100px" src="storage/{{ $item['avatar'] }}" alt=""></td>
             <td>{{ $item['fullname'] }}</td>
             <td>{{ $item['code'] }}</td>
@@ -123,7 +121,7 @@
             <td>
                 <?php $id = $item['id'];  ?>
                 <a href="{{ route("student.show",$id) }}">
-                    <button type="button" class="border-info btn btn-outline-info">Chi Tiết</button>
+                    <button style="width: 90px;" type="button" class="border-info btn btn-outline-info">Chi Tiết</button>
                 </a>
             </td>
         </tr>
@@ -174,7 +172,7 @@
             </td>
             <td>
                 <a href="{{ route('student.show',"$item->id") }}">
-                    <button type="button" class="border-info btn btn-outline-info">Chi Tiết</button>
+                    <button style="width: 90px;" type="button" class="border-info btn btn-outline-info">Chi Tiết</button>
                 </a>
             </td>
         </tr>
@@ -182,7 +180,7 @@
         @endif
     </tbody>
 </table>
-<div class="container justify-content-center d-flex mt-5 pb-5">
+<div class="container justify-content-center d-flex mt-5">
     @if($check == false)
     {{$get_all_student->links()}}
     @endif

@@ -11,6 +11,11 @@
             <input type="text" class="form-control" name="title" id="" value="{{ $news->title }}">
             {!! ShowErrors($errors,'title') !!}
         </div>
+        <div class="form-group">
+            <label for="">Mô tả</label>
+            <input type="text" class="form-control" name="description" id="" value="{{ $news->description }}">
+            {!! ShowErrors($errors,'description') !!}
+        </div>
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
@@ -53,12 +58,12 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="">Thumbnail</label> <br>
-            <img src="storage/{{ $news->image }}" width="30%" alt="">
-        </div>
-        <div class="form-group">
-            <label for="">Đổi ảnh mới</label>
-            <input class="form-control" type="file" name="image" id="">
+            <label for="exampleFormControlInput1">Ảnh</label> <br>
+            <img style="width:30%" src="storage/{{ $news->image }}" alt="">
+            <br>
+            {!! ShowErrors($errors,'image') !!}
+            <input type="hidden" name="image" value="{{ $news->image }}">
+            <input type="file" name="image" class="form-control">
         </div>
     </div>
     <div class="card-footer">

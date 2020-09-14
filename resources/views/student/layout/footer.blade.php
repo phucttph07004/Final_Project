@@ -1,90 +1,59 @@
-<!-- Main Footer -->
-{{-- <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.2
-    </div>
-  </footer> --}}
 </div>
-<!-- ./wrapper -->
 
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-<script src="js/jquery.min.js"></script>
-<script src="js/moment.min.js"></script>
-<!-- Bootstrap -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- overlayScrollbars -->
-{{-- <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script> --}}
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
+<!-- JAVASCRIPT -->
+<script src="/js/jquery.min.js"></script>
+<script src="/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/metisMenu.min.js"></script>
+<script src="/js/simplebar.min.js"></script>
+<script src="/js/waves.min.js"></script>
 
-<!-- OPTIONAL SCRIPTS -->
-<script src="dist/js/demo.js"></script>
+<!-- apexcharts -->
 
-<!-- PAGE PLUGINS -->
-<!-- jQuery Mapael -->
-{{-- <script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-<script src="plugins/raphael/raphael.min.js"></script>
-<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script> --}}
-{{-- <script src="plugins/jquery-mapael/maps/usa_states.min.js"></script> --}}
-<!-- ChartJS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
-<!-- PAGE SCRIPTS -->
-<script src="dist/js/pages/dashboard2.js"></script>
+<!-- jquery.vectormap map -->
+<script src="/plugins/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="/plugins/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js"></script>
 
-<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- Required datatable js -->
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 
-<script type="text/javascript">
-$(function() {
-    // Summernote
-    $('.textarea').summernote();
+<!-- Buttons examples -->
+<script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/plugins/jszip/jszip.min.js"></script>
+<script src="/plugins/pdfmake/build/pdfmake.min.js"></script>
+<script src="/plugins/pdfmake/build/vfs_fonts.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="/plugins/datatables-keytable/js/dataTables.keyTable.min.js"></script>
+<script src="/plugins/datatables-select/js/dataTables.select.min.js"></script>
 
-    $("input").on("change", function() {
-        this.setAttribute(
-            "data-date",
-            moment(this.value, "YYYY-MM-DD")
-            .format(this.getAttribute("data-date-format"))
-        )
-    }).trigger("change")
+<!-- Datatable init js -->
+<script src="/js/datatables.init.js"></script>
 
-})
+<!-- Responsive examples -->
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
-$(document).ready(function() {
+{{-- <script src="/plugins/dashboard/dashboard.init.js"></script> --}}
 
-    $(document).on('keyup', '#search', function() {
-        var query = $(this).val();
-        $.ajax({
-            type: 'GET',
-            url: "{{ route('search.action') }}",
-            method: 'GET',
-            data: {
-                query: query
-            },
-            dataType: 'json',
-            success: function(data) {
-                $('#tbody').html(data);
-                console.log(data);
-            }
-        })
-    });
+{{-- phần trang làm bài quiz --}}
+<script src="/plugins/pagination/jquery.min.js"></script>
+<script src="/plugins/pagination/pagination.min.js"></script>
 
-    
-});
-</script>
 
-<script type="text/javascript">
-$.ajaxSetup({
-    headers: {
-        'csrftoken': '{{ csrf_token() }}'
-    }
-});
+<script src="/js/app.js"></script>
+<script src="/js/attendance.js"></script>
+<script src="/js/absent.js"></script>
+
+
+<script>
+
+
 </script>
 
 @stack('scripts')
-
-
 </body>
 
 </html>

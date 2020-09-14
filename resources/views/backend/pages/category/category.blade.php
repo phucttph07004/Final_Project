@@ -2,8 +2,8 @@
 @section('title','Quản Trị Danh Mục')
 @section('title_page','Quản Trị Danh Mục')
 @section('content')
-<section class="content">
-<table style="background-color: white" class="table ml-5">
+<section class="content" style="margin:0;">
+<table style="background-color: white" class="table table-striped table-bordered dt-responsive nowrap ">
     @if(session('thongbao'))
     <div class="alert alert-primary text-center" role="alert">
         {{session('thongbao') }}

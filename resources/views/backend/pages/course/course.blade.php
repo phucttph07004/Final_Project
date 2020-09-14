@@ -2,8 +2,8 @@
 @section('title','Quản Lý Khoá Học')
 @section('title_page','Quản Lý Khoá Học')
 @section('content')
-<section class="content">
-    <form action="" class="d-flex mb-4 ml-5 pt-4">
+<section class="content" style="margin:0!important;">
+    <form action="" class="d-flex mb-4 ">
         <div class="col-4"><input type="date" class="form-control" name="start_date" id=""></div>
         <div class="col-4"><input type="date" class="form-control" name="finish_date" id=""></div>
         <div class="col-3">
@@ -12,14 +12,14 @@
             </button>
         </div>
     </form>
-    <form class="ml-5 d-flex align-items-center" action="">
+    <form class=" mb-3 d-flex align-items-center" action="">
         <div class="col-6">
-        <input class="form-control" type="text" name="course_name" placeholder="Lọc theo tên khoá">
+        <input class="form-control" type="text" name="course_name" placeholder="Tìm theo tên khoá">
         </div>
-        <button type="submit" class="btn btn-outline-info mr-4">Lọc</button>
+        <button type="submit" class="btn btn-outline-info mr-4">Tìm</button>
         <a href="{{route('course.index')}}" class="btn btn-outline-success">Bỏ lọc</a>
     </form>
-    <table style="background-color: white" class="table ml-5">
+    <table style="background-color: white" class="table table-striped table-bordered dt-responsive nowrap ">
         @if(session('thongbao'))
         <div class="alert alert-primary text-center" role="alert">
             {{session('thongbao') }}
@@ -51,12 +51,6 @@
                 <td>
                     <a class="btn btn-outline-info" href="{{ route('course.show',"$course->id") }}">Chi Tiết</a>
                     <a class="btn btn-outline-warning" href="{{ route('course.edit',"$course->id") }}">Sửa</a>
-                    <a id="btn_delete_{{ $course->id }}" class="btn btn-outline-danger">Xóa</a>
-                    <form id="delete_form_{{ $course->id }}" action="{{ route('course.destroy',$course->id) }}"
-                        method="post" style="display: none;">
-                        @method('DELETE')
-                        @csrf
-                    </form>
                 </td>
             </tr>
             @endforeach

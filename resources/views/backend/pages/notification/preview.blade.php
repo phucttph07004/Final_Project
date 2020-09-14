@@ -2,7 +2,9 @@
 @section('title','Quản Trị Thông Báo')
 @section('title_page','Xác Nhận Thông Báo')
 @section('content')
-<form class=" col-10 pl-5 pt-5" action="{{ route('notifications.update',"1") }}" method="POST">
+
+<div class="col-12">
+<form action="{{ route('notifications.update',"1") }}" method="POST">
     @csrf
     @method('PUT')
     @if(session('thongbao'))
@@ -27,7 +29,7 @@
         <label for="exampleFormControlInput1">Loại Thông Báo</label>
         <select class="form-control" name="category_id" id="">
             @foreach($get_categories as $item)
-            <option @if($Notification['category_id']==$item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
+            <option  @if($Notification['category_id']==$item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
             @endforeach
         </select>
     </div>
@@ -40,28 +42,33 @@
     </div>
     <div class="form-group">
         <label for="exampleFormControlTextarea1">Tiêu Đề</label>
-        <br>
-        {!! ShowErrors($errors,'title') !!}
+        @if( isset($warnings['title']) != null)
+                <p style='color: red'>{{ $warnings['title'] }}</p>
+        @endif
         <textarea name="title" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $Notification['title']}}</textarea>
     </div>
     <div class="form-group">
         <label for="exampleFormControlTextarea1">Nội Dung Thông Báo</label>
-        <br>
-        {!! ShowErrors($errors,'content') !!}
+        @if( isset($warnings['content']) != null)
+                <p style='color: red'>{{ $warnings['content'] }}</p>
+        @endif
         <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $Notification['content']}}</textarea>
     </div>
     <div class="row">
         <div class="col-12">
+            @if(isset($warnings['is_active']) != null)
+                <p style='color: red'>{{ $warnings['is_active'] }}</p>
+            @endif
             <div class="row">
-                <div class="col-4 ml-4">
+                <div class="col-3 ml-4">
+                    <div class="row">
                     <div class="form-group">
                         <select class="form-control" name="is_active" id="">
-                            <br>
-                            {!! ShowErrors($errors,'is_active') !!}
-                            <option>Chọn Xác Nhận</option>
+                            <option value="0">Chọn Xác Nhận</option>
                             <option value="1">Xác Nhận Gửi Thông Báo</option>
                             <option value="2">Lưu thông Báo Vào Nháp</option>
                         </select>
+                    </div>
                     </div>
                 </div>
                 <div class="col-2">
@@ -71,5 +78,5 @@
         </div>
     </div>
 </form>
-
+</div>
 @endsection
