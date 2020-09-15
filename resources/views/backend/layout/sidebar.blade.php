@@ -44,12 +44,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('schedule_learn.index')}}" class=" waves-effect">
-                        <i class="ri-account-circle-line"></i>
-                        <span>Quản Trị Lịch Học</span>
-                    </a>
-                </li>
-                <li>
                     <a href="{{route('quiz.index')}}" class=" waves-effect">
                         <i class="ri-account-circle-line"></i>
                         <span>Quản Trị Quiz</span>

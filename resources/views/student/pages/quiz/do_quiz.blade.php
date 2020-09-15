@@ -61,7 +61,6 @@
                             text-align: center;
                             margin-left: -45px;
                         }
-
                         #pagination ul li {
                             border: 1px solid #17a2b8;
                             padding: 10px;
