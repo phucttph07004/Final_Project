@@ -15,6 +15,10 @@ class IndexController extends Controller
     public function index()
     {  
         $class_id = Auth::guard('student')->user()->class_id;
+    {
+        $data['notifications'] = Notification::where('is_active', 1)->orderBy('created_at','DESC')->limit(5)->get();
+        return view('student.pages.index',$data);
+    }
 
         $id = Auth::guard('student')->user()->id;
         $data['feedback'] = DB::table('feedback')
@@ -41,15 +45,17 @@ class IndexController extends Controller
     }  
     public function schedule()
     {
-        $data=array();
+        $schedules=array();
         if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)->finish_date > now()){
-            $data['schedules'] = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->whereDate('time' , '>=', now())->get();
+            $schedules = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->whereDate('time' , '>=', now())->paginate(10);
         }    
+        $data['schedules'] = $schedules;
         return view('student.pages.schedule_learn.schedule_learn',$data);
     }
 
     public function attendance()
     {
+        $data['schedules']=array();
         if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)->finish_date > now()){
             $data['schedules'] = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->get();
             $data['status'] = null;

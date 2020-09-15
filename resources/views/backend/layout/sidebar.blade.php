@@ -1,22 +1,21 @@
- <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a>
+<!-- ========== Left Sidebar Start ========== -->
+<div class="vertical-menu">
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
-            <div class="image">
-                <img src="storage/{{Auth::user()->avatar}}" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="{{route('account.show', [Auth::user()->id])}}" class="d-block">{{Auth::user()->fullname}}</a>
-            </div>
-        </div>
+    <div data-simplebar class="h-100">
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li class="menu-title">Menu</li>
+
+                <li>
+                    <a href="/admin" class="waves-effect">
+                        <i class="ri-dashboard-line"></i><span
+                            class="badge badge-pill badge-success float-right">3</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -137,9 +136,10 @@
                     </ul>
                 </li>
 
+               
             </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
+        </div>
+        <!-- Sidebar -->
     </div>
-    <!-- /.sidebar -->
-</aside>
+</div>
+<!-- Left Sidebar End -->

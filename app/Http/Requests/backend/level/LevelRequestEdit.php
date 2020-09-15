@@ -6,6 +6,7 @@ use App\Models\Level;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+
 class LevelRequestEdit extends FormRequest
 {
     /**
@@ -25,11 +26,18 @@ class LevelRequestEdit extends FormRequest
      */
     public function rules()
     {
-        $level = Level::find((int) request()->segment(2));
+        $segments = request()->segments();
+        $levels = Level::find((int) end($segments));
+        if(request('image') != $levels->image){
+            $mimes ='|mimes:jpeg,jpg,png';
+        }else{
+            $mimes ='required';
+        }
         return [
             'level'=>'required|numeric|',
             'fee'=>'required|numeric',
-            'description'=>'required|min:10'
+            'description'=>'required|min:10',
+            'image'=>$mimes,
         ];
     }
     public function messages()
@@ -43,7 +51,10 @@ class LevelRequestEdit extends FormRequest
             'fee.numeric'=>'Học phí phải là số',
             
             'description.required'=> 'Không được để trống mô tả',
-            'description.min' => 'Mô tả quá ngắn'
+            'description.min' => 'Mô tả quá ngắn',
+
+            'image.required'=>'Không để trống ảnh',
+            'image.mimes'=>'Không đúng định dạng ảnh',
         ];
     }
 }

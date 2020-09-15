@@ -6,8 +6,6 @@
         <meta charset="utf-8" />
         <title>@yield('title')</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-        <meta content="Themesdesign" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -98,16 +96,12 @@
                                 </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <!-- item-->
-                                <a class="dropdown-item" href="{{route('teacher.profile',[Auth::user()->id])}}"><i class="ri-user-line align-middle mr-1"></i> Profile</a>
-                                <a class="dropdown-item" href="#"><i class="ri-wallet-2-line align-middle mr-1"></i> My Wallet</a>
-                                <a class="dropdown-item d-block" href="#"><span class="badge badge-success float-right mt-1">11</span><i class="ri-settings-2-line align-middle mr-1"></i> Settings</a>
-                                <a class="dropdown-item" href="#"><i class="ri-lock-unlock-line align-middle mr-1"></i> Lock screen</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="{{ route('teacher.logout') }}"><i class="ri-shut-down-line align-middle mr-1 text-danger"></i> Logout</a>
+                                <a class="dropdown-item" href="{{route('teacher.profile',[Auth::user()->id])}}"><i class="ri-user-line align-middle mr-1"></i>Hồ sơ</a>
+                                <a class="dropdown-item d-block"  href="{{route('teacher-password.edit',[Auth::user()->id])}}"><i class="ri-settings-2-line align-middle mr-1"></i>Đổi mật khẩu</a>
+                                <a class="dropdown-item text-danger" href="{{ route('teacher.logout') }}"><i class="ri-shut-down-line align-middle mr-1 text-danger"></i>Đăng xuất</a>
                             </div>
                         </div>
     
                     </div>
                 </div>
             </header>
-    

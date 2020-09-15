@@ -1,4 +1,6 @@
-@extends('backend.layout.master')
+@extends('./backend/layout/master')
+@section('title','Quản Trị Feedback')
+@section('title_page','Quản Trị Feedback')
 @section('content')
 <section class="content">
     <div class="container-fluid">
@@ -6,8 +8,6 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="d-flex align-items-center">
-                            <h3 >Danh sách đăng ký thi đầu vào</h3>
                                 <div class="row pl-5">
                                 <div class="ml-5 dropdown pt-3 pb-4 mt-2">
                                     <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -19,16 +19,9 @@
                                         <a class="dropdown-item" href="/admin/feedback?course_id={{$course->id}}">{{$course->course_name}}</a>
                                       @endforeach
                                     </div>
-                                </div>
-                            <div style="width: 300px;">
-                                    <form class="form-inline pt-4">
-                                        <input name="fullname" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Theo Tên Học Viên" aria-label="Search">
-                                        <a>
-                                            <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                                        </a>
-                                    </form>
+                                </div> 
+                                </form>
                             </div>
-                        </div>
                         </div>
                         </div>
                     </div>

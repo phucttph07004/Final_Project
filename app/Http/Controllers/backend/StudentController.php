@@ -94,7 +94,6 @@ class StudentController extends Controller
     public function store(StudentRequest $request)
     {
         $data = Arr::except($request, ['_token'])->toarray();
-
         if ($data['class_id'] == null) {
             $data['status'] = 1;
             $data['slot'] = $data['slot_add'];
@@ -129,22 +128,6 @@ class StudentController extends Controller
 
     public function edit(Student $student)
     {
-        // check khoa xem cho doi lich hay k
-        $data['check_course'] = array();
-        foreach (Course::where('id', Classes::find($student->class_id)->course_id )->get() as $value) {
-            $first_date = strtotime($value->start_date);
-            $second_date = strtotime($value->finish_date);
-            $datediff = abs($first_date - $second_date);
-            $time_allowed = floor($datediff / (60 * 60 * 24) / 10);
-            $start_date = strtotime(date("Y-m-d", strtotime($value->start_date)) . " +$time_allowed days");
-            $start_date_plus10 = strftime("%Y-%m-%d", $start_date);
-
-            if ($start_date_plus10 >= date('Y-m-d')) {
-                $data['check_course'] = $value;
-            }
-        }
-
-
         $data['get_all_course'] = Course::all();
         $data['get_all_level'] = Level::all();
         $data['get_student'] = $student;

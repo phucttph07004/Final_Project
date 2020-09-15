@@ -75,7 +75,7 @@ class AttendanceController extends Controller
         //     ->join('courses', 'classes.course_id', '=', 'courses.id')
         //     ->where('classes.course_id',  $id)
         //     ->get();
-            $data['classes']= DB::table('classes')
+            $data['levels']= DB::table('level')
                 ->join('courses', 'classes.course_id', '=', 'courses.id')
                 ->join('levels', 'classes.level_id', '=', 'levels.id')
                 ->where('course_id', $id)

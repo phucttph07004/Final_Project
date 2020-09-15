@@ -25,7 +25,7 @@ class Classes extends Model
         return $this->hasMany('App\Models\Classes', 'course_id', 'id');
     }
 
-    public function CountStudent()
+    public function CountStuden()
     {
         return $this->hasMany('App\Models\Student', 'class_id', 'id');
     }

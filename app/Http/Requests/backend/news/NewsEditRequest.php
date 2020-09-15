@@ -22,7 +22,8 @@ class NewsEditRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {$segments = request()->segments();
+    {
+        $segments = request()->segments();
         $news = News::find((int) end($segments));
         if(request('image') != $news->image){
             $mimes ='|mimes:jpeg,jpg,png';

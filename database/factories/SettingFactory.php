@@ -11,5 +11,11 @@ $factory->define(Setting::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'phone' =>'0123456789',
         'slogan' =>$faker->realText($maxNbChars = 50, $indexSize = 1),
+        'banner' =>$faker->imageUrl(200, 200, 'cats'),
+        'welcome' => $faker->realText($maxNbChars = 50, $indexSize = 3),
+        'welcome_content' => $faker->realText($maxNbChars = 150, $indexSize = 3),
+        'welcome_image' =>$faker->imageUrl(200, 200, 'cats'),
+        'breadcrumb' =>$faker->imageUrl(200, 200, 'cats'),
+        'address' => "Tòa nhà FPT Polytechnic, Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội",
     ];
 });

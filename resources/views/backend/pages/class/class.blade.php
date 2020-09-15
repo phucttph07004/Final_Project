@@ -2,30 +2,26 @@
 @section('title','Quản Trị Lớp Học')
 @section('title_page','Quản Trị Lớp Học')
 @section('content')
-<section class="content">
-
-    <table style="background-color: white" class="table ml-5">
-        @if(session('thongbao'))
-        <div class="alert alert-primary text-center" role="alert">
-            {{session('thongbao') }}
-        </div>
-        @endif
-        <div class="d-flex flex-wrap align-items-center ml-5 pt-4">
-            <form action="" class="d-flex mb-4 ">
-                <div class="col-4"><input type="date" class="form-control border-success" name="start_date" id=""></div>
-                <div class="col-4"><input type="date" class="form-control border-success" name="finish_date" id=""></div>
-                <div class="col-3">
-                    <button type="submit" class="btn btn-outline-info">
-                        Lọc theo ngày tháng
-                    </button>
-                </div>
-            </form>
-           <div class="col-4">
-            <form action="">
-                <input class="form-control border-success" type="text" name="name" value="" placeholder="Tìm theo tên lớp">
+<section class="content" style="margin:0!important;">
+ <div class="d-flex align-items-center flex-wrap align-items-center pt-4">
+           <div class="col-7">
+            <form action="" class="d-flex ">
+                    <div class="col-4"><input type="date" class="form-control border-success" name="start_date" id=""></div>
+                    <div class="col-4"><input type="date" class="form-control border-success" name="finish_date" id=""></div>
+                    <div class="col-3">
+                        <button type="submit" class="btn btn-outline-info">
+                            Lọc theo ngày tháng
+                        </button>
+                    </div>
+                </form>
+           </div>
+           <div class="col-5">
+            <form action="" class="d-flex">
+                <input class="form-control border-success mr-2" type="text" name="name" value="" placeholder="Tìm theo tên lớp">
+                <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
             </form>
            </div>
-            <div class="ml-5 dropdown pt-3 pb-4 mt-2">
+            <div class="ml-4 dropdown pt-3 pb-4 mt-2">
                 <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button"
                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Lọc Theo Level
@@ -63,6 +59,12 @@
                 </div>
             </div>
         </div>
+    <table style="background-color: white" class="table table-striped table-bordered dt-responsive nowrap">
+        @if(session('thongbao'))
+        <div class="alert alert-primary text-center" role="alert">
+            {{session('thongbao') }}
+        </div>
+        @endif
         <thead>
             <tr>
                 <th scope="col">STT</th>

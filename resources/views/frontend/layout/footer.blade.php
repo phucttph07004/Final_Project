@@ -1,89 +1,22 @@
   <!-- Start footer -->
   <footer class="footer">
-      <!-- <div class="footer__top">
-          <div class="container">
-              <div class="row">
-                  <div class="col-4">
-                      <div class="footer__top-item">
-                          <h1 class="footer__top-title">Something English Center On Facebook</h1>
-                      </div>
-                  </div>
-                  <div class="col-4">
-                      <div class="footer__top-item">
-                          <div class="footer__logo">
-                              <a href="/">
-                                  <img src="/images/Logo.png" alt="logo"></a>
-                          </div>
-                          <p>Somthing English Center - Hệ thống hoc tiếng Anh giao tiếp toàn diện cho người mới bắt đầu.</p>
-                      </div>
-                  </div>
-                  <div class="col-4">
-                  <div class="footer__top-item">
-                          <h1 class="footer__top-title">Subscribe</h1>
-                          <p>To receive information about special events and free English language learning materials. Please leave us contact information.</p>
-                          <form action="">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Fullname">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Phone Number">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                       <select class="form-control" name="address" id="">
-                                           <option value="" selected>Address</option>
-                                       </select>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="form-control">Subscribe</button>
-                                </div>
-                          </form>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div> -->
       <div class="footer__mid pt-0">
           <div class="container">
               <div class="row">
+                  @foreach ($settings as $setting)
+                  <div class="col-md-6">
+                    <div id="fb-root"></div>
+                    {!!$setting->fanpage!!}
+                  </div>
+                  @endforeach
                  <div class="col-md-4">
                      <div class="footer__mid-item">
-                        <p><i class="fa fa-map-marker"></i>Tòa nhà FPT Polytechnic, Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội</p>
-                        <p><i class="fa fa-phone"></i><a href="tel:0123456789">0123456789</a></p> 
-                    </div>
-                 </div>
-                 <div class="col-md-4">
-                     <div class="footer__mid-item">
-                        <p><i class="fa fa-map-marker"></i>Tòa nhà FPT Polytechnic, Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội</p>
-                        <p><i class="fa fa-phone"></i><a href="tel:0123456789">0123456789</a></p> 
-                    </div>
-                 </div>
-                 <div class="col-md-4">
-                     <div class="footer__mid-item">
-                        <p><i class="fa fa-map-marker"></i>Tòa nhà FPT Polytechnic, Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội</p>
-                        <p><i class="fa fa-phone"></i><a href="tel:0123456789">0123456789</a></p> 
-                    </div>
-                 </div>
-                 <div class="col-md-4">
-                     <div class="footer__mid-item">
-                        <p><i class="fa fa-map-marker"></i>Tòa nhà FPT Polytechnic, Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội</p>
-                        <p><i class="fa fa-phone"></i><a href="tel:0123456789">0123456789</a></p> 
-                    </div>
-                 </div>
-                 <div class="col-md-4">
-                     <div class="footer__mid-item">
-                        <p><i class="fa fa-map-marker"></i>Tòa nhà FPT Polytechnic, Phố Trịnh Văn Bô, Nam Từ Liêm, Hà Nội</p>
-                        <p><i class="fa fa-phone"></i><a href="tel:0123456789">0123456789</a></p> 
+                        @foreach($settings as $setting)
+                            <img src="storage/{{$setting->logo}}" alt="">
+                            <p>{{$setting->slogan}}</p>
+                            <p><i class="fa fa-map-marker"></i>{{$setting->address}}</p>
+                            <p><i class="fa fa-phone"></i><a href="tel:0123456789">{{$setting->phone}}</a></p> 
+                        @endforeach
                     </div>
                  </div>
               </div>
@@ -120,7 +53,7 @@
   <script src="/plugins/animation/wow.min.js"></script>
   <script src="/js/main.js"></script>
   <script>
-new WOW().init();
+
   </script>
   </body>
 

@@ -51,7 +51,7 @@
             <div class="form-group">
                 <label for="">Giảng viên</label>
                 <input type="text" readonly="readonly" class="form-control" name="start_date" id=""
-                value="{{$class->Get_teacher_Name->fullname}}">
+                @if($class->teacher_id == null) value="Chưa có giảng viên" @else value="{{$class->Get_teacher_Name->fullname}}" @endif>
                    
             </div>
         </div>
@@ -86,7 +86,7 @@
     </div>
     <h3 class="ml-4 mb-3">Danh sách học viên</h3>
 
-    <table style="background-color: white" class="table ml-5">
+    <table style="background-color: white" class="table ml-3 table-striped table-bordered dt-responsive nowrap">
         @if(session('thongbao'))
         <div class="alert alert-primary text-center" role="alert">
             {{session('thongbao') }}

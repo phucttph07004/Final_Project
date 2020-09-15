@@ -8,10 +8,17 @@
                     <table class="table table-bordered" id="sampleTable">
                         <thead>
                             <tr>
-                                <div class="col-12 text-center mb-3 font-weight-bold">
+                                <div class="col-12 mb-3 font-weight-bold">
                                     <input id="minute" type="hidden" value="{{ (int)$time[0] }}">
                                     <input id="seconds" type="hidden" value="{{ (int)$time[1] }}">
-                                    <div id="timer">Thời Gian Làm Bài: <span id="m">{{ (int)$time[0] }}</span> Phút : <span id="s">{{ (int)$time[1] }}</span> Giây </span></div>
+                                    <div class="text-center" id="timer">Thời Gian Làm Bài: <span id="m">{{ (int)$time[0] }}</span> Phút : <span id="s">{{ (int)$time[1] }}</span> Giây </span></div>
+                                    <input onclick="end_do_quiz_click()" type="button" class="end_do_quiz_click text-left position-absolute text-primary" value="Kết Thúc Bài Kiểm Tra">
+                                    <form id="end_do_quiz_click" action="{{ route('do-quiz.update',$quiz) }}" method="post" style="display: none;">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="level_id" id="level_id" value="{{ $level_id }}">
+                                        <input type="hidden" name="quiz" id="quiz" value="{{ $quiz }}">
+                                    </form>
                                 </div>
                             </tr>
                         </thead>
@@ -23,8 +30,16 @@
                                     <div class="col-12">Câu Hỏi Số {{ $i }} : {{ str_replace('\"', '"',str_replace("\'", "'", $value->question) )  }}</div>
                                     <div class="col-12 mt-4">
                                         @foreach(json_decode(str_replace("\'","'",$value->answer)) as $key => $answer)
+
                                         <div class="form-check">
-                                            <input onclick="add_ajax( '{{ $value->question }}','{{ $key }}','{{ $level_id }}','{{ $quiz }}')" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios_{{ $key }}">
+                                            <input @if($selected_answer_do_quiz !=null) @foreach( json_decode(str_replace("\'", "'" ,$selected_answer_do_quiz)) as $key3=> $selectedanswer)
+                                            @if($key == $selectedanswer && str_replace('\"', '"',str_replace("\'", "'", $value->question)) == $key3 )
+                                            checked
+                                            @endif
+                                            @endforeach
+                                            @endif
+
+                                            onclick="add_ajax( '{{ $value->question }}','{{ $key }}','{{ $level_id }}','{{ $quiz }}')" class="form-check-input" type="radio" name="exampleRadios_{{ $i }}" id="exampleRadios_{{ $key }}">
                                             <label class="form-check-label" for="exampleRadios_{{ $key }}">
                                                 {{ $key.": " }} {{ $answer }}
                                             </label>
@@ -61,8 +76,11 @@
         </div> <!-- end col -->
     </div>
 </div>
-<input type="hidden" id="level_id" value="{{ $level_id }}">
-<input type="hidden" id="quiz" value="{{ $quiz }}">
+<form id="end_do_quiz_form" action="{{ route('do-quiz.show',$quiz) }}" method="get" style="display: none;">
+    @csrf
+    <input type="hidden" name="level_id" id="level_id" value="{{ $level_id }}">
+    <input type="hidden" name="quiz" id="quiz" value="{{ $quiz }}">
+</form>
 @endsection
 {{-- previous --}}
 <style>
@@ -93,6 +111,17 @@
     button.button_show {
         margin: 60px 200px 200px 375px !important;
     }
+    input.end_do_quiz_click:focus{
+    border: none;
+    outline: none;
+    }
+    input.end_do_quiz_click{
+        top: 0px;
+        border: none;
+        margin-left: -14px;
+        cursor: pointer;
+        background: none;
+    }
 </style>
 @push('scripts')
 <script>
@@ -109,6 +138,17 @@
             }
         });
     }
+    // chuyển sang xem chi tiết
+    function End_Quiz() {
+        $("#end_do_quiz_form").submit();
+    }
+    // ấn kết thúc bài
+    function end_do_quiz_click() {
+        if(confirm('Bạn Chắc Chắn Muốn Kết Thúc Bài Kiểm Tra Tại Đây ?')){
+            $("#end_do_quiz_click").submit();
+        }
+    }
+
     // phân trang
     $(document).ready(function() {
         let rows = []
@@ -131,10 +171,10 @@
         var time = setInterval(function() {
             document.getElementById("timer").innerHTML = 'Thời Gian Làm Bài: ' + minute + " Phút : " + sec + " Giây";
             sec--;
-            if (sec <= 0) {
+            if (sec == -1) {
                 minute--;
                 sec = 60;
-                if (minute <= 0) {
+                if (minute == -1) {
                     document.getElementById("timer").innerHTML = 'Thời Gian Làm Bài Đã Kết Thúc ';
                     $.ajax({
                         url: '/student/quiz/end_time/' + $('#level_id').val() + '/' + $('#quiz').val(),
@@ -144,7 +184,7 @@
                             console.log(response);
                         }
                     });
-                    $('.button_show').html("<button type='button' class='btn-lg btn btn-primary button_show'>Xem Chi Tiết Bài Làm</button>");
+                    $('.button_show').html('<button onclick="End_Quiz()" type="button" class="btn-lg btn btn-primary button_show">Xem Chi Tiết Bài Làm</button>');
                     $('.paginationjs-pages').html('');
                     clearInterval(time);
                 }

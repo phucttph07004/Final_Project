@@ -2,7 +2,7 @@
 @section('title','Quản Trị Lớp')
 @section('title_page','Thêm Mới Lớp')
 @section('content')
-<form enctype="multipart/form-data" class="pl-5 pt-5" action="{{ route('class.store') }}" method="POST">
+<form enctype="multipart/form-data" class="card-body" action="{{ route('class.store') }}" method="POST">
     @csrf
     @if(session('thongbao'))
     <div class="alert alert-primary" role="alert">

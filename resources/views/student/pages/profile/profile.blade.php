@@ -1,4 +1,6 @@
 @extends('student.layout.master')
+@section('title','Thông tin cá nhân')
+
 @section('content')
     <div class="container-fluid">
        <div class="row">
