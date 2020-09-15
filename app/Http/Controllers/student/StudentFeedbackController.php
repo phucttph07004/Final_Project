@@ -19,10 +19,8 @@ class StudentFeedbackController extends Controller
     public function postFormFeedback(Request $request)
     {
         $data = Arr::except($request->all(),['_token']);
-        $data['student_id']=Auth::guard('student')->id;
-
         Feedback::create($data);
-
         return redirect()->route('home.student');
     }
 }
+ 

@@ -20,12 +20,8 @@ class AttendanceController extends Controller
 {
 
     public function index(){
-        $data['all'] = DB::table('courses')
-            ->join('classes', 'courses.id', '=', 'classes.course_id')
-            ->join('levels', 'classes.level_id', '=', 'levels.id')
-            ->select('courses.id', 'courses.course_name', 'levels.fee',)
-            ->get();
-            return view('backend.pages.attendance.index',$data);
+        $data['course'] = Course::orderBy('id','desc')->first();
+        return view('backend.pages.attendance.index',$data);
         // $currentDate = date('Y-m-d');
         // $weekday = date('N');
         // $hour = date('H');
@@ -68,13 +64,38 @@ class AttendanceController extends Controller
 		// 		'today' => $today
 		// 	]);
     }
-    public function edit($id){
-        $data['all'] = DB::table('students')
-            ->join('classes', 'students.class_id', '=', 'classes.id')
-            ->join('courses', 'classes.course_id', '=', 'courses.id')
-            ->where('classes.course_id',  $id)
-            ->select('students.id', 'students.fullname')
-            ->get();
+    public function show($id){
+        // $data['students'] = DB::table('students')
+        //     ->join('classes', 'students.class_id', '=', 'classes.id')
+        //     ->join('courses', 'classes.course_id', '=', 'courses.id')
+        //     ->where('classes.course_id',  $id)
+        //     ->get();
+        // $data['level'] = DB::table('levels')
+        //     ->join('classes', 'levels.id', '=', 'classes.level_id')
+        //     ->join('courses', 'classes.course_id', '=', 'courses.id')
+        //     ->where('classes.course_id',  $id)
+        //     ->get();
+            $data['classes']= DB::table('classes')
+                ->join('courses', 'classes.course_id', '=', 'courses.id')
+                ->join('levels', 'classes.level_id', '=', 'levels.id')
+                ->where('course_id', $id)
+                ->select('classes.name','levels.fee', 'students.id')
+                ->get();
+                $class_id = array();
+                    foreach (Classes::where('course_id', $value)->get() as $class) {
+                        $class_id[] = $class->id;
+                    }
+                    $student = array();
+                    foreach ($id_class as $id_class) {
+                        $student[] = Student::where('class_id', $id_class)->get()->toarray();
+                    }
+                    $aa = array();
+                    foreach (Collect($student) as $key => $value1) {
+                        foreach ($value1 as $value) {
+                            $aa[] = $value;
+                        }
+                    }
+                    $data['get_all_student'] = $aa;
             return view('backend.pages.attendance.edit_attendance',$data);
     //     $schedule = DB::table('schedules')
     //         ->where('id', $id)

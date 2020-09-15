@@ -12,26 +12,24 @@
     @endif
     <thead>
         <tr>
-            <th scope="col">STT</th>
             <th scope="col">Khóa</th>
-            <th scope="col">Doanh thu</th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         <?php $i = 1 ?>
-        @foreach ($all as $course)
+        
         <tr>
-            <th scope="row">{{ $i++ }}</th>
-            <td>{{ $course->course_name }}</td>
-            <td>{{count($all)}}</td>
+
+            <td>{{ $course->course_name}}</td>
+            <td></td>
             <td>
-                <a href="{{ route('attendance.edit',"$course->id") }}">
+                <a href="{{ route('attendance.show',"$course->id") }}">
                     <button type="button" class="border-info btn btn-outline-info">Chi tiết</button>
                 </a>
             </td>
         </tr>
-        @endforeach
     </tbody>
 </table>
 <div class="container justify-content-center d-flex mt-5 pb-5">

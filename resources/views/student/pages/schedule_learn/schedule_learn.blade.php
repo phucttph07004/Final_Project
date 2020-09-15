@@ -38,11 +38,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if($schedule->teacher_id == null)
-                                        Chưa có giảng viên
-                                        @else
-                                        {{$schedule->getNameTeacher->fullname}}
-                                        @endif
+                                        
                                     </td>
                                 </tr>
                             @endforeach

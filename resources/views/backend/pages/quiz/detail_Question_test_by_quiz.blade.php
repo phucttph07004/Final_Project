@@ -17,7 +17,7 @@
             <th scope="col">Người Tạo</th>
             <th style="width: 250px;" scope="col">Ngày Cập Nhật</th>
             <th style="margin-right: 23px"  scope="col">
-                    <a href="{{ route('quiz.create','level='.$level.'&quiz='.$quiz->quiz) }}">
+                    <a href="{{ route('quiz.create','level='.$level_id.'&quiz='.$quiz->quiz) }}">
                         <button style="width: 77%" type="button" class="border-primary btn btn-outline-primary"> Thêm Câu Hỏi</button>
                     </a>
             </th>
@@ -43,7 +43,7 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;">
-            {{ $item->question }}
+            {{ str_replace("\'","'",str_replace('\"','"',$item->question)) }}
             </p>
 
         </td>

@@ -17,7 +17,6 @@ class CreateNotificationsTable extends Migration
             $table->increments('id');
             $table->text('title');
             $table->longtext('content');
-
             $table->integer('status');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

@@ -59,7 +59,7 @@
 
                         </select>
                     </div>
-                    <button type="submit" class="btn">Đăng ký</button>
+                    
                 </form>
             </div>
         </div>
