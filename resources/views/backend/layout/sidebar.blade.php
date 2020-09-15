@@ -30,15 +30,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('schedule_teach.index')}}" class=" waves-effect">
-                        <i class="ri-calendar-event-fill"></i>
-                        <span>Quản Trị Lịch Dạy</span>
-                    </a>
-                </li>
-                <li>
                     <a href="{{route('schedule_learn.index')}}" class=" waves-effect">
                         <i class="ri-account-circle-line"></i>
                         <span>Quản Trị Lịch Học</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('schedule_teach.index')}}" class=" waves-effect">
+                        <i class="ri-calendar-event-fill"></i>
+                        <span>Quản Trị Lịch Dạy</span>
                     </a>
                 </li>
                 <li>

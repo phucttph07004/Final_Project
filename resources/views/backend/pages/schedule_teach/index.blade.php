@@ -3,10 +3,10 @@
 @section('title_page','Xếp Lịch Dạy Cho Giảng viên')
 @section('content')
 <div class="col-12">
-    <div style="padding-left: 110px" class="row bg-light form-inline">
-        <div class="col-5"></div>
-        <div class="col-7">
-            <div class="row pl-5">
+    <div class="row bg-light form-inline">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <div style="margin-left: 45px" class="row pl-5">
                 <div class="ml-5 dropdown pt-3 pb-4 mt-2">
                     <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Lọc Theo Trạng Thái
@@ -17,7 +17,7 @@
                         <a class="dropdown-item" href="/admin/schedule_teach?teacher=0">Chưa Xếp</a>
                     </div>
                 </div>
-                <div style="width: 300px;">
+                <div>
                     <form class="form-inline pt-4">
                         <input name="name" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Tìm Theo Tên Lớp" aria-label="Search">
                         <a>
@@ -73,9 +73,9 @@
             </td>
             <td>
                 @if($item->teacher_id == null)
-                <button style="width: 47%;" data-toggle="modal" data-target="#exampleModal_{{ $item->id }}" type="button" id="btn_create_teacher_{{ $item->id }}" class="create border-primary btn btn-outline-primary">Xếp Giảng Viên</button>
+                <button style="width: 57%;" data-toggle="modal" data-target="#exampleModal_{{ $item->id }}" type="button" id="btn_create_teacher_{{ $item->id }}" class="create border-primary btn btn-outline-primary">Xếp Giảng Viên</button>
                 @else
-                <button style="width: 47%;" data-toggle="modal" data-target="#exampleModal_{{ $item->id }}" type="button" id="btn_create_teacher_{{ $item->id }}" class="create border-warning btn btn-outline-warning">Đổi Giảng Viên</button>
+                <button style="width: 57%;" data-toggle="modal" data-target="#exampleModal_{{ $item->id }}" type="button" id="btn_create_teacher_{{ $item->id }}" class="create border-warning btn btn-outline-warning">Đổi Giảng Viên</button>
                 @endif
                 <button data-toggle="modal" data-target="#exampleModal_{{ $item->id }}" type="button" id="btn_create_teacher_{{ $item->id }}" class="border-success btn btn-outline-success chitiet">Chi Tiết</button>
             </td>
@@ -206,6 +206,7 @@
                 url: '/admin/schedule_teach/create/' + id,
                 method: 'get',
                 success: function(response) {
+                    console.log(response);
                     // đổ dữ liệu weekday and slot
                     var time_slot = null;
                     $.each(response[1], function(weekday, slot) {

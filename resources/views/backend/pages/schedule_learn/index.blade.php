@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="col-12">
-    <div style="padding-left: 140px" class="row bg-light form-inline">
+    <div style="padding-left: 70px" class="row bg-light form-inline">
         <div class="col-5"></div>
         <div class="col-7">
             <div class="row pl-5">
@@ -22,7 +22,7 @@
                     <form style="margin-left:0px" class="form-inline pt-4">
                         <input style="width: 200px;" name="name" class="border-success bg-white form-control mr-sm-2" type="text" placeholder="Tìm Theo Tên Lớp" aria-label="Search">
                         <a>
-                            <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            <button style="width: 95px;" class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </a>
                     </form>
                 </div>
@@ -32,10 +32,10 @@
 </div>
 
 @if(session('thongbao'))
-    <div class="alert alert-primary text-center" role="alert">
-        {{session('thongbao') }}
-      </div>
-    @endif
+<div class="alert alert-primary text-center" role="alert">
+    {{session('thongbao') }}
+</div>
+@endif
 <table class="table">
     <thead>
         <tr>
@@ -62,7 +62,7 @@
         @foreach ($get_all_class as $item)
         <tr>
             <th class="pl-3" scope="row">{{ $i++ }}</th>
-            <td>{{ $item->name }}</td>
+            <td style="width: 150px;">{{ $item->name }}</td>
             <td>{{ $item->levelName->level }}</td>
             <td>{{ $item->courseName->course_name }}</td>
             <td>{{ $item->count_studen_count }}</td>
@@ -77,17 +77,20 @@
                 @endif
                 @endif
             </td>
-            <td>
+            <td style="padding-left: 90px">
                 @if($item->status == 0)
                 <button type="button" class="border-secondary btn btn-outline-secondary">Đã Đóng</button>
                 @else
                 @if(array_search($item->id, $get_schedule) === false)
-                <button style="width: 85px;" data-toggle="modal" data-target="#exampleModal_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Xếp Lịch</button>
+                <button style="width: 97px;" data-toggle="modal" data-target="#exampleModal_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Xếp Lịch</button>
                 @else
                 @if($item->count_studen_count == 0 && $item->teacher_id == null)
-                <button style="width: 85px;" data-toggle="modal" data-target="#exampleModal_edit_{{$item->id}}" id="button_edit_{{$item->id}}" type="button" class="border-warning btn btn-outline-warning">Đổi Lịch</button>
+                <button style="width: 97px;" data-toggle="modal" data-target="#exampleModal_edit_{{$item->id}}" id="button_edit_{{$item->id}}" type="button" class="border-warning btn btn-outline-warning">Đổi Lịch</button>
                 @else
-                <button style="width: 85px;" data-toggle="modal" data-target="#exampleModal_edit_{{$item->id}}" id="button_edit_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Xem Lịch</button>
+                <button style="width: 97px;" data-toggle="modal" data-target="#exampleModal_edit_{{$item->id}}" id="button_edit_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Xem Lịch</button>
+                @if($item->teacher_id != null)
+                <button style="width: 120px;" data-toggle="modal" data-target="#exampleModal_chuyen_lich_{{$item->id}}" id="button_chuyen_lich_{{$item->id}}" type="button" class="border-primary btn btn-outline-primary">Chuyển Lịch</button>
+                @endif
                 @endif
                 @endif
                 @endif
@@ -107,7 +110,7 @@
                 <div class="modal-header m-auto">
                     <h4 class="modal-title text-primary font-weight-bold" id="exampleModalLabel">Xếp Lịch Học</h4>
                 </div>
-                <h4 class="error text-center text-danger"></h4>
+                <h5 class="error text-center text-danger"></h5>
                 <div class="modal-body">
                     <table class="table">
                         <thead class="thead-light">
@@ -246,7 +249,7 @@
                         @endif
                     </h4>
                 </div>
-                <h4 class="error text-center text-danger"></h4>
+                <h5 class="error text-center text-danger"></h5>
                 <div class="modal-body">
                     <table class="table">
                         <thead class="thead-light">
@@ -378,6 +381,47 @@
 </form>
 @endif
 @endforeach
+
+
+{{-- chuyển lịch --}}
+@foreach ($get_all_class as $item)
+<!-- Modal -->
+<form id="btn_chuyen_lich_form_{{ $item->id }}" action="{{ route('schedule_learn.update',$item->id) }}" method="post">
+    @csrf
+    @method('PUT')
+    <div class="modal fade" id="exampleModal_chuyen_lich_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header m-auto">
+                    <h4 class="modal-title text-primary font-weight-bold" id="exampleModalLabel">Chuyển Lịch Học</h4>
+                </div>
+                <h5 class="erorr_submit text-center text-danger"></h5>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Ngày Muốn Chuyển</label>
+                        <span id="erorr_ngay_muon_chuyen" style="color: red;height: 10px;">
+                        </span>
+                        <select class="form-control" name="id_date_old" id="ngay_muon_chuyen_{{$item->id}}">
+                            {{-- in ra các ngày của lớp học --}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Ngày Chuyển Sang</label>
+                        <input type="date" name="date_update" class="form-control" id="ngay_chuyen_sang_{{$item->id}}">
+                    </div>
+                    <div class="row" id="show_slot_null_{{$item->id}}">
+                        {{-- show các ca mà trống trong ngày đo --}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                    <button type="button" id="button_an_chuyen_lich_{{$item->id}}" class="btn btn-primary">Chuyển Lịch</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@endforeach
 <div class="container justify-content-center d-flex mt-5">
     @if($check == false)
     {{$get_all_class->links()}}
@@ -435,6 +479,80 @@
                 }
             });
         });
+    });
+    // show lich hoc ajax ////////////////////
+    $(document).ready(function() {
+        $("button[id^='button_chuyen_lich_']").click(function() {
+            id = event.currentTarget.attributes.id.value.replace('button_chuyen_lich_', '');
+            html = "";
+            $.ajax({
+                url: '/admin/schedule_learn/show/chuyen_lich/' + id,
+                method: 'get',
+                success: function(response) {
+                    // lấy a các ngày trong lịch mà chưa học
+                    for (const [key, value] of Object.entries(response)) {
+                        html += `
+                        <option value="${key}" >${value}</option>
+                        `;
+                    }
+                    $(`#ngay_muon_chuyen_${id}`).html(`<option value="0">Chọn Ngày</option>${html}`);
+                }
+            });
+        });
+    });
+
+    // check ấn nút mà k chọn ngày chuyển ////////////////////////////////////////
+    $("select[id^='ngay_muon_chuyen_']").on('change', function() {
+        id = event.currentTarget.attributes.id.value.replace('ngay_muon_chuyen_', '');
+        $(`input#ngay_chuyen_sang_${id}`).val("")
+        $('span#erorr_ngay_muon_chuyen').html("");
+        $(`div#show_slot_null_${id}`).html("");
+    });
+
+    $("button[id^='button_an_chuyen_lich_']").click(function() {
+        id = event.currentTarget.attributes.id.value.replace('button_an_chuyen_lich_', '');
+
+        console.log($(`select#ngay_muon_chuyen_${id}`).val());
+        console.log($(`input#ngay_chuyen_sang_${id}`).val());
+        console.log($('input[name=slot]:checked').val());
+
+
+
+        if($(`select#ngay_muon_chuyen_${id}`).val() == 0 || $(`input#ngay_chuyen_sang_${id}`).val() == null || $('input[name=slot]:checked').val() == undefined){
+            $('h5.erorr_submit').html('vui Lòng Nhập Đủ Thông Tin');
+        }else{
+            $("#btn_chuyen_lich_form_" + id).submit();
+        }
+    });
+
+
+    $("input[id^='ngay_chuyen_sang_']").on('change', function() {
+        id = event.currentTarget.attributes.id.value.replace('ngay_chuyen_sang_', '');
+        if ($(`select#ngay_muon_chuyen_${id}`).val() == 0) {
+            $('span#erorr_ngay_muon_chuyen').html("<p> Vui Lòng Chọn Ngày Muốn Chuyển </p>");
+        } else {
+            html = "";
+            $.ajax({
+                url: '/admin/schedule_learn/show/lich_trong/' + $(`select#ngay_muon_chuyen_${id}`).val() + '/' + $(`input#ngay_chuyen_sang_${id}`).val(),
+                method: 'get',
+                success: function(response) {
+                    console.log(response)
+                    // lấy a các lịch mà trống trong ngày đó
+
+                    response.map(x => {
+                        html += `
+                        <div class="form-check ml-3">
+                        <input class="form-check-input" type="radio" name="slot" id="exampleRadios1" value="${x}">
+                        <label class="form-check-label" for="exampleRadios1">
+                            Ca : ${x}
+                        </label>
+                        </div>
+                        `;
+                    });
+                    $(`#show_slot_null_${id}`).html(`<label class="col-12" for="exampleFormControlSelect1">Các Ca Trống Trong Ngày</label>${html}`);
+                }
+            });
+        }
     });
 </script>
 @endpush

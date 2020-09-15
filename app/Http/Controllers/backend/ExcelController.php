@@ -111,18 +111,54 @@ class ExcelController extends Controller
 
     public function show_edit_schedule($id)
     {
+        $check_week_slot = array();
         $week_slot = array();
-        foreach (Schedule::where('class_id', $id)->get() as $value) {
-            if (array_search($value->weekday, $week_slot) === false) {
+
+        foreach (Schedule::where('class_id', $id)->get() as $key => $value) {
+            if (array_search($value->weekday, $check_week_slot) === false) {
+                $check_week_slot[] = $value->weekday;
                 $week_slot[$value->weekday] = $value->slot;
             }
         }
         return $week_slot;
     }
 
+    public function show_chuyen_lich_schedule($id)
+    {
+        $day_week_slot = array();
+        foreach (Schedule::where([['class_id', $id], ['time', '>=', now()]])->get() as $value) {
+            $day_week_slot[$value->id] = 'Ngày ' . $value->time . " ( " . 'Thứ ' . $value->weekday . ' : ' . ' Ca ' . $value->slot . " ) ";
+        }
+        return $day_week_slot;
+    }
+    public function show_lich_trong_schedule($id_ngay_muon_chuyen, $ngay_chuyen_sang)
+    {
+        $check = Schedule::where([['teacher_id', Schedule::find($id_ngay_muon_chuyen)->teacher_id], ['time', $ngay_chuyen_sang]])->get();
+
+        $all_slot_null = array();
+        $check_slot_da_co = array();
+        // kiểm tra xem ngày đấy đã có lịch và ca nào hay chưa
+        if (count($check) == 0) {
+            for ($j = 1; $j < 7; $j++) {
+                $all_slot_null[] = $j;
+            }
+        } else {
+            foreach ($check as $key  => $value) {
+                $check_slot_da_co[] = $value->slot;
+            }
+            for ($i = 1; $i < 7; $i++) {
+                if (array_search($i, $check_slot_da_co) === false) {
+                    $all_slot_null[] = $i;
+                }
+            }
+        }
+        return $all_slot_null;
+    }
+
     public function show_teacher_schedule_teach($id)
     {
         $teacher_selected[] = User::find(Classes::find($id)->teacher_id);
+        // return Classes::find($id)->teacher_id;
         // đển in ra fonrend
         $week_and_slot = array();
         // tạo 1 mngr rỗng để check
@@ -132,6 +168,7 @@ class ExcelController extends Controller
             if (array_search($value->weekday, $finter_week_slot) === false) {
                 // đển in ra fonrend
                 $week_and_slot[$value->weekday] = $value->slot;
+                $finter_week_slot[]=$value->weekday;
             }
         }
         // lấy ra toàn bộ giáo viên chưa có lịch dậy và check giáo viên có lịch dạy có trùng hay k

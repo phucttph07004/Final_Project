@@ -25,7 +25,6 @@ class LevelRequest extends FormRequest
     {
         return [
             'level'=>'required|numeric|unique:levels',
-            'image'=>'required||mimes:jpeg,jpg,png',
             'description'=>'required|min:6',
             'fee'=>'required|numeric',
         ];
@@ -36,8 +35,6 @@ class LevelRequest extends FormRequest
             'level.required'=>'Không được bỏ trống level',
             'level.numeric'=>'level phải là chữ số',
             'level.unique'=>'level đã tồn tại',
-            'image.required'=>'Không để trống ảnh',
-            'image.mimes'=>'Không đúng định dạng ảnh',
             'description.required'=>'Không được bỏ trống mô tả',
             'description.min'=>'Tên mô tả không được dưới 6 ký tự',
             'fee.required'=>'Không được bỏ trống học phí',

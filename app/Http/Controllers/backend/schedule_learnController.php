@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{Classes, Level, Schedule, Course};
+use App\Http\Requests\backend\DoilichRequest\{DoilichRequest};
 use Arr;
 use Auth;
 use Carbon\Carbon;
@@ -15,20 +16,9 @@ class schedule_learnController extends Controller
     {
         $data['get_all_level'] = Level::all();
         $data['get_all_schedule'] = Schedule::all();
-        // lấy ra khóa hiện tại đg hoạt động
-        $get_all_course = array();
-        foreach (Course::all() as $value) {
-            $first_date = strtotime($value->start_date);
-            $second_date = strtotime($value->finish_date);
-            $datediff = abs($first_date - $second_date);
-            $time_allowed = floor($datediff / (60 * 60 * 24) / 10);
-            $start_date = strtotime(date("Y-m-d", strtotime($value->start_date)) . " +$time_allowed days");
-            $start_date_plus10 = strftime("%Y-%m-%d", $start_date);
-            if ($start_date_plus10 >= date('Y-m-d')) {
-                $get_all_course[] = $value->id;
-            }
-        }
-        $data['check_course'] = $get_all_course;
+        $data['check_course'] = Course::all();
+
+
         // lấy ra các lớp có lịch  để check lớp đã có lịch hay chưa
         $data['get_schedule'] = Schedule::all();
         if ($data['get_schedule'] != null) {
@@ -45,40 +35,38 @@ class schedule_learnController extends Controller
         $collection = array();
         if ($Request->all() != null && $Request['page'] == null) {
             foreach ($Request->all() as $key => $value) {
-                    if ($key == 'name') {
-                        $data['get_all_class'] = Classes::where([["$key", 'LIKE', "%$value%"],['status','!=',0]])->withcount('CountStuden')->paginate(10);
-                    } elseif ($key == 'weekday' && $value == 0) {
-                        foreach (Classes::all() as $value) {
-                            if (array_search($value->id, $class) === false && array_search($value->course_id, $get_all_course) !== false) {
-                                $collection[] = Classes::where([['id', $value->id],['status','!=',0]])->withcount('CountStuden')->first();
-                            }
+                if ($key == 'name') {
+                    $data['get_all_class'] = Classes::where([["$key", 'LIKE', "%$value%"], ['status', '!=', 0], ['finish_date', '>', now()]])->withcount('CountStuden')->paginate(10);
+                } elseif ($key == 'weekday' && $value == 0) {
+                    foreach (Classes::all() as $value) {
+                        if (array_search($value->id, $class) === false && new Carbon($value->finish_date) > now()) {
+                            $collection[] = Classes::where([['id', $value->id], ['status', '!=', 0]])->withcount('CountStuden')->first();
                         }
-                        $data['check'] = true;
-                        $check=count($collection)!=0?$collection:array();
-                        $data['get_all_class'] =collect($check);
-                    } else {
-                        foreach (Classes::all() as $value) {
-                            if (array_search($value->id, $class) !== false && array_search($value->course_id, $get_all_course) !== false) {
-                                $collection[] = Classes::where([['id', $value->id],['status','!=',0]])->withcount('CountStuden')->first();
-                            }
-                        }
-                        $data['check'] = true;
-                        $check=count($collection)!=0?$collection:array();
-                        $data['get_all_class'] =collect($check);
                     }
+                    $data['check'] = true;
+                    $check = count($collection) != 0 ? $collection : array();
+                    $data['get_all_class'] = collect($check);
+                } else {
+                    foreach (Classes::all() as $value) {
+                        if (array_search($value->id, $class) !== false && new Carbon($value->finish_date) > now()) {
+                            $collection[] = Classes::where([['id', $value->id], ['status', '!=', 0]])->withcount('CountStuden')->first();
+                        }
+                    }
+                    $data['check'] = true;
+                    $check = count($collection) != 0 ? $collection : array();
+                    $data['get_all_class'] = collect($check);
+                }
             }
         } else {
-
-                //         $collection[] = Classes::where('status','<>',0)->withcount('CountStuden')->first();
-
-                foreach (Classes::all() as $value) {
-                    if (array_search($value->course_id, $get_all_course) !== false) {
-                        $collection[] = Classes::where([['id', $value->id],['status','!=',0]])->withcount('CountStuden')->first();
-                    }
+            foreach (Classes::all() as $value) {
+                $check_date_class = Classes::where([['id', $value->id], ['status', '!=', 0]])->withcount('CountStuden')->first();
+                if (new Carbon($check_date_class->finish_date) > now()) {
+                    $collection[] = $check_date_class;
                 }
-                $data['check'] = true;
-                $check=count($collection)!=0?$collection:array();
-                $data['get_all_class'] =collect($check);
+            }
+            $data['check'] = true;
+            $check = count($collection) != 0 ? $collection : array();
+            $data['get_all_class'] = collect($check);
         }
         return view('backend.pages.schedule_learn.index', $data);
     }
@@ -87,7 +75,6 @@ class schedule_learnController extends Controller
     public function store(Request $request)
     {
         if (count(Schedule::where('class_id', $request['class_id'])->get()) != 0) {
-
             foreach (Schedule::where('class_id', $request['class_id'])->get() as $value) {
                 Schedule::destroy($value->id);
             }
@@ -152,6 +139,28 @@ class schedule_learnController extends Controller
             }
             if ($i >= $class->number_of_sessions) break;
         }
+        // update lại ngày bắt đầu và ngày kết thúc trong bảng class
+        $date_start = Schedule::where('class_id', $request['class_id'])->first()->time;
+        $date_end = Schedule::where('class_id', $request['class_id'])->first()->time;;
+        foreach (Schedule::where('class_id', $request['class_id'])->get() as $key_check => $value_check) {
+            if ($value_check->time > $date_end) {
+                $date_end = $value_check->time;
+            }
+        }
+        $update_date_class = array();
+        $update_date_class['start_date'] = $date_start;
+        $update_date_class['finish_date'] = $date_end;
+        Classes::find($request['class_id'])->update($update_date_class);
+
+
         return redirect()->back()->with('thongbao', 'Xếp Lịch Học Cho Lớp Thành Công');
+    }
+    public function update(Request $request)
+    {
+        $data = array();
+        $data['slot'] = $request['slot'];
+        $data['time'] = $request['date_update'];
+        Schedule::find($request['id_date_old'])->update($data);
+        return redirect()->back()->with('thongbao', 'Chuyển Lịch Học Cho Lớp Thành Công');
     }
 }
