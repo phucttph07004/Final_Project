@@ -1,5 +1,5 @@
 @extends('backend.layout.master')
-@section('title','Chi tiết lịch dạy')
+@section('title','Chi tiết lịch học')
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -7,10 +7,10 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="card-title">Lịch dạy lớp {{$class->name}}</h4>
+                        <h4 class="card-title">Lịch học lớp {{$class->name}}</h4>
                         <p style="font-size: 17px">Đã học: {{$pasts->count('time')}}/24 buổi</p>
                     </div>
-                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
+                    <table id="" class="table table-striped table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>

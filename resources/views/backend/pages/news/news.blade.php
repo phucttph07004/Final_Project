@@ -31,24 +31,18 @@
                 <td>{{$new->categoryName->name}}</td>
                 <td>{{$new->view}}</td>
                 <td>
-                    @if($new->status == 1)
-                    <span class="text-success">Hiện</span>
-                    @else
-                    <span class="text-danger">Ẩn</span>
-                    @endif
+                    <a class="toggle-class" id="btn_deactive_{{ $new->id }}">
+                        <input type="checkbox" @if($new->status == 1) checked @endif
+                        data-toggle="toggle" data-on="Hiện"
+                        data-off="Ẩn" data-onstyle="success" data-offstyle="danger"
+                        >
+                    </a>
                 </td>
                 <td>{{$new->created_at->format('d-m-Y')}}</td>
                 <td>
                     <a class="btn btn-outline-primary" href="{{route('news.edit',[$new->id])}}">Sửa</a>
-
-                    @if($new->status == 1)
-                    <button id="btn_delete_{{ $new->id }}" class="btn btn-outline-danger">Ẩn</button>
-                    @else
-                    <button id="btn_delete_{{ $new->id }}" class="btn btn-outline-success">Hiện</button>
-                    @endif
-
-                    <form id="delete_form_{{ $new->id }}" action="{{ route('news.destroy',$new->id) }}" method="post"
-                        style="display: none;">
+                    <form id="deactive_form_{{ $new->id }}" action="{{ route('news.destroy',$new->id) }}"
+                        method="post" style="display: none;">
                         @method('DELETE')
                         <input type="hidden" name="status" value="{{$new->status}}">
                         @csrf
@@ -66,12 +60,9 @@
 
 @push('scripts')
 <script>
-$("button[id^='btn_delete_']").click(function(event) {
-    id = event.currentTarget.attributes.id.value.replace('btn_delete_', '');
-    $("#delete_form_" + id).submit();
-});
-$('.close-noti').click(function() {
-    $('.alert-noti').hide();
+$("a[id^='btn_deactive_']").click(function(event) {
+    id = event.currentTarget.attributes.id.value.replace('btn_deactive_', '');
+    $("#deactive_form_" + id).submit();
 });
 </script>
 @endpush

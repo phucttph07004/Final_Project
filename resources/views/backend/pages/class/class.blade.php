@@ -72,6 +72,7 @@
                 <th scope="col">Level</th>
                 <th scope="col">Khoá</th>
                 <th scope="col">Ngày bắt đầu</th>
+                <th scope="col">Ngày kết thúc dự kiến</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col">
                     <a href="{{ route('class.create') }}">
@@ -98,17 +99,14 @@
                 <td>{{ $class->levelName->level}}</td>
                 <td>{{ $class->courseName->course_name}}</td>
                 <td>{{date('d-m-Y', strtotime($class->start_date))}}</td>
+                <td>{{date('d-m-Y', strtotime($class->finish_date))}}</td>
                 <td>
-                    <!-- <input data-id="{{$class->id}}" id="btn_deactive_{{ $class->id }}" class="toggle-class" type="checkbox" data-onstyle="success"
-                        data-offstyle="danger" data-toggle="toggle" data-on="Mở" data-off="Đóng"
-                        {{ $class->status ? 'checked' : '' }}> -->
                     <a class="toggle-class" id="btn_deactive_{{ $class->id }}">
                         <input type="checkbox" @if($class->status == 1) checked @endif
                         data-toggle="toggle" data-on="Mở "
                         data-off="Đóng" data-onstyle="success" data-offstyle="danger"
                         >
                     </a>
-
                 </td>
                 <td>
                     <a class="btn btn-outline-info" href="{{ route('class.show',"$class->id") }}"> Chi Tiết

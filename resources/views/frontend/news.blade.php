@@ -34,9 +34,9 @@
                             <a class="news__item-title"
                                 href="{{route('news.news-detail',[$new->id])}}">{{$new -> title}}</a>
                         </h2>
-                        <div class="news__item-desc">
-                            {!!$new->content!!}
-                        </div>
+                        <p class="news__item-desc">
+                            {{$new->desc}}
+                        </p>
                     </div>
                 </div>
             </div>

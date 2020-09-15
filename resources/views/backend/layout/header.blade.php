@@ -65,21 +65,17 @@
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box">
-                        <a href="index.html" class="logo logo-dark">
-                            <span class="logo-sm">
-                                    <img src="/dist/img/logo-sm-dark.png" alt="" height="22">
-                                </span>
+                        <a style="color:white" href="/admin" class="logo logo-dark">
+                            
                             <span class="logo-lg">
-                                    <img src="/dist/img/logo-dark.png" alt="" height="20">
+                                    EDUSPACE
                                 </span>
                         </a>
 
-                        <a href="index.html" class="logo logo-light">
-                            <span class="logo-sm">
-                                    <img src="/dist/img/logo-sm-light.png" alt="" height="22">
-                                </span>
+                        <a style="color:white" href="/admin" class="logo logo-light">
+                           
                             <span class="logo-lg">
-                                    <img src="/dist/img/logo-light.png" alt="" height="20">
+                                EDUSPACE
                                 </span>
                         </a>
                     </div>

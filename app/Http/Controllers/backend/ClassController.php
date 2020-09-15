@@ -96,6 +96,8 @@ class ClassController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data['status'] = '1';
         $data['number_of_sessions'] = 24;
+        $data['schedule'] = Schedule::all();
+
         Classes::create($data);
         return redirect()->route('class.index')->with('thongbao','Thêm lớp thành công');
     }

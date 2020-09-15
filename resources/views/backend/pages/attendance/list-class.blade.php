@@ -1,22 +1,23 @@
 @extends('./backend/layout/master')
-@section('title','Quản Trị Lớp Học')
-@section('title_page','Quản Trị Lớp Học')
+@section('title','Điểm danh')
+@section('title_page','Điểm danh')
 @section('content')
-<section class="content">
-
-    <table style="background-color: white" class="table ml-5">
+<section class="content" style="margin:0">
+    <div class="d-flex flex-wrap align-items-center pt-4">
+        <div class="col-4">
+         <form action="" class="d-flex mb-2">
+             <input class="form-control border-success mr-2" type="text" name="name" value="" placeholder="Tìm theo tên lớp">
+             <button class="btn btn-primary"type="submit">Tìm kiếm</button>
+         </form>
+        </div>
+     </div>
+    <table style="background-color: white" class="table">
         @if(session('thongbao'))
         <div class="alert alert-primary text-center" role="alert">
             {{session('thongbao') }}
         </div>
         @endif
-        <div class="d-flex flex-wrap align-items-center ml-5 pt-4">
-           <div class="col-4">
-            <form action="">
-                <input class="form-control border-success" type="text" name="name" value="" placeholder="Tìm theo tên lớp">
-            </form>
-           </div>
-        </div>
+       
         <thead>
             <tr>
                 <th scope="col">STT</th>
@@ -25,11 +26,6 @@
                 <th scope="col">Khoá</th>
                 <th scope="col">Ngày bắt đầu</th>
                 <th scope="col">Ngày Kết thúc</th>
-                <th scope="col">
-                    <a href="{{ route('class.create') }}">
-                        <button type="button" class="btn btn-outline-primary">Tạo lớp mới</button>
-                    </a>
-                </th>
             </tr>
         </thead>
         <tbody>

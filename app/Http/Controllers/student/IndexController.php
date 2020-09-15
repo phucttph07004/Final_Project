@@ -20,7 +20,7 @@ class IndexController extends Controller
     public function schedule()
     {
         $schedules=array();
-        if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)){
+        if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)->finish_date > now()){
             $schedules = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->whereDate('time' , '>=', now())->paginate(10);
         }    
         $data['schedules'] = $schedules;
@@ -30,8 +30,8 @@ class IndexController extends Controller
     public function attendance()
     {
         $data['schedules']=array();
-        if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)){
-            $data['schedules'] = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->get();
+        if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)->finish_date > now()){
+            $data['schedules'] = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->paginate(10);
             $data['status'] = null;
             // foreach (Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->where('time' ,'<=', now())->get() as $value) {
             //     $test = [Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->where('time' ,'<=', now())->get()];
@@ -47,7 +47,6 @@ class IndexController extends Controller
         }   
         return view('student.pages.attendance.attendance',$data);
     }
-
     public function history_learned_class()
     {
         $data['histories'] = History_learned_class::where('student_id',Auth::guard('student')->user()->id)->get();

@@ -30,7 +30,7 @@
         </thead>
         <tbody>
         @if(count($waiting_list) == 0)
-        <td colspan="7">
+        <td colspan="9">
             <div class="mt-5 col-12 justify-content-center d-flex">
                 <div class=" alert alert-danger" role="alert">
                     Không Có kết Quả  Nào

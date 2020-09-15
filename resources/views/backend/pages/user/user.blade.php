@@ -54,7 +54,7 @@
             @foreach ($users as $user)
             <tr>
                 <th scope="row">{{ $i++ }}</th>
-                <td><img style="width:70px;height:50px" src="storage/{{ $user->avatar }}" alt=""></td>
+                <td><img style="width:150px;height:auto" src="storage/{{ $user->avatar }}" alt=""></td>
                 <td>{{ $user->fullname }}</td>
                 <td>
                     @if( $user->role == 5 ) <span>Giám đốc</span>

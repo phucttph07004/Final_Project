@@ -25,7 +25,8 @@ class ClassRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:classes',
-            'start_date' =>'required|after:yesterday',
+            'start_date' => 'required|after:yesterday',
+            // 'finish_date'=> 'required|after:start_date',
         ];
     }
 
@@ -38,7 +39,8 @@ class ClassRequest extends FormRequest
             'start_date.required' => 'Không để trống ngày khai giảng',
             'start_date.after' => 'Không thể chọn ngày trong quá khứ',
 
-           
+            // 'finish_date.required' => 'Không để trống ngày kết thúc',
+            // 'finish_date.after' => 'Ngày kết thúc phải sau ngày khai giảng',
            
         ];
     }
