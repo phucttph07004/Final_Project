@@ -158,7 +158,7 @@ class ExcelController extends Controller
     public function show_teacher_schedule_teach($id)
     {
         $teacher_selected[] = User::find(Classes::find($id)->teacher_id);
-        // return Classes::find($id)->teacher_id;
+
         // đển in ra fonrend
         $week_and_slot = array();
         // tạo 1 mngr rỗng để check
