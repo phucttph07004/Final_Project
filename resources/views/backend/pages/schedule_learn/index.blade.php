@@ -395,7 +395,7 @@
                 <div class="modal-header m-auto">
                     <h4 class="modal-title text-primary font-weight-bold" id="exampleModalLabel">Chuyển Lịch Học</h4>
                 </div>
-                <h5 class="erorr_submit text-center text-danger"></h5>
+                <h5 class="erorr_submit text-center" style="color: red;"></h5>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Ngày Muốn Chuyển</label>
@@ -407,7 +407,8 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Ngày Chuyển Sang</label>
-                        <input type="date" name="date_update" class="form-control" id="ngay_chuyen_sang_{{$item->id}}">
+                        <span id="erorr_ngay_chuyen_sang" style="color: red;height: 10px;"></span>
+                            <input type="date" name="date_update" class="form-control" id="ngay_chuyen_sang_{{$item->id}}">
                     </div>
                     <div class="row" id="show_slot_null_{{$item->id}}">
                         {{-- show các ca mà trống trong ngày đo --}}
@@ -509,25 +510,35 @@
         $(`div#show_slot_null_${id}`).html("");
     });
 
+    // khi ấn vào lút chuyển lịch thì kiểm tra dữ liệu đã đúng chưa
     $("button[id^='button_an_chuyen_lich_']").click(function() {
         id = event.currentTarget.attributes.id.value.replace('button_an_chuyen_lich_', '');
-
-        console.log($(`select#ngay_muon_chuyen_${id}`).val());
-        console.log($(`input#ngay_chuyen_sang_${id}`).val());
-        console.log($('input[name=slot]:checked').val());
-
-
-
-        if($(`select#ngay_muon_chuyen_${id}`).val() == 0 || $(`input#ngay_chuyen_sang_${id}`).val() == null || $('input[name=slot]:checked').val() == undefined){
-            $('h5.erorr_submit').html('vui Lòng Nhập Đủ Thông Tin');
-        }else{
-            $("#btn_chuyen_lich_form_" + id).submit();
+        // check có phải chọn ngày quá khứ hay k
+        var datep = $(`#ngay_chuyen_sang_${id}`).val();
+        if (Date.parse(datep) - Date.parse(new Date()) < 0) {
+            // qk
+            $('span#erorr_ngay_chuyen_sang').html("<p>Không Được Chuyển Vào Ngày Hiện Tại Hoặc Quá Khứ</p>");
+        } else {
+            // ht
+            if ($(`select#ngay_muon_chuyen_${id}`).val() == 0 || $(`input#ngay_chuyen_sang_${id}`).val() == null || $('input[name=slot]:checked').val() == undefined) {
+                $('h5.erorr_submit').html('vui Lòng Nhập Đủ Thông Tin');
+            } else {
+                $("#btn_chuyen_lich_form_" + id).submit();
+            }
         }
     });
 
-
     $("input[id^='ngay_chuyen_sang_']").on('change', function() {
         id = event.currentTarget.attributes.id.value.replace('ngay_chuyen_sang_', '');
+        // check có phải chọn ngày quá khứ hay k và bỏ thông báo lỗi
+        var datep = $(`#ngay_chuyen_sang_${id}`).val();
+        if (Date.parse(datep) - Date.parse(new Date()) < 0) {
+            $('span#erorr_ngay_chuyen_sang').html("<p>Không Được Chuyển Vào Ngày Hiện Tại Hoặc Quá Khứ</p>");
+            $(`#show_slot_null_${id}`).clss('display','none');
+            $('#erorr_slot').css('display','none');
+        }else{
+            $('span#erorr_ngay_chuyen_sang').html("");
+        }
         if ($(`select#ngay_muon_chuyen_${id}`).val() == 0) {
             $('span#erorr_ngay_muon_chuyen').html("<p> Vui Lòng Chọn Ngày Muốn Chuyển </p>");
         } else {
@@ -536,10 +547,12 @@
                 url: '/admin/schedule_learn/show/lich_trong/' + $(`select#ngay_muon_chuyen_${id}`).val() + '/' + $(`input#ngay_chuyen_sang_${id}`).val(),
                 method: 'get',
                 success: function(response) {
-                    console.log(response)
-                    // lấy a các lịch mà trống trong ngày đó
-
-                    response.map(x => {
+                    // lấy ra các lịch mà trống trong ngày đó
+                    if(response.length == 0){
+                        html += "<span id='erorr_slot' style='color:red;margin-left:17px'>Không Có Ca Nào Trống Trong Ngày Này</span>";
+                    }else{
+                        $('#erorr_slot').css('display','none');
+                        response.map(x => {
                         html += `
                         <div class="form-check ml-3">
                         <input class="form-check-input" type="radio" name="slot" id="exampleRadios1" value="${x}">
@@ -549,6 +562,7 @@
                         </div>
                         `;
                     });
+                    }
                     $(`#show_slot_null_${id}`).html(`<label class="col-12" for="exampleFormControlSelect1">Các Ca Trống Trong Ngày</label>${html}`);
                 }
             });
