@@ -71,7 +71,7 @@
                 <th scope="col">Tên lớp</th>
                 <th scope="col">Level</th>
                 <th scope="col">Khoá</th>
-                <th scope="col">Ngày bắt đầu</th>
+                <th scope="col">Ngày khai giảng</th>
                 <th scope="col">Ngày kết thúc dự kiến</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col">

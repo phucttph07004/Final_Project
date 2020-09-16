@@ -68,6 +68,19 @@ class TeacherController extends Controller
     {
         $data['class'] = Classes::find($id);
         $data['students'] = Student::where('class_id', $id)->get();
+        $data['pasts'] = Schedule::where('time','<', now())->where('class_id',$id)->get();
+        $sche = null;
+        $i = 1;
+        foreach(Schedule::where('class_id',$id)->get() as $value){
+            
+            if($value->student_id != null){
+                $sche .= $value->student_id.',';
+            }
+           
+        }
+        $schedule = rtrim($sche,',');
+        $data['schedule'] = explode(',',$schedule);
+
         return view('teacher.pages.schedule_teach.class_list',$data);
     }
 

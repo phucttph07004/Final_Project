@@ -56,18 +56,19 @@ class IndexController extends Controller
         $data['schedules']=array();
         if(Classes::find(Student::find(Auth::guard('student')->user()->id)->class_id)->finish_date > now()){
             $data['schedules'] = Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->paginate(10);
-            $data['status'] = null;
-            // foreach (Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->where('time' ,'<=', now())->get() as $value) {
-            //     $test = [Schedule::where("class_id",Student::find(Auth::guard('student')->user()->id)->class_id)->where('time' ,'<=', now())->get()];
-            //     // dd($test);
-            //     if(array_search(Auth::guard('student')->user()->id,explode(',', $value->student_id)) === false)
-            //         {
-            //             $data['status'] =  $value; 
-            //         }
-            //     else{
-            //         $data['status'] = null;  
-            //     }
-            // }
+            
+            $data['pasts'] = Schedule::where('time','<', now())->where('class_id',Student::find(Auth::guard('student')->user()->id)->class_id)->get();
+            $sche = null;
+            $i = 1;
+            foreach(Schedule::where('class_id',Student::find(Auth::guard('student')->user()->id)->class_id)->get() as $value){
+                
+                if($value->student_id != null){
+                    $sche .= $value->student_id.',';
+                }
+            
+            }
+        $schedule = rtrim($sche,',');
+        $data['schedule'] = explode(',',$schedule);
         }   
         return view('student.pages.attendance.attendance',$data);
     }

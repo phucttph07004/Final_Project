@@ -92,6 +92,7 @@
                 <th scope="col">Mã học viên</th>
                 <th scope="col">Số điện thoại</th>
                 <th scope="col">Email</th>
+                <th class="text-center" >Số buổi vắng</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col">
                     <!-- <a type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#students"
@@ -119,6 +120,20 @@
                 <td>{{ $student->code}}</td>
                 <td>{{ $student->phone}}</td>
                 <td>{{ $student->email}}</td>
+                <td class="text-center" >
+                    <?php
+                        $count = count($pasts);
+                        $check=0;
+                        ?>
+                    @foreach($schedule as $key => $value)
+                    @if($value == $student->id)
+                       <?php
+                        $check++;
+                       ?>
+                    @endif
+                    @endforeach
+                    {{ substr($count - $check,-1).' / '.$count}}
+                </td>
                 <td>
                     @if($student->status == 0) <span>Khoá</span>
                     @else <span>Hoạt động</span>

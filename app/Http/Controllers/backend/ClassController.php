@@ -116,6 +116,19 @@ class ClassController extends Controller
         $data['users']=User::all();
         $data['pasts'] = Schedule::where('time','<', now())->where('class_id',$id)->get();
 
+        
+        $sche = null;
+        $i = 1;
+        foreach(Schedule::where('class_id',$id)->get() as $value){
+            
+            if($value->student_id != null){
+                $sche .= $value->student_id.',';
+            }
+           
+        }
+        $schedule = rtrim($sche,',');
+        $data['schedule'] = explode(',',$schedule);
+
         return view('backend.pages.class.detail-class',$data);
     }
 
