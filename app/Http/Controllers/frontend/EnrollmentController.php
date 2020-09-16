@@ -1,27 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\{Branch, Student,Classroom,Level};
 use Illuminate\Http\Request;
+use App\Http\Requests\frontend\register\RegisterRequest;
 
+use App\Models\Enrollment;
+use App\Models\Setting;
 
-use App\Models\{Classes,Course,Level,User,Student};
-
+use Mail;
 use Arr;
-use Auth;
-use Carbon\Carbon;
-
-class ClassDetailController extends Controller
+class EnrollmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
+        
     }
 
     /**
@@ -31,6 +28,9 @@ class ClassDetailController extends Controller
      */
     public function create()
     {
+        //
+        $data['get_all_level']=Level::all();
+        return view('frontend.enrollment',$data);
     }
 
     /**
@@ -39,9 +39,13 @@ class ClassDetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        //
+       
+        $data = Arr::except($request->all(), ['_token']);
+        $data['status']=0;
+        $enrollment = Enrollment::create($data);
+        return redirect()->back()->with('thongbao','Bạn đã đăng ký thành công');;
     }
 
     /**
@@ -63,10 +67,11 @@ class ClassDetailController extends Controller
      */
     public function edit($id)
     {
+        //
     }
 
-    /**
-     * Update the specified resource in storage.
+    /**;
+     * Update the; specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -74,11 +79,7 @@ class ClassDetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Arr::except($request, ['_token','_method'])->toarray();
-        $student=Student::find($id);
-        $student['class_id']=7;
-        $student->update($data);
-        return redirect()->back()->with('thongbao','Cập Nhật Học Viên Thành Công');
+        //
     }
 
     /**

@@ -122,7 +122,6 @@
                 $("#slot option[value='']").prop("selected", "selected")
             }
         });
-
         $('#course').change(function() {
             if ($('#course').val() != -2) {
                 $('.error_course').html('');
@@ -132,7 +131,6 @@
             $('.thong-bao').css('display', 'none');
             $('.paste_class').html("");
         });
-
         $('#slot').on('change', function() {
             if ($('#course').val() == -2) {
                 $('.error_course').html('Nếu bỏ trống Khóa Học học viên sẽ được lưu vào danh sách chờ');

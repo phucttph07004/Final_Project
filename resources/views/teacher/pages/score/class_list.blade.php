@@ -75,7 +75,7 @@
     </div>
     {{-- Modal --}}
     @foreach($students as $student)
-    <form id="score_submit{{$student->id}}"action="{{route('score.store')}}" method="post">
+    <form id="score_submit_{{$student->id}}" action="{{route('score.store')}}" method="post">
         @csrf
         <div class="modal fade bs-example-modal-center" id="modal_{{$student->id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -88,12 +88,12 @@
                     </div>
                     <div class="modal-body">
                         <h5 class="error abc"></h5>
-                        <input type="text" placeholder="Nhập điểm" id="student_score_{{$student->id}}" name="score" class="form-control mb-2">
+                        <input type="text" placeholder="Nhập điểm" id="student_score_{{$student->id}}" name="score" class="form-control score mb-2">
                         <input type="hidden" name="student_id" value="{{$student->id}}">
                         <input type="hidden" name="class_id" value="{{$class->id}}">
                         <input type="hidden" name="level_id" value="{{$class->level_id}}">
                         <input type="hidden" name="course_id" value="{{$class->course_id}}">
-                            <button id="btn_create_{{$student->id}}" type="submit" class="btn btn-primary">Nhập điểm</button>
+                            <button id="btn_create_{{$student->id}}" type="button" class="btn btn-primary">Nhập điểm</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -103,5 +103,28 @@
 @endsection
 
 @push('scripts')
-
+<script>
+    $("button[id^='btn_create_']").click(function(event) {
+    id = event.currentTarget.attributes.id.value.replace('btn_create_', '');
+    var score = $('.score').val();
+    if (score < 0 || score >10) {
+        $(".error").html("Số điểm nằm trong khoảng từ 0-10");
+    }
+    else if(isNaN(score)){
+        $(".error").html("Điểm phải là số");
+    }
+    else{
+        if(score >= 0 && score < 11 ){
+            $("#score_submit_" + id).submit();
+    }
+    }
+});
+$('.score').on('keyup keypress', function(e) {
+  var keyCode = e.keyCode || e.which;
+  if (keyCode === 13) { 
+    e.preventDefault();
+    return false;
+  }
+});
+</script>
 @endpush

@@ -32,7 +32,7 @@
                 <td>{{ $class->level_id}}</td>
                 <td>{{ $class->courseName->course_name}}</td>
                 <td>
-                    @if($class->is_active == 1) <span style='color: green'>Hoạt động</span>
+                    @if($class->status == 1) <span style='color: green'>Hoạt động</span>
                     @else <span style='color: red'>Khoá</span>
                     @endif
                 </td>
@@ -41,7 +41,7 @@
                     </a>
                     <a class="btn btn-outline-warning" href="{{ route('class.edit',"$class->id") }}">Sửa</a>
 
-                    @if($class->is_active == 1)
+                    @if($class->status == 1)
                     <button id="btn_deactive_{{ $class->id }}" class="btn btn-outline-danger">Đóng</button>
                     @else
                     <button id="btn_deactive_{{ $class->id }}" class="btn btn-outline-success">Mở</button>
@@ -50,7 +50,7 @@
                     <form id="deactive_form_{{ $class->id }}" action="{{ route('class.destroy',$class->id) }}" method="post"
                         style="display: none;">
                         @method('DELETE')
-                        <input type="hidden" name="is_active" value="{{$class->is_active}}">
+                        <input type="hidden" name="status" value="{{$class->status}}">
                         @csrf
                     </form>
                 </td>

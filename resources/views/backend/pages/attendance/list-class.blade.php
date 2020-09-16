@@ -3,7 +3,7 @@
 @section('title_page','Điểm danh')
 @section('content')
 <section class="content" style="margin:0">
-    <div class="d-flex flex-wrap align-items-center pt-4">
+    <div class="d-flex flex-wrap align-items-center">
         <div class="col-4">
          <form action="" class="d-flex mb-2">
              <input class="form-control border-success mr-2" type="text" name="name" value="" placeholder="Tìm theo tên lớp">
@@ -11,7 +11,7 @@
          </form>
         </div>
      </div>
-    <table style="background-color: white" class="table">
+    <table style="background-color: white" class="table table-striped table-bordered dt-responsive nowrap">
         @if(session('thongbao'))
         <div class="alert alert-primary text-center" role="alert">
             {{session('thongbao') }}

@@ -25,10 +25,6 @@ class RegisterRequest extends FormRequest
     {
         return [
             'fullname'=>'required|min:6',
-            'email'=>'required|email|unique:registers',
-            'address'=>'required|min:4',
-            'phone'=>'required|min:10|max:10',
-            'date_of_birth'=>'required',
 
         ];
     }

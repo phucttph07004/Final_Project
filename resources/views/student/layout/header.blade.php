@@ -27,7 +27,7 @@
         <link href="/css/icons.min.css" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         {{-- Profile --}}
         <link rel="stylesheet" href="/css/profile.css" type="text/css">
 

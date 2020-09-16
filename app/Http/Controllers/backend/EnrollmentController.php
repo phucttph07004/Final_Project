@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Models\{Enrollment,Level};
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\backend\category\CategoryRequest;
-
-use App\Models\Category;
-
 use Arr;
 use Str;
 use Auth;
 use Carbon\Carbon;
 
 
-class CategoryController extends Controller
+class EnrollmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,43 +20,42 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {   
+        $data['get_all_level'] = Level::all();
         if($request->all() != null && $request['page'] == null){
             foreach($request->all() as $key => $value){
                 if($key == 'status'){
-                    $data['get_all_register'] = Register::where("$key","$value")->paginate(10);
+                    $data['get_all_enrollment'] = Enrollment::where("$key","$value")->paginate(10);
                 }else{
-                    $data['get_all_register'] = Register::where("$key",'LIKE',"%$value%")->paginate(10);
+                    $data['get_all_enrollment'] = Enrollment::where("$key",'LIKE',"%$value%")->paginate(10);
                 }
             }
         }else{
-            $data['get_all_register']=Register::paginate(10);
+            $data['get_all_enrollment']=Enrollment::paginate(10);
         }
-        return view('backend.pages.register.index',$data);
+        return view('backend.pages.enrollment.index',$data);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $registers = Register::find($id);
-
-        $data['status'] = 1;
-
-        $registers->update($data);
-
+        $data = Arr::except($request, ['_token', '_method'])->toarray();
+        $enrollment = Enrollment::find($id);
+        if ($request['status'] == 1) {
+            $data['status'] = 0;
+        } else {
+            $data['status'] = 1;
+        }
+        $enrollment->update($data);
         return redirect()->back();
     }
 
+
     public function changeStatus(Request $request)
     {
-        $register = Register::find($request->id);
-        $register->status = $request->status;
-        $register->save();
+        $enrollment = Enrollment::find($request->id);
+        $enrollment->status = $request->status;
+        $enrollment->save();
   
-        return response()->json(['success'=>'Status change successfully.']);
-    public function index()
-    {
-            $categories = Category::paginate(10);
-            return view('backend.pages.category.category',['categories' => $categories]);
-    }
+        return response()->json(['success'=>'Status change successfully.']);}
 
     /**
      * Show the form for creating a new resource.
@@ -69,7 +65,7 @@ class CategoryController extends Controller
     public function create()
     {
         return view('backend.pages.category.create-category');
-
+        
     }
 
     /**
@@ -78,16 +74,6 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
-    {
-        $data = Arr::except($request->all(), ['_token']);
-        $data['user_id']=Auth::user()->id;
-        $data['status']=1;
-        Category::create($data);
-
-        return redirect()->back()->with('thongbao','Thêm danh mục thành công');
-    }
-
     /**
      * Display the specified resource.
      *
@@ -107,8 +93,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $data['get_register'] = Register::find($id);
-        return view('backend.pages.register.edit',$data);
+        $data['get_enrollment'] = Enrollment::find($id);
+        return view('backend.pages.enrollment.edit',$data);
         $data['categories'] = Category::find($id);
         return view('backend.pages.category.edit-category',$data);
     }
@@ -123,8 +109,8 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, $id)
     {
         $data = Arr::except($request, ['_token','_method'])->toarray();
-        $register=Register::find($id);
-        $register->update($data);
+        $enrollment=Enrollment::find($id);
+        $enrollment->update($data);
         return redirect()->back()->with('thongbao','Cập Nhật Thành Công');
         $categories = Category::find($id);
 
@@ -143,10 +129,4 @@ class CategoryController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        Category::destroy($id);
-        return redirect()->route('category.index');
-    }
-}
+*/}

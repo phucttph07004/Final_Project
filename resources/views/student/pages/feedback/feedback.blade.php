@@ -2,29 +2,19 @@
 @section('title','Quản Lý Khoá Học')
 @section('title_page','Thêm Mới Khoá Học')
 @section('content')
-<form enctype="multipart/form-data" class="pl-5 pt-5" action="{{ route('post.StudentFeedback') }}" method="POST">
-    @csrf
-    <div class="form-group">
-        <label for="exampleFormControlInput1">Nội dung Feedback</label>
-        <br>
-        {!! ShowErrors($errors,'content') !!}
-        <input name="content" type="text" value="{{ old('content')}}" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="">Đánh giá</label>
-        <br>
-        {!! ShowErrors($errors,'score') !!}
-        <select class="form-control" name="score" id="">
-            <?php for ($i=1; $i <11 ; $i++) { 
-                echo  '<option value="$i">'.$i.'</option>' ;
-            } ?>
-        </select>
-    </div>
-    <div class="d-flex align-items-center">
-        <button type="submit" class="btn btn-primary">Gửi Feedback</button>
-    </div>
-
-    </div>
-
-</form>
+<h3>Đánh giá giáo viên</h3>
+                <form action="{{ route('post.StudentFeedback') }}" method="POST">
+                @csrf
+                <input hidden type="text" name="student_id" value="{{Auth::guard('student')->user()->id}}">
+                <input hidden type="text" name="class_id" value="{{Auth::guard('student')->user()->class_id}}">
+                    <div class="form-group">
+                        <label>Nhận xét về giáo viên</label>
+                        <textarea class="form-control" name="content" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Đánh giá</label>
+                        <input class="form-control" type="text" name="score">
+                    </div>
+                    <button type="submit" class="btn">Gửi</button>
+                </form>
 @endsection

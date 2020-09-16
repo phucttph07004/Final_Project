@@ -12,8 +12,8 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="/admin/notifications">Tất Cả</a>
-                    <a class="dropdown-item" href="/admin/notifications?is_active=1">Đang Hiển Thị</a>
-                    <a class="dropdown-item" href="/admin/notifications?is_active=2">Không Hiển Thị</a>
+                    <a class="dropdown-item" href="/admin/notifications?status=1">Đang Hiển Thị</a>
+                    <a class="dropdown-item" href="/admin/notifications?status=2">Không Hiển Thị</a>
                     <a class="dropdown-item" href="/admin/notifications?status=1">Thông Báo Bình Thường</a>
                     <a class="dropdown-item" href="/admin/notifications?status=2">Thông Báo Khẩn Cấp</a>
                 </div>
@@ -75,7 +75,7 @@
                 @endif
             </td>
             <td>
-                @if($item->is_active == 1)
+                @if($item->status == 1)
                 <p class="text-primary">Đang Hiển Thị</p>
                 @else
                 <p class="text-warning">Không Hiển Thị</p>
@@ -86,13 +86,13 @@
             <button type="button" class="border-info  btn btn-outline-info">Chi Tiết</button>
                 </a>
 
-                @if($item->is_active == 1)
+                @if($item->status == 1)
                 <a id="btn_delete_{{ $item->id }}"class="border-warning btn btn-outline-warning">Tắt</a>
                           <form id="delete_form_{{ $item->id }}" action="{{ route('notifications.destroy',$item->id) }}"
                             method="post"style="display: none;"
                             >
                             @method('DELETE')
-                            <input type="hidden" name="is_active" value="2">
+                            <input type="hidden" name="status" value="2">
                             @csrf
                           </form>
                 @else
@@ -101,7 +101,7 @@
                             method="post"style="display: none;"
                             >
                             @method('DELETE')
-                            <input type="hidden" name="is_active" value="1">
+                            <input type="hidden" name="status" value="1">
                             @csrf
                           </form>
                 @endif

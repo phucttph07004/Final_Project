@@ -193,7 +193,6 @@
         if (confirm('Bạn có chắc chắn muốn thay đổi trạng thái học phí')) {
             $("#btn_edit_fee_status_form_" + id).submit();
         } else {
-
         }
     });
     $("a[id^='btn_edit_status_']").click(function(event) {

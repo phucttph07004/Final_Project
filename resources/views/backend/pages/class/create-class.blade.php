@@ -48,7 +48,7 @@
             class="form-control">
     </div>
     <div class="form-group">
-        <label for="">Ngày kết thúc</label>
+        <label for="">Ngày kết thúc dự kiến</label>
         <br>
         {!! ShowErrors($errors,'finish_date') !!}
         <input data-date="" data-date-format="DD MM YYYY" type="date" value="{{ old('finish_date')}}" name="finish_date"
