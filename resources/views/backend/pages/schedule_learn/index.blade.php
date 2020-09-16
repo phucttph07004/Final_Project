@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="col-12">
-    <div style="padding-left: 70px" class="row bg-light form-inline">
+    <div style="padding-left: 500px" class="row bg-light form-inline">
         <div class="col-5"></div>
         <div class="col-7">
             <div class="row pl-5">
@@ -62,9 +62,9 @@
         @foreach ($get_all_class as $item)
         <tr>
             <th class="pl-3" scope="row">{{ $i++ }}</th>
-            <td style="width: 150px;">{{ $item->name }}</td>
-            <td>{{ $item->levelName->level }}</td>
-            <td>{{ $item->courseName->course_name }}</td>
+            <td style="width: 250px;">{{ $item->name }}</td>
+            <td style="width: 200px;">{{ $item->levelName->level }}</td>
+            <td style="width: 250px;">{{ $item->courseName->course_name }}</td>
             <td>{{ $item->count_studen_count }}</td>
             <td>
                 @if($item->status == 0)
@@ -77,7 +77,7 @@
                 @endif
                 @endif
             </td>
-            <td style="padding-left: 90px">
+            <td style="padding-left: 150px">
                 @if($item->status == 0)
                 <button type="button" class="border-secondary btn btn-outline-secondary">Đã Đóng</button>
                 @else
