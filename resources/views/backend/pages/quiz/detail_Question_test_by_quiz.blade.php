@@ -15,11 +15,11 @@
             <th class="pl-3" scope="col">STT</th>
             <th scope="col">Mô Tả</th>
             <th scope="col">Người Tạo</th>
-            <th style="width: 250px;" scope="col">Ngày Cập Nhật</th>
+            <th style="width: 250px;" scope="col">Ngày Cập Nhật Mới Nhất</th>
             <th style="margin-right: 23px"  scope="col">
                 @if(count($get_all_Question_test) < 10)
                     <a href="{{ route('quiz.create','level='.$level_id.'&quiz='.$quiz->quiz) }}">
-                        <button style="width: 77%" type="button" class="border-primary btn btn-outline-primary"> Thêm Câu Hỏi</button>
+                        <button style="width: 67%" type="button" class="border-primary btn btn-outline-primary"> Thêm Câu Hỏi</button>
                     </a>
                 @endif
             </th>
@@ -49,18 +49,18 @@
             </p>
 
         </td>
-        <td>{{ $item->userName->fullname }}</td>
-        <td>
+        <td style="width: 309px;">{{ $item->userName->fullname }}</td>
+        <td style="width: 309px;">
             {{$item->updated_at->format('Y-m-d') }}
         </td>
             <td>
             <a href="{{ route('detail_question_test.edit',$item->id) }}">
-                <button type="button" class="border-primary btn btn-outline-primary"> Chi Tiết </button>
+                <button style="width: 109px;" type="button" class="border-primary btn btn-outline-primary"> Chi Tiết </button>
             </a>
             <a href="{{ route('quiz.edit',$item->id) }}">
-                <button type="button" class="border-warning btn btn-outline-warning">Sửa</button>
+                <button style="width: 106px;" type="button" class="border-warning btn btn-outline-warning">Sửa</button>
             </a>
-            <a id="btn_delete_{{ $item->id }}"class="btn border-danger  btn-outline-danger">Xóa</a>
+            <a style="width: 106px;" id="btn_delete_{{ $item->id }}"class="btn border-danger  btn-outline-danger">Xóa</a>
             <form id="delete_form_{{ $item->id }}" action="{{ route('quiz.destroy',$item->id) }}"
             method="post"style="display: none;"
             >

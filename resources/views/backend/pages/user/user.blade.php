@@ -65,7 +65,7 @@
                 </td>
                 <td>
                     <a class="toggle-class" id="btn_deactive_{{ $user->id }}">
-                        <input type="checkbox" @if($user->status == 1) checked @endif
+                        <input id="toggle_user_{{ $user['id'] }}" type="checkbox" @if($user->status == 1) checked @endif
                         data-toggle="toggle" data-on="Hoạt động"
                         data-off="Khoá" data-onstyle="success" data-offstyle="danger">
                     </a>
@@ -84,13 +84,6 @@
                     <a class="btn border-warning btn-outline-warning" href="{{ route('user.edit',"$user->id") }}">
                         Sửa
                     </a>
-
-                    <!-- <a id="btn_delete_{{ $user->id }}" class="btn btn-outline-danger">Xóa</a>
-                <form id="delete_form_{{ $user->id }}" action="{{ route('user.destroy',$user->id) }}"
-                    method="post" style="display: none;">
-                    @method('DELETE')
-                    @csrf
-                </form> -->
                 </td>
             </tr>
             @endforeach
@@ -106,9 +99,11 @@
 <script>
 $("a[id^='btn_deactive_']").click(function(event) {
     id = event.currentTarget.attributes.id.value.replace('btn_deactive_', '');
-    if (confirm('Bạn có muốn thay đổi trạng thái của tài khoản')) {
-        $("#deactive_form_" + id).submit();
-    }
+    if (confirm('Bạn có chắc chắn muốn thay đổi trạng thái lớp học')) {
+            $("#deactive_form_" + id).submit();
+        } else {
+            $(`input#toggle_user_${id}`).bootstrapToggle('disable')
+        }
 });
 
 </script>

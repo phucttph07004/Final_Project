@@ -6,7 +6,7 @@
     <div class="row bg-light form-inline">
         <div class="col-4"></div>
         <div class="col-8">
-            <div style="margin-left: 45px" class="row pl-5">
+            <div style="margin-left: 365px" class="row pl-5">
                 <div class="ml-5 dropdown pt-3 pb-4 mt-2">
                     <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Lọc Theo Trạng Thái

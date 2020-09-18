@@ -53,6 +53,8 @@
 
 <script src="/js/attendance.js"></script>
 
+<script src="/js/toggle_boostrap.js"></script>
+
 <script type="text/javascript">
 $(function() {
     // Summernote

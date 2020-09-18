@@ -60,14 +60,14 @@
             @endif
         </td>
         <td style="width: 100px"></td>
-            <td style="width: 22%;">
+            <td class="text-center" style="width: 22%;">
             <a href="{{ route('detail_question_test.show',$item->id) }}">
-                <button type="button" class="border-primary btn btn-outline-primary"> Câu Hỏi </button>
+                <button style="width: 109px;" type="button" class="border-primary btn btn-outline-primary"> Câu Hỏi </button>
             </a>
             <a href="{{ route('quiz_test.edit',$item->id) }}">
-                <button type="button" class="border-warning btn btn-outline-warning">Sửa</button>
+                <button style="width: 107px;" type="button" class="border-warning btn btn-outline-warning">Sửa</button>
             </a>
-            <a id="btn_delete_{{ $item->id }}"class="btn border-danger  btn-outline-danger">Xóa</a>
+            <a style="width: 107px;" id="btn_delete_{{ $item->id }}"class="btn border-danger  btn-outline-danger">Xóa</a>
             <form id="delete_form_{{ $item->id }}" action="{{ route('quiz_test.destroy',$item->id) }}"
             method="post"style="display: none;"
             >

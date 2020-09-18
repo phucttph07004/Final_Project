@@ -8,7 +8,6 @@
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title">Menu</li>
-
                 <li>
                     <a href="/admin" class="waves-effect">
                         <i class="ri-dashboard-line"></i>
@@ -29,6 +28,7 @@
                         <span>Quản Trị Học Viên</span>
                     </a>
                 </li>
+                
                 <li>
                     <a href="{{route('schedule_learn.index')}}" class=" waves-effect">
                         <i class="ri-account-circle-line"></i>

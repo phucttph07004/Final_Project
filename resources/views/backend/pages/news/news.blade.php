@@ -32,7 +32,7 @@
                 <td>{{$new->view}}</td>
                 <td>
                     <a class="toggle-class" id="btn_deactive_{{ $new->id }}">
-                        <input type="checkbox" @if($new->status == 1) checked @endif
+                        <input id="toggle_news_{{ $new['id'] }}"  type="checkbox" @if($new->status == 1) checked @endif
                         data-toggle="toggle" data-on="Hiện"
                         data-off="Ẩn" data-onstyle="success" data-offstyle="danger"
                         >
@@ -62,7 +62,11 @@
 <script>
 $("a[id^='btn_deactive_']").click(function(event) {
     id = event.currentTarget.attributes.id.value.replace('btn_deactive_', '');
-    $("#deactive_form_" + id).submit();
+    if (confirm('Bạn có chắc chắn muốn thay đổi trạng thái lớp học')) {
+            $("#deactive_form_" + id).submit();
+        } else {
+            $(`input#toggle_news_${id}`).bootstrapToggle('disable')
+        }
 });
 </script>
 @endpush
