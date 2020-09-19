@@ -115,7 +115,7 @@ class UserController extends Controller
         $data['updated_at']=$updated_at['formatted'];
         $users->update($data);
 
-        return redirect()->route('user.index')->with('thongbao','Cập nhật Thành Công');
+        return redirect()->route('user.index')->with('thongbao','Cập nhật tài khoản thành công');
     }
 
     /**

@@ -7,7 +7,7 @@
     @method('PUT')
     <div class="card-body">
         <div class="form-group">
-            <label for="">Tiêu đề</label>
+            <label for="">Tên khoá</label>
             <input type="text" class="form-control" name="course_name" id="" value="{{ $course->course_name }}">
             {!! ShowErrors($errors,'course_name') !!}
         </div>
@@ -24,7 +24,7 @@
     </div>
     <div class="card-footer">
         <a href="{{route('course.index')}}" class="btn btn-danger">Quay lại</a>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
     </div>
 
     </section>

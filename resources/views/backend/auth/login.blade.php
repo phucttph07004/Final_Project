@@ -1,79 +1,76 @@
-{{-- @extends('frontend.master.layout') --}}
-@section('title',"Login")
-
-{{-- @section('content') --}}
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="{{ asset("") }}">
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-  <!-- Font-icon css-->
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <title>Login - Vali Admin</title>
-</head>
-<body>
-  <section class="material-half-bg">
-    <div class="cover"></div>
-  </section>
-  <section class="login-content">
-    <div class="logo">
-      <h1>Vali</h1>
-    </div>
-    <div class="login-box">
-      <form class="login-form" action="{{ route('auth.login') }}" method="POST" id="formLogin">
-        @csrf
-        <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
-        <div class="form-group">
-          <label class="control-label">EMAIL</label><br>
-          {!! ShowErrors($errors,'email') !!}
-          @if(session('thongbao'))
-        <span style='color: red'>{{session('thongbao')}}</span>
-          @endif
-        <input class="form-control" name="email" type="text" placeholder="email" value="{{ old('email')}}" >
-        </div>
-    
-        <div class="form-group">
-          <label class="control-label">PASSWORD</label>
-          <br>
-          {!! ShowErrors($errors,'password') !!}
-          <input class="form-control" name="password" type="password" placeholder="Password" value="{{ old('password') }}">
-        </div>
-        <div class="form-group">
-          <div class="utility">
-            <div class="animated-checkbox">
-              <label>
-                <input type="checkbox"><span class="label-text">Stay Signed in</span>
-              </label>
-            </div>
-            <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
-          </div>
-        </div>
-        <div class="form-group btn-container">
-          <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
-        </div>
-      </form>
-      </div>
-    </section>
-    <!-- Essential javascripts for application to work-->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="js/plugins/pace.min.js"></script>
-    <script type="text/javascript">
-      // Login Page Flipbox control
-      $('.login-content [data-toggle="flip"]').click(function() {
-      	$('.login-box').toggleClass('flipped');
-      	return false;
-      });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js" type="text/javascript" charset="utf-8" async defer></script>
-    <script src="public/js/validate.js" type="text/javascript" charset="utf-8" async defer></script>
-  </body>
-  </html>
+<html lang="en">
 
-  {{-- @endsection --}}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Plugin -->
+    <link rel="stylesheet" href="/plugins/bootstrap4/bootstrap.min.css">
+
+    <!-- Icon -->
+    <link rel="stylesheet" href="/plugins/fontawesome/css/font-awesome.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <!-- Start Login -->
+        <div class="login">
+            <div class="login__overlay">
+            </div>
+            <div class="container h-100">
+                <div class="d-flex align-items-center justify-content-center h-100">
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="login__form">
+                            <p class="login__form-title">Đăng nhập</p>
+                            <form action="{{route('auth.login')}}" method="POST">
+                                @csrf
+                                <input class="login__form-input" type="text" name="email" value="{{old('email')}}"
+                                    placeholder="Email">
+                                {!! ShowErrors($errors,'email') !!}
+                                <div class="login__form-password">
+                                    <input class="login__form-input" type="password" name="password" id="password"
+                                        placeholder="Mật khẩu">
+                                    <div class="show-pass">
+                                        <i class="fa fa-lock "></i>
+                                    </div>
+                                </div>
+                                {!! ShowErrors($errors,'password') !!}
+                                
+                                @if(session()->has('success'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('success') }}
+                                </div>
+                                @elseif(session()->has('danger'))
+                                <div class="alert alert-danger">
+                                    {{ session()->get('danger') }}
+                                </div>
+                                @endif
+                                <div class="d-flex align-items-center">
+                                    <button type="submit" style="margin-right:40px" class="btn login__form-btn">Đăng nhập</button>
+                                    <a href="{{route('get.forgotpassword')}}">Quên mật khẩu</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Login -->
+    </div>
+
+    <!-- Javascript -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+
+</html>

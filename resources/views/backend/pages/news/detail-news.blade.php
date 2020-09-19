@@ -1,15 +1,20 @@
 @extends('./backend/layout/master')
-@section('title','Quản Trị Trang Giới Thiệu')
-@section('title_page','Sửa Trang Giới Thiệu')
+@section('title','Quản Trị Tin Tức')
+@section('title_page','Chi tiết Tin Tức')
 @section('content')
-<form role="form" method="POST" action="{{ route('about.update', $about->id) }}" enctype="multipart/form-data">
+<form role="form" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="card-body">
         <div class="form-group">
             <label for="">Tiêu đề</label>
-            <input type="text" class="form-control" name="title" id="" value="{{ $about->title }}">
+            <input type="text" class="form-control" name="title" id="" value="{{ $news->title }}">
             {!! ShowErrors($errors,'title') !!}
+        </div>
+        <div class="form-group">
+            <label for="">Mô tả</label>
+            <input type="text" class="form-control" name="description" id="" value="{{ $news->description }}">
+            {!! ShowErrors($errors,'description') !!}
         </div>
         <section class="content">
             <div class="row">
@@ -33,8 +38,8 @@
                             <div class="mb-3">
                                 <textarea name="content" class="textarea" placeholder="Place some text here"
                                     style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-                                                        {{ $about->content }}
-                                </textarea>
+                                                        {{ $news->content }}
+                                                    </textarea>
                             </div>
                         </div>
                     </div>
@@ -43,11 +48,23 @@
             </div>
             <!-- ./row -->
         </section>
+        <div class="form-group">
+        <label for="">Danh mục</label>
+            <select name="category_id" id="" class="form-control">
+                @foreach ($categories as $category)
+                <option @if($category->id == $news->category_id ) selected @endif
+                    value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Ảnh</label> <br>
+            <img style="width:30%" src="storage/{{ $news->image }}" alt="">
+            <br>
+            {!! ShowErrors($errors,'image') !!}
+            <input type="hidden" name="image" value="{{ $news->image }}">
+            <input type="file" name="image" class="form-control">
+        </div>
     </div>
-    <div class="card-footer">
-        <a href="{{route('news.index')}}" class="btn btn-danger">Quay lại</a>
-        <button type="submit" class="btn btn-primary">Cập nhật</button>
-    </div>
-
     </section>
     @endsection

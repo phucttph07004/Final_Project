@@ -15,6 +15,7 @@
                                 <th>Mã Học Viên</th>
                                 <th>Số điện thoại</th>
                                 <th>Email</th>
+                                <th>Số buổi vắng</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -26,6 +27,20 @@
                                 <td>{{$student->code}}</td>
                                 <td>{{$student->phone}}</td>
                                 <td>{{$student->email}}</td>
+                                <td>
+                                    <?php
+                                    $count = count($pasts);
+                                    $check=0;
+                                    ?>
+                                @foreach($schedule as $key => $value)
+                                @if($value == $student->id)
+                                   <?php
+                                    $check++;
+                                   ?>
+                                @endif
+                                @endforeach
+                                {{ substr($count - $check,-1).' / '.$count}}
+                                </td>
                             </tr>
                             @endforeach
                             </tbody>

@@ -49,6 +49,7 @@
 <!-- Attendance js-->
 
 <script src="/js/attendance.js"></script>
+@stack('scripts')
 </body>
 
 </html>

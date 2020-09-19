@@ -6,25 +6,42 @@
 <div class="d-flex align-items-center">
             <div class="col-5">
                 <form action="" class="d-flex">
-                    <input class="form-control mr-2" type="text" name="fullname" value="" placeholder="Tìm theo tên">
+                    <input class="form-control mr-2" type="text" name="fullname" value="{{request()->get('fullname')}}" placeholder="Tìm theo tên">
                     <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
                 </form>
             </div>
             <div class="ml-5 dropdown pt-3 pb-4 mt-2">
                 <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button"
                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   
+                    @if(empty(request()->get('role')))
                     Lọc Theo Chức vụ
+                    @elseif(request()->get('role') == 5)
+                    Giám đốc
+                    @elseif(request()->get('role') == 4)
+                    Giảng viên
+                    @elseif(request()->get('role') == 3)
+                    Quản lý
+                    @elseif(request()->get('role') == 2)
+                    Admin
+                    @endif
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    @foreach ($users as $user)
-                    <a class="dropdown-item" href="{{route('user.index')}}?role={{ $user->role }}">
-                        @if( $user->role == 5 ) <span>Giám đốc</span>
-                        @elseif( $user->role == 4 ) <span>Giáo viên</span>
-                        @elseif( $user->role == 3 ) <span>Quản lý</span>
-                        @elseif( $user->role == 2 ) <span>Admin</span>
-                        @endif
+                    <a class="dropdown-item" href="{{route('user.index')}}">
+                        Tất cả
                     </a>
-                    @endforeach
+                    <a class="dropdown-item" href="{{route('user.index')}}?role=5">
+                        Giám đốc
+                    </a>
+                    <a class="dropdown-item" href="{{route('user.index')}}?role=4">
+                        Giảng viên
+                    </a>
+                    <a class="dropdown-item" href="{{route('user.index')}}?role=3">
+                        Quản lý
+                    </a>
+                    <a class="dropdown-item" href="{{route('user.index')}}?role=2">
+                        Admin
+                    </a>
                 </div>
             </div>
         </div>
@@ -50,11 +67,20 @@
             </tr>
         </thead>
         <tbody>
+            @if(count($users) == 0)
+            <td colspan="6">
+                <div class="mt-5 col-12 justify-content-center d-flex">
+                    <div class=" alert alert-danger" role="alert">
+                        Không có nhân viên phù hợp
+                    </div>
+                </div>
+            </td>
+            @endif
             <?php $i=1 ?>
             @foreach ($users as $user)
             <tr>
                 <th scope="row">{{ $i++ }}</th>
-                <td><img style="width:70px;height:50px" src="storage/{{ $user->avatar }}" alt=""></td>
+                <td><img style="width:150px;height:auto" src="storage/{{ $user->avatar }}" alt=""></td>
                 <td>{{ $user->fullname }}</td>
                 <td>
                     @if( $user->role == 5 ) <span>Giám đốc</span>
@@ -65,7 +91,7 @@
                 </td>
                 <td>
                     <a class="toggle-class" id="btn_deactive_{{ $user->id }}">
-                        <input type="checkbox" @if($user->status == 1) checked @endif
+                        <input id="toggle_user_{{ $user['id'] }}" type="checkbox" @if($user->status == 1) checked @endif
                         data-toggle="toggle" data-on="Hoạt động"
                         data-off="Khoá" data-onstyle="success" data-offstyle="danger">
                     </a>
@@ -84,13 +110,6 @@
                     <a class="btn border-warning btn-outline-warning" href="{{ route('user.edit',"$user->id") }}">
                         Sửa
                     </a>
-
-                    <!-- <a id="btn_delete_{{ $user->id }}" class="btn btn-outline-danger">Xóa</a>
-                <form id="delete_form_{{ $user->id }}" action="{{ route('user.destroy',$user->id) }}"
-                    method="post" style="display: none;">
-                    @method('DELETE')
-                    @csrf
-                </form> -->
                 </td>
             </tr>
             @endforeach
@@ -106,9 +125,11 @@
 <script>
 $("a[id^='btn_deactive_']").click(function(event) {
     id = event.currentTarget.attributes.id.value.replace('btn_deactive_', '');
-    if (confirm('Bạn có muốn thay đổi trạng thái của tài khoản')) {
-        $("#deactive_form_" + id).submit();
-    }
+    if (confirm('Bạn có chắc chắn muốn thay đổi trạng thái lớp học')) {
+            $("#deactive_form_" + id).submit();
+        } else {
+            $(`input#toggle_user_${id}`).bootstrapToggle('disable')
+        }
 });
 
 </script>

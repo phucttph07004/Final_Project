@@ -18,7 +18,7 @@
         @foreach($levels as $level)
            <div class="schedule-opening__inner">
             <div class="schedule-opening__head">
-                {{$level->level}}
+                Level: {{$level->level}}
             </div>
             <table class="table table-bordered ">
                 <thead>
@@ -30,6 +30,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                   
                     <?php $i=1?>
                     @foreach($classes as $class)
                     @if($level->id == $class->level_id)
@@ -46,12 +47,21 @@
                                 @elseif ($schedule->slot == 4) Buổi chiều
                                 @elseif ($schedule->slot == 5) Buổi tối
                                 @elseif ($schedule->slot == 6) Buổi tối
+                                @else
+                                Đang cập nhật...
                                 @endif
                         </td>
                         @endif
                         @endforeach
                     </tr>
                     @else
+                    <td colspan="7">
+                        <div class="mt-5 col-12 justify-content-center d-flex">
+                            <div class=" alert alert-danger" role="alert">
+                                Hiện tại chưa có lớp sắp khai giảng
+                            </div>
+                        </div>
+                    </td>
                     @endif
                     @endforeach
                 </tbody>

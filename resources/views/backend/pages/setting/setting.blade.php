@@ -26,7 +26,7 @@
                                     <th>Slogan</th>
                                     <th>Email</th>
                                     <th>Số điện thoại</th>
-                                    <th>Action</th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,7 +60,7 @@
                             <thead>
                                 <tr>
                                     <th>Tiêu đề</th>
-                                    <th>Action</th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>

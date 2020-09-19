@@ -21,15 +21,6 @@
                     <div class="card card-outline card-info">
                         <div class="card-header">
                             <label for="">Nội dung</label>
-                            <!-- tools box -->
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse"
-                                    data-toggle="tooltip" title="Collapse">
-                                    <i class="fas fa-minus"></i></button>
-                                <button type="button" class="btn btn-tool btn-sm" data-card-widget="remove"
-                                    data-toggle="tooltip" title="Remove">
-                                    <i class="fas fa-times"></i></button>
-                            </div>
                             <!-- /. tools -->
                         </div>
                         <!-- /.card-header -->

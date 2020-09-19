@@ -1,6 +1,6 @@
 @extends('./backend/layout/master')
 @section('title','Quản Lý Khoá Học')
-@section('title_page','Thêm Mới Khoá Học')
+@section('title_page','Tạo Khoá Học Mới')
 @section('content')
 <form enctype="multipart/form-data" class="pl-5 pt-5" action="{{ route('course.store') }}" method="POST">
     @csrf

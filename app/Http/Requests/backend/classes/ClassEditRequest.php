@@ -25,18 +25,12 @@ class ClassEditRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'number_of_sessions' => 'required|numeric'
         ];
     }
 
     public function message(){
         return [
             'name.required' => 'Không được bỏ trống tên lớp',
-
-            'number_of_sessions.required' => 'Không được bỏ trống số buổi học',
-            'number_of_sessions.numeric' => 'Số buổi học phải là số',
-
-
         ];
     }
 }

@@ -1,6 +1,6 @@
 @extends('./backend/layout/master')
 @section('title','Quản Trị Lớp')
-@section('title_page','Thêm Mới Lớp')
+@section('title_page','Tạo lớp học mới')
 @section('content')
 <form enctype="multipart/form-data" class="card-body" action="{{ route('class.store') }}" method="POST">
     @csrf
@@ -41,7 +41,7 @@
         </select>
     </div>
     <div class="form-group">
-        <label for="">Ngày bắt đầu</label>
+        <label for="">Ngày dự kiến khai giảng</label>
         <br>
         {!! ShowErrors($errors,'start_date') !!}
         <input data-date="" data-date-format="DD MM YYYY" type="date" value="{{ old('start_date')}}" name="start_date"
@@ -51,7 +51,7 @@
         <label for="">Ngày kết thúc dự kiến</label>
         <br>
         {!! ShowErrors($errors,'finish_date') !!}
-        <input data-date="" data-date-format="DD MM YYYY" name="finish_date" type="date" value="{{ old('finish_date')}}"
+        <input data-date="" data-date-format="DD MM YYYY" type="date" value="{{ old('finish_date')}}" name="finish_date"
             class="form-control">
     </div>
     <div class="d-flex align-items-center">

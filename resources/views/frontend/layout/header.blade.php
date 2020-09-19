@@ -29,7 +29,16 @@
                 <div class="container">
                     <div class="header__top-inner d-flex align-items-center justify-content-between">
                         <div class="header__top-info d-flex align-items-center">
-                       
+                        @foreach($settings as $setting)
+                            <p class="header__top-welcome">{{$setting->slogan}}</p>
+                            <a href="mailto:{{$setting->email}}" class="header__top-email"><i class="fa fa-envelope-o"></i>{{$setting->email}}</a>
+                            <a href="tel:{{$setting->phone}}" class="header__top-phoneNumber"><i class="fa fa-phone"></i>{{$setting->phone}}</a>
+                        @endforeach
+                        </div>
+                        <div class="">
+                            <a style="color:#c8bee3" class="mr-2" href="{{route('home.teacher')}}">Giảng viên</a>
+                            <a style="color:#c8bee3"  class="mr-2" href="/admin">Nhân viên</a>
+                            <a style="color:#c8bee3" class="" href="{{route('home.student')}}">Học viên</a>
                         </div>
                     </div>
                 </div>
@@ -38,7 +47,11 @@
                 <div class="container">
                     <div class="header__main-inner d-flex align-items-center justify-content-between h-100">
                         <div class="header__logo">
-                        
+                        @foreach($settings as $setting)
+                            <a href="/">
+                                <img src="/storage/{{$setting->logo}}" alt="logo">
+                            </a>
+                        @endforeach
                         </div>
                         <nav class="header__menu">
                             <ul class="header__menu-list d-flex">

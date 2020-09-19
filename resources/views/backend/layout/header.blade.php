@@ -13,10 +13,10 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- overlayScrollbars -->
-    {{-- <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css"> --}}
+     {{-- <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css"> --}}
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css"> 
     <script src="dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
@@ -29,6 +29,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
+    <link rel="stylesheet" href="/css/toggle.css">
     {{-- New css --}}
 
     <link href="/plugins/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
@@ -50,17 +51,6 @@
     <!-- Sweet alert css -->
     <link href="/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
-
-    <!-- CSS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"  />
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
-    <link rel="stylesheet" href="dist/css/notification.css">
     <!-- CK EDITOR -->
     <style>
         select.form-control{
@@ -78,21 +68,17 @@
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box">
-                        <a href="index.html" class="logo logo-dark">
-                            <span class="logo-sm">
-                                    <img src="/dist/img/logo-sm-dark.png" alt="" height="22">
-                                </span>
+                        <a style="color:white" href="/admin" class="logo logo-dark">
+                            
                             <span class="logo-lg">
-                                    <img src="/dist/img/logo-dark.png" alt="" height="20">
+                                    EDUSPACE
                                 </span>
                         </a>
 
-                        <a href="index.html" class="logo logo-light">
-                            <span class="logo-sm">
-                                    <img src="/dist/img/logo-sm-light.png" alt="" height="22">
-                                </span>
+                        <a style="color:white" href="/admin" class="logo logo-light">
+                           
                             <span class="logo-lg">
-                                    <img src="/dist/img/logo-light.png" alt="" height="20">
+                                EDUSPACE
                                 </span>
                         </a>
                     </div>
