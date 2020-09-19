@@ -198,6 +198,8 @@
         $(`input#toggle_fee_${id}`).bootstrapToggle('disable')
     }
     });
+
+
     $("a[id^='btn_edit_status_']").click(function(event) {
         id = event.currentTarget.attributes.id.value.replace('btn_edit_status_', '');
         if (confirm('Bạn có chắc chắn muốn thay đổi trạng thái học viên')) {

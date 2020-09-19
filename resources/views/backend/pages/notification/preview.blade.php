@@ -60,7 +60,7 @@
                 <p style='color: red'>{{ $warnings['is_active'] }}</p>
             @endif
             <div class="row">
-                <div class="col-3 ml-4">
+                <div class="col-3 ml-3">
                     <div class="row">
                     <div class="form-group">
                         <select class="form-control" name="is_active" id="">

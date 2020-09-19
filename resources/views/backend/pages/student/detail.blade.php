@@ -130,7 +130,7 @@
 </div>
     <div class="row">
     <a href="{{ route('student.edit',"$get_student->id") }}">
-        <button type="button" class="border-blue bg-blue btn btn-outline-warning ml-4">Sửa Học Viên</button>
+        <button type="button" class="border-blue bg-blue btn btn-outline-warning ml-3">Sửa Học Viên</button>
     </a>
     </div>
 </form>

@@ -122,6 +122,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{route('revenue.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Quản trị doanh thu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('attendance.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Điểm danh</p>

@@ -20,44 +20,53 @@ Route::group([
     'middleware' => ['check_role_admin', 'check_auth'],
 ], function () {
 
-Route::resource('/','backend\IndexController');
+    Route::resource('/', 'backend\IndexController');
 
-Route::resource('/setting', 'backend\SettingController');
-// Route::post('/register', 'backend\RegisterController@confirm')->name('register.confirm');
-Route::resource('/news', 'backend\NewsController');
-Route::resource('/notifications','backend\NotificationController');
-Route::POST('/notification/store/default','backend\ExcelController@student_store_default');
-Route::resource('/student','backend\StudentController');
-Route::resource('/account','backend\AccountController');
-Route::resource('/password','backend\AccountChangePassController');
-Route::resource('/level','backend\LevelController');
-Route::resource('/user','backend\UserController');
-Route::resource('/category','backend\CategoryController');
-Route::resource('/enrollment','backend\EnrollmentController');
-Route::resource('/course', 'backend\CourseController');
-Route::resource('/class','backend\ClassController');
-Route::resource('/class-detail','backend\ClassDetailController');
-Route::resource('/schedule_learn','backend\schedule_learnController');
-Route::resource('/schedule_teach','backend\schedule_teachController');
-Route::resource('/feedback','backend\FeedbackController');
-Route::resource('/revenue','backend\RevenueController');
-// quản lý bài quiz của admin
-Route::resource('quiz', 'backend\QuestionTestController');
-Route::resource('detail_question_test', 'backend\detail_question_test');
-Route::resource('quiz_test', 'backend\QuizController');
-//end quản lý bài quiz của admin
+    Route::resource('/setting', 'backend\SettingController');
+    // Route::post('/register', 'backend\RegisterController@confirm')->name('register.confirm');
+    Route::resource('/news', 'backend\NewsController');
+    Route::resource('/notifications', 'backend\NotificationController');
+    Route::POST('/notification/store/default', 'backend\ExcelController@student_store_default');
+    Route::resource('/student', 'backend\StudentController');
+    Route::resource('/account', 'backend\AccountController');
+    Route::resource('/password', 'backend\AccountChangePassController');
+    Route::resource('/level', 'backend\LevelController');
+    Route::resource('/user', 'backend\UserController');
+    Route::resource('/category', 'backend\CategoryController');
+    Route::resource('/course', 'backend\CourseController');
+    Route::resource('/class', 'backend\ClassController');
+    Route::resource('/class-detail', 'backend\ClassDetailController');
+    Route::resource('/schedule_learn', 'backend\schedule_learnController');
+    Route::resource('/schedule_teach', 'backend\schedule_teachController');
+    Route::resource('/feedback', 'backend\FeedbackController');
+    Route::resource('/revenue', 'backend\RevenueController');
+    // quản lý bài quiz của admin
+    Route::resource('quiz', 'backend\QuestionTestController');
+    Route::resource('detail_question_test', 'backend\detail_question_test');
+    Route::resource('quiz_test', 'backend\QuizController');
+    //end quản lý bài quiz của admin
 
-// Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
-// Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
+    // Route::get('/student/create/excel','backend\ExcelController@student_create_excel');
+    // Route::POST('/student/store/excel','backend\ExcelController@student_store_excel');
 
-Route::get('/student/create/{slot}/{level}/{course}','backend\ExcelController@show_class_add_student');
-Route::get('/student/edit/selected/{slot}/{level}/{level_id_now}/{class_id_now}','backend\ExcelController@show_class_edit');
-Route::get('/schedule_learn/show/edit/{id}','backend\ExcelController@show_edit_schedule');
-Route::get('/schedule_teach/create/{id}','backend\ExcelController@show_teacher_schedule_teach');
-Route::resource('/attendance','backend\AttendanceController');
-Route::resource('waiting-list','backend\WaitingListController');
-Route::resource('about' , 'backend\AboutController');
+    // show ra lớp cho tạo hc và sửa hv ở phần quản trị hv
+    Route::get('/student/create/{slot}/{level}/{course}', 'backend\ExcelController@show_class_add_student');
+    Route::get('/student/edit/selected/{slot}/{level}/{level_id_now}/{class_id_now}', 'backend\ExcelController@show_class_edit');
+    // end show ra lớp cho tạo hc và sửa hv
 
+    // ajax lịch học
+    Route::get('/schedule_learn/show/edit/{id}', 'backend\ExcelController@show_edit_schedule');
+    Route::get('/schedule_learn/show/chuyen_lich/{id}', 'backend\ExcelController@show_chuyen_lich_schedule');
+    Route::get('/schedule_learn/show/lich_trong/{id_ngay_muon_chuyen}/{ngay_chuyen_sang}', 'backend\ExcelController@show_lich_trong_schedule');
+    //end ajax lịch học
+
+    // ajax lịch dạy
+    Route::get('/schedule_teach/create/{id}', 'backend\ExcelController@show_teacher_schedule_teach');
+    //end ajax lịch dạy
+
+    Route::resource('/attendance', 'backend\AttendanceController');
+    Route::resource('waiting-list', 'backend\WaitingListController');
+    Route::resource('about', 'backend\AboutController');
 });
 
 
@@ -93,10 +102,6 @@ Route::group(
         Route::post('forgot-password', 'student\ResetPasswordController@sendCode')->name('post.studentforgotpassword');
         Route::get('reset-password', 'student\ResetPasswordController@resetform')->name('get.studentresetpassword');
         Route::post('reset-password', 'student\ResetPasswordController@changePassword')->name('post.studentresetpassword');
-
-        Route::resource('do-quiz', 'student\QuizController');
-        Route::get('/quiz/update_selected_answer/{question}/{selected_answer}/{level_id}/{quiz}', 'student\ajax_quiz_student_Controller@update_selected_answer');
-        Route::get('/quiz/end_time/{level_id}/{quiz}', 'student\ajax_quiz_student_Controller@end_time');
     }
 
 );
@@ -107,6 +112,10 @@ Route::group(
         'middleware' => ['check_student'],
     ],
     function () {
+        Route::resource('do-quiz', 'student\QuizController');
+        Route::get('/quiz/update_selected_answer/{question}/{selected_answer}/{level_id}/{quiz}', 'student\ajax_quiz_student_Controller@update_selected_answer');
+        Route::get('/quiz/end_time/{level_id}/{quiz}', 'student\ajax_quiz_student_Controller@end_time');
+
         Route::get('/', 'student\IndexController@index')->name('home.student');
         Route::get('/schedule', 'student\IndexController@schedule')->name('student.scheduleLearn');
         Route::resource('notification', 'student\NotificationController');
@@ -114,7 +123,7 @@ Route::group(
         Route::post('feedback', 'student\StudentFeedbackController@postFormFeedback')->name('post.StudentFeedback');
         Route::get('profile/{id}', 'student\ProfileController@index')->name('student.profile');
         Route::get('attendance', 'student\IndexController@attendance')->name('student.attendance');
-        Route::resource('student-password','student\PasswordController');
+        Route::resource('student-password', 'student\PasswordController');
     }
 );
 
@@ -132,7 +141,7 @@ Route::group(
         Route::get('schedule-teach/class-list/{id}', 'teacher\TeacherController@classList')->name('teacher.classList');
         Route::resource('roll-call', 'teacher\RollCallController');
         Route::resource('open-quiz', 'teacher\Teacher_qiuz_Controller');
-        Route::resource('teacher-password','teacher\PasswordController');
+        Route::resource('teacher-password', 'teacher\PasswordController');
     }
 );
 
