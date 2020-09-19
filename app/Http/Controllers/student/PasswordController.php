@@ -9,6 +9,7 @@ use App\Http\Requests\backend\account\PasswordRequest;
 use App\Models\Student;
 use Arr;
 use Auth;
+use DB;
 use Carbon\Carbon;
 
 class PasswordController extends Controller
@@ -64,7 +65,30 @@ class PasswordController extends Controller
     public function edit($id)
     {
         $data['student'] = Student::find(Auth::guard('student')->user()->id);
-        return view('student.pages.profile.edit-password',$data);
+        $class_id = Auth::guard('student')->user()->class_id;
+        $data['profile'] = Student::find(Auth::guard('student')->user()->id);
+        $id = Auth::guard('student')->user()->id;
+        $data['feedback'] = DB::table('feedback')
+                                ->where('student_id', $id)
+                                ->where('class_id', $class_id)
+                                ->get();
+        $data['sessions'] = DB::table('schedules')
+                                ->where('class_id', $class_id)
+                                ->whereNotNull('student_id')
+                                ->get();
+        
+        $data['number_of_sessions'] = DB::table('schedules')
+                                        ->where('class_id', $class_id)
+                                        ->get();
+                 
+        
+        if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions']) && count($data['feedback']) > 0){
+            return view('student.pages.profile.edit-password',$data);
+        }
+        else{
+            return redirect('student/feedback');
+        }
+        
     }
 
     /**

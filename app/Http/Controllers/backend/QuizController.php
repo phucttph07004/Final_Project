@@ -36,7 +36,7 @@ class QuizController extends Controller
         $data = Arr::except($request, ['_token', '_method'])->toarray();
         $update_quiz = QuizTest::find($id);
         $quiz_id['quiz_id'] = $request['quiz'];
-
+        
         foreach (Question_test::where([['quiz_id', $update_quiz->quiz], ['level_id', $update_quiz->level_id]])->get() as $key => $value) {
             $value->update($quiz_id);
         }

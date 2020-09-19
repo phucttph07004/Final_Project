@@ -19,8 +19,84 @@ use Carbon\Carbon;
 class AttendanceController extends Controller
 {
 
-    public function index(){
-        $data['course'] = Course::orderBy('id','desc')->first();
+    public function index(Request $request){
+        $data['courses']=Course::all();
+                if ($request->all() != null && $request['page'] == null) {
+                    foreach ($request->all() as $key => $value) {
+                        if ($key == 'course_id') {
+                            $data['course_name'] = Course::where('id',$value)->first();
+                        
+                            $data['classes']= DB::table('classes')
+                                ->join('levels', 'classes.level_id', '=', 'levels.id')
+                                ->join('courses', 'classes.course_id', '=', 'courses.id')
+                                ->where('course_id', $value)
+                                ->select('classes.name','levels.fee','classes.id')
+                                ->get();
+                             $class_id = array();
+                                foreach($data['classes'] as $key1 => $value1){
+                                       $class_id[] = $value1->id;
+                                }
+                            $studentByClass=array();
+                            foreach($class_id as $key2 => $value2){
+                                $studentByClass[$value2] = count( Student::where([['class_id',$value2],['fee_status',1]])->get());
+                            }
+                            $course_total=0;
+                            foreach($data['classes'] as $key1 => $value1){
+                                foreach($studentByClass as $key3 => $value3){
+                                    if($value1->id == $key3){
+                                       $data['total'][] = $value3 *  $value1->fee;
+                                       $course_total += $value3 *  $value1->fee;
+                                    }
+                                }
+                            }
+                            
+                    }
+                    
+                }
+                
+                        
+                    
+                } 
+                else {
+                    
+                    $data['course_name'] = Course::orderBy('id','desc')->first();
+                    $data['classes']= DB::table('classes')
+                            ->join('levels', 'classes.level_id', '=', 'levels.id')
+                            ->join('courses', 'classes.course_id', '=', 'courses.id')
+                            ->where('course_id', $data['course_name']->id)
+                            ->select('classes.name','levels.fee','classes.id')
+                            ->get();
+                            $class_id = array();
+                            foreach($data['classes'] as $key => $value){
+                                $class_id[] = $value->id;
+                            }
+                            $studentByClass=array();
+                            foreach($class_id as $key1 => $value1){
+                                $studentByClass[$value1] = count( Student::where([['class_id',$value1],['fee_status',1]])->get());
+                            }
+                            $course_total=0;
+                            foreach($data['classes'] as $key => $value){
+                                foreach($studentByClass as $key2 => $value2){
+                                    if($value->id == $key2){
+                                        $data['total'][] = $value2 *  $value->fee;
+                                        $course_total += $value2 *  $value->fee;
+                                    }
+                                }
+                            }
+                            // dd($course_total);
+                            $check_course = DB::table('revenues')
+                            ->where('course_id', $data['course_name']->id)->first();
+                            // dd($check_course);
+                        if($check_course = null){
+                            DB::table('revenues')->insert(
+                                ['course_id' => $data['course_name']->id, 'total' => $course_total]
+                            );
+                        }        
+                            
+                }
+                
+                
+                
         return view('backend.pages.attendance.index',$data);
         // $currentDate = date('Y-m-d');
         // $weekday = date('N');
@@ -64,56 +140,7 @@ class AttendanceController extends Controller
 		// 		'today' => $today
 		// 	]);
     }
-    public function show($id){
-        // $data['students'] = DB::table('students')
-        //     ->join('classes', 'students.class_id', '=', 'classes.id')
-        //     ->join('courses', 'classes.course_id', '=', 'courses.id')
-        //     ->where('classes.course_id',  $id)
-        //     ->get();
-        // $data['level'] = DB::table('levels')
-        //     ->join('classes', 'levels.id', '=', 'classes.level_id')
-        //     ->join('courses', 'classes.course_id', '=', 'courses.id')
-        //     ->where('classes.course_id',  $id)
-        //     ->get();
-            $data['levels']= DB::table('level')
-                ->join('courses', 'classes.course_id', '=', 'courses.id')
-                ->join('levels', 'classes.level_id', '=', 'levels.id')
-                ->where('course_id', $id)
-                ->select('classes.name','levels.fee', 'students.id')
-                ->get();
-                $class_id = array();
-                    foreach (Classes::where('course_id', $value)->get() as $class) {
-                        $class_id[] = $class->id;
-                    }
-                    $student = array();
-                    foreach ($id_class as $id_class) {
-                        $student[] = Student::where('class_id', $id_class)->get()->toarray();
-                    }
-                    $aa = array();
-                    foreach (Collect($student) as $key => $value1) {
-                        foreach ($value1 as $value) {
-                            $aa[] = $value;
-                        }
-                    }
-                    $data['get_all_student'] = $aa;
-            return view('backend.pages.attendance.edit_attendance',$data);
-    //     $schedule = DB::table('schedules')
-    //         ->where('id', $id)
-    //         ->get();
-        
-    //     $studentList = DB::table('students')
-    //     ->where('class_id', $schedule->class_id)
-    //     ->get();
-       
-    //     echo($schedule);die;
-    //    return view('backend.pages.attendance.edit_attendance')->with([
-
-    //         'schedule'     => $schedule,
-    //         'studentList' => $studentList,
-
-    //     ]);
-        
-    }
+   
     public function post(Request $request) {
 
 		$schedule_id  = $request->schedule_id;

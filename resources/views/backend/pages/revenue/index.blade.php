@@ -13,7 +13,7 @@
                         </button>
                         <div style="width: 172px;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             @foreach($courses as $course)
-                            <a class="dropdown-item" href="/admin/attendance?course_id={{$course->id}}">{{$course->course_name}}</a>
+                            <a class="dropdown-item" href="/admin/revenue?course_id={{$course->id}}">{{$course->course_name}}</a>
                             @endforeach
                         </div>
                     </div>
@@ -30,8 +30,8 @@
     data: {
       labels: [
         <?php 
-            foreach($classes as $class){
-                echo("'Lớp: ".$class->name."'".",");
+            foreach($name as $item){
+                echo("'Level: ".$item->level."'".",");
             }
         ?>
       ],
@@ -42,7 +42,7 @@
               <?php
               if(!empty($total)){
                 for($i = 0; $i < count($total); $i++){
-                    echo("'"."#000"."'".",");
+                    echo("'"."#85$i"."'".",");
                 }
               }
               else{

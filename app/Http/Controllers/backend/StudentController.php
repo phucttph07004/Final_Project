@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Models\{Course, Student, Classes, Level, history_learned_class, Waiting_list};
+use App\Models\{Course, Student, Classes, Level, history_learned_class, Waiting_list,Revenue};
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\backend\student\{StudentRequest, StudentRequestEdit};
 use Arr;
 use Str;
+use DB;
 use Auth;
 use Carbon\Carbon;
 
@@ -66,6 +67,63 @@ class StudentController extends Controller
             $data['status'] = 1;
         }
         $student->update($data);
+        $class = Classes::find($student->class_id);
+        $classes = Classes::where('course_id', $class->course_id)->get();
+        foreach ($classes as $key => $value) {
+            $level[] = $value->level_id;
+        }
+        $level_id=array_unique($level);
+        // dd($level_id);
+        foreach ($level_id as $key1 => $value1) {
+            $fee = level::where('id', $value1)->get();
+            foreach ($fee as $key2 => $value2) {
+                if($value1 == $value2->id){
+                    $level_fee[$value1] = $value2->fee; 
+                }
+            }
+        }
+        $lv_fee = json_encode($level_fee);
+        
+        $course_id = $class->course_id;
+        $level = Level::find($class->level_id);
+        $lv = array($level->id => $level->fee);
+        $level_fee = json_encode($lv);
+        
+        
+        $check = Revenue::where("course_id",$course_id)->first();
+        if($check == null){
+            DB::table('revenues')->insert(
+                ['course_id' => $course_id, 'level_fee' => $lv_fee, 'total' => '0']
+            );
+            $check1 = Revenue::where("course_id",$course_id)->first();
+            $feeByLv = json_decode($check1->level_fee);
+            foreach ($feeByLv as $key => $value) {
+                $level_name[] = Level::where('id',$key)->get();
+            }
+            foreach ($feeByLv as $key => $value) {
+            if($class->level_id == $key){
+                DB::table('revenues')
+                    ->where('course_id', $course_id)
+                    ->update(['total' => $check1->total + $value]);
+            }
+        }
+    }
+        else{
+            $feeByLv = json_decode($check->level_fee);
+        //    dd( $feeByLv);
+            
+            foreach ($feeByLv as $key => $value) {
+            if($class->level_id == $key){
+                $abc = DB::table('revenues')
+                    ->where('course_id', $course_id)
+                    ->update(['total' => $check->total + $value, 'level_fee' => $lv_fee]);
+            }
+        }
+        
+    }
+   
+        ;
+
         return redirect()->back();
     }
 
