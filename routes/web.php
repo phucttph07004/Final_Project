@@ -101,10 +101,6 @@ Route::group(
         Route::post('forgot-password', 'student\ResetPasswordController@sendCode')->name('post.studentforgotpassword');
         Route::get('reset-password', 'student\ResetPasswordController@resetform')->name('get.studentresetpassword');
         Route::post('reset-password', 'student\ResetPasswordController@changePassword')->name('post.studentresetpassword');
-
-        Route::resource('do-quiz', 'student\QuizController');
-        Route::get('/quiz/update_selected_answer/{question}/{selected_answer}/{level_id}/{quiz}', 'student\ajax_quiz_student_Controller@update_selected_answer');
-        Route::get('/quiz/end_time/{level_id}/{quiz}', 'student\ajax_quiz_student_Controller@end_time');
     }
 
 );
@@ -115,6 +111,10 @@ Route::group(
         'middleware' => ['check_student'],
     ],
     function () {
+        Route::resource('do-quiz', 'student\QuizController');
+        Route::get('/quiz/update_selected_answer/{question}/{selected_answer}/{level_id}/{quiz}', 'student\ajax_quiz_student_Controller@update_selected_answer');
+        Route::get('/quiz/end_time/{level_id}/{quiz}', 'student\ajax_quiz_student_Controller@end_time');
+
         Route::get('/', 'student\IndexController@index')->name('home.student');
         Route::get('/schedule', 'student\IndexController@schedule')->name('student.scheduleLearn');
         Route::resource('notification', 'student\NotificationController');
