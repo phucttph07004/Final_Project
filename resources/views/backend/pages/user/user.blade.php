@@ -6,25 +6,42 @@
 <div class="d-flex align-items-center">
             <div class="col-5">
                 <form action="" class="d-flex">
-                    <input class="form-control mr-2" type="text" name="fullname" value="" placeholder="Tìm theo tên">
+                    <input class="form-control mr-2" type="text" name="fullname" value="{{request()->get('fullname')}}" placeholder="Tìm theo tên">
                     <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
                 </form>
             </div>
             <div class="ml-5 dropdown pt-3 pb-4 mt-2">
                 <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button"
                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   
+                    @if(empty(request()->get('role')))
                     Lọc Theo Chức vụ
+                    @elseif(request()->get('role') == 5)
+                    Giám đốc
+                    @elseif(request()->get('role') == 4)
+                    Giảng viên
+                    @elseif(request()->get('role') == 3)
+                    Quản lý
+                    @elseif(request()->get('role') == 2)
+                    Admin
+                    @endif
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    @foreach ($users as $user)
-                    <a class="dropdown-item" href="{{route('user.index')}}?role={{ $user->role }}">
-                        @if( $user->role == 5 ) <span>Giám đốc</span>
-                        @elseif( $user->role == 4 ) <span>Giáo viên</span>
-                        @elseif( $user->role == 3 ) <span>Quản lý</span>
-                        @elseif( $user->role == 2 ) <span>Admin</span>
-                        @endif
+                    <a class="dropdown-item" href="{{route('user.index')}}">
+                        Tất cả
                     </a>
-                    @endforeach
+                    <a class="dropdown-item" href="{{route('user.index')}}?role=5">
+                        Giám đốc
+                    </a>
+                    <a class="dropdown-item" href="{{route('user.index')}}?role=4">
+                        Giảng viên
+                    </a>
+                    <a class="dropdown-item" href="{{route('user.index')}}?role=3">
+                        Quản lý
+                    </a>
+                    <a class="dropdown-item" href="{{route('user.index')}}?role=2">
+                        Admin
+                    </a>
                 </div>
             </div>
         </div>
@@ -50,6 +67,15 @@
             </tr>
         </thead>
         <tbody>
+            @if(count($users) == 0)
+            <td colspan="6">
+                <div class="mt-5 col-12 justify-content-center d-flex">
+                    <div class=" alert alert-danger" role="alert">
+                        Không có nhân viên phù hợp
+                    </div>
+                </div>
+            </td>
+            @endif
             <?php $i=1 ?>
             @foreach ($users as $user)
             <tr>

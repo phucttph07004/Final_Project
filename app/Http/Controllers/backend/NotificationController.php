@@ -19,7 +19,7 @@ class NotificationController extends Controller
             foreach ($request->all() as $key => $value) {
                 if ($key == 'status') {
                     $data['get_all_notification'] = Notification::where("$key", "$value")->paginate(10);
-                } elseif ($key == 'status') {
+                } elseif ($key == 'is_active') {
                     $data['get_all_notification'] = Notification::where("$key", "$value")->paginate(10);
                 } else {
                     $data['get_all_notification'] = Notification::where("$key", 'LIKE', "%$value%")->paginate(10);
@@ -34,8 +34,8 @@ class NotificationController extends Controller
     public function destroy(Request $request, $id)
     {
         $data = Arr::except($request, ['_token', '_method'])->toarray();
-        if ($data['status'] != 1) {
-            $data['status'] = 2;
+        if ($data['is_active'] != 1) {
+            $data['is_active'] = 2;
         }
         $Notification = Notification::find($id);
         $Notification->update($data);

@@ -2,6 +2,26 @@
 @section('title','Quản Trị Tin Tức')
 @section('title_page','Quản Trị Tin Tức')
 @section('content')
+<div class="filter mb-3">
+    <div class="col-5 mb-3">
+        <form action="" class="d-flex">
+            <input class="form-control border-success mr-2" type="text" name="title" value="{{request()->get('name')}}" placeholder="Tìm theo tiêu đề">
+            <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+        </form>
+    </div>
+    <div class="col-12 ">
+        <form action="" class="row">
+            <div class="col-4"><input type="date" class="form-control border-success" value="{{request()->get('start_date')}}" name="start_date" id=""></div>
+            <div class="col-4"><input type="date" class="form-control border-success" value="{{request()->get('finish_date')}}" name="finish_date" id=""></div>
+            <div class="col-3">
+                <button type="submit" class="btn btn-outline-info">
+                    Lọc theo ngày tháng
+                </button>
+            </div>
+        </form>
+   </div>
+    </div>
+</div>
 <section class="content" style="margin:0!important;">
     <table style="background-color: white" class="table table-striped table-bordered dt-responsive nowrap ">
         @if(session('thongbao'))
@@ -40,6 +60,7 @@
                 </td>
                 <td>{{$new->created_at->format('d-m-Y')}}</td>
                 <td>
+                    <a class="btn btn-outline-primary" href="{{route('news.show',[$new->id])}}">Chi tiết</a>
                     <a class="btn btn-outline-primary" href="{{route('news.edit',[$new->id])}}">Sửa</a>
                     <form id="deactive_form_{{ $new->id }}" action="{{ route('news.destroy',$new->id) }}"
                         method="post" style="display: none;">

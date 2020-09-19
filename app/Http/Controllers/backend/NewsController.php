@@ -21,11 +21,21 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
-
-
-        $news = News::where('type','new')->OrderBy('created_at','desc')->paginate(6);
+        if($request->all() != null && $request['page'] == null){
+            foreach($request->all() as $key => $value){
+                if($key == 'title'){
+                    $news=News::where("$key",'LIKE',"%$value%")->paginate(10);
+                }
+                else{
+                    $news=News::whereBetween('created_at', array($request->start_date, $request->finish_date))->where('type','new')->OrderBy('created_at','desc')->paginate(10);
+                }
+            }
+        }else{
+            $news = News::where('type','new')->OrderBy('created_at','desc')->paginate(6);
+        }
+        
         return view('backend.pages.news.news',['news'=>$news]);
     }
 
@@ -69,7 +79,9 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['news'] = News::find($id);
+        $categories= Category::all();
+        return view('backend.pages.news.detail-news',$data,compact('categories'));
     }
 
     /**

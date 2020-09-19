@@ -41,7 +41,7 @@
         </select>
     </div>
     <div class="form-group">
-        <label for="">Ngày bắt đầu</label>
+        <label for="">Ngày dự kiến khai giảng</label>
         <br>
         {!! ShowErrors($errors,'start_date') !!}
         <input data-date="" data-date-format="DD MM YYYY" type="date" value="{{ old('start_date')}}" name="start_date"

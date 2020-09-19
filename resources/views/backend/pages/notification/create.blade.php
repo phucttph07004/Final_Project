@@ -39,12 +39,26 @@
         </select>
       </div>
 
-    <div class="form-group">
-      <label for="exampleFormControlTextarea1">Nội Dung </label>
-      <br>
+      <section class="">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-outline card-info">
+                    <!-- /.card-header -->
+                    <div class="card-body pad">
+                      <h4>Nội dung</h4>
+                        <div class="mb-3">
+                            <textarea rows="20" name="content" class="textarea" placeholder="Nhập nội dung vào đây"
+                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+                                {{ old('content')}}  </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-->
+        </div>
+        <!-- ./row -->
         {!! ShowErrors($errors,'content') !!}
-      <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ old('content') }}</textarea>
-    </div>
+    </section>
     <button type="submit" class="mb-5 btn btn-primary">Tạo Thông Báo</button>
   </form>
 </div>

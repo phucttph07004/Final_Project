@@ -31,7 +31,7 @@ class CourseController extends Controller
                     $data['courses']=Course::where("$key",'LIKE',"%$value%")->paginate(10);
                 }
                 else{
-                    $data['courses']=Course::whereBetween('start_date', array($request->start_date, $request->finish_date))->paginate(10);
+                    $data['courses']=Course::whereBetween('start_date', array($request->start_date, $request->finish_date))->whereBetween('finish_date', array($request->start_date, $request->finish_date))->paginate(10);
                 }
             }
         }else{

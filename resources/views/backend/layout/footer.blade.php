@@ -1,7 +1,9 @@
 </div>
 <!-- JAVASCRIPT -->
+
 <script src="/js/jquery.min.js"></script>
-<script src="/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/umd/popper.js" ></script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/js/metisMenu.min.js"></script>
 <script src="/js/simplebar.min.js"></script>
 <script src="/js/waves.min.js"></script>

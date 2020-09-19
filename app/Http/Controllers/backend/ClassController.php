@@ -47,7 +47,7 @@ class ClassController extends Controller
                 else{
                     $data['levels']=Level::all();
                     $data['courses']=Course::all();
-                    $data['classes']=Classes::whereBetween('start_date', array($request->start_date, $request->finish_date))->paginate(10);
+                    $data['classes']=Classes::whereBetween('start_date', array($request->start_date, $request->finish_date))->whereBetween('finish_date', array($request->start_date, $request->finish_date))->paginate(10);
                 }
             }
         }else{

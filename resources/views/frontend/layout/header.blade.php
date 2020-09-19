@@ -35,6 +35,11 @@
                             <a href="tel:{{$setting->phone}}" class="header__top-phoneNumber"><i class="fa fa-phone"></i>{{$setting->phone}}</a>
                         @endforeach
                         </div>
+                        <div class="">
+                            <a style="color:#c8bee3" class="mr-2" href="{{route('home.teacher')}}">Giảng viên</a>
+                            <a style="color:#c8bee3"  class="mr-2" href="/admin">Nhân viên</a>
+                            <a style="color:#c8bee3" class="" href="{{route('home.student')}}">Học viên</a>
+                        </div>
                     </div>
                 </div>
             </div>
