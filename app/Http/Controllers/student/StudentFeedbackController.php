@@ -36,7 +36,7 @@ class StudentFeedbackController extends Controller
                                         ->get();
                  
         $data['notifications'] = Notification::where('status', 1)->limit(5)->get();
-        if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions']) && count($data['feedback']) > 0){
+        if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions'])){
             return redirect()->route('home.student',$data); 
         }
         else if(count($data['feedback']) > 0){

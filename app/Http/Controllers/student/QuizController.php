@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{Student, Schedule, Classes, QuizTest, Homeworks_history, Question_test};
 use Arr;
+use DB;
 use Auth;
 use Carbon\Carbon;
 
