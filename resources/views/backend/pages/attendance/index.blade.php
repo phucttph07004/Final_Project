@@ -1,84 +1,60 @@
-@extends('./backend/layout/master')
-@section('title','Quản Trị Học Viên')
-@section('title_page','Quản Trị Học Viên')
+@extends('backend.layout.master')
+@section('title','Điểm danh')
 @section('content')
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 style="font-size:18px;float:none;" class="card-title">Điểm danh lớp {{$class->name}}</h4>
+                        <p>Ngày : {{$schedule->time}}</p>
+                            <table id="" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên</th>
+                                    <th>Ảnh</th>
+                                    <th>Mã Học Viên</th>
+                                    <th>Có mặt</th>
+                                    <th>Vắng mặt</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php $i=1 ?>
+                                @foreach($students as $student)
+                                <tr>
+                                    <td>{{$i++}}</td>
+                                    <td>{{$student->fullname}}</td>
+                                        <td>
+                                            <img style="width:130px;" src="/storage/{{$student->avatar}}" alt="">
+                                        </td>
+                                    <td>{{$student->code}}</td>
+                                    <td>
+                                        {{-- <input @if(array_search($student->id,explode(',', $schedule->student_id)) === false) @else checked @endif type="checkbox" class="student_status" value="{{$student->id}}" name="student_id" data-student="{{$student->id}}" id="attendence_status_{{$student->id}}">
+                                        <label for="attendence_status_{{$student->id}}">Có mặt</label> --}}
+                                        <input @if(array_search($student->id,explode(',', $schedule->student_id)) === true)  @else checked @endif type="radio" class="present" value="{{$student->id}}" name="student_id_{{$student->id}}" data-student="{{$student->id}}">
+                                    </td>
+                                    <td>
+                                        <input @if(array_search($student->id,explode(',', $schedule->student_id)) === false) checked  @else  @endif type="radio" class="absent"  value="{{$student->id}}" name="student_id_{{$student->id}}" data-absent="{{$student->id}}">
+                                    </td>
+                                </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            <form action="{{route('attendance.update',$schedule->id) }}" method="POST" class="button-items">
+                                @method('PUT')
+                                 @csrf
+                                 <input type="hidden" name="student_id" value="{{$schedule->student_id}}" class="student_id" id="student_id">
 
-    <div class="col-12 ">
-        <div style="padding-left: 430px" class="row bg-light form-inline">
-            <div class="">
-                <div class="row">
-                    <div class="dropdown pt-3 pb-4 mr-2 mt-2">
-                        <button class="border-success bg-white btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Chọn theo khóa
-                        </button>
-                        <div style="width: 172px;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            @foreach($courses as $course)
-                            <a class="dropdown-item" href="/admin/attendance?course_id={{$course->id}}">{{$course->course_name}}</a>
-                            @endforeach
+                                <button style="margin:0 auto; display: block;" class="btn btn-primary waves-effect waves-light" type="submit">Xác nhận</button>
+
+                            </form>
                         </div>
-                    </div>
                 </div>
-            </div>
+            </div> <!-- end col -->
         </div>
-        <canvas id="bar-chart" width="400" height="250"></canvas>
+
     </div>
-    </div>
-
-<script>
- new Chart(document.getElementById("bar-chart"), {
-    type: 'bar',
-    data: {
-      labels: [
-        <?php 
-            foreach($classes as $class){
-                echo("'Lớp: ".$class->name."'".",");
-            }
-        ?>
-      ],
-      datasets: [
-        {
-          label: "Doanh thu(Triệu Đồng)",
-          backgroundColor: [
-              <?php
-              if(!empty($total)){
-                for($i = 0; $i < count($total); $i++){
-                    echo("'"."#000"."'".",");
-                }
-              }
-              else{
-                  echo('123123');
-              }
-                
-                ?>
-          ],
-          data: [
-            <?php 
-            if(!empty($total)){
-                for($i = 0; $i < count($total); $i++)
-                    echo($total[$i].",");
-            }
-            else{
-                
-            }
-
-           
-            ?>
-          ]
-        }
-      ]
-    },
-    options: {
-      legend: { display: false },
-      title: {
-        display: true,
-        text: 'Doanh thu khóa {{$course_name->course_name}}'
-      }
-    }
-});
-</script>
-
-
-
 @endsection
 @push('scripts')
 

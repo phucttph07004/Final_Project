@@ -16,7 +16,7 @@
      {{-- <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css"> --}}
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="dist/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
     <script src="dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
@@ -38,7 +38,7 @@
     <link href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Responsive datatable examples -->
-    <link href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />  
+    <link href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Css -->
     <link href="/plugins/bootstrap4/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -69,14 +69,14 @@
                     <!-- LOGO -->
                     <div class="navbar-brand-box">
                         <a style="color:white" href="/admin" class="logo logo-dark">
-                            
+
                             <span class="logo-lg">
                                     EDUSPACE
                                 </span>
                         </a>
 
                         <a style="color:white" href="/admin" class="logo logo-light">
-                           
+
                             <span class="logo-lg">
                                 EDUSPACE
                                 </span>
