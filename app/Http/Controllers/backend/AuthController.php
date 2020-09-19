@@ -13,8 +13,6 @@ use Arr;
 
 class AuthController extends Controller
 {
-    //
-
     public function getLoginForm(){
         return view('backend.auth.login');
     }
@@ -22,7 +20,7 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         $data = Arr::except($request->all(), ['_token']);
-        
+
         if($result = Auth::attempt($data)){
             if(Auth::User()->status == 0 ){
                 return redirect()->route('auth.login')->with('danger','Tài Khoản Của Bạn Đã Bị Khóa');

@@ -13,7 +13,6 @@ Route::get('about', 'frontend\AboutController@index')->name('home.about');
 // Route::get('/', function () {return redirect()->route('home.index');});
 // login và logout
 
-
 // các chức năng của admin
 Route::group([
     'prefix' => 'admin',
@@ -58,17 +57,17 @@ Route::group([
      Route::get('/student/create/{slot}/{level}/{course}', 'backend\ExcelController@show_class_add_student');
      Route::get('/student/edit/selected/{slot}/{level}/{level_id_now}/{class_id_now}', 'backend\ExcelController@show_class_edit');
      // end show ra lớp cho tạo hc và sửa hv
- 
+
      // ajax lịch học
      Route::get('/schedule_learn/show/edit/{id}', 'backend\ExcelController@show_edit_schedule');
      Route::get('/schedule_learn/show/chuyen_lich/{id}', 'backend\ExcelController@show_chuyen_lich_schedule');
      Route::get('/schedule_learn/show/lich_trong/{id_ngay_muon_chuyen}/{ngay_chuyen_sang}', 'backend\ExcelController@show_lich_trong_schedule');
      //end ajax lịch học
- 
+
      // ajax lịch dạy
      Route::get('/schedule_teach/create/{id}', 'backend\ExcelController@show_teacher_schedule_teach');
      //end ajax lịch dạy
- 
+
      Route::resource('/attendance', 'backend\AttendanceController');
      Route::resource('waiting-list', 'backend\WaitingListController');
 });
