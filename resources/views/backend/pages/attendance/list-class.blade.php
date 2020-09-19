@@ -6,7 +6,7 @@
     <div class="d-flex flex-wrap align-items-center">
         <div class="col-4">
          <form action="" class="d-flex mb-2">
-             <input class="form-control border-success mr-2" type="text" name="name" value="" placeholder="Tìm theo tên lớp">
+         <input class="form-control border-success mr-2" type="text" name="name" value="{{request()->get('name')}}" placeholder="Tìm theo tên lớp">
              <button class="btn btn-primary"type="submit">Tìm kiếm</button>
          </form>
         </div>

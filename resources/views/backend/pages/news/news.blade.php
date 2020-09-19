@@ -5,7 +5,7 @@
 <div class="filter mb-3">
     <div class="col-5 mb-3">
         <form action="" class="d-flex">
-            <input class="form-control border-success mr-2" type="text" name="title" value="{{request()->get('name')}}" placeholder="Tìm theo tiêu đề">
+            <input class="form-control border-success mr-2" type="text" name="title" value="{{request()->get('title')}}" placeholder="Tìm theo tiêu đề">
             <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
         </form>
     </div>
@@ -42,6 +42,15 @@
             </tr>
         </thead>
         <tbody>
+            @if(count($news) == 0)
+            <td colspan="8">
+                <div class="mt-5 col-12 justify-content-center d-flex">
+                    <div class=" alert alert-danger" role="alert">
+                        Không có kết quả cho tin tức tìm kiếm
+                    </div>
+                </div>
+            </td>
+            @endif
         <?php $i = 1 ?>
             @foreach($news as $new)
             <tr>

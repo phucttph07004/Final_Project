@@ -88,7 +88,6 @@ class NotificationController extends Controller
             } else if (strlen($data['title']) < 6) {
                 $warnings['title'] = 'Nội Dung Không Được Đươi 6 Ký Tự';
             }
-
             $preview['get_users'] = User::all();
             $preview['Notification'] = $data;
             $preview['get_categories'] = Category::all();

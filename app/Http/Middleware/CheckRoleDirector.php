@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class CheckRoleAdmin
+class CheckRoleDirector
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class CheckRoleAdmin
     public function handle($request, Closure $next)
     {
         if(Auth::check()){
-            if(Auth::User()->role !== config('common.role.admin') && Auth::User()->role !== config('common.role.director')){
+            if(Auth::User()->role !== config('common.role.director')){
               return redirect()->back();
             }else{
                 return $next($request);

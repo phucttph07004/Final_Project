@@ -28,7 +28,7 @@ class IndexController extends Controller
         $data['number_of_sessions'] = DB::table('schedules')
                                         ->where('class_id', $class_id)
                                         ->get();
-                 
+        $data['notifications'] = Notification::where('is_active',1)->OrderBy('created_at','desc')->get();  
         if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions']) && count($data['feedback']) > 0){
             return view('student.pages.index',$data);   
         }
