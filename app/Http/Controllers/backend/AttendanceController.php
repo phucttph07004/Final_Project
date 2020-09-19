@@ -36,7 +36,7 @@ class AttendanceController extends Controller
             $data['levels']=Level::all();
             $data['courses']=Course::where('finish_date', '>' , now())->get();
             $data['classes'] = Classes::where('finish_date', '>' , now())->paginate(10);
-            
+
         }
         return view('backend.pages.attendance.list-class',$data);
     }
@@ -72,7 +72,7 @@ class AttendanceController extends Controller
     {
         $data['schedules'] = Schedule::where("class_id", $id)->get();
         $data['class'] = Classes::find($id);
-        $data['pasts'] = Schedule::where('time','<', now())->get();
+        $data['pasts'] = Schedule::where('time','<', now())->where('class_id', Schedule::find($id)->class_id)->get();
 
         return view('backend.pages.attendance.schedule',$data);
     }

@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="col-12">
-    <div style="padding-left: 450px" class="row bg-light form-inline">
+    <div style="padding-left: 1015px" class="row bg-light form-inline">
         <div class="col-5"></div>
         <div class="col-7">
             <div class="row pl-5 pb-4">

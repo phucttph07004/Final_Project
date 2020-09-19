@@ -5,9 +5,10 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\{Feedback,Student};
+use App\Models\{Feedback,Student,Course};
 use Auth;
 use Arr;
+use DB;
 use Carbon\Carbon;
 
 class FeedbackController extends Controller
@@ -17,9 +18,27 @@ class FeedbackController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['feedbacks'] = Feedback::paginate(10);
+        if($request->all() != null && $request['page'] == null){
+            foreach($request->all() as $key => $value){
+                if($key == 'course_id'){
+                    $data['courses']=Course::all();
+                    $data['feedbacks']= DB::table('feedback')
+                        ->join('classes', 'feedback.class_id', '=', 'classes.id')
+                        ->join('students', 'feedback.student_id', '=', 'students.id')
+                        ->where("$key",'LIKE',"$value")->paginate(10);
+                
+            }
+        }
+        }else{
+            $data['courses']=Course::all();
+            $data['feedbacks']= DB::table('feedback')
+                        ->join('classes', 'feedback.class_id', '=', 'classes.id')
+                        ->join('students', 'feedback.student_id', '=', 'students.id')
+                        ->paginate(10);
+            
+        }
         return view('backend.pages.feedback.feedback',$data);
     }
 
@@ -28,10 +47,7 @@ class FeedbackController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -39,10 +55,7 @@ class FeedbackController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.

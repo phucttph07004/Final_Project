@@ -31,7 +31,7 @@ class AboutController extends Controller
 
         $about->update($data);
 
-        return redirect()->route('news.index')->with('thongbao','Cập nhập tin tức thành công');
+        return redirect()->route('setting.index')->with('thongbao','Cập nhập thành công');
 
     }
 }

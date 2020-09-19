@@ -10,7 +10,7 @@
                         <h4 class="card-title">Lịch dạy lớp {{$class->name}}</h4>
                         <p style="font-size: 17px">Đã học: {{$pasts->count('time')}}/24 buổi</p>
                     </div>
-                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
+                    <table id="" class="table table-striped table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
@@ -61,6 +61,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="container justify-content-center d-flex mt-5 pb-5">
+                        {{$schedules->links()}}
+                    </div>
                 </div>
             </div>
         </div> <!-- end col -->

@@ -1,6 +1,9 @@
+</div>
 <!-- JAVASCRIPT -->
+
 <script src="/js/jquery.min.js"></script>
-<script src="/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/umd/popper.js" ></script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/js/metisMenu.min.js"></script>
 <script src="/js/simplebar.min.js"></script>
 <script src="/js/waves.min.js"></script>
@@ -52,18 +55,13 @@
 
 <script src="/js/attendance.js"></script>
 
+<script src="/js/toggle_boostrap.js"></script>
+
 <script type="text/javascript">
 $(function() {
     // Summernote
     $('.textarea').summernote();
 
-    $("input").on("change", function() {
-        this.setAttribute(
-            "data-date",
-            moment(this.value, "YYYY-MM-DD")
-            .format(this.getAttribute("data-date-format"))
-        )
-    }).trigger("change")
 
 })
 </script>

@@ -47,19 +47,15 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if($schedule->teacher_id == null)
-                                        Chưa có giảng viên
-                                        @else
-                                        {{$schedule->getNameTeacher->fullname}}
-                                        @endif
+                                        
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        {{-- <div class="container justify-content-center d-flex mt-5 pb-5">
+                        <div class="container justify-content-center d-flex mt-5 pb-5">
                             {{$schedules->links()}}
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div> <!-- end col -->

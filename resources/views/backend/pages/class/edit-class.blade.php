@@ -31,22 +31,13 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="">Số buổi</label>
-            <input type="text" class="form-control" name="number_of_sessions" id="" value="{{ $class->number_of_sessions }}">
-            {!! ShowErrors($errors,'number_of_sessions') !!}
-        </div>
-        <div class="form-group">
             <label for="">Ngày bắt đầu</label>
             <input class="form-control" type="date" name="start_date" id="" value="{{$class->start_date}}">
-        </div>
-        <div class="form-group">
-            <label for="">Ngày kết thúc</label>
-            <input class="form-control" type="date" name="finish_date" id="" value="{{$class->finish_date}}">
         </div>
     </div>
     <div class="card-footer">
         <a href="{{route('class.index')}}" class="btn btn-danger">Quay lại</a>
-        <button type="submit" class="btn btn-primary">Sửa</button>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
     </div>
 
     </section>

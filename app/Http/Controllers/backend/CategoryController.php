@@ -21,11 +21,46 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index(Request $request)
+    // {   
+    //     if($request->all() != null && $request['page'] == null){
+    //         foreach($request->all() as $key => $value){
+    //             if($key == 'status'){
+    //                 $data['get_all_register'] = Register::where("$key","$value")->paginate(10);
+    //             }else{
+    //                 $data['get_all_register'] = Register::where("$key",'LIKE',"%$value%")->paginate(10);
+    //             }
+    //         }
+    //     }else{
+    //         $data['get_all_register']=Register::paginate(10);
+    //     }
+    //     return view('backend.pages.register.index',$data);
+    // }
     public function index()
     {
             $categories = Category::paginate(10);
             return view('backend.pages.category.category',['categories' => $categories]);
     }
+
+    // public function destroy($id)
+    // {
+    //     $registers = Register::find($id);
+
+    //     $data['status'] = 1;
+
+    //     $registers->update($data);
+
+    //     return redirect()->back();
+    // }
+
+    // public function changeStatus(Request $request)
+    // {
+    //     $register = Register::find($request->id);
+    //     $register->status = $request->status;
+    //     $register->save();
+  
+    //     return response()->json(['success'=>'Status change successfully.']);
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -73,6 +108,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $data['get_register'] = Register::find($id);
+        return view('backend.pages.register.edit',$data);
         $data['categories'] = Category::find($id);
         return view('backend.pages.category.edit-category',$data);
     }
@@ -86,6 +123,10 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
+        $data = Arr::except($request, ['_token','_method'])->toarray();
+        $register=Register::find($id);
+        $register->update($data);
+        return redirect()->back()->with('thongbao','Cập Nhật Thành Công');
         $categories = Category::find($id);
 
         $data = Arr::except(request()->all(), ["_token ,'_method'"]);

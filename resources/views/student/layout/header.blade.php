@@ -27,7 +27,7 @@
         <link href="/css/icons.min.css" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         {{-- Profile --}}
         <link rel="stylesheet" href="/css/profile.css" type="text/css">
 
@@ -43,21 +43,17 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
-                                <span class="logo-sm">
-                                        <img src="/dist/img/logo-sm-dark.png" alt="" height="22">
-                                    </span>
+                            <a style="color:white" href="/admin" class="logo logo-dark">
+                                
                                 <span class="logo-lg">
-                                        <img src="/dist/img/logo-dark.png" alt="" height="20">
+                                        EDUSPACE
                                     </span>
                             </a>
-
-                            <a href="index.html" class="logo logo-light">
-                                <span class="logo-sm">
-                                        <img src="/dist/img/logo-sm-light.png" alt="" height="22">
-                                    </span>
+    
+                            <a style="color:white" href="/admin" class="logo logo-light">
+                               
                                 <span class="logo-lg">
-                                        <img src="/dist/img/logo-light.png" alt="" height="20">
+                                    EDUSPACE
                                     </span>
                             </a>
                         </div>

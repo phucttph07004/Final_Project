@@ -47,7 +47,7 @@ class ClassController extends Controller
                 else{
                     $data['levels']=Level::all();
                     $data['courses']=Course::all();
-                    $data['classes']=Classes::whereBetween('start_date', array($request->start_date, $request->finish_date))->paginate(10);
+                    $data['classes']=Classes::whereBetween('start_date', array($request->start_date, $request->finish_date))->whereBetween('finish_date', array($request->start_date, $request->finish_date))->paginate(10);
                 }
             }
         }else{
@@ -96,6 +96,8 @@ class ClassController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data['status'] = '1';
         $data['number_of_sessions'] = 24;
+        $data['schedule'] = Schedule::all();
+
         Classes::create($data);
         return redirect()->route('class.index')->with('thongbao','Thêm lớp thành công');
     }
@@ -113,6 +115,19 @@ class ClassController extends Controller
         $data['class'] = Classes::find($id);
         $data['users']=User::all();
         $data['pasts'] = Schedule::where('time','<', now())->where('class_id',$id)->get();
+
+        
+        $sche = null;
+        $i = 1;
+        foreach(Schedule::where('class_id',$id)->get() as $value){
+            
+            if($value->student_id != null){
+                $sche .= $value->student_id.',';
+            }
+           
+        }
+        $schedule = rtrim($sche,',');
+        $data['schedule'] = explode(',',$schedule);
 
         return view('backend.pages.class.detail-class',$data);
     }

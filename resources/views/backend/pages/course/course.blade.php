@@ -4,8 +4,8 @@
 @section('content')
 <section class="content" style="margin:0!important;">
     <form action="" class="d-flex mb-4 ">
-        <div class="col-4"><input type="date" class="form-control" name="start_date" id=""></div>
-        <div class="col-4"><input type="date" class="form-control" name="finish_date" id=""></div>
+        <div class="col-4"><input type="date" class="form-control" value="{{request()->get('start_date')}}" name="start_date" id=""></div>
+        <div class="col-4"><input type="date" class="form-control" value="{{request()->get('finish_date')}}" name="finish_date" id=""></div>
         <div class="col-3">
             <button type="submit" class="btn btn-outline-info">
                 Lọc theo ngày tháng
@@ -14,7 +14,7 @@
     </form>
     <form class=" mb-3 d-flex align-items-center" action="">
         <div class="col-6">
-        <input class="form-control" type="text" name="course_name" placeholder="Tìm theo tên khoá">
+        <input class="form-control" type="text" name="course_name" value="{{request()->get('course_name')}}" placeholder="Tìm theo tên khoá">
         </div>
         <button type="submit" class="btn btn-outline-info mr-4">Tìm</button>
         <a href="{{route('course.index')}}" class="btn btn-outline-success">Bỏ lọc</a>
@@ -50,7 +50,11 @@
                 <td>{{$course->userName->fullname}}</td>
                 <td>
                     <a class="btn btn-outline-info" href="{{ route('course.show',"$course->id") }}">Chi Tiết</a>
+                    @if($course->start_date > now()->toDateString()) 
                     <a class="btn btn-outline-warning" href="{{ route('course.edit',"$course->id") }}">Sửa</a>
+                    @else
+                    
+                    @endif 
                 </td>
             </tr>
             @endforeach

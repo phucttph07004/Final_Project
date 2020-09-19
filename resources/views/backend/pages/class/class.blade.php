@@ -6,8 +6,8 @@
  <div class="d-flex align-items-center flex-wrap align-items-center pt-4">
            <div class="col-7">
             <form action="" class="d-flex ">
-                    <div class="col-4"><input type="date" class="form-control border-success" name="start_date" id=""></div>
-                    <div class="col-4"><input type="date" class="form-control border-success" name="finish_date" id=""></div>
+                    <div class="col-4"><input type="date" class="form-control border-success" value="{{request()->get('start_date')}}" name="start_date" id=""></div>
+                    <div class="col-4"><input type="date" class="form-control border-success" value="{{request()->get('finish_date')}}" name="finish_date" id=""></div>
                     <div class="col-3">
                         <button type="submit" class="btn btn-outline-info">
                             Lọc theo ngày tháng
@@ -17,7 +17,7 @@
            </div>
            <div class="col-5">
             <form action="" class="d-flex">
-                <input class="form-control border-success mr-2" type="text" name="name" value="" placeholder="Tìm theo tên lớp">
+                <input class="form-control border-success mr-2" type="text" name="name" value="{{request()->get('name')}}" placeholder="Tìm theo tên lớp">
                 <button class="border-success btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
             </form>
            </div>
@@ -50,7 +50,7 @@
             <div class="ml-5 dropdown pt-3 pb-4 mt-2">
                 <button class="mr-2 border-success bg-white btn btn-secondary dropdown-toggle" type="button"
                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Lọc Theo Trạng Thái
+                  Lọc theo trạng thái
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="{{route('class.index')}}">Tất cả</a>
@@ -71,8 +71,8 @@
                 <th scope="col">Tên lớp</th>
                 <th scope="col">Level</th>
                 <th scope="col">Khoá</th>
-                <th scope="col">Ngày bắt đầu</th>
-                <th scope="col">Ngày Kết thúc</th>
+                <th scope="col">Ngày khai giảng</th>
+                <th scope="col">Ngày kết thúc dự kiến</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col">
                     <a href="{{ route('class.create') }}">
@@ -83,7 +83,7 @@
         </thead>
         <tbody>
             @if(count($classes) == 0)
-            <td colspan="7">
+            <td colspan="8">
                 <div class="mt-5 col-12 justify-content-center d-flex">
                     <div class=" alert alert-danger" role="alert">
                         Không có lớp học trong level hoặc khoá học này
@@ -101,22 +101,22 @@
                 <td>{{date('d-m-Y', strtotime($class->start_date))}}</td>
                 <td>{{date('d-m-Y', strtotime($class->finish_date))}}</td>
                 <td>
-                    <!-- <input data-id="{{$class->id}}" id="btn_deactive_{{ $class->id }}" class="toggle-class" type="checkbox" data-onstyle="success"
-                        data-offstyle="danger" data-toggle="toggle" data-on="Mở" data-off="Đóng"
-                        {{ $class->status ? 'checked' : '' }}> -->
                     <a class="toggle-class" id="btn_deactive_{{ $class->id }}">
-                        <input type="checkbox" @if($class->status == 1) checked @endif
+                        <input id="toggle_class_{{ $class['id'] }}" type="checkbox" @if($class->status == 1) checked @endif
                         data-toggle="toggle" data-on="Mở "
                         data-off="Đóng" data-onstyle="success" data-offstyle="danger"
                         >
                     </a>
-
                 </td>
                 <td>
                     <a class="btn btn-outline-info" href="{{ route('class.show',"$class->id") }}"> Chi Tiết
                     </a>
-                    <a data-start="{{$class->start_date}}" class="btn btn-outline-warning edit-class"
-                        href="{{route('class.edit',"$class->id")}}">Sửa</a>
+                    @if($class->start_date >= now()->toDateString()) 
+                    <a data-start="{{$class->start_date}}" class="btn btn-outline-warning edit-class" href="{{route('class.edit',"$class->id")}}">Sửa</a> 
+                    @else
+                    
+                    @endif 
+                    
 
                     <!-- @if($class->status == 1)
                     <button id="btn_deactive_{{ $class->id }}" class="btn btn-outline-danger">Đóng</button>
@@ -145,7 +145,12 @@
 <script>
 $("a[id^='btn_deactive_']").click(function(event) {
     id = event.currentTarget.attributes.id.value.replace('btn_deactive_', '');
-    $("#deactive_form_" + id).submit();
+    if (confirm('Bạn có chắc chắn muốn thay đổi trạng thái lớp học')) {
+            $("#deactive_form_" + id).submit();
+        } else {
+            $(`input#toggle_class_${id}`).bootstrapToggle('disable')
+        }
 });
+
 </script>
 @endpush

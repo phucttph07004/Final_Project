@@ -11,7 +11,7 @@
 
                 <li>
                     <a href="{{route('home.student')}}" class="waves-effect">
-                        <i class="ri-dashboard-line"></i><span class="badge badge-pill badge-success float-right">3</span>
+                        <i class="ri-dashboard-line"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
@@ -34,6 +34,12 @@
                     <a href="{{route('do-quiz.index')}}" class=" waves-effect">
                         <i class="ri-account-circle-line"></i>
                         <span>Làm Bài Quiz</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('student.history_learned')}}" class=" waves-effect">
+                        <i class="ri-save-line"></i>
+                        <span>Lịch sử học</span>
                     </a>
                 </li>
             </ul>

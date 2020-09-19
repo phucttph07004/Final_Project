@@ -52,7 +52,7 @@
         @if( isset($warnings['content']) != null)
                 <p style='color: red'>{{ $warnings['content'] }}</p>
         @endif
-        <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $Notification['content']}}</textarea>
+        <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3">{!!$Notification['content']!!}</textarea>
     </div>
     <div class="row">
         <div class="col-12">

@@ -7,15 +7,6 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title">Menu</li>
-
-                <li>
-                    <a href="index.html" class="waves-effect">
-                        <i class="ri-dashboard-line"></i><span class="badge badge-pill badge-success float-right">3</span>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-
                 <li>
                 <a href="{{route('teacher.scheduleTeach')}}" class=" waves-effect">
                         <i class="ri-calendar-2-line"></i>
@@ -23,17 +14,17 @@
                     </a>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a href="apps-chat.html" class=" waves-effect">
                         <i class="ri-account-circle-line"></i>
                         <span>Điểm danh</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li>
-                    <a href="open-quiz" class=" waves-effect">
+                    <a href="{{route('score.index')}}" class=" waves-effect">
                         <i class="ri-account-circle-line"></i>
-                        <span>Mở Quiz </span>
+                        <span>Nhập điểm thi cuối khoá</span>
                     </a>
                 </li>
             </ul>

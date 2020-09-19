@@ -27,7 +27,7 @@ class StudentsImport implements ToModel, WithHeadingRow
         return new Student(
             [
             'fullname' => $row['fullname'] ?? $row['fullname'],
-            'is_active' =>1,
+            'status' =>1,
             'code' =>"$code",
             'password' =>bcrypt('123456'),
             'email' => $row['email'] ?? $row['email'],
