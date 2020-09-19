@@ -188,8 +188,6 @@
 <script>
     $("a[id^='btn_edit_fee_status_']").click(function(event) {
         id = event.currentTarget.attributes.id.value.replace('btn_edit_fee_status_', '');
-
-
     if($(`input#toggle_fee_${id}`).prop('checked') === false){
         if (confirm('Bạn có chắc chắn muốn thay đổi trạng thái học phí')) {
             $("#btn_edit_fee_status_form_" + id).submit();

@@ -13,7 +13,7 @@
             <div class="col-6">
                 <h1 class="">Đăng Ký Kiểm Tra Đầu Vào</h1>
                
-                <form class="" action="{{ route('enrollment') }}" method="POST">
+                <form class="" action="{{ route('enrollment.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <input class="form-control" type="text" name="fullname" id="full_name"

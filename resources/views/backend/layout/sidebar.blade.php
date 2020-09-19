@@ -54,7 +54,7 @@
                         <span>Quản Trị Level</span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a href="{{route('course.index')}}" class=" waves-effect">
                         <i class=" ri-book-open-line"></i>

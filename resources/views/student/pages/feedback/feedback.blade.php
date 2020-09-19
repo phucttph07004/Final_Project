@@ -1,20 +1,55 @@
-@extends('./student/layout/master')
-@section('title','Quản Lý Khoá Học')
-@section('title_page','Thêm Mới Khoá Học')
+
+
+@extends('student.layout.master')
+@section('title','Thông tin cá nhân')
+
 @section('content')
-<h3>Đánh giá giáo viên</h3>
-                <form action="{{ route('post.StudentFeedback') }}" method="POST">
-                @csrf
-                <input hidden type="text" name="student_id" value="{{Auth::guard('student')->user()->id}}">
-                <input hidden type="text" name="class_id" value="{{Auth::guard('student')->user()->class_id}}">
-                    <div class="form-group">
-                        <label>Nhận xét về giáo viên</label>
-                        <textarea class="form-control" name="content" rows="3"></textarea>
+    <div class="container-fluid">
+    <h4 class="card-title"></h4>
+       <div class="row">
+            <div class="col-4">
+                <div class="profile__inner">
+                    <div class="profile__inner-head">
+                        <div class="avatar">
+                            <img src="{{$teacher_info->avatar}}" alt="student avatar">
+                        </div>
+                        <div class="info">
+                            <h4>{{$teacher_info->fullname}}</h4>
+                            <p>Giáo viên</p>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Đánh giá</label>
-                        <input class="form-control" type="text" name="score">
+                    <div class="profile__inner-body">
+                    <p><span>Email:</span> <span>{{$teacher_info->email}}</span></p>
+                    <p><span>Số điện thoại:</span> <span>{{$teacher_info->phone}}</span></p>
                     </div>
-                    <button type="submit" class="btn">Gửi</button>
-                </form>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card profile__detail">
+                    <div class="card-body">
+                    <form action="{{ route('post.StudentFeedback') }}" method="POST">
+                    @csrf   
+                        <h4 class="card-title">Đánh giá giáo viên</h4>
+                        <input hidden type="text" name="student_id" value="{{Auth::guard('student')->user()->id}}">
+                        <input hidden type="text" name="class_id" value="{{Auth::guard('student')->user()->class_id}}">
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-md-4 col-form-label">Điểm mạnh & điểm yếu</label>
+                            <div class="col-md-12">
+                            <textarea class="form-control" type="text" value="" id="example-text-input" name="content"  cols="30" rows="5"></textarea>
+                            
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-search-input" class="col-md-12 col-form-label">Đánh giá trên thang điểm 10</label>
+                            <div class="col-md-2">
+                                <input class="form-control" type="number" name="score" value="" id="example-search-input">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary col-2 center-block">Gửi</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+       </div>
+    </div>
 @endsection

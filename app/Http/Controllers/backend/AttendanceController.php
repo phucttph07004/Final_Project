@@ -36,7 +36,7 @@ class AttendanceController extends Controller
             $data['levels']=Level::all();
             $data['courses']=Course::where('finish_date', '>' , now())->get();
             $data['classes'] = Classes::where('finish_date', '>' , now())->paginate(10);
-            
+
         }
         return view('backend.pages.attendance.list-class',$data);
     }

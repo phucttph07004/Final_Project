@@ -3,20 +3,7 @@
       <div class="footer__mid pt-0">
           <div class="container">
               <div class="row">
-                  @foreach ($settings as $setting)
-                  <div class="col-md-6">
-                    <div id="fb-root"></div>
-                    {!!$setting->fanpage!!}
-                  </div>
-                  @endforeach
-                 <div class="col-md-4">
-                     <div class="footer__mid-item">
-                        @foreach($settings as $setting)
-                            <img src="storage/{{$setting->logo}}" alt="">
-                            <p>{{$setting->slogan}}</p>
-                            <p><i class="fa fa-map-marker"></i>{{$setting->address}}</p>
-                            <p><i class="fa fa-phone"></i><a href="tel:0123456789">{{$setting->phone}}</a></p> 
-                        @endforeach
+                  
                     </div>
                  </div>
               </div>
