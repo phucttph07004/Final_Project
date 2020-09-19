@@ -39,6 +39,9 @@ class StudentFeedbackController extends Controller
         if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions']) && count($data['feedback']) > 0){
             return redirect()->route('home.student',$data); 
         }
+        else if(count($data['feedback']) > 0){
+            return redirect()->route('home.student',$data); 
+        }
         else{
             $data['teacher_info'] = DB::table('users')
             ->join('classes', 'classes.teacher_id', '=', 'users.id')

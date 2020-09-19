@@ -53,8 +53,11 @@ class QuizController extends Controller
                                         ->where('class_id', $class_id)
                                         ->get();
                  
-        if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions']) && count($data['feedback']) > 0){
+        if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions'])){
             return view('student.pages.quiz.index', $data);
+        }
+        else if(count($data['feedback']) > 0){
+            return redirect()->route('home.student',$data); 
         }
         else{
             return redirect('student/feedback');

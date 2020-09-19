@@ -29,8 +29,11 @@ class IndexController extends Controller
         $data['number_of_sessions'] = DB::table('schedules')
                                         ->where('class_id', $class_id)
                                         ->get();
-                 
-        if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions']) && count($data['feedback']) > 0){
+        // dd(count($data['feedback']));
+        if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions'])){
+            return view('student.pages.index',$data);   
+        }
+        else if(count($data['feedback']) > 0){
             return view('student.pages.index',$data);   
         }
         else{

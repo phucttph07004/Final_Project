@@ -82,8 +82,11 @@ class PasswordController extends Controller
                                         ->get();
                  
         
-        if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions']) && count($data['feedback']) > 0){
+        if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions'])){
             return view('student.pages.profile.edit-password',$data);
+        }
+        else if(count($data['feedback']) > 0){
+            return redirect()->route('home.student',$data); 
         }
         else{
             return redirect('student/feedback');
