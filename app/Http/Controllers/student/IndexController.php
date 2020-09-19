@@ -64,8 +64,11 @@ class IndexController extends Controller
                                         ->get();
                  
         $data['notifications'] = Notification::where('status', 1)->limit(5)->get();
-        if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions']) && count($data['feedback']) > 0){
+        if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions']) ){
             return view('student.pages.schedule_learn.schedule_learn',$data);
+        }
+        else if(count($data['feedback']) > 0){
+            return view('student.pages.schedule_learn.schedule_learn');   
         }
         else{
             return redirect('student/feedback');
@@ -108,8 +111,11 @@ class IndexController extends Controller
                                         ->get();
                  
         $data['notifications'] = Notification::where('status', 1)->limit(5)->get();
-        if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions']) && count($data['feedback']) > 0){
+        if(count($data['sessions']) <= 2/3 * count($data['number_of_sessions'])){
             return view('student.pages.attendance.attendance',$data);
+        }
+        else if(count($data['feedback']) > 0){
+            return view('student.pages.attendance.attendance',$data);   
         }
         else{
             return redirect('student/feedback');
@@ -138,7 +144,7 @@ class IndexController extends Controller
             return view('student.pages.history.history',$data);
         }
         else if(count($data['feedback']) > 0){
-            return redirect()->route('home.student',$data); 
+            return redirect()->route('student.pages.history.history',$data); 
         }
         else{
             return redirect('student/feedback');

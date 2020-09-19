@@ -74,7 +74,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('feedback.index')}}" class=" waves-effect">
+                    <a href="{{route('revenue.index')}}" class=" waves-effect">
                         <i class="ri-account-circle-line"></i>
                         <span>Quản Trị Doanh Thu</span>
                     </a>

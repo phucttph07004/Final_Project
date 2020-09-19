@@ -33,7 +33,7 @@ class ProfileController extends Controller
         
         }
         else if(count($data['feedback']) > 0){
-            return redirect()->route('home.student',$data); 
+            return redirect()->route('student.pages.profile.profile',$data); 
         }
         else{
             return redirect('student/feedback');
