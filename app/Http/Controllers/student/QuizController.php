@@ -58,7 +58,7 @@ class QuizController extends Controller
             return view('student.pages.quiz.index', $data);
         }
         else if(count($data['feedback']) > 0){
-            return redirect()->route('home.student',$data); 
+            return redirect()->route('student.pages.quiz.index', $data); 
         }
         else{
             return redirect('student/feedback');

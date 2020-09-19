@@ -70,7 +70,7 @@
                 <td>{{$new->created_at->format('d-m-Y')}}</td>
                 <td>
                     <a class="btn btn-outline-primary" href="{{route('news.show',[$new->id])}}">Chi tiết</a>
-                    <a class="btn btn-outline-primary" href="{{route('news.edit',[$new->id])}}">Sửa</a>
+                    <a class="btn btn-outline-warning" href="{{route('news.edit',[$new->id])}}">Sửa</a>
                     <form id="deactive_form_{{ $new->id }}" action="{{ route('news.destroy',$new->id) }}"
                         method="post" style="display: none;">
                         @method('DELETE')

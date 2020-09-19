@@ -68,7 +68,7 @@
     </div>
     <div class="card-footer">
         <a href="{{route('news.index')}}" class="btn btn-danger">Quay lại</a>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Sửa</button>
     </div>
 
     </section>
