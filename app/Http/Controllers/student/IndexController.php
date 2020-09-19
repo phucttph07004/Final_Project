@@ -14,6 +14,7 @@ class IndexController extends Controller
 {
     public function index()
     {  
+        $data['notifications'] = Notification::where('status', 1)->limit(5)->get();
         $class_id = Auth::guard('student')->user()->class_id;
         $id = Auth::guard('student')->user()->id;
         $data['feedback'] = DB::table('feedback')

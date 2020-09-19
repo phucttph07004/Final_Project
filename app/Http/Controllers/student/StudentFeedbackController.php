@@ -45,6 +45,7 @@ class StudentFeedbackController extends Controller
             ->where('classes.id', $class_id)
             ->select('teacher_id','fullname','email','phone','avatar')
             ->first();
+            
             return view('student.pages.feedback.feedback',$data);
         }
         
