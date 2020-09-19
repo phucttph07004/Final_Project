@@ -92,7 +92,7 @@
 <script>
 $("a[id^='btn_deactive_']").click(function(event) {
     id = event.currentTarget.attributes.id.value.replace('btn_deactive_', '');
-    if (confirm('Bạn có chắc chắn muốn thay đổi trạng thái lớp học')) {
+    if (confirm('Bạn có chắc chắn muốn thay đổi trạng thái của tin tức')) {
             $("#deactive_form_" + id).submit();
         } else {
             $(`input#toggle_news_${id}`).bootstrapToggle('disable')

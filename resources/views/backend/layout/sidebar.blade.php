@@ -85,18 +85,18 @@
                         <span>Quản Trị Nhân Viên</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('waiting-list.index')}}" class=" waves-effect">
+                        <i class="ri-account-circle-line"></i>
+                        <span>Quản Trị Danh Sách Chờ</span>
+                    </a>
+                </li>
                 @endif
                 @if (Auth::user()->role == 3)
                 <li>
                     <a href="{{route('category.index')}}" class=" waves-effect">
                         <i class=" ri-list-check"></i>
                         <span>Quản Trị Danh Mục</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('waiting-list.index')}}" class=" waves-effect">
-                        <i class="ri-account-circle-line"></i>
-                        <span>Quản Trị Danh Sách Chờ</span>
                     </a>
                 </li>
                 @endif

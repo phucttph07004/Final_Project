@@ -70,7 +70,7 @@ Route::group([
      //end ajax lịch dạy
  
      Route::resource('/attendance', 'backend\AttendanceController');
-     Route::resource('waiting-list', 'backend\WaitingListController');
+     Route::resource('/waiting-list', 'backend\WaitingListController');
 });
 
 // Check Admin

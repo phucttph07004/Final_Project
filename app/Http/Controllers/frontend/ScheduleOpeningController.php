@@ -4,7 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{News,Setting,User,Level,CLasses,Schedule};
+use App\Models\{News,Setting,User,Level,Classes,Schedule};
 
 class ScheduleOpeningController extends Controller
 {
